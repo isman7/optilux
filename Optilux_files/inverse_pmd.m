@@ -78,14 +78,15 @@ if nfc > 1, error('inverse_pmd can be used only with a unique field.'); end
 isopt = exist('options','var');
 isnotgvd = isopt && isfield(options,'gvd') && strcmp(options.gvd,'no');
 Nfft = length(GSTATE.FN);
-U = zeros(2,2,Nfft); U(1,1,:) = 1; U(2,2,:) = 1; % PMD matrix for Nfft freq
+U11 = ones(Nfft,1); U12 = zeros(Nfft,1); U22 = ones(Nfft,1); U21 = zeros(Nfft,1);
+% PMD matrix elements for Nfft freq
 allgvd = zeros(Nfft,1);
 sig0 = eye(2);
 sig2 = [0 1;1 0];
 sig3i = [0 1;-1 0]; % =i*sig3 = i*[0 -i;i 0]
 
-if isopt && isfield(options,'mat')
-    U = update_U(ones(1,Nfft),ones(1,Nfft),options.mat,U);  % change reference system
+if isopt && isfield(options,'mat') % change reference system
+    [U11,U12,U21,U22] = update_U(ones(Nfft,1),options.mat,U11,U12,U21,U22);  
 end
 
 %%%% Calculate matrix U
@@ -95,8 +96,9 @@ for n=1:nfiber % cycle over the fibers composing the link
     matR = getmatR(brf{n}.theta(1),brf{n}.epsilon(1),sig0,sig2,sig3i);
     deltabeta=0.5*(brf{n}.db1+brf{n}.db0(1));  % differential beta factor (trunk 1)
     l1 = fastexp(-deltabeta); % eigenvalues
-    l2 = 1./l1;
-    U = update_U(l1,l2,matR',U);
+%     l2 = 1./l1;
+    [U11,U12,U21,U22] = update_U(l1,matR',U11,U12,U21,U22);  
+    
     for k=2:ntrunk % except the first. The last is finished after.
         matR1 = getmatR(brf{n}.theta(k-1),brf{n}.epsilon(k-1),sig0,sig2,sig3i);
         matR2 = getmatR(brf{n}.theta(k),brf{n}.epsilon(k),sig0,sig2,sig3i);
@@ -115,50 +117,56 @@ for n=1:nfiber % cycle over the fibers composing the link
         
         deltabeta=0.5*(brf{n}.db1+brf{n}.db0(k));  % differential beta factor
         l1 = fastexp(-deltabeta); % eigenvalues
-        l2 = 1./l1;
-        U = update_U(l1,l2,matR,U);
+%         l2 = 1./l1;
+        [U11,U12,U21,U22] = update_U(l1,matR,U11,U12,U21,U22);
     end
     matR = getmatR(brf{n}.theta(end),brf{n}.epsilon(end),sig0,sig2,sig3i);
-    U = update_U(ones(1,Nfft),ones(1,Nfft),matR,U);  % last trunk
+    [U11,U12,U21,U22] = update_U(ones(Nfft,1),matR,U11,U12,U21,U22); % last trunk         
     allgvd = allgvd + brf{n}.betat*brf{n}.lcorr*ntrunk;
 end
-Hgvd = fastexp(-allgvd);    % overall GVD in one step (scalar component)
 if ~isnotgvd
-    U(1,1,:) = Hgvd.*squeeze(U(1,1,:)); U(1,2,:) = Hgvd.*squeeze(U(1,2,:)); 
-    U(2,1,:) = Hgvd.*squeeze(U(2,1,:)); U(2,2,:) = Hgvd.*squeeze(U(2,2,:)); 
+    Hgvd = fastexp(-allgvd);    % overall GVD in one step (scalar component)
+    U11 = Hgvd.*U11; U12 = Hgvd.*U12; 
+    U21 = Hgvd.*U21; U22 = Hgvd.*U22; 
 end
-Uinv(1,1,:) = conj(U(1,1,:)); Uinv(1,2,:) = conj(U(2,1,:));
-Uinv(2,1,:) = conj(U(1,2,:)); Uinv(2,2,:) = conj(U(2,2,:));
+Uinv11 = conj(U11); Uinv12 = conj(U21);
+Uinv21 = conj(U12); Uinv22 = conj(U22);
+
+Uinv(1,1,:) = Uinv11; Uinv(1,2,:) = Uinv12; 
+Uinv(2,1,:) = Uinv21; Uinv(2,2,:) = Uinv22;
+U(1,1,:) = U11; U(1,2,:) = U12; 
+U(2,1,:) = U21; U(2,2,:) = U22;
+
 if nargout >= 1, varargout{1} = Uinv; end
 if nargout >= 2, varargout{2} = U; end
 
 if ~isopt || ~isfield(options,'apply') || strcmp(options.apply,'n')
     uux = fft(GSTATE.FIELDX);
     uuy = fft(GSTATE.FIELDY);
-    GSTATE.FIELDX = squeeze(Uinv(1,1,:)).* uux + squeeze(Uinv(1,2,:)).*uuy;
-    GSTATE.FIELDY = squeeze(Uinv(2,1,:)).* uux + squeeze(Uinv(2,2,:)).*uuy;
+    GSTATE.FIELDX = Uinv11.* uux + Uinv12.*uuy;
+    GSTATE.FIELDY = Uinv21.* uux + Uinv22.*uuy;
     GSTATE.FIELDX = ifft(GSTATE.FIELDX);
     GSTATE.FIELDY = ifft(GSTATE.FIELDY);
-    GSTATE.DISP = zeros(2, GSTATE.NCH);
+    if ~isnotgvd, GSTATE.DISP = zeros(2, GSTATE.NCH);end
 end   
 %--------------------------------------------------------------------------
-function U=update_U(l1,l2,matR,Uold)
+function [U11,U12,U21,U22]=update_U(l1,matR,Uold11,Uold12,Uold21,Uold22)
 
 %UPDATE_U update 3-D matrix U
-%   UPDATE_U(L1,L2,MATR,UOLD) updates the 3d matrix UOLD yielding the new
-%   one on output U. MATR is the birefringence matrix 2x2 of the new trunk,
-%   while L1 and L2 are vectors 1xNfft equal to the eigenvalues. Nfft is
-%   the number of frequencies, i.e. the FFT points.
+%   [U11,U12,U21,U22]=UPDATE_U(L1,MATR,UOLD11,UOLD12,UOLD21,UOLD22) updates 
+%   the matrix [UOLD11,UOLD12;UOLD21,UOLD22] yielding the new one on
+%   output. MATR is the birefringence matrix 2x2 of the new trunk, while L1
+%   is a vector [1,Nfft] equal to the eigenvalues. Nfft is the number of 
+%   frequencies, i.e. the FFT points.
 %
-%   On output U is o fsize [2,2,Nfft].
 
-matT(1,1,:) = l1*matR(1,1); matT(1,2,:) = l1*matR(1,2);
-matT(2,1,:) = l2*matR(2,1); matT(2,2,:) = l2*matR(2,2); % first trunk
+matT11 = l1*matR(1,1); matT12 = l1*matR(1,2);
+% matT21 = l2*matR(2,1); matT22 = l2*matR(2,2); % first trunk
 
-U(1,1,:) = matT(1,1,:).*Uold(1,1,:) + matT(1,2,:).*Uold(2,1,:);
-U(1,2,:) = matT(1,1,:).*Uold(1,2,:) + matT(1,2,:).*Uold(2,2,:);
-U(2,1,:) = -conj(U(1,2,:));%matT(2,1,:).*Uold(1,1,:) + matT(2,2,:).*Uold(2,1,:);
-U(2,2,:) = conj(U(1,1,:));%matT(2,1,:).*Uold(1,2,:) + matT(2,2,:).*Uold(2,2,:);
+U11 = matT11.*Uold11 + matT12.*Uold21;
+U12 = matT11.*Uold12 + matT12.*Uold22;
+U21 = -conj(U12); %matT21.*Uold11 + matT22.*Uold21;
+U22 = conj(U11);  %matT21.*Uold12 + matT22.*Uold22;
     
 %--------------------------------------------------------------------------
 function matR=getmatR(theta,epsilon,sig0,sig2,sig3i)
