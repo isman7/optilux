@@ -7,7 +7,7 @@ function [delay,wrn,rho,Iric]=corrdelay(Iric,pat,Nt,Nsymb,opt)
 %   vector of real, while in multi-level formats IRIC is a complex vector.
 %   The transmitted electric signal is artificially created by repeating  
 %   the pattern PAT in order to have NT points x symbol (see RESET_ALL). 
-%   NSYMB is the number of bits. 
+%   NSYMB is the number of symbols. 
 %
 %   E.g. if PAT='1101' and Nt=4 the reference transmitted signal turns out
 %   to be non-return to zero equal to:
@@ -20,15 +20,17 @@ function [delay,wrn,rho,Iric]=corrdelay(Iric,pat,Nt,Nsymb,opt)
 %   This function measures the delay as the coordinate of the maximum of
 %   the cross-correlation. If the  difference between the largest and the 
 %   second maximum is lower than a threshold (initialized at the beginning 
-%   of this function), the function print a warning of low accuracy. 
+%   of this function), the function display a warning of low accuracy. 
 %   Low accuracy is an indicator that the delay may be wrong. 
 %
 %   DELAY=CORRDELAY(IRIC,PAT,NT,NSYMB,OPT) has the optional flag OPT.
-%   If OPT='phase' CORRDELAY treats IRIC as a complex quaternary signal. 
+%   If OPT='phase' CORRDELAY treats IRIC as a complex signal (e.g. QPSK 
+%   signal). 
 %
 %   [DELAY,WRN,RHO]=CORRDELAY(IRIC,PAT,NT,NSYMB,OPT) also returns the 
-%   correlation coefficient RHO of the two sequences (IRIC and x, see 
-%   above). WRN is a flag equal to true if the the delay is measured with
+%   correlation coefficient RHO of the signal and reference one. 
+%
+%   WRN is a flag equal to true if the the delay is measured with
 %   low accuracy.
 %   Low accuracy may happen in presence of amplified spontaneous emission 
 %   noise or with big distortions. 
@@ -39,11 +41,13 @@ function [delay,wrn,rho,Iric]=corrdelay(Iric,pat,Nt,Nsymb,opt)
 %	the angle of the input IRIC after removing phase shift ambiguity (useful 
 %	in multi-level formats).
 %
-%   Author: Paolo Serena, 2009
+%   See Also EVAL_EYE, DSP4COHDEC
+%
+%   Author: Paolo Serena, 2008
 %   University of Parma, Italy
 
 %    This file is part of Optilux, the optical simulator toolbox.
-%    Copyright (C) 2009  Paolo Serena, <serena@tlc.unipr.it>
+%    Copyright (C) 2008  Paolo Serena, <serena@tlc.unipr.it>
 %			 
 %    Optilux is free software; you can redistribute it and/or modify
 %    it under the terms of the GNU General Public License as published by
@@ -68,43 +72,43 @@ end
 
 MINERR = 1e-4; % [dB].relerr < MINERR is an indicator of a periodic pattern
 MAXERR = 0.5;  % [dB].relerr < MAXERR is an indicator that the delay is wrong
-NPHI = 36;     % number of phases under for removing phase ambiguity
+NPHI = 71;    % number of phases under for removing phase ambiguity
 
 wrn=false;
 Nfft = Nsymb*Nt;
 if isopt
-    refsig = reshape(repmat(fastexp(pat),NPHI,Nt).',Nfft,NPHI);
-    % refsig is an ideal reference signal for delay evaluation
-    repIric = repmat(Iric,1,NPHI).*repmat(fastexp(linspace(0,2*pi,NPHI)),Nfft,1);
-    % repIric: repeat Iric by testing NPHI phase delays
-%     repIric(repIric>pi)=repIric(repIric>pi)-2*pi;
-
-    crosscorr = real(ifft( fft(repIric) .* conj(fft(refsig))));
-    [maxc1,posc1] = max(crosscorr); % best delay for each phase shift
-    [maxc,posc2] = max(maxc1);  % best of best -> remove phase ambiguity
-    posc = posc1(posc2);
-    refangle = angle(refsig(:,posc2));
-    % now move to neighboring symbol in mod(2*pi)
-    Iric = angle(repIric(:,posc2).*conj(refsig(:,posc2)))+refangle;
+    allphi = (0:NPHI-1)*2*pi/(floor(NPHI));% linspace except 2*pi
+    refsig = reshape(repmat(fastexp(pat),1,Nt).',Nfft,1);
+    crosscorr = (ifft( fft(Iric) .* conj(fft(refsig))));
+    vettmax = zeros(1,NPHI);
+    vettpos = zeros(1,NPHI);
+    for kk=1:NPHI
+    	temp = cos(allphi(kk))*real(crosscorr) - sin(allphi(kk))*imag(crosscorr);
+    	[vettmax(kk),vettpos(kk)]=max(temp);
+    end
+    [maxc,posmax] = max(vettmax); 
+    posc = vettpos(posmax);
+    Iric = angle(Iric*fastexp(-allphi(posmax))); % remove phase for eye evaluation
+    crosscorr = real(crosscorr*fastexp(allphi(posmax)));
 else
     refsig = reshape(repmat(pat,1,Nt)',Nfft,1);
     % refsig is an ideal reference signal for delay evaluation
     crosscorr = real(ifft( fft(Iric) .* conj(fft(refsig))));
     [maxc,posc] = max(crosscorr);
-    posc2 = 1;
-end    
+end
+
 delay = nmod(posc,Nfft)-1; % system delay
 
 % Now check if the delay is correct
 
-ii=find(diff(sign(diff(crosscorr(:,posc2)))) == -2) + 1;% all the maxima of crosscorr 
-[allmax,posall]=sort(crosscorr(ii,posc2),'descend'); 
+ii=find(diff(sign(diff(crosscorr))) == -2) + 1;% all the maxima of crosscorr 
+[allmax,posall]=sort(crosscorr(ii),'descend'); 
 if ii(posall(1)) == posc
     inderr = 2; % use the second largest maximum
 else
     inderr = 1; % means that the maximum is at one boundary of crosscorr
 end
-relerr = 10*log10(crosscorr(posc,posc2)/allmax(inderr));  % relative error
+relerr = 10*log10(crosscorr(posc)/allmax(inderr));  % relative error
 if (relerr > MINERR) && (relerr < MAXERR)
     warning('optilux:corrdelay','low accuracy in delay evaluation');
     wrn=true;
