@@ -1,0 +1,350 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Optilux Structure</TITLE>
+<META NAME="description" CONTENT="Optilux Structure">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="Signals_description.html">
+<LINK REL="previous" HREF="Style_rules.html">
+<LINK REL="up" HREF="Getting_Started.html">
+<LINK REL="next" HREF="Signals_description.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html86"
+  HREF="Signals_description.html">Signals description</A>
+<B>Up:</B> <A NAME="tex2html84"
+  HREF="Getting_Started.html">Getting Started</A>
+<B> Previous:</B> <A NAME="tex2html78"
+  HREF="Style_rules.html">Style rules</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION00140000000000000000"></A><A NAME="sec:Optilux-Structure"></A>
+<BR>
+Optilux Structure
+</H1>
+
+<P>
+
+<H2><A NAME="SECTION00141000000000000000">
+The code</A>
+</H2>
+
+<P>
+Optilux is a collection of .m files, each representing a specific
+block of an optical system. Hence programming in Optilux follows standard
+rules where the top-to-bottom flow on a .m file corresponds to moving
+over the distance of the optical system. For the sake of easiness,
+the most important and used variables have been collected into a global
+one, called <TT>GSTATE</TT>. <TT>GSTATE</TT> is a struct variable
+and must be declared as global by each function that shares it.
+<BR>
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=400>
+<DIV ALIGN="CENTER">
+<B>Note</B>: Remember that both <TT>GSTATE</TT> and its fields have
+capital letters. 
+</DIV></TD>
+</TR>
+</TABLE>
+<BR>
+<P>
+
+<H2><A NAME="SECTION00142000000000000000">
+The global GSTATE</A>
+</H2>
+
+<P>
+<TT>GSTATE</TT> is a struct variable with the following fields:
+<BR>
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TH ALIGN="LEFT" VALIGN="TOP" WIDTH=100> 
+<SPAN  CLASS="textbf">Argument</SPAN> </TH>
+<TH ALIGN="LEFT" VALIGN="TOP" WIDTH=300> <SPAN  CLASS="textbf">Description</SPAN> </TH>
+<TH ALIGN="LEFT" VALIGN="TOP" WIDTH=100> <SPAN  CLASS="textbf">Initialized by function</SPAN> </TH>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=100>
+
+<TT>NSYMB</TT> </TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=300> The number of symbols of the digital signal under transmission. For
+binary transmissions this is also the number of bits. </TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=100> <A HREF="reset_all.html#sec:reset_all">reset_all</A> </TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=100>  
+ 
+<TT>NT</TT> </TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=300> The number of discrete points x symbol. </TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=100> <A HREF="reset_all.html#sec:reset_all">reset_all</A> </TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=100>  
+ 
+<TT>NCH</TT> </TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=300> The number of channels for a wavelength division multiplexing (WDM)
+transmission. </TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=100> <A HREF="reset_all.html#sec:reset_all">reset_all</A> </TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=100>  
+ 
+<TT>FN</TT> </TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=300> The vector of frequencies, normalized to the symbol rate. See <A HREF="Signals_description.html#sec:Signals-description">here</A>
+for more details.  </TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=100> <A HREF="reset_all.html#sec:reset_all">reset_all</A> </TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=100>  
+ 
+<TT>SYMBOLRATE</TT> </TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=300> The signal symbol rate in [Gsymbols/s]. For a binary transmission
+this is also the bit rate [Gbit/s]. </TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=100> <A HREF="electricsource.html#sec:electricsource">electricsource</A> </TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=100>  
+ 
+<TT>DISP</TT> </TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=300> The running cumulated dispersion [ps/nm] along the system.  </TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=100> <A HREF="create_field.html#sec:create_field">create_field</A> </TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=100>  
+ 
+<TT>FIELDX</TT> </TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=300> The X component of the electric field. In absence of polarization
+effects the electric field is assumed polarized on the X component. </TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=100> <A HREF="create_field.html#sec:create_field">create_field</A> </TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=100>  
+ 
+<TT>FIELDY</TT> </TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=300> The Y component of the electric field. Unlike <TT>GSTATE.FIELDX</TT>,
+the Y component may not exists leading to an empty field for <TT>GSTATE.FIELDY</TT>. </TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=100> <A HREF="create_field.html#sec:create_field">create_field</A> </TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=100>  
+ 
+<TT>FIELDX_TX</TT> </TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=300> A copy of <TT>GSTATE.FIELDX</TT>. Useful for back-to-back measurements. </TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=100> <A HREF="create_field.html#sec:create_field">create_field</A> </TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=100>  
+ 
+<TT>FIELDY_TX</TT> </TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=300> A copy of <TT>GSTATE.FIELDY</TT>. Useful for back-to-back measurements. </TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=100> <A HREF="create_field.html#sec:create_field">create_field</A> </TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=100>  
+ 
+<TT>DELAY</TT> </TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=300> The running cumulated delay along the optical line by the X and Y
+polarizations. The delay is normalized to the inverse of the symbol
+rate, i.e. 1 is one symbol time. Note: by default Optilux bases its
+measurements at the receiver by estimating the delay through a correlation
+method instead of using this theoretical delay. </TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=100> <A HREF="create_field.html#sec:create_field">create_field</A> </TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=100>  
+ 
+<TT>LAMBDA</TT> </TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=300> The WDM channel wavelengths [nm].  </TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=100> <A HREF="lasersource.html#sec:lasersource">lasersource</A> </TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=100>  
+ 
+<TT>POWER</TT> </TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=300> The transmitted peak power of the WDM channels [mW].  </TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=100> <A HREF="lasersource.html#sec:lasersource">lasersource</A> </TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=100>  
+ 
+<TT>PRINT</TT> </TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=300> A flag true or false for printing functions summary to file. </TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=100> <A HREF="reset_all.html#sec:reset_all">reset_all</A> </TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=100>  
+
+<TT>DIR</TT> </TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=300> The output directory. Such option exists only with <TT>GSTATE.PRINT=true</TT>. </TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=100> <A HREF="reset_all.html#sec:reset_all">reset_all</A> </TD>
+</TR>
+</TABLE>
+
+<P>
+
+<H2><A NAME="SECTION00143000000000000000">
+MeX files</A>
+</H2>
+
+<P>
+Optilux makes use of mex files to speed up the simulation. To reach
+a trade off between speed and code reliability, only simple, but time
+consuming, portions of codes are compiled as mex files. So far the
+following functions are implemented in mex files:
+<BR>
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="CENTER"><A HREF="fastexp.html#sec:fastexp">fastexp</A></TD>
+<TD ALIGN="CENTER"><TT>fastexp(x)</TT> is <TT>exp(i*x)</TT></TD>
+</TR>
+<TR><TD ALIGN="CENTER"><A HREF="saddle.html#sec:saddle">saddle</A></TD>
+<TD ALIGN="CENTER">saddle point search</TD>
+</TR>
+<TR><TD ALIGN="CENTER"><A HREF="cmaadaptivefilter.html#sec:cmaadaptivefilter">cmaadaptivefilter</A></TD>
+<TD ALIGN="CENTER">Continuous modulus algorithm</TD>
+</TR>
+<TR><TD ALIGN="CENTER"><A HREF="easiadaptivefilter.html#sec:easiadaptivefilter">easiadaptivefilter</A></TD>
+<TD ALIGN="CENTER">EASI algorithm</TD>
+</TR>
+</TABLE>
+<BR>
+<P>
+A mex file can improve the speed of the code significantly. For instance,
+observe the following line codes:
+<BR>
+<P>
+<TT>x=rand(1,1e5);</TT>
+
+<P>
+<TT>tic;</TT>
+
+<P>
+<TT>for k=1:1e3 </TT>
+
+<P>
+<TT>&nbsp;&nbsp;&nbsp;&nbsp;y=fastexp(x); </TT>
+
+<P>
+<TT>end </TT>
+
+<P>
+<TT>toc </TT>
+
+<P>
+<TT>&gt;&gt; Elapsed time is 8.187043 seconds. </TT>&nbsp;
+<BR>
+<P>
+<TT>x=rand(1,1e5); </TT>
+
+<P>
+<TT>tic; </TT>
+
+<P>
+<TT>for k=1:1e3 </TT>
+
+<P>
+<TT>&nbsp;&nbsp;&nbsp;&nbsp;y=exp(i*x); </TT>
+
+<P>
+<TT>end </TT>
+
+<P>
+<TT>toc </TT>
+
+<P>
+<TT>&gt;&gt; Elapsed time is 13.872832 seconds. </TT>&nbsp;
+<BR>
+<P>
+<TT>x=rand(1,1e5); </TT>
+
+<P>
+<TT>tic; </TT>
+
+<P>
+<TT>for k=1:1e3 </TT>
+
+<P>
+<TT>&nbsp;&nbsp;&nbsp;&nbsp;y=complex(cos(x),sin(x)); </TT>
+
+<P>
+<TT>end </TT>
+
+<P>
+<TT>toc </TT>
+
+<P>
+<TT>&gt;&gt; Elapsed time is 12.031231 seconds.</TT>&nbsp;
+<BR>
+<P>
+All pieces of code give the same result, but the computational gain
+of <TT>fastexp</TT> is significant. Mex files must be compilated before
+using it. A simple way to compile all files once is to use <A HREF="comp_mex.html#sec:comp_mex">comp_mex</A>
+in your Optilux directory.
+
+<P>
+
+<H3><A NAME="SECTION00143100000000000000">
+Notes </A>
+</H3>
+
+<P>
+The compilation of <TT>.c</TT> files under Matlab<SUP><SMALL>TM</SMALL></SUP>can
+fail because Matlab is unable to find the correct c++-standard-library.
+In this case edit your <TT>mexopts.sh</TT> file (you can create it
+in <TT>~/.matlabxx/mexopts.sh</TT> by running <TT>mex
+-setup</TT> on the command line) and replace the line: 
+
+<P>
+<TT>CLIBS=$RPATH $MLIBS -lm -lstdc++ </TT>
+
+<P>
+by, (e.g. if you have Matlab in /opt/matlab) 
+
+<P>
+<TT>CLIBS=$RPATH $MLIBS -lm /opt/matlab/sys/os/glnx86/libstdc++.so.6</TT> 
+
+<P>
+i.e. teach Matlab to use its stdc library. 
+<BR>
+<P>
+Another solution under Debian-based Linux systems is to run the following: 
+
+<P>
+<TT>apt-get install build-essential </TT>
+
+<P>
+This package contains an informational list of packages which are
+considered essential for building Debian packages.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html85"
+  HREF="Signals_description.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html83"
+  HREF="Getting_Started.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html77"
+  HREF="Style_rules.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html86"
+  HREF="Signals_description.html">Signals description</A>
+<B> Up:</B> <A NAME="tex2html84"
+  HREF="Getting_Started.html">Getting Started</A>
+<B> Previous:</B> <A NAME="tex2html78"
+  HREF="Style_rules.html">Style rules</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,206 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>inverse_pmd</TITLE>
+<META NAME="description" CONTENT="inverse_pmd">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="optfilter.html">
+<LINK REL="previous" HREF="ampliflat.html">
+<LINK REL="up" HREF="List_Functions.html">
+<LINK REL="next" HREF="optfilter.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html468"
+  HREF="optfilter.html">optfilter</A>
+<B>Up:</B> <A NAME="tex2html466"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html460"
+  HREF="ampliflat.html">ampliflat</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION002210000000000000000"></A><A NAME="sec:inverse_pmd"></A>
+<BR>
+inverse_pmd
+</H1>
+
+<P>
+Inverse PMD matrix.
+
+<P>
+
+<H2><A NAME="SECTION002211000000000000000">
+Syntax</A>
+</H2>
+
+<P>
+INVERSE_PMD(BRF)
+<BR><TT>UINV=INVERSE_PMD(BRF)</TT>&nbsp;
+<BR><TT>[UINV,U]=INVERSE_PMD(BRF)</TT>&nbsp;
+<BR><TT>INVERSE_PMD(BRF,OPTIONS)</TT>
+
+<P>
+
+<H2><A NAME="SECTION002212000000000000000">
+Description</A>
+</H2>
+
+<P>
+<TT>INVERSE_PMD(BRF)</TT> applies the inverse PMD matrix of the link
+to the electric field contained within <TT>GSTATE</TT>. The link parameter
+are within the cell <TT>BRF</TT>. The k-th field of <TT>BRF</TT> contains
+the parameters of fiber <TT>k</TT> of the current link that should
+be inverted. <TT>BRF{k}</TT> is a struct with the following fields: 
+
+<UL>
+<LI><TT>BRF{k}.db0</TT> = birefringence [rad] at <TT>GSTATE.FN=0</TT>
+(see <A HREF="reset_all.html#sec:reset_all">reset_all</A>). 
+</LI>
+<LI><TT>BRF{k}.theta</TT> = azimuth [rad] of all the PMFs composing
+the fiber. 
+</LI>
+<LI><TT>BRF{k}.epsilon</TT> = ellipticity [rad] of all the PMFs
+composing the fiber. 
+</LI>
+<LI><TT>BRF{k}.dgdrms</TT> = r.m.s. DGD [ns] per trunk. 
+</LI>
+<LI><TT>BRF{k}.lcorr</TT> = length [m] of each PMF trunk. 
+</LI>
+<LI><TT>BRF{k}.betat</TT> = <!-- MATH
+ $\beta(\omega)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="44" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img53.png"
+ ALT="$ \beta(\omega)$"></SPAN>, i.e. scalar phase shift
+[rad] including GVD, slope, etc, where <!-- MATH
+ $\omega/2/\pi$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="58" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img54.png"
+ ALT="$ \omega/2/\pi$"></SPAN> is the
+vector of FFT frequencies. <SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img55.png"
+ ALT="$ \beta$"></SPAN> is common to both polarizations. 
+</LI>
+<LI><TT>BRF{k}.db1</TT> = differential phase shift [rad] induced
+by PMD. 
+<BR>
+<P>
+</LI>
+</UL>
+<TT>BRF</TT> is returned by <A HREF="fiber.html#sec:fiber">fiber</A>. 
+<BR>
+<P>
+<TT>UINV=INVERSE_PMD(BRF)</TT> also returns in <TT>UINV</TT> a 3-D
+matrix such that <TT>UINV(:,:,n)</TT> contains the <TT>(2,2)</TT>
+inverse PMD matrix at frequency <TT>GSTATE.FN(n)</TT>. Such matrix
+includes also the scalar linear distortion like GVD, with exception
+(see later). 
+<BR>
+<P>
+<TT>[UINV,U]=INVERSE_PMD(BRF)</TT> also returns the PMD matrix
+<TT>U</TT>. 
+<BR>
+<P>
+<TT>INVERSE_PMD(BRF,OPTIONS)</TT> allows the following optional parameters: 
+
+<UL>
+<LI><TT>OPTIONS.gvd = 'no'</TT>: do not apply GVD in the <TT>U, UINV</TT>
+evaluation, i.e. force <TT>BRF{k}.betat = 0</TT>. 
+</LI>
+<LI><TT>OPTIONS.apply = 'no'</TT>: do not apply the inverse matrix to
+<TT>GSTATE.FIELDX</TT> and <TT>GSTATE.FIELDY</TT>. 
+</LI>
+<LI><TT>OPTIONS.mat</TT> = <TT>(2,2)</TT> unitary matrix that rotates
+the reference system before applying <TT>U</TT>. E.g. such matrix
+can be the one returned by <A HREF="set_sop.html#sec:set_sop">set_sop</A>. 
+</LI>
+</UL>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=400> 
+<B>Note 1</B>:<TT>UINV</TT> is a unitary matrix, hence neglects the
+fiber attenuation. Hence, <TT>Uinv(:,:,n) = U(:,:,n)'</TT>.
+
+<P>
+<B>Note 2</B>: Given the link in Fig.&nbsp;<A HREF="#sec:inverse_pmd">2.21</A>, the
+n-th call to fiber must return <TT>BRF{n}.</TT> </TD>
+</TR>
+</TABLE>
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:inversepmdfig"></A><A NAME="5690"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 2.6:</STRONG>
+The n-th fiber of the line must return <TT>BRF{n}.</TT></CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV><IMG
+  WIDTH="700" HEIGHT="118" ALIGN="BOTTOM" BORDER="0"
+ SRC="./inversepmd_line.png"
+ ALT="Image inversepmd_line">
+
+<P>
+
+<P></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+
+<H2><A NAME="SECTION002213000000000000000">
+See Also </A>
+</H2>
+
+<P>
+<A HREF="fiber.html#sec:fiber">fiber</A>, <A HREF="set_sop.html#sec:set_sop">set_sop</A>.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html467"
+  HREF="optfilter.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html465"
+  HREF="List_Functions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html459"
+  HREF="ampliflat.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html468"
+  HREF="optfilter.html">optfilter</A>
+<B> Up:</B> <A NAME="tex2html466"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html460"
+  HREF="ampliflat.html">ampliflat</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

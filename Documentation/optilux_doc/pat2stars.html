@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>pat2stars</TITLE>
+<META NAME="description" CONTENT="pat2stars">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="samp2pat.html">
+<LINK REL="previous" HREF="pat_decoder.html">
+<LINK REL="up" HREF="List_Functions.html">
+<LINK REL="next" HREF="samp2pat.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html303"
+  HREF="samp2pat.html">samp2pat</A>
+<B>Up:</B> <A NAME="tex2html301"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html295"
+  HREF="pat_decoder.html">pat_decoder</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION00290000000000000000"></A><A NAME="sec:pat2stars"></A>
+<BR>
+pat2stars
+</H1>
+
+<P>
+Convert an M-ary pattern into a complex constellation
+
+<P>
+
+<H2><A NAME="SECTION00291000000000000000">
+Syntax</A>
+</H2>
+
+<P>
+<TT>STARS=PAT2STARS(PAT,FORMAT)</TT>&nbsp;
+<BR><TT>STARS=PAT2STARS(PAT,FORMAT,OPTIONS)</TT>
+
+<P>
+
+<H2><A NAME="SECTION00292000000000000000">
+Description</A>
+</H2>
+
+<P>
+<TT>STARS=PAT2STARS(PAT,FORMAT)</TT> returns in <TT>STARS</TT> the
+values of the complex constellation associated with the M-ary <TT>PAT</TT>
+pattern. The supported modulation formats in <TT>FORMAT</TT> are (see
+the <A HREF="Glossary.html#sec:Glossary">Glossary</A> for a list of acronyms):
+
+<UL>
+<LI><TT>'ook' </TT>
+</LI>
+<LI><TT>'psbt' </TT>
+</LI>
+<LI><TT>'bpsk', 'dpsk', 'nf-dpsk' </TT>
+</LI>
+<LI><TT>'qpsk', 'dqpsk', 'nf-dqpsk' </TT>
+</LI>
+</UL>
+The constellation is associated with the pattern through Gray coding,
+thus, for example, the QPSK constellation associated with the symbols
+<TT>[0, 1, 2, 3]</TT> is <TT>[1, i, -i, -1]</TT>. 
+<BR>
+<BR><TT>STARS=PAT2STARS(PAT,FORMAT,OPTIONS)</TT> allows to modify the
+default behaviour. 
+
+<P>
+Currently supported fields are: 
+
+<UL>
+<LI><TT>OPTIONS.binary</TT>: if set to <TT>true</TT>, <TT>PAT2STARS</TT>
+assumes the pattern is binary and thus is a matrix of size <TT>[NSYMB,
+log2(M)]</TT>, being <TT>M</TT> the cardinality of the alphabet. If
+<TT>M=2</TT>, this option is simply neglected. 
+</LI>
+</UL>
+
+<P>
+
+<H2><A NAME="SECTION00293000000000000000">
+See Also</A>
+</H2>
+
+<P>
+<A HREF="stars2pat.html#sec:stars2pat">stars2pat</A>, <A HREF="pat_decoder.html#sec:pat_decoder">pat_decoder</A>
+
+<P>
+
+<H2><A NAME="SECTION00294000000000000000">
+References</A>
+</H2>
+
+<P>
+See [<A
+ HREF="Bibliography.html#Proakis">4</A>] for more details. A detailed analysis of DPSK
+and QPSK modulation formats is available in [<A
+ HREF="Bibliography.html#GnaWin05">5</A>]. PSBT
+and Enhanced PSBT (EPSBT) are described in [<A
+ HREF="Bibliography.html#Penninckx97">6</A>,<A
+ HREF="Bibliography.html#Penninckx00">7</A>,<A
+ HREF="Bibliography.html#Kim02">8</A>].
+NF-DPSK was presented in [<A
+ HREF="Bibliography.html#Penninckx01">9</A>] and analyzed in [<A
+ HREF="Bibliography.html#Forestieri04">10</A>,<A
+ HREF="Bibliography.html#Lyubomirsky05">11</A>].
+Finally NF-DQPSK was proposed in [<A
+ HREF="Bibliography.html#Lyubomirsky08">12</A>]. 
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html302"
+  HREF="samp2pat.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html300"
+  HREF="List_Functions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html294"
+  HREF="pat_decoder.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html303"
+  HREF="samp2pat.html">samp2pat</A>
+<B> Up:</B> <A NAME="tex2html301"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html295"
+  HREF="pat_decoder.html">pat_decoder</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

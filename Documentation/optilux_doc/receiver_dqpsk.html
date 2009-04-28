@@ -1,0 +1,242 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>receiver_dqpsk</TITLE>
+<META NAME="description" CONTENT="receiver_dqpsk">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="receiver_cohmix.html">
+<LINK REL="previous" HREF="receiver_dpsk.html">
+<LINK REL="up" HREF="List_Functions.html">
+<LINK REL="next" HREF="receiver_cohmix.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html523"
+  HREF="receiver_cohmix.html">receiver_cohmix</A>
+<B>Up:</B> <A NAME="tex2html521"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html515"
+  HREF="receiver_dpsk.html">receiver_dpsk</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION002250000000000000000"></A><A NAME="sec:receiver_dqpsk"></A>
+<BR>
+receiver_dqpsk
+</H1>
+
+<P>
+Complete DQPSK receiver. (POST fiber+OBPF+MZs+LPF).
+
+<P>
+
+<H2><A NAME="SECTION002251000000000000000">
+Syntax</A>
+</H2>
+
+<P>
+<TT>IRIC=RECEIVER_DQPSK(ICH,X)</TT>&nbsp;
+<BR><TT>[IRIC,SN]=RECEIVER_DQPSK(ICH,X)</TT>
+
+<P>
+
+<H2><A NAME="SECTION002252000000000000000">
+Description</A>
+</H2>
+
+<P>
+<TT>IRIC=RECEIVER_DQPSK(ICH,X)</TT> returns the received current
+<TT>IRIC</TT> of channel <TT>ICH</TT> of an OOK transmission using
+the following receiver:
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:receiver_dqpsk"></A><A NAME="5708"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 2.9:</STRONG>
+DQPSK receiver.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV><IMG
+  WIDTH="700" HEIGHT="385" ALIGN="BOTTOM" BORDER="0"
+ SRC="./rec_dqpsk.png"
+ ALT="Image rec_dqpsk">
+
+<P>
+
+<P></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+<TT>[IRIC,SN]=RECEIVER_OOK(ICH,X)</TT> also returns the vector
+<TT>SN</TT> containing the FFT coefficients of the electric field
+after the optical filter. <TT>SN</TT> is used by <A HREF="ber_kl.html#sec:ber_kl">ber_kl</A>.
+<BR>
+<P>
+<TT>X</TT> is a structure of fields: 
+
+<UL>
+<LI><TT>X.oftype</TT> = optical filter (OBPF) type (see <A HREF="myfilter.html#sec:myfilter">myfilter</A>) 
+</LI>
+<LI><TT>X.obw</TT> = OBPF 3 dB bandwidth normalized to the symbol rate. 
+</LI>
+<LI><TT>X.oord</TT> = optical filter order (for special filters, see <A HREF="myfilter.html#sec:myfilter">myfilter</A>) 
+</LI>
+<LI><TT>X.eftype</TT> = electrical filter (LPF) type (see <A HREF="myfilter.html#sec:myfilter">myfilter</A>) 
+</LI>
+<LI><TT>X.ebw</TT> = LPF 3-dB bandwidth normalized to the symbol rate. 
+</LI>
+<LI><TT>X.eord</TT> = electrical filter order (for special filters, see
+<A HREF="myfilter.html#sec:myfilter">myfilter</A>) 
+</LI>
+<LI><TT>X.comp</TT> = component on which evaluate eye and calculate BER.
+Can be <TT>'phase'</TT> or <TT>'quadrature'</TT>. 
+</LI>
+</UL>
+Optional parameters of <TT>X</TT>: 
+
+<UL>
+<LI><TT>X.dpost</TT> = post compensating fiber cumulated dispersion [ps/nm] 
+</LI>
+<LI><TT>X.slopez</TT> = post compensating fiber cumulated slope [ps/nm&#94;2] 
+</LI>
+<LI><TT>X.lambda</TT> = wavelength [nm] at which the post compensating
+fiber has a cumulated dispersion equal to <TT>X.dpost</TT>. 
+</LI>
+<LI><TT>X.b2b = 'b2b'</TT> evaluates the current in back-to-back configuration,
+i.e. with the transmitter connected directly to the receiver. With
+this option the values of <TT>x.dpost</TT> and <TT>x.slopez</TT> are
+discarded.
+</LI>
+<LI><SPAN  CLASS="textsf">X.mzdel = specify the delay of the upper brace of both the
+MZDI interferometers of the DQPSK receiver. The default delay is 1
+and it must be % comprised in the interval 0 <SPAN CLASS="MATH"><IMG
+ WIDTH="20" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img28.png"
+ ALT="$ \leq$"></SPAN> X.mzdel <SPAN CLASS="MATH"><IMG
+ WIDTH="20" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img28.png"
+ ALT="$ \leq$"></SPAN>1.
+Setting mzdel to a value smaller than 1 implements the Partial DQPSK
+(P-DQPSK) [<A
+ HREF="Bibliography.html#partial_dqpsk">19</A>]</SPAN>
+</LI>
+</UL>
+The post-compensating fiber is assumed as a purely ideal-linear fiber,
+while the photodiodes are ideal (<TT>abs(.)&#94;2</TT>).
+
+<BR>
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=400> 
+<B>Note:</B> This function works over a copy of the electric field.
+All fields of the global variable <TT>GSTATE</TT> are left unchanged. </TD>
+</TR>
+</TABLE>
+
+<P>
+
+<H2><A NAME="SECTION002253000000000000000">
+Details</A>
+</H2>
+
+<P>
+Calling <SPAN CLASS="MATH"><IMG
+ WIDTH="41" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img56.png"
+ ALT="$ A(t)$"></SPAN> the electric field at the output of the optical filter,
+the current at the input of the low pass filter in the upper arm is:<P><!-- MATH
+ \begin{displaymath}
+I_{I}(t)=\mbox{Re}\left\{ A(t)A^{*}(t-T)e^{-j\frac{\pi}{4}}\right\}
+\end{displaymath}
+ -->
+</P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<IMG
+ WIDTH="64" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img62.png"
+ ALT="$\displaystyle I_{I}(t)=$">Re<IMG
+ WIDTH="186" HEIGHT="44" ALIGN="MIDDLE" BORDER="0"
+ SRC="img63.png"
+ ALT="$\displaystyle \left\{ A(t)A^{*}(t-T)e^{-j\frac{\pi}{4}}\right\} $">
+</DIV><P></P>
+being <SPAN CLASS="MATH"><IMG
+ WIDTH="19" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img59.png"
+ ALT="$ T$"></SPAN> the bit time. Similarly, in the lower arm we have:<P><!-- MATH
+ \begin{displaymath}
+I_{Q}(t)=\mbox{Re}\left\{ A(t)A^{*}(t-T)e^{+j\frac{\pi}{4}}\right\}
+\end{displaymath}
+ -->
+</P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<IMG
+ WIDTH="68" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img64.png"
+ ALT="$\displaystyle I_{Q}(t)=$">Re<IMG
+ WIDTH="186" HEIGHT="44" ALIGN="MIDDLE" BORDER="0"
+ SRC="img65.png"
+ ALT="$\displaystyle \left\{ A(t)A^{*}(t-T)e^{+j\frac{\pi}{4}}\right\} $">
+</DIV><P></P>
+In Optilux delaying the electric field by <SPAN CLASS="MATH"><IMG
+ WIDTH="19" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img59.png"
+ ALT="$ T$"></SPAN> seconds corresponds
+to a circular shift of <TT>GSTATE.NT</TT> points. See <A HREF="Signals_description.html#sub:Frequency-domain-representation">_description</A>
+for more details.
+
+<P>
+
+<H2><A NAME="SECTION002254000000000000000">
+See also </A>
+</H2>
+
+<P>
+<A HREF="receiver_dpsk.html#sec:receiver_dpsk">receiver_dpsk</A> 
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html522"
+  HREF="receiver_cohmix.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html520"
+  HREF="List_Functions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html514"
+  HREF="receiver_dpsk.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html523"
+  HREF="receiver_cohmix.html">receiver_cohmix</A>
+<B> Up:</B> <A NAME="tex2html521"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html515"
+  HREF="receiver_dpsk.html">receiver_dpsk</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>myfilter</TITLE>
+<META NAME="description" CONTENT="myfilter">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="lpfilter.html">
+<LINK REL="previous" HREF="evaldelay.html">
+<LINK REL="up" HREF="List_Functions.html">
+<LINK REL="next" HREF="lpfilter.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html765"
+  HREF="lpfilter.html">lpfilter</A>
+<B>Up:</B> <A NAME="tex2html763"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html757"
+  HREF="evaldelay.html">evaldelay</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION002430000000000000000"></A><A NAME="sec:myfilter"></A>
+<BR>
+myfilter
+</H1>
+
+<P>
+Filter device in the frequency domain.
+
+<P>
+
+<H2><A NAME="SECTION002431000000000000000">
+Syntax</A>
+</H2>
+
+<P>
+<TT>HF=MYFILTER(FTYPE,F,BW)</TT>&nbsp;
+<BR><TT>HF=MYFILTER(FTYPE,F,BW,ORD)</TT>
+
+<P>
+
+<H2><A NAME="SECTION002432000000000000000">
+Description</A>
+</H2>
+
+<P>
+<TT>HF=MYFILTER(FTYPE,F,BW,ORD)</TT> returns the filter <TT>FTYPE</TT>
+evaluated at frequencies <TT>F</TT> in the column vector <TT>HF</TT>.
+<TT>BW</TT> is the the 3-dB bandwidth of the filter (with exceptions,
+Note 2), with respect to the filtered signal power, i.e., <TT>|HF|&#94;2=0.5</TT>
+at <TT>F=+-BW</TT>.
+<BR>
+<P>
+<TT>FTYPE</TT> can be a string of the following: 
+
+<UL>
+<LI><TT>'movavg'</TT> : Short term integrator (moving average) [see
+Note 2] 
+</LI>
+<LI><TT>'gauss'</TT> : Gaussian filter [see Note 3] 
+</LI>
+<LI><TT>'butt2'</TT> : Butterworth 2nd order 
+</LI>
+<LI><TT>'butt4'</TT> : Butterworth 4th order 
+</LI>
+<LI><TT>'butt6'</TT> : Butterworth 6th order 
+</LI>
+<LI><TT>'ideal'</TT> : Ideal filter 
+</LI>
+<LI><TT>'bessel5'</TT> : Bessel 5th order 
+</LI>
+<LI><TT>'rc1'</TT> : RC1 filter 
+</LI>
+<LI><TT>'rc2'</TT> : RC2 filter 
+</LI>
+<LI><TT>'supergauss'</TT>: Super-Gaussian filter of order ORD 
+</LI>
+<LI><TT>'gauss_off'</TT> : Gaussian filter with offset ORD from the center
+of the channel 
+<BR>
+<BR><TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=400> 
+<B>Note 1</B>: The bandwidth <TT>BW</TT> is a lowpass bandwidth -&gt;
+For optical bandpass filters having 3dB bandwidth <TT>Bo</TT>, it
+is <TT>BW=Bo/2</TT>. </TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=400>  
+<B>Note 2</B>: For the moving average <TT>BW</TT> is not the 3dB bandwidth,
+but the first zero of the sinc, i.e. <TT>1/BW</TT> is the duration
+of the moving average. The 3dB bandwidth is <TT>0.443*BW</TT>. </TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=400>  
+<B>Note 3</B>: For the Gaussian filter the bandwidth 1/e (<TT>Be</TT>)
+is related to the 3dB bandwidth by <TT>Be= 1.6986*BW</TT> </TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=400>  
+<B>Note 4</B>: If the frequency is normalized, the 3dB bandwidth must
+be normalized as well to the same value.  </TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=400>  
+<B>Note 5</B>: For future new implementations of special filters,
+use the variable <TT>ORD</TT> for the new filter parameters. </TD>
+</TR>
+</TABLE>
+<BR>
+<P>
+</LI>
+</UL>
+Thanks to E. Forestieri for the filter expressions. 
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html764"
+  HREF="lpfilter.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html762"
+  HREF="List_Functions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html756"
+  HREF="evaldelay.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html765"
+  HREF="lpfilter.html">lpfilter</A>
+<B> Up:</B> <A NAME="tex2html763"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html757"
+  HREF="evaldelay.html">evaldelay</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

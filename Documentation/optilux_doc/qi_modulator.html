@@ -1,0 +1,246 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>qi_modulator</TITLE>
+<META NAME="description" CONTENT="qi_modulator">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="fiber.html">
+<LINK REL="previous" HREF="phase_modulator.html">
+<LINK REL="up" HREF="List_Functions.html">
+<LINK REL="next" HREF="fiber.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html414"
+  HREF="fiber.html">fiber</A>
+<B>Up:</B> <A NAME="tex2html412"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html406"
+  HREF="phase_modulator.html">phase_modulator</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION002170000000000000000"></A><A NAME="sec:qi_modulator"></A>
+<BR>
+qi_modulator
+</H1>
+
+<P>
+Modulate the optical field using a QI Mach-Zehnder modulator
+
+<P>
+
+<H2><A NAME="SECTION002171000000000000000">
+Syntax</A>
+</H2>
+
+<P>
+<TT>E=QI_MODULATOR(E,MODSIG_I,MODSIG_Q) </TT>&nbsp;
+<BR><TT>E=QI_MODULATOR(E,MODSIG_I,MODSIG_Q)</TT>
+
+<P>
+
+<H2><A NAME="SECTION002172000000000000000">
+Description</A>
+</H2>
+
+<P>
+<TT>E=QI_MODULATOR(E,MODSIG_I,MODSIG_Q)</TT> modulates the optical
+field using a QI Mach-Zehnder interferometer (<TT>QI-MZI</TT>) [<A
+ HREF="Bibliography.html#Kawanishi05">15</A>,<A
+ HREF="Bibliography.html#Kawanishi08">16</A>].
+The <TT>QI-MZI</TT> is basically a Mach-Zehnder super-structure, i.e.
+a MZI on whose arms are placed two standard <TT>MZI</TT>. Moreover
+on one of the two arms the <TT>MZI</TT> is followed by a <!-- MATH
+ $\frac{\pi}{2}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="19" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img41.png"
+ ALT="$ \frac{\pi}{2}$"></SPAN>phase
+shift. The schematic representation of a <TT>QI-MZI</TT> is reported
+in Fig.&nbsp;<A HREF="#fig:Scematic-of-the">2.3</A>.
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:Scematic-of-the"></A><A NAME="5650"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 2.3:</STRONG>
+Schematic of the QI Mach-Zehnder modulator</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV><IMG
+  WIDTH="600" HEIGHT="314" ALIGN="BOTTOM" BORDER="0"
+ SRC="./qi.png"
+ ALT="Image qi">
+
+<P></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+The model of the <TT>QI-MZI</TT> is
+
+<P>
+<BR>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray*}
+E_{out} & = & \frac{E_{in}}{2}\left\{ iqr\left[e^{j\frac{\pi(V_{i1}(t)-V_{bias})}{V_{\pi}}}+\gamma e^{j\frac{\pi(Vi_{2}(t)+V_{bias})}{V_{\pi}}}\right]\right.\\
+ &  & +\left.(1-iqr)\left[e^{j\frac{\pi(Vq_{1}(t)-V_{bias})}{V_{\pi}}}+\gamma e^{j\frac{\pi(V_{q2}(t)+V_{bias})}{V_{\pi}}}\right]e^{j\left(\frac{\pi}{2}+V_{biasc}\right)}\right\}
+\end{eqnarray*}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="42" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img42.png"
+ ALT="$\displaystyle E_{out}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="20" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img43.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="379" HEIGHT="61" ALIGN="MIDDLE" BORDER="0"
+ SRC="img44.png"
+ ALT="$\displaystyle \frac{E_{in}}{2}\left\{ iqr\left[e^{j\frac{\pi(V_{i1}(t)-V_{bias})}{V_{\pi}}}+\gamma e^{j\frac{\pi(Vi_{2}(t)+V_{bias})}{V_{\pi}}}\right]\right.$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="513" HEIGHT="65" ALIGN="MIDDLE" BORDER="0"
+ SRC="img45.png"
+ ALT="$\displaystyle +\left.(1-iqr)\left[e^{j\frac{\pi(Vq_{1}(t)-V_{bias})}{V_{\pi}}}+...
+...t)+V_{bias})}{V_{\pi}}}\right]e^{j\left(\frac{\pi}{2}+V_{biasc}\right)}\right\}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+<P>
+<!-- MATH
+ $V_{i1}=-V_{i2}=\frac{MODSIG\_I}{2}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="215" HEIGHT="47" ALIGN="MIDDLE" BORDER="0"
+ SRC="img46.png"
+ ALT="$ V_{i1}=-V_{i2}=\frac{MODSIG\_I}{2}$"></SPAN> and <!-- MATH
+ $V_{q1}=-V_{q2}=\frac{MODSIG\_Q}{2}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="223" HEIGHT="47" ALIGN="MIDDLE" BORDER="0"
+ SRC="img47.png"
+ ALT="$ V_{q1}=-V_{q2}=\frac{MODSIG\_Q}{2}$"></SPAN>
+are the in-phase and in-quadrature electrical driving signals produced
+by <TT><A HREF="electricsource.html#sec:electricsource">electricsource</A></TT>.
+
+<P>
+<TT>E=QI_MODULATOR(E,MODSIG_I,MODSIG_Q, OPTIONS)</TT> can modify
+the parameters of the <TT>QI-MZI</TT>. <TT>OPTIONS</TT> is an optional
+structure whose fields can be:
+
+<UL>
+<LI><TT>iqratio</TT> : change the power ratio between I and Q arms (<SPAN CLASS="MATH"><IMG
+ WIDTH="30" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img48.png"
+ ALT="$ iqr$"></SPAN>,
+default = 0) 
+</LI>
+<LI><TT>biasc</TT> : change the bias between I and Q arms (<SPAN CLASS="MATH"><IMG
+ WIDTH="52" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img49.png"
+ ALT="$ V_{biasc}$"></SPAN>,
+default = 0) 
+</LI>
+<LI><TT>exratio</TT> : extinction ratio of the two nested modulators [dB]
+(default = [inf inf]) 
+</LI>
+<LI><TT>bias</TT> : <SPAN CLASS="MATH"><IMG
+ WIDTH="45" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img39.png"
+ ALT="$ V_{bias}$"></SPAN> of the two nested modulators (default
+= [0 0]) 
+</LI>
+<LI><TT>amplitude</TT>: <SPAN CLASS="MATH"><IMG
+ WIDTH="27" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img40.png"
+ ALT="$ V_{\pi}$"></SPAN> of the two nested modulators (default
+= [1 1]) 
+</LI>
+<LI><TT>nochirp</TT>: reduce effect of chirp due to finite exratio of
+the two nested modulators [<A
+ HREF="Bibliography.html#dualMZGnauck">14</A>]1 (default = [false
+false]) 
+</LI>
+</UL>
+<TT>QI_MODULATOR</TT> acts on a per channel basis, so if you want
+to create optical signals for a N-channel WDM system you have to call
+<TT>QI_MODULATOR</TT> N times.
+
+<P>
+
+<H2><A NAME="SECTION002173000000000000000">
+See Also</A>
+</H2>
+
+<P>
+<A HREF="electricsource.html#sec:electricsource">electricsource</A>, <A HREF="lasersource.html#sec:lasersource">lasersource</A>,
+<A HREF="mz_modulator.html#sec:mz_modulator">mz_modulator</A> 
+
+<P>
+
+<H2><A NAME="SECTION002174000000000000000">
+References</A>
+</H2>
+
+<P>
+A description of the QI Mach Zehnder modulator (also called dual parallel
+Mach-Zehnder modulator) is given in [<A
+ HREF="Bibliography.html#Kawanishi05">15</A>,<A
+ HREF="Bibliography.html#Kawanishi08">16</A>].
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html413"
+  HREF="fiber.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html411"
+  HREF="List_Functions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html405"
+  HREF="phase_modulator.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html414"
+  HREF="fiber.html">fiber</A>
+<B> Up:</B> <A NAME="tex2html412"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html406"
+  HREF="phase_modulator.html">phase_modulator</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

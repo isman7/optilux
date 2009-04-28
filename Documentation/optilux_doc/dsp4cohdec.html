@@ -1,0 +1,279 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>dsp4cohdec</TITLE>
+<META NAME="description" CONTENT="dsp4cohdec">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="easiadaptivefilter.html">
+<LINK REL="previous" HREF="cmaadaptivefilter.html">
+<LINK REL="up" HREF="List_Functions.html">
+<LINK REL="next" HREF="easiadaptivefilter.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html644"
+  HREF="easiadaptivefilter.html">easiadaptivefilter</A>
+<B>Up:</B> <A NAME="tex2html642"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html636"
+  HREF="cmaadaptivefilter.html">cmaadaptivefilter</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION002340000000000000000"></A><A NAME="sec:dsp4cohdec"></A>
+<BR>
+dsp4cohdec
+</H1>
+
+<P>
+Digital signal processing for a coherent receiver
+
+<P>
+
+<H2><A NAME="SECTION002341000000000000000">
+Syntax</A>
+</H2>
+
+<P>
+<TT>[PHASES AMPLITUDES]=DSP4COHDEC(ICH,PAT,X,P)</TT>
+
+<P>
+
+<H2><A NAME="SECTION002342000000000000000">
+Description</A>
+</H2>
+
+<P>
+<TT>[PHASES AMPLITUDES]=DSP4COHDEC(ICH,PAT,X,P)</TT> returns the
+received phase (<TT>PHASES</TT>) and amplitude (<TT>AMPLITUDES</TT>)
+of a quadrature phase shift keying (QPSK) signal after digital signal
+processing (DSP). <TT>ICH</TT> is the channel number, <TT>PAT</TT>
+the pattern. The processing consists in several steps: 
+
+<OL>
+<LI>Analog to Digital Conversion ( quantization ) 
+</LI>
+<LI>Dispersion Compensation through FIR
+</LI>
+<LI>Rebuilding of Complex Signal(s)
+</LI>
+<LI>Digital Clock Recovery 
+</LI>
+<LI>Polarization Demultiplexing
+</LI>
+<LI>Frequency Estimation using the Bell Labs algorithm [<A
+ HREF="Bibliography.html#Leven07">27</A>]
+</LI>
+<LI>Phase Estimation using the Viterbi&amp;Viterbi algorithm [<A
+ HREF="Bibliography.html#Viterbi83">28</A>]
+</LI>
+<LI>Hard decision
+<BR>
+<P>
+</LI>
+</OL>
+<TT>X</TT> a struct whose fields are: 
+
+<UL>
+<LI><TT>X.oftype</TT> = optical filter type (see <A HREF="myfilter.html#sec:myfilter">myfilter</A>) 
+</LI>
+<LI><TT>X.obw</TT> = optical filter 3 dB bandwidth normalized to the symbol
+rate 
+</LI>
+<LI><TT>X.oord</TT> = optical filter order (if <TT>X.oftype</TT> is <TT>'supergaussian'</TT>) 
+</LI>
+<LI><TT>X.eftype</TT> = electrical filter type (see <A HREF="myfilter.html#sec:myfilter">myfilter</A>) 
+</LI>
+<LI><TT>X.ebw</TT> = electrical filter 3-dB bandwidth normalized to the
+symbol rate 
+</LI>
+<LI><TT>X.eord</TT> = electrical filter order (if <TT>X.eftype</TT> is
+<TT>'supergaussian'</TT>) 
+</LI>
+</UL>
+<TT>X</TT> can also have the optional parameters: 
+
+<UL>
+<LI><TT>X.lodetuning</TT> = Local Oscillator Detuning frequency [Hz]. 
+</LI>
+<LI><TT>X.lophasenoise</TT> = Local Oscillator Phase Noise Vector [rad]. 
+</LI>
+<LI><TT>X.lolinewidth</TT> = Local Oscillator Linewidth (Hz/symbolrate)
+</LI>
+<LI><TT>X.lopower</TT> = Local Oscillator Power [dBm] 
+</LI>
+<LI><TT>X.ts</TT> = Fixed sampling time (<TT>-0.5 &lt;= X.ts &lt;= 0.5</TT>) 
+</LI>
+<LI><TT>X.plot</TT> = <TT>'ploteye'</TT>: plots the eye in the active
+figure; <TT>'plotcur'</TT> plots the received current 
+</LI>
+<LI><TT>X.pol</TT> = <TT>'x','y','xy'</TT>. Polarization of <TT>X.plot</TT> 
+</LI>
+<LI><TT>X.color</TT> = color string for the plot (see <TT>PLOT</TT>).
+E.g. <TT>'b-'</TT> 
+</LI>
+<LI><TT>X.dpost</TT> = post compensating fiber cumulated dispersion [ps/nm] 
+</LI>
+<LI><TT>X.slopez</TT> = post compensating fiber cumulated slope [ps/nm&#94;2] 
+</LI>
+<LI><TT>X.lambda</TT> = wavelength [nm] at which the post compensating
+fiber has a cumulated dispersion equal to <TT>X.dpost</TT> 
+</LI>
+<LI><TT>X.delay</TT> = <TT>'theory'</TT> means that the delay uses the
+theoretical delay saved within <TT>GSTATE.DELAY</TT> (see <A HREF="create_field.html#sec:create_field">creat_field</A>).
+By default the delay is measured by a cross-correlation measurement
+between the received current and an artificial pulse amplitude modulation
+(PAM) signal with ideal non-return to zero bits with symbols equal
+to <TT>PAT</TT>. The correlation method is useful in presence of polarization
+mode dispersion (PMD) 
+</LI>
+</UL>
+<TT>P</TT> is a structure whose fields are: 
+
+<UL>
+<LI><TT>P.baudrate</TT> : Baud-Rate or symbol rate [GBaud] 
+</LI>
+<LI><TT>P.workatbaudrate</TT>: work with one (true) or two (false) samples/symb
+</LI>
+<LI><TT>P.sps</TT> : samples per symbol in the <TT>IRX</TT> matrix
+</LI>
+<LI><TT>P.applyadc</TT> : enable quantization (true/false)
+</LI>
+<LI><TT>P.adcbits</TT> : number of bits of the ADC
+</LI>
+<LI><TT>P.applydcf </TT>: enable dispersion compensation filter (true/false)
+</LI>
+<LI><TT>P.dispersion </TT>: dispersion [ps/nm]
+</LI>
+<LI><TT>P.lambda</TT> : wavelength of the channel [nm]
+</LI>
+<LI><TT>P.ndispsym</TT> : dispersion compensating filter length [symbols]
+</LI>
+<LI><TT>P.applynlr</TT> : enable nonlinear rotation (true/false)
+</LI>
+<LI><TT>P.nlralpha</TT> : constant for non linear rotation algorithm
+</LI>
+<LI><TT>P.applypol</TT> : enable polarization demux/tracking (true/false)
+</LI>
+<LI><TT>P.polmethod</TT> : used method: 
+
+<P>
+
+<UL>
+<LI><TT>'singlepol': Kikuchi</TT> [<A
+ HREF="Bibliography.html#Kikuchi08">29</A>]
+</LI>
+<LI><TT>'cma': Constant Modulus Algorithm (CMA) [<A
+ HREF="Bibliography.html#Godard">26</A>]</TT>
+</LI>
+<LI><TT>'easi': EASI [<A
+ HREF="Bibliography.html#Cardoso96">30</A>]</TT>
+</LI>
+<LI><TT>'combo': COMBO</TT>: <TT>EASI+CMA</TT>
+</LI>
+</UL>
+</LI>
+<LI><TT>P.cmaparams.R</TT> : radius of CMA 
+</LI>
+<LI><TT>P.cmaparams.mu</TT> : convergence parameter of CMA 
+</LI>
+<LI><TT>P.cmaparams.taps</TT>: CMA filter taps 
+</LI>
+<LI><TT>P.cmaparams.txpolars</TT>: transmitted polarizations 
+</LI>
+<LI><TT>P.cmaparams.phizero</TT>: rotation angle between tx and rx field 
+</LI>
+<LI><TT>P.easiparams.mu</TT>: convergence parameter of EASI 
+</LI>
+<LI><TT>P.easiparams.txpolars</TT>: transmitted polarizations 
+</LI>
+<LI><TT>P.easiparams.phizero</TT>: rotation angle between tx and rx field 
+</LI>
+<LI><TT>P.modorder</TT> : modulation order: <TT>BPSK</TT>=1, <TT>QPSK</TT>=2
+</LI>
+<LI><TT>P.freqavg</TT> : frequency estimation smoothing parameter <TT>[<A
+ HREF="Bibliography.html#Leven07">27</A>]</TT>
+</LI>
+<LI><TT>P.phasavg</TT> : phase estimation smoothing parameter [<A
+ HREF="Bibliography.html#Viterbi83">28</A>]
+</LI>
+<LI><TT>P.poworder</TT> : modulus power in phase estimation 
+<BR>
+<P>
+</LI>
+</UL>
+Given <TT>PHASES </TT>ans <TT>AMPLITUDES</TT> the symbol constellation
+can be plotted % using the function <TT>POLAR</TT>: 
+<BR>
+<P>
+<TT>POLAR(PHASES,AMPLITUDES) </TT>
+
+<P>
+
+<H2><A NAME="SECTION002343000000000000000">
+See Also</A>
+</H2>
+
+<P>
+<A HREF="cmaadaptivefilter.html#sec:cmaadaptivefilter">cmaadaptivefilter</A>, <A HREF="easiadaptivefilter.html#sec:easiadaptivefilter">easiadaptivefilter</A>,
+<A HREF="receiver_cohmix.html#sec:receiver_cohmix">receiver_cohmix</A>
+
+<P>
+
+<H2><A NAME="SECTION002344000000000000000">
+References</A>
+</H2>
+
+<P>
+The frequency and phase estimation algorithms employed in this function
+are described in [<A
+ HREF="Bibliography.html#Leven07">27</A>] and [<A
+ HREF="Bibliography.html#Viterbi83">28</A>]. Two of the
+possible polarization demultiplexing algorithms are described in [<A
+ HREF="Bibliography.html#Godard">26</A>,<A
+ HREF="Bibliography.html#Cardoso96">30</A>].
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html643"
+  HREF="easiadaptivefilter.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html641"
+  HREF="List_Functions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html635"
+  HREF="cmaadaptivefilter.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html644"
+  HREF="easiadaptivefilter.html">easiadaptivefilter</A>
+<B> Up:</B> <A NAME="tex2html642"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html636"
+  HREF="cmaadaptivefilter.html">cmaadaptivefilter</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

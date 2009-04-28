@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>corrdelay</TITLE>
+<META NAME="description" CONTENT="corrdelay">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="evaldelay.html">
+<LINK REL="previous" HREF="avg_power.html">
+<LINK REL="up" HREF="List_Functions.html">
+<LINK REL="next" HREF="evaldelay.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html739"
+  HREF="evaldelay.html">evaldelay</A>
+<B>Up:</B> <A NAME="tex2html737"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html731"
+  HREF="avg_power.html">avg_power</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION002410000000000000000"></A><A NAME="sec:corrdelay"></A>
+<BR>
+corrdelay
+</H1>
+
+<P>
+System delay by cross-correlation measurement
+
+<P>
+
+<H2><A NAME="SECTION002411000000000000000">
+Syntax</A>
+</H2>
+
+<P>
+<TT>DELAY=CORRDELAY(IRIC,PAT,NT,NSYMB)</TT>&nbsp;
+<BR><TT>DELAY=CORRDELAY(IRIC,PAT,NT,NSYMB,OPT)</TT>&nbsp;
+<BR><TT>[DELAY,WRN,RHO]=CORRDELAY(IRIC,PAT,NT,NSYMB,OPT)</TT>&nbsp;
+<BR><TT>[DELAY,WRN,RHO,IRICA]=CORRDELAY(IRIC,PAT,NT,NSYMB,OPT)</TT>
+
+<P>
+
+<H2><A NAME="SECTION002412000000000000000">
+Description</A>
+</H2>
+
+<P>
+<TT>DELAY=CORRDELAY(IRIC,PAT,NT,NSYMB)</TT> evaluates the system delay
+<TT>DELAY</TT> (in symbols) between the electric signal that drives
+the transmitter laser and the received signal <TT>IRIC</TT>. For binary
+alphabets <TT>IRIC</TT> is a vector of real, while in multi-level
+formats <TT>IRIC </TT>is a complex vector. The transmitted electric
+signal is artificially created by repeating the pattern <TT>PAT</TT>
+in order to have <TT>NT</TT> points x symbol (see <A HREF="reset_all.html#sec:reset_all">reset_all</A>).
+
+<BR><TT>NSYMB</TT> is the number of symbols. 
+<BR>
+The cross-correlation is the convolution between the vector <TT>conj(x)</TT>
+(see example below) and <TT>IRIC</TT>. 
+<BR>
+<P>
+This function measures the delay as the coordinate of the maximum
+of the cross-correlation. If the difference between the largest and
+the second maximum is lower than a threshold (initialized at the beginning
+of this function), the function prints a warning of low accuracy.
+Low accuracy is an indicator that the delay may be wrong. 
+<BR>
+<P>
+<TT>DELAY=CORRDELAY(IRIC,PAT,NT,NSYMB,OPT)</TT> has the optional flag
+<TT>OPT</TT>. 
+
+<P>
+If <TT>OPT='phase'</TT> <TT>CORRDELAY</TT> treats <TT>IRIC</TT> as
+a complex quaternary signal (e.g. QPSK signal). 
+<BR>
+<P>
+<TT>[DELAY,WRN,RHO]=CORRDELAY(IRIC,PAT,NT,NSYMB,OPT)</TT> also
+returns the correlation coefficient <TT>RHO </TT>of the signal and
+the reference one. 
+<BR>
+<P>
+<TT>WRN</TT> is a flag equal to true if the the delay is measured
+with low accuracy. Low accuracy may happen in presence of amplified
+spontaneous emission noise or with big distortions. In such cases,
+if possible, it is better to use the theoretical delay saved into
+global variable <TT>GSTATE.DELAY</TT>.
+<BR>
+<P>
+<TT>[DELAY,WRN,RHO,IRICA]=CORRDELAY(IRIC,PAT,NT,NSYMB,OPT)
+</TT>returns on <TT>IRICA</TT> the angle of the input <TT>IRIC</TT> after
+removing phase shift ambiguity (useful in multi-level formats).
+
+<P>
+
+<H2><A NAME="SECTION002413000000000000000">
+Example</A>
+</H2>
+
+<P>
+if <TT>PAT='1101'</TT> and <TT>Nt=4</TT> the reference transmitted
+signal turns out to be non-return to zero equal to: 
+<BR><TT>x=[1 1 1 1 1 1 1 1 0 0 0 0 1 1 1 1];</TT>
+<BR>
+The cross-correlation is the convolution between the vector <TT>x</TT>
+and <TT>IRIC</TT>. For multi-level formats <TT>x </TT>is complex like
+<TT>IRIC, </TT>e.g.<TT> x=[exp(i*pi/4) exp(i*3/4*pi) ...]
+</TT>for QPSK<TT>.</TT>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html738"
+  HREF="evaldelay.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html736"
+  HREF="List_Functions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html730"
+  HREF="avg_power.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html739"
+  HREF="evaldelay.html">evaldelay</A>
+<B> Up:</B> <A NAME="tex2html737"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html731"
+  HREF="avg_power.html">avg_power</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

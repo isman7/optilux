@@ -1,0 +1,1077 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>NLSE</TITLE>
+<META NAME="description" CONTENT="NLSE">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="Coupled_NLSE_CNLSE.html">
+<LINK REL="previous" HREF="Background.html">
+<LINK REL="up" HREF="Background.html">
+<LINK REL="next" HREF="Coupled_NLSE_CNLSE.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html994"
+  HREF="Coupled_NLSE_CNLSE.html">Coupled-NLSE (CNLSE)</A>
+<B>Up:</B> <A NAME="tex2html992"
+  HREF="Background.html">Background</A>
+<B> Previous:</B> <A NAME="tex2html986"
+  HREF="Background.html">Background</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION00310000000000000000"></A><A NAME="sec:NLSE"></A>
+<BR>
+NLSE
+</H1>
+
+<P>
+The nonlinear Schr&#246;dinger equation (NLSE) in absence of polarization
+effects for an electric field <SPAN CLASS="MATH"><IMG
+ WIDTH="59" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img91.png"
+ ALT="$ A(z,t)$"></SPAN> [<!-- MATH
+ $\sqrt{\mbox{W}}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="41" HEIGHT="45" ALIGN="MIDDLE" BORDER="0"
+ SRC="img92.png"
+ ALT="$ \sqrt{\mbox{W}}$"></SPAN>],
+<SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img93.png"
+ ALT="$ z$"></SPAN> being the distance [m] and <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$ t$"></SPAN> the time [s], in engineering
+notation is the following partial differential equation (PDE) [<A
+ HREF="Bibliography.html#Agrawal">1</A>]:
+
+<P>
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:NLSE"></A><!-- MATH
+ \begin{equation}
+\frac{\partial A(z,t)}{\partial z}=-\frac{\alpha}{2}A-\beta_{1}\frac{\partial A}{\partial t}+j\frac{\beta_{2}}{2}\frac{\partial^{2}A}{\partial t^{2}}+\frac{\beta_{3}}{6}\frac{\partial^{3}A}{\partial t^{3}}-j\gamma\left|A\right|^{2}A
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="495" HEIGHT="66" ALIGN="MIDDLE" BORDER="0"
+ SRC="img94.png"
+ ALT="$\displaystyle \frac{\partial A(z,t)}{\partial z}=-\frac{\alpha}{2}A-\beta_{1}\f...
+...{3}}{6}\frac{\partial^{3}A}{\partial t^{3}}-j\gamma\left\vert A\right\vert^{2}A$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+where <SPAN CLASS="MATH"><IMG
+ WIDTH="14" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img95.png"
+ ALT="$ j$"></SPAN> is the imaginary unit; <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img96.png"
+ ALT="$ \alpha$"></SPAN> is the fiber attenuation;
+<!-- MATH
+ $\beta_{k}=\left.\frac{\text{d}^{k}\beta}{\text{d}\omega^{k}}\right|_{\omega=\omega_{0}}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="130" HEIGHT="53" ALIGN="MIDDLE" BORDER="0"
+ SRC="img97.png"
+ ALT="$ \beta_{k}=\left.\frac{\text{d}^{k}\beta}{\text{d}\omega^{k}}\right\vert _{\omega=\omega_{0}}$"></SPAN>,
+<!-- MATH
+ $k=1,2,\ldots$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="99" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img98.png"
+ ALT="$ k=1,2,\ldots$"></SPAN>, being <!-- MATH
+ $\beta(\omega)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="44" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img53.png"
+ ALT="$ \beta(\omega)$"></SPAN> the wave propagation constant
+and <!-- MATH
+ $\omega_{0}=2\pi f_{0}=2\pi c/\lambda_{0}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="173" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img99.png"
+ ALT="$ \omega_{0}=2\pi f_{0}=2\pi c/\lambda_{0}$"></SPAN> with <!-- MATH
+ $f_{0},\,\lambda_{0}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="54" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img100.png"
+ ALT="$ f_{0},\,\lambda_{0}$"></SPAN>
+the central frequency/wavelength of <SPAN CLASS="MATH"><IMG
+ WIDTH="59" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img91.png"
+ ALT="$ A(z,t)$"></SPAN>, respectively, <SPAN CLASS="MATH"><IMG
+ WIDTH="14" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img14.png"
+ ALT="$ c$"></SPAN>
+being the speed of light; <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img101.png"
+ ALT="$ \gamma$"></SPAN> is the nonlinear coefficient.
+Such parameters satisfy the following relations.
+
+<P>
+
+<H2><A NAME="SECTION00311000000000000000">
+Attenuation</A>
+</H2>
+
+<P>
+The attenuation <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img96.png"
+ ALT="$ \alpha$"></SPAN> [m<SPAN CLASS="MATH"><IMG
+ WIDTH="26" HEIGHT="21" ALIGN="BOTTOM" BORDER="0"
+ SRC="img102.png"
+ ALT="$ ^{-1}$"></SPAN>] is a measure of the power
+loss along the distance. Assuming all parameters zero except <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img96.png"
+ ALT="$ \alpha$"></SPAN>,
+the NLSE (<A HREF="#eq:NLSE">3.1</A>) becomes:
+
+<P>
+<P><!-- MATH
+ \begin{displaymath}
+\frac{\partial A}{\partial z}=-\frac{\alpha}{2}A
+\end{displaymath}
+ -->
+</P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<IMG
+ WIDTH="106" HEIGHT="62" ALIGN="MIDDLE" BORDER="0"
+ SRC="img103.png"
+ ALT="$\displaystyle \frac{\partial A}{\partial z}=-\frac{\alpha}{2}A$">
+</DIV><P></P>
+
+<P>
+whose solution is <!-- MATH
+ $A(z,t)=A(0,t)e^{-\frac{\alpha}{2}z}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="181" HEIGHT="42" ALIGN="MIDDLE" BORDER="0"
+ SRC="img104.png"
+ ALT="$ A(z,t)=A(0,t)e^{-\frac{\alpha}{2}z}$"></SPAN>. In Optilux
+<SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img96.png"
+ ALT="$ \alpha$"></SPAN> is assumed constant over the signals spectrum even if it
+actually depends on the wavelength. 
+
+<P>
+The attenuation is usually expressed in [dB/km]. In a dB scale
+the power loss can be measured as:
+
+<P>
+<P><!-- MATH
+ \begin{displaymath}
+10\log_{10}\left(\left|A(z,t)\right|^{2}\right)-10\log_{10}\left(\left|A(0,t)\right|^{2}\right)=\alpha z\cdot10\log_{10}e
+\end{displaymath}
+ -->
+</P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<IMG
+ WIDTH="487" HEIGHT="53" ALIGN="MIDDLE" BORDER="0"
+ SRC="img105.png"
+ ALT="$\displaystyle 10\log_{10}\left(\left\vert A(z,t)\right\vert^{2}\right)-10\log_{10}\left(\left\vert A(0,t)\right\vert^{2}\right)=\alpha z\cdot10\log_{10}e$">
+</DIV><P></P>
+
+<P>
+Hence, the relation between the attenuation in [m<SPAN CLASS="MATH"><IMG
+ WIDTH="26" HEIGHT="21" ALIGN="BOTTOM" BORDER="0"
+ SRC="img102.png"
+ ALT="$ ^{-1}$"></SPAN>] and
+the attenuation in [dB/km] is the following:<P><!-- MATH
+ \begin{displaymath}
+\alpha\quad[\mbox{m}^{-1}]=\frac{\alpha\quad[\mbox{dB/km}]}{\log_{10}e}\cdot10^{-4}=10^{-4}\cdot\ln\left(10\right)\alpha\quad[\mbox{dB/km}]
+\end{displaymath}
+ -->
+</P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<IMG
+ WIDTH="42" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img106.png"
+ ALT="$\displaystyle \alpha\quad[$">m<IMG
+ WIDTH="450" HEIGHT="64" ALIGN="MIDDLE" BORDER="0"
+ SRC="img107.png"
+ ALT="$\displaystyle ^{-1}]=\frac{\alpha\quad[\mbox{dB/km}]}{\log_{10}e}\cdot10^{-4}=10^{-4}\cdot\ln\left(10\right)\alpha\quad[\mbox{dB/km}]$">
+</DIV><P></P>
+
+<P>
+To the attenuation can be associated the attenuation length <!-- MATH
+ $L_{A}=1/\alpha$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="87" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img108.png"
+ ALT="$ L_{A}=1/\alpha$"></SPAN>
+as a measure of the distance over which the loss effect is significant.
+For a typical system having <!-- MATH
+ $\alpha=0.2$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="67" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img109.png"
+ ALT="$ \alpha=0.2$"></SPAN> dB/km it is <!-- MATH
+ $L_{A}=21715$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="103" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img110.png"
+ ALT="$ L_{A}=21715$"></SPAN>
+[m].
+
+<P>
+
+<H2><A NAME="SECTION00312000000000000000"></A><A NAME="sub:Group-velocity"></A>
+<BR>
+Group velocity
+</H2>
+
+<P>
+<!-- MATH
+ $\beta_{1}=\left.\frac{\text{d}\beta}{\text{d}\omega}\right|_{\omega=\omega_{0}}=1/v_{g}\left(\omega_{0}\right)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="221" HEIGHT="53" ALIGN="MIDDLE" BORDER="0"
+ SRC="img111.png"
+ ALT="$ \beta_{1}=\left.\frac{\text{d}\beta}{\text{d}\omega}\right\vert _{\omega=\omega_{0}}=1/v_{g}\left(\omega_{0}\right)$"></SPAN>
+[s/m] accounts for the group velocity <SPAN CLASS="MATH"><IMG
+ WIDTH="23" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img112.png"
+ ALT="$ v_{g}$"></SPAN> of the signal along
+the fiber, and hence is a delay per unit length. In presence of only
+<SPAN CLASS="MATH"><IMG
+ WIDTH="25" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img113.png"
+ ALT="$ \beta_{1}$"></SPAN> the NLSE writes as:
+
+<P>
+<P><!-- MATH
+ \begin{displaymath}
+\frac{\partial A}{\partial z}=-\beta_{1}\frac{\partial A}{\partial t}
+\end{displaymath}
+ -->
+</P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<IMG
+ WIDTH="124" HEIGHT="62" ALIGN="MIDDLE" BORDER="0"
+ SRC="img114.png"
+ ALT="$\displaystyle \frac{\partial A}{\partial z}=-\beta_{1}\frac{\partial A}{\partial t}$">
+</DIV><P></P>
+
+<P>
+whose solution is:<P><!-- MATH
+ \begin{displaymath}
+A(z,t)=A\left(0,t-\frac{z}{v_{g}}\right)
+\end{displaymath}
+ -->
+</P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<IMG
+ WIDTH="200" HEIGHT="65" ALIGN="MIDDLE" BORDER="0"
+ SRC="img115.png"
+ ALT="$\displaystyle A(z,t)=A\left(0,t-\frac{z}{v_{g}}\right)$">
+</DIV><P></P>
+
+<P>
+Two signals centered at wavelengths <!-- MATH
+ $\lambda_{1}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="25" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img116.png"
+ ALT="$ \lambda_{1}$"></SPAN> and <!-- MATH
+ $\lambda_{2}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="25" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img117.png"
+ ALT="$ \lambda_{2}$"></SPAN>
+generally have different group velocities <SPAN CLASS="MATH"><IMG
+ WIDTH="31" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img118.png"
+ ALT="$ v_{g1}$"></SPAN> and <SPAN CLASS="MATH"><IMG
+ WIDTH="31" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img119.png"
+ ALT="$ v_{g2}$"></SPAN>,
+respectively, and hence travel at different speed. The delay per unit
+length between the two signals is the walk-off parameter <SPAN CLASS="MATH"><IMG
+ WIDTH="31" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img120.png"
+ ALT="$ d_{12}$"></SPAN>
+equal to:
+
+<P>
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:dsp"></A><!-- MATH
+ \begin{equation}
+d_{12}=\frac{1}{v_{g1}}-\frac{1}{v_{g2}}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="140" HEIGHT="60" ALIGN="MIDDLE" BORDER="0"
+ SRC="img121.png"
+ ALT="$\displaystyle d_{12}=\frac{1}{v_{g1}}-\frac{1}{v_{g2}}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">2</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+<SPAN CLASS="MATH"><IMG
+ WIDTH="66" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img122.png"
+ ALT="$ d_{12}&gt;0$"></SPAN> means that the channel having group velocity <SPAN CLASS="MATH"><IMG
+ WIDTH="31" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img118.png"
+ ALT="$ v_{g1}$"></SPAN>
+travels slower than the other. The walk-off weights the impact of
+the XPM and FWM effects.
+
+<P>
+
+<H2><A NAME="SECTION00313000000000000000">
+GVD parameters</A>
+</H2>
+
+<P>
+The GVD parameters are the derivatives of order greater than 1 of
+<!-- MATH
+ $\beta(\omega)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="44" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img53.png"
+ ALT="$ \beta(\omega)$"></SPAN> at <!-- MATH
+ $\omega=\omega_{0}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="63" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img123.png"
+ ALT="$ \omega=\omega_{0}$"></SPAN>. Usually only <SPAN CLASS="MATH"><IMG
+ WIDTH="25" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img124.png"
+ ALT="$ \beta_{2}$"></SPAN>
+[s<SPAN CLASS="MATH"><IMG
+ WIDTH="14" HEIGHT="21" ALIGN="BOTTOM" BORDER="0"
+ SRC="img51.png"
+ ALT="$ ^{2}$"></SPAN>/m] and <SPAN CLASS="MATH"><IMG
+ WIDTH="25" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img125.png"
+ ALT="$ \beta_{3}$"></SPAN> [s<SPAN CLASS="MATH"><IMG
+ WIDTH="14" HEIGHT="21" ALIGN="BOTTOM" BORDER="0"
+ SRC="img126.png"
+ ALT="$ ^{3}$"></SPAN>/m] are included in
+the NLSE. Assuming all parameters zero except <!-- MATH
+ $\beta_{1,2,3}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="49" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img127.png"
+ ALT="$ \beta_{1,2,3}$"></SPAN> the
+NLSE becomes a linear PDE and writes as:<P><!-- MATH
+ \begin{displaymath}
+\frac{\partial A}{\partial z}=-\beta_{1}\frac{\partial A}{\partial t}+j\frac{\beta_{2}}{2}\frac{\partial^{2}A}{\partial t^{2}}+\frac{\beta_{3}}{6}\frac{\partial^{3}A}{\partial t^{3}}
+\end{displaymath}
+ -->
+</P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<IMG
+ WIDTH="304" HEIGHT="66" ALIGN="MIDDLE" BORDER="0"
+ SRC="img128.png"
+ ALT="$\displaystyle \frac{\partial A}{\partial z}=-\beta_{1}\frac{\partial A}{\partia...
+...l^{2}A}{\partial t^{2}}+\frac{\beta_{3}}{6}\frac{\partial^{3}A}{\partial t^{3}}$">
+</DIV><P></P>
+
+<P>
+which writes in a simple form in the frequency domain <!-- MATH
+ $\widetilde{A}(z,\omega)={\cal F}\left\{ A(z,t)\right\}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="182" HEIGHT="47" ALIGN="MIDDLE" BORDER="0"
+ SRC="img129.png"
+ ALT="$ \widetilde{A}(z,\omega)={\cal F}\left\{ A(z,t)\right\} $"></SPAN>:<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:GVD"></A><!-- MATH
+ \begin{equation}
+\frac{\partial\widetilde{A}}{\partial z}=-j\left(\beta_{1}\omega+\frac{\beta_{2}}{2}\omega^{2}+\frac{\beta_{3}}{6}\omega^{3}\right)\widetilde{A}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="300" HEIGHT="73" ALIGN="MIDDLE" BORDER="0"
+ SRC="img130.png"
+ ALT="$\displaystyle \frac{\partial\widetilde{A}}{\partial z}=-j\left(\beta_{1}\omega+\frac{\beta_{2}}{2}\omega^{2}+\frac{\beta_{3}}{6}\omega^{3}\right)\widetilde{A}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">3</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+whose solution is:
+
+<P>
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:GVD_solution"></A><!-- MATH
+ \begin{equation}
+\widetilde{A}(z,\omega)=\widetilde{A}(0,\omega)e^{-j\left(\beta_{1}\omega+\frac{\beta_{2}}{2}\omega^{2}+\frac{\beta_{3}}{6}\omega^{3}\right)z}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="324" HEIGHT="54" ALIGN="MIDDLE" BORDER="0"
+ SRC="img131.png"
+ ALT="$\displaystyle \widetilde{A}(z,\omega)=\widetilde{A}(0,\omega)e^{-j\left(\beta_{1}\omega+\frac{\beta_{2}}{2}\omega^{2}+\frac{\beta_{3}}{6}\omega^{3}\right)z}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">4</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+Note from (<A HREF="#eq:GVD_solution">3.4</A>) that, being the system linear,
+the behavior of each frequency along the fiber depends only by itself.
+Since in (<A HREF="#eq:GVD">3.3</A>) the loss is absent, for the energy conservation
+principle the energy carried by frequency <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img132.png"
+ ALT="$ \omega$"></SPAN> must remain unaltered,
+i.e. <!-- MATH
+ $\left|\widetilde{A}(z,\omega)\right|^{2}=\left|\widetilde{A}(0,\omega)\right|^{2}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="192" HEIGHT="61" ALIGN="MIDDLE" BORDER="0"
+ SRC="img133.png"
+ ALT="$ \left\vert\widetilde{A}(z,\omega)\right\vert^{2}=\left\vert\widetilde{A}(0,\omega)\right\vert^{2}$"></SPAN>,
+so that the GVD parameters induce a pure phase rotation in the frequency
+domain. 
+
+<P>
+Most of the times <SPAN CLASS="MATH"><IMG
+ WIDTH="25" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img124.png"
+ ALT="$ \beta_{2}$"></SPAN> and <SPAN CLASS="MATH"><IMG
+ WIDTH="25" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img125.png"
+ ALT="$ \beta_{3}$"></SPAN> are expressed as functions
+of the wavelength through the fiber dispersion, <!-- MATH
+ $D=\left.\frac{\text{d}\beta_{1}}{\text{d}\lambda}\right|_{\lambda=\lambda_{0}}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="122" HEIGHT="53" ALIGN="MIDDLE" BORDER="0"
+ SRC="img134.png"
+ ALT="$ D=\left.\frac{\text{d}\beta_{1}}{\text{d}\lambda}\right\vert _{\lambda=\lambda_{0}}$"></SPAN>
+, and through the fiber dispersion slope, <!-- MATH
+ $D^{'}=\left.\frac{\text{d}^{2}\beta_{1}}{\text{d}\lambda^{2}}\right|_{\lambda=\lambda_{0}}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="136" HEIGHT="53" ALIGN="MIDDLE" BORDER="0"
+ SRC="img135.png"
+ ALT="$ D^{'}=\left.\frac{\text{d}^{2}\beta_{1}}{\text{d}\lambda^{2}}\right\vert _{\lambda=\lambda_{0}}$"></SPAN>,
+where <!-- MATH
+ $\lambda_{0}=c/f_{0}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="86" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img136.png"
+ ALT="$ \lambda_{0}=c/f_{0}$"></SPAN>. The following relations hold:
+
+<P>
+<BR>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray*}
+\beta_{2} & = & -\frac{\lambda_{0}^{2}}{2\pi c}D\\
+\beta_{3} & = & \left(\frac{\lambda_{0}}{2\pi c}\right)^{2}\left(2\lambda_{0}D+\lambda_{0}^{2}D^{'}\right)
+\end{eqnarray*}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="25" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img137.png"
+ ALT="$\displaystyle \beta_{2}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="20" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img43.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="70" HEIGHT="66" ALIGN="MIDDLE" BORDER="0"
+ SRC="img138.png"
+ ALT="$\displaystyle -\frac{\lambda_{0}^{2}}{2\pi c}D$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="25" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img139.png"
+ ALT="$\displaystyle \beta_{3}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="20" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img43.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="212" HEIGHT="73" ALIGN="MIDDLE" BORDER="0"
+ SRC="img140.png"
+ ALT="$\displaystyle \left(\frac{\lambda_{0}}{2\pi c}\right)^{2}\left(2\lambda_{0}D+\lambda_{0}^{2}D^{'}\right)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+<P>
+Note that the third order dispersion <SPAN CLASS="MATH"><IMG
+ WIDTH="25" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img125.png"
+ ALT="$ \beta_{3}$"></SPAN> exists even with
+zero slope.
+
+<P>
+The dispersion <SPAN CLASS="MATH"><IMG
+ WIDTH="22" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img141.png"
+ ALT="$ D$"></SPAN> is usually expressed in [ps/(nm<SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img142.png"
+ ALT="$ \cdot$"></SPAN>km)]
+while the dispersion slope <SPAN CLASS="MATH"><IMG
+ WIDTH="28" HEIGHT="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="img143.png"
+ ALT="$ D^{'}$"></SPAN> in [ps<SPAN CLASS="MATH"><IMG
+ WIDTH="14" HEIGHT="21" ALIGN="BOTTOM" BORDER="0"
+ SRC="img51.png"
+ ALT="$ ^{2}$"></SPAN>/(nm<SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img142.png"
+ ALT="$ \cdot$"></SPAN>km)].
+As a reference, at <!-- MATH
+ $\lambda_{0}=1550$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="88" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img144.png"
+ ALT="$ \lambda_{0}=1550$"></SPAN> nm it is <!-- MATH
+ $\beta_{2}\quad[$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="49" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img145.png"
+ ALT="$ \beta_{2}\quad[$"></SPAN>s<!-- MATH
+ $^{2}/\mbox{m}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="23" HEIGHT="41" ALIGN="MIDDLE" BORDER="0"
+ SRC="img146.png"
+ ALT="$ ^{2}/$">m</SPAN>]
+=-<!-- MATH
+ $-1.2754\cdot10^{-27}\cdot D\quad$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="182" HEIGHT="41" ALIGN="MIDDLE" BORDER="0"
+ SRC="img147.png"
+ ALT="$ -1.2754\cdot10^{-27}\cdot D\quad$"></SPAN>[ps/(nm<SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img142.png"
+ ALT="$ \cdot$"></SPAN>km)]. 
+
+<P>
+<SPAN CLASS="MATH"><IMG
+ WIDTH="56" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img148.png"
+ ALT="$ D&gt;0$"></SPAN> (<!-- MATH
+ $\beta_{2}<0$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="59" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img149.png"
+ ALT="$ \beta_{2}&lt;0$"></SPAN>) corresponds to anomalous dispersion, <SPAN CLASS="MATH"><IMG
+ WIDTH="56" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img150.png"
+ ALT="$ D&lt;0$"></SPAN>
+(<!-- MATH
+ $\beta_{2}>0$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="59" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img151.png"
+ ALT="$ \beta_{2}&gt;0$"></SPAN>) corresponds to normal dispersion.
+
+<P>
+To the GVD parameters can be associated the dispersion length, <!-- MATH
+ $L_{D}=\beta_{2}/T_{0}^{2}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="108" HEIGHT="41" ALIGN="MIDDLE" BORDER="0"
+ SRC="img152.png"
+ ALT="$ L_{D}=\beta_{2}/T_{0}^{2}$"></SPAN>,
+and the dispersion slope length, <!-- MATH
+ $L_{D}^{'}=\beta_{3}/T_{0}^{3}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="108" HEIGHT="46" ALIGN="MIDDLE" BORDER="0"
+ SRC="img153.png"
+ ALT="$ L_{D}^{'}=\beta_{3}/T_{0}^{3}$"></SPAN>,
+being <SPAN CLASS="MATH"><IMG
+ WIDTH="25" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img154.png"
+ ALT="$ T_{0}$"></SPAN> a reference time, generally the symbol time. The previous
+lengths have signs, hence sometimes the absolute value is used. For
+instance, the power of a Gaussian pulse doubles its <SPAN CLASS="MATH"><IMG
+ WIDTH="33" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img155.png"
+ ALT="$ 1/e$"></SPAN> width after
+propagating over a length of <SPAN CLASS="MATH"><IMG
+ WIDTH="32" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img156.png"
+ ALT="$ L_{D}$"></SPAN> [<A
+ HREF="Bibliography.html#Agrawal">1</A>].
+
+<P>
+
+<H2><A NAME="SECTION00314000000000000000">
+Nonlinear coefficient</A>
+</H2>
+
+<P>
+The nonlinear coefficient <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img101.png"
+ ALT="$ \gamma$"></SPAN> [1/(W<SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img142.png"
+ ALT="$ \cdot$"></SPAN>km)] is due to
+the Kerr effect of the fiber. The relation between the nonlinear coefficient
+and the fiber nonlinear index <SPAN CLASS="MATH"><IMG
+ WIDTH="25" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img157.png"
+ ALT="$ n_{2}$"></SPAN> [m<SPAN CLASS="MATH"><IMG
+ WIDTH="14" HEIGHT="21" ALIGN="BOTTOM" BORDER="0"
+ SRC="img51.png"
+ ALT="$ ^{2}$"></SPAN>/W] is the following:<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:gamma-def"></A><!-- MATH
+ \begin{equation}
+\gamma=\frac{2\pi n_{2}}{\lambda_{0}A_{\textrm{eff}}}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="97" HEIGHT="60" ALIGN="MIDDLE" BORDER="0"
+ SRC="img158.png"
+ ALT="$\displaystyle \gamma=\frac{2\pi n_{2}}{\lambda_{0}A_{\textrm{eff}}}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">5</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+being <!-- MATH
+ $A_{\textrm{eff}}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="36" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img159.png"
+ ALT="$ A_{\textrm{eff}}$"></SPAN> [<SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img50.png"
+ ALT="$ \mu$"></SPAN>m<SPAN CLASS="MATH"><IMG
+ WIDTH="14" HEIGHT="21" ALIGN="BOTTOM" BORDER="0"
+ SRC="img51.png"
+ ALT="$ ^{2}$"></SPAN>] the fiber effective
+area. As a reference, a single mode fiber (SMF) has almost <!-- MATH
+ $A_{\mbox{eff}}=80$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="84" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img160.png"
+ ALT="$ A_{\mbox{eff}}=80$"></SPAN><!-- MATH
+ $\mu\mbox{m}^{2}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img50.png"
+ ALT="$ \mu$">m<IMG
+ WIDTH="14" HEIGHT="21" ALIGN="BOTTOM" BORDER="0"
+ SRC="img51.png"
+ ALT="$ ^{2}$"></SPAN>
+and <!-- MATH
+ $n_{2}=2.7\cdot10^{-20}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="135" HEIGHT="41" ALIGN="MIDDLE" BORDER="0"
+ SRC="img161.png"
+ ALT="$ n_{2}=2.7\cdot10^{-20}$"></SPAN> [m<SPAN CLASS="MATH"><IMG
+ WIDTH="14" HEIGHT="21" ALIGN="BOTTOM" BORDER="0"
+ SRC="img51.png"
+ ALT="$ ^{2}$"></SPAN>/W] thus giving <!-- MATH
+ $\gamma=1.37$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="75" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img162.png"
+ ALT="$ \gamma=1.37$"></SPAN>
+[1/<!-- MATH
+ $\left(\mbox{W}\cdot\mbox{km}\right)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="79" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img163.png"
+ ALT="$ \left(\mbox{W}\cdot\mbox{km}\right)$"></SPAN>] @ <!-- MATH
+ $\lambda_{0}=1550$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="88" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img144.png"
+ ALT="$ \lambda_{0}=1550$"></SPAN>
+nm, while for a dispersion compensating fiber (DCF) the value is usually
+four times larger due to a reduced effective area. To the nonlinear
+coefficient can be associated the nonlinear length <!-- MATH
+ $L_{\textrm{NL}}=1/(\gamma\cdot P)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="138" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img164.png"
+ ALT="$ L_{\textrm{NL}}=1/(\gamma\cdot P)$"></SPAN>,
+being <SPAN CLASS="MATH"><IMG
+ WIDTH="20" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img165.png"
+ ALT="$ P$"></SPAN> a reference power, usually the transmitted signal peak
+power. A direct comparison between the nonlinear length and the dispersion
+length allows to deduce the propagation regime inside the optical
+fiber. <!-- MATH
+ $L_{\textrm{NL}}\gg L_{D}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="96" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img166.png"
+ ALT="$ L_{\textrm{NL}}\gg L_{D}$"></SPAN> implies propagation in the dispersion,
+or purely linear, regime; on the opposite with <!-- MATH
+ $L_{\textrm{NL}}\ll L_{D}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="96" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img167.png"
+ ALT="$ L_{\textrm{NL}}\ll L_{D}$"></SPAN>
+the propagation is in the nonlinear regime.
+
+<P>
+In the nonlinear regime the NLSE writes as:
+
+<P>
+<P><!-- MATH
+ \begin{displaymath}
+\frac{\partial A}{\partial z}=-\frac{\alpha}{2}A-j\gamma\left|A\right|^{2}A
+\end{displaymath}
+ -->
+</P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<IMG
+ WIDTH="203" HEIGHT="62" ALIGN="MIDDLE" BORDER="0"
+ SRC="img168.png"
+ ALT="$\displaystyle \frac{\partial A}{\partial z}=-\frac{\alpha}{2}A-j\gamma\left\vert A\right\vert^{2}A$">
+</DIV><P></P>
+whose solution is:
+
+<P>
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:SPM_solution"></A><!-- MATH
+ \begin{equation}
+A(z,t)=A(0,t)e^{-\frac{\alpha}{2}z-j\gamma\left|A(0,t)\right|^{2}L_{\textrm{eff}}(z)}=A(0,t)e^{-\frac{\alpha}{2}z}e^{-j\Phi(z,t)}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="502" HEIGHT="49" ALIGN="MIDDLE" BORDER="0"
+ SRC="img169.png"
+ ALT="$\displaystyle A(z,t)=A(0,t)e^{-\frac{\alpha}{2}z-j\gamma\left\vert A(0,t)\right\vert^{2}L_{\textrm{eff}}(z)}=A(0,t)e^{-\frac{\alpha}{2}z}e^{-j\Phi(z,t)}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">6</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+where <SPAN CLASS="MATH"><IMG
+ WIDTH="59" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img170.png"
+ ALT="$ \Phi(z,t)$"></SPAN> is the SPM nonlinear phase rotation, while <!-- MATH
+ $L_{\textrm{eff}}(z)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="59" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img171.png"
+ ALT="$ L_{\textrm{eff}}(z)$"></SPAN>
+is the effective length up to coordinate <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img93.png"
+ ALT="$ z$"></SPAN> and is equal to:
+
+<P>
+<P><!-- MATH
+ \begin{displaymath}
+L_{\textrm{eff}}(z)=\frac{1-\exp(-\alpha z)}{\alpha}
+\end{displaymath}
+ -->
+</P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<IMG
+ WIDTH="202" HEIGHT="64" ALIGN="MIDDLE" BORDER="0"
+ SRC="img172.png"
+ ALT="$\displaystyle L_{\textrm{eff}}(z)=\frac{1-\exp(-\alpha z)}{\alpha}$">
+</DIV><P></P>
+
+<P>
+For <!-- MATH
+ $z\ll1/\alpha$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="76" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img173.png"
+ ALT="$ z\ll1/\alpha$"></SPAN> <!-- MATH
+ $L_{\textrm{eff}}(z)\simeq z$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="94" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img174.png"
+ ALT="$ L_{\textrm{eff}}(z)\simeq z$"></SPAN>, while for <!-- MATH
+ $z\gg1/\alpha$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="76" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img175.png"
+ ALT="$ z\gg1/\alpha$"></SPAN>
+<!-- MATH
+ $L_{\textrm{eff}}(z)\simeq L_{A}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="110" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img176.png"
+ ALT="$ L_{\textrm{eff}}(z)\simeq L_{A}$"></SPAN>. It turns out that <!-- MATH
+ $L_{\textrm{eff}}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="35" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img177.png"
+ ALT="$ L_{\textrm{eff}}$"></SPAN>
+is a measure of the distance over which the nonlinear effect is significant. 
+
+<P>
+Note from (<A HREF="#eq:SPM_solution">3.6</A>) that the solution is memoryless
+so that what happens at time <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$ t$"></SPAN> depends only from the input at the
+same time. Assuming zero loss, for the energy conservation principle
+the energy carried by time <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$ t$"></SPAN>, being the system memoryless, must
+remain unaltered, i.e. <!-- MATH
+ $\left|A(z,t)\right|^{2}=\left|A(0,t)\right|^{2}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="176" HEIGHT="46" ALIGN="MIDDLE" BORDER="0"
+ SRC="img178.png"
+ ALT="$ \left\vert A(z,t)\right\vert^{2}=\left\vert A(0,t)\right\vert^{2}$"></SPAN>,
+so that SPM is a pure phase rotation in the time domain. 
+
+<P>
+
+<H2><A NAME="SECTION00315000000000000000">
+Alternative expressions of the NLSE</A>
+</H2>
+
+<P>
+In the frequency domain (<A HREF="#eq:NLSE">3.1</A>) the Fourier transform of
+the electric field, i.e. <!-- MATH
+ $\widetilde{A}(z,\omega)={\cal F}\left\{ A(z,t)\right\}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="182" HEIGHT="47" ALIGN="MIDDLE" BORDER="0"
+ SRC="img129.png"
+ ALT="$ \widetilde{A}(z,\omega)={\cal F}\left\{ A(z,t)\right\} $"></SPAN>,
+satisfies the following NLSE:
+
+<P>
+<BR>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:NLSE_freq"></A><!-- MATH
+ \begin{eqnarray}
+\frac{\partial\widetilde{A}}{\partial z} & = & -\frac{\alpha}{2}\widetilde{A}-j\left(\beta_{1}\omega+\frac{\beta_{2}}{2}\omega^{2}+\frac{\beta_{3}}{6}\omega^{3}\right)\widetilde{A}\nonumber \\
+ &  & -j\gamma\iint\widetilde{A}\left(z,\omega+\omega_{1}\right)\widetilde{A}\left(z,\omega+\omega_{2}\right)\widetilde{A}^{*}\left(z,\omega+\omega_{1}+\omega_{2}\right)\frac{d\omega_{1}}{2\pi}\frac{d\omega_{2}}{2\pi}
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="35" HEIGHT="73" ALIGN="MIDDLE" BORDER="0"
+ SRC="img179.png"
+ ALT="$\displaystyle \frac{\partial\widetilde{A}}{\partial z}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="20" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img43.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="299" HEIGHT="65" ALIGN="MIDDLE" BORDER="0"
+ SRC="img180.png"
+ ALT="$\displaystyle -\frac{\alpha}{2}\widetilde{A}-j\left(\beta_{1}\omega+\frac{\beta_{2}}{2}\omega^{2}+\frac{\beta_{3}}{6}\omega^{3}\right)\widetilde{A}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="521" HEIGHT="62" ALIGN="MIDDLE" BORDER="0"
+ SRC="img181.png"
+ ALT="$\displaystyle -j\gamma\iint\widetilde{A}\left(z,\omega+\omega_{1}\right)\wideti...
+...ga+\omega_{1}+\omega_{2}\right)\frac{d\omega_{1}}{2\pi}\frac{d\omega_{2}}{2\pi}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">7</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+<P>
+where the integrals cover the entire space of real numbers. With the
+definition <!-- MATH
+ $A(z,t)=U(z,\tau)\exp\left(-\frac{\alpha}{2}z\right)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="234" HEIGHT="42" ALIGN="MIDDLE" BORDER="0"
+ SRC="img182.png"
+ ALT="$ A(z,t)=U(z,\tau)\exp\left(-\frac{\alpha}{2}z\right)$"></SPAN>
+with <!-- MATH
+ $\tau=t-z/\beta_{1}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="109" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img183.png"
+ ALT="$ \tau=t-z/\beta_{1}$"></SPAN> the NLSE becomes:<P><!-- MATH
+ \begin{displaymath}
+\frac{\partial U}{\partial z}=+j\frac{\beta_{2}}{2}\frac{\partial^{2}U}{\partial\tau^{2}}+\frac{\beta_{3}}{6}\frac{\partial^{3}U}{\partial\tau^{3}}-j\gamma\left|U\right|^{2}Ue^{-\alpha z}
+\end{displaymath}
+ -->
+</P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<IMG
+ WIDTH="372" HEIGHT="66" ALIGN="MIDDLE" BORDER="0"
+ SRC="img184.png"
+ ALT="$\displaystyle \frac{\partial U}{\partial z}=+j\frac{\beta_{2}}{2}\frac{\partial...
+...artial^{3}U}{\partial\tau^{3}}-j\gamma\left\vert U\right\vert^{2}Ue^{-\alpha z}$">
+</DIV><P></P>
+
+<P>
+The time <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img185.png"
+ ALT="$ \tau$"></SPAN> is usually called the retarded time frame. Note that
+the linear impairment <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img96.png"
+ ALT="$ \alpha$"></SPAN> still remains in the equation since
+the NLSE is a nonlinear differential equation. 
+
+<P>
+Alternatively, by writing <!-- MATH
+ $A(z,\tau_{n})=\sqrt{P}V(z,\tau_{n})\exp\left(-\frac{z}{2L_{A}}\right)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="300" HEIGHT="53" ALIGN="MIDDLE" BORDER="0"
+ SRC="img186.png"
+ ALT="$ A(z,\tau_{n})=\sqrt{P}V(z,\tau_{n})\exp\left(-\frac{z}{2L_{A}}\right)$"></SPAN>
+with <!-- MATH
+ $\tau_{n}=\left(t-z/\beta_{1}\right)/T_{0}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="165" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img187.png"
+ ALT="$ \tau_{n}=\left(t-z/\beta_{1}\right)/T_{0}$"></SPAN>, being <SPAN CLASS="MATH"><IMG
+ WIDTH="25" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img154.png"
+ ALT="$ T_{0}$"></SPAN>
+and <SPAN CLASS="MATH"><IMG
+ WIDTH="20" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img165.png"
+ ALT="$ P$"></SPAN> a reference time and power, respectively, and exploiting
+the characteristics lengths we have the following:
+
+<P>
+<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:NLSE_x_U"></A><!-- MATH
+ \begin{equation}
+\frac{\partial V}{\partial z}=+j\frac{1}{2L_{D}}\frac{\partial^{2}V}{\partial\tau_{n}^{2}}+\frac{1}{6L_{D}^{'}}\frac{\partial^{3}V}{\partial\tau_{n}^{3}}-\frac{j}{L_{\textrm{NL}}}\left|V\right|^{2}Ve^{-z/L_{A}}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="445" HEIGHT="66" ALIGN="MIDDLE" BORDER="0"
+ SRC="img188.png"
+ ALT="$\displaystyle \frac{\partial V}{\partial z}=+j\frac{1}{2L_{D}}\frac{\partial^{2...
+...\tau_{n}^{3}}-\frac{j}{L_{\textrm{NL}}}\left\vert V\right\vert^{2}Ve^{-z/L_{A}}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">8</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+where <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img185.png"
+ ALT="$ \tau$"></SPAN> is the time in a retarded frame normalized to a reference
+time <SPAN CLASS="MATH"><IMG
+ WIDTH="25" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img154.png"
+ ALT="$ T_{0}$"></SPAN>.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html993"
+  HREF="Coupled_NLSE_CNLSE.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html991"
+  HREF="Background.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html985"
+  HREF="Background.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html994"
+  HREF="Coupled_NLSE_CNLSE.html">Coupled-NLSE (CNLSE)</A>
+<B> Up:</B> <A NAME="tex2html992"
+  HREF="Background.html">Background</A>
+<B> Previous:</B> <A NAME="tex2html986"
+  HREF="Background.html">Background</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

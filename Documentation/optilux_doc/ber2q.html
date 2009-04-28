@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>ber2q</TITLE>
+<META NAME="description" CONTENT="ber2q">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="mdoc.html">
+<LINK REL="previous" HREF="printfield.html">
+<LINK REL="up" HREF="List_Functions.html">
+<LINK REL="next" HREF="mdoc.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html885"
+  HREF="mdoc.html">mdoc</A>
+<B>Up:</B> <A NAME="tex2html883"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html877"
+  HREF="printfield.html">printfield</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION002520000000000000000"></A><A NAME="sec:ber2q"></A>
+<BR>
+ber2q
+</H1>
+
+<P>
+Convert the bit-error rate in Q-factor
+
+<P>
+
+<H2><A NAME="SECTION002521000000000000000">
+Syntax</A>
+</H2>
+
+<P>
+<TT>Q=BER2Q(BER)</TT>
+
+<P>
+
+<H2><A NAME="SECTION002522000000000000000">
+Description</A>
+</H2>
+
+<P>
+<TT>Q=BER2Q(BER)</TT> converts the bit error rate <TT>BER</TT> in
+the <TT>Q</TT> factor [dB] using the formula:<P><!-- MATH
+ \begin{displaymath}
+\texttt{Q=20log10(sqrt(2)*erfcinv(2*BER));}
+\end{displaymath}
+ -->
+</P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<IMG
+ WIDTH="344" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img89.png"
+ ALT="$\displaystyle \texttt{Q=20log10(sqrt(2)*erfcinv(2*BER));}$">
+</DIV><P></P>
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="5857"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 2.14:</STRONG>
+Relation between the error probability and the Q factor [dB].</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV><IMG
+ WIDTH="476" HEIGHT="376" ALIGN="BOTTOM" BORDER="0"
+ SRC="img90.png"
+ ALT="\includegraphics[width=0.6\linewidth]{Figure/Q_vs_ber}">
+
+<P>
+
+<P></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+<BR><HR>
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

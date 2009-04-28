@@ -1,0 +1,417 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Signals description</TITLE>
+<META NAME="description" CONTENT="Signals description">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="Glossary.html">
+<LINK REL="previous" HREF="Optilux_Structure.html">
+<LINK REL="up" HREF="Getting_Started.html">
+<LINK REL="next" HREF="Glossary.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html99"
+  HREF="Glossary.html">Glossary</A>
+<B>Up:</B> <A NAME="tex2html97"
+  HREF="Getting_Started.html">Getting Started</A>
+<B> Previous:</B> <A NAME="tex2html91"
+  HREF="Optilux_Structure.html">Optilux Structure</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION00150000000000000000"></A><A NAME="sec:Signals-description"></A>
+<BR>
+Signals description
+</H1>
+
+<P>
+Aim of this Section is to clarify the relation between an analog signal
+and its discrete version, with particular emphasis on the numerical
+details for describing a signal both in the time or frequency domain.
+
+<P>
+
+<H2><A NAME="SECTION00151000000000000000"></A><A NAME="sub:Time-domain-representation"></A>
+<BR>
+Time domain representation
+</H2>
+
+<P>
+Optilux works with discrete time signals. A discrete time signal is
+an indexed sequence of real or complex numbers. A widely used signal
+in Optilux is the discrete version of a digital modulation signal,
+i.e. a sequence of information symbols emitted at rate <SPAN CLASS="MATH"><IMG
+ WIDTH="20" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img3.png"
+ ALT="$ R$"></SPAN> [symbols/s].
+<SPAN CLASS="MATH"><IMG
+ WIDTH="20" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img3.png"
+ ALT="$ R$"></SPAN> plays a fundamental role for a digital signal and hence in Optilux
+is saved into the global variable <TT>GSTATE.SYMBOLRATE</TT> in [Gsymbols/s].
+A digital modulation signal in Optilux is a vector containing <TT>NSYMB</TT>
+symbols, where each symbol is described by <TT>NT</TT> points. The
+length of such a vector is therefore <TT>NFFT=NSYMB*NT </TT>points.
+Remember that, since Optilux makes use of the Fast Fourier Transform
+algorithm, such signals are intrinsically periodic of period <TT>NFFT</TT>.
+Both variables <TT>NT</TT> and <TT>NSYMB</TT> are saved into the global
+<TT>GSTATE.NT</TT> and <TT>GSTATE.NSYMB</TT>, respectively. 
+<BR>
+<P>
+Some notes about the time: 
+
+<UL>
+<LI>A time signal in Optilux is an indexed vector. The distance between
+two indexes, i.e. <TT>1</TT>, corresponds to a time interval of:
+<BR>
+<DIV CLASS="centerline" ID="par16003" ALIGN="CENTER">
+<TT>1/(GSTATE.SYMBOLRATE*GSTATE.NT*1e9) [s]</TT></DIV>
+
+<BR>
+or
+<BR>
+<DIV CLASS="centerline" ID="par16004" ALIGN="CENTER">
+<TT>1/GSTATE.NT [symbols].</TT></DIV>
+</LI>
+<LI>Since Optilux works with circularly periodic signals, the concept
+of starting time or clock <TT>0</TT> is arbitrary. For convention,
+when plotting signals vs. the time variable Optilux associates the
+first index to clock <TT>0</TT>. In such cases we use the following
+time vector:
+<BR>
+<DIV CLASS="centerline" ID="par16005" ALIGN="CENTER">
+<TT>time=0:1/GSTATE.NT:GSTATE.NSYMB-1/GSTATE.NT;</TT></DIV>
+</LI>
+<LI>A signal function of time is of length <TT>NFFT</TT>. 
+</LI>
+<LI>Optilux works with FFTs, hence we strongly recommend to use signals
+of length <TT>NFFT</TT> factorisable in small integers. For instance
+working with signals of length a power of <TT>2</TT> is the best (fastest)
+solution, while working with signals of length equal to a to a large
+prime number is the worst or slowest solution. 
+</LI>
+</UL>
+
+<P>
+
+<H2><A NAME="SECTION00152000000000000000"></A><A NAME="sub:Frequency-domain-representation"></A>
+<BR>
+Frequency domain representation 
+</H2>
+
+<P>
+The frequency, i.e. the fundamental variable of the Fourier domain,
+is contained in the global variable <TT>GSTATE</TT> as <TT>GSTATE.FN</TT>.
+Given a signal <SPAN CLASS="MATH"><IMG
+ WIDTH="38" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img4.png"
+ ALT="$ x(t)$"></SPAN>, being <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$ t$"></SPAN> the time, the Fourier transform
+<!-- MATH
+ $\widetilde{X}(f)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="49" HEIGHT="47" ALIGN="MIDDLE" BORDER="0"
+ SRC="img6.png"
+ ALT="$ \widetilde{X}(f)$"></SPAN>, being <SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img7.png"
+ ALT="$ f$"></SPAN> the frequency (<TT>GSTATE.FN</TT>),
+is defined as:
+
+<P>
+<P><!-- MATH
+ \begin{displaymath}
+\widetilde{X}(f)=\int_{-\infty}^{\infty}x(t)e^{-j2\pi ft}dt
+\end{displaymath}
+ -->
+</P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<IMG
+ WIDTH="225" HEIGHT="63" ALIGN="MIDDLE" BORDER="0"
+ SRC="img8.png"
+ ALT="$\displaystyle \widetilde{X}(f)=\int_{-\infty}^{\infty}x(t)e^{-j2\pi ft}dt$">
+</DIV><P></P>
+<TT>GSTATE.FN</TT> in Optilux is the following vector (see <A HREF="reset_all.html#sec:reset_all">reset_all</A>):
+<BR>
+<P>
+<DIV CLASS="centerline" ID="par16017" ALIGN="CENTER">
+<TT>GSTATE.FN=FFTSHIFT(-NT/2:1/NSYMB:NT/2-1/NSYMB);</TT></DIV>
+&nbsp;
+<BR>
+<P>
+being <TT>NT=GSTATE.NT</TT> and <TT>NSYMB=GSTATE.NSYMB</TT>. 
+<BR>
+<P>
+Some notes about the frequency: 
+
+<UL>
+<LI>The frequency is normalized to <TT>GSTATE.SYMBOLRATE</TT>. Hence,
+the frequency in Optilux is dimensionless. It turns out that all filter
+bandwidths in Optilux are normalized as well. For instance, an optical
+filter with bandwidth 20 GHz applied to a system working with a symbol
+rate of 10 Gbs in Optilux has bandwidth B= 20 GHz/10 Gbs = 2. Clearly,
+such a policy is just a question of style. 
+</LI>
+<LI>The lowest discrete frequency (resolution) is <TT>1/GSTATE.NSYMB</TT>.
+The largest discrete frequency (Nyquist frequency), in absolute value,
+is <TT>GSTATE.NT/2</TT>. 
+</LI>
+<LI><TT>GSTATE.FN</TT> is of length <TT>NFFT</TT>. Note that the definition
+of <TT>GSTATE.FN</TT> yields the frequency zero at index <TT>1,
+NFFT/2</TT> negative frequencies and <TT>NFFT/2-1</TT> positive frequencies. 
+</LI>
+<LI>The presence of <TT>FFTSHIFT</TT> in the frequency definition allows
+to easily generate spectra in FFT notation. 
+</LI>
+<LI>The non-normalized frequency in [1/s] is <TT>GSTATE.FN*GSTATE.SYMBOLRATE*1e9</TT>. 
+</LI>
+<LI>Any time signal is intrinsically periodic in time and in frequency
+with period <TT>NFFT</TT>. 
+</LI>
+<LI>See <A HREF="NLSE_in_WDM_case.html#sub:Unique-and-separate">here</A> for more details about
+the choice of <TT>GSTATE.NT.</TT>
+</LI>
+</UL>
+The following Fig.&nbsp;<A HREF="#fig:PSD_abs_norm">1.1</A> shows the power spectral
+density (PSD) of a typical on-off keying (OOK) signal modulated with
+symbol rate 40 Gbit/s. The left figure shows the frequency in absolute
+units, the right one with the frequency used by Optilux.
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:PSD_abs_norm"></A><A NAME="5477"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 1.1:</STRONG>
+Left: PSD vs. absolute frequency [GHz].
+Right: The same PSD vs. normalized frequency [a.u.]. Symbol rate:
+40 Gsymb/s.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV><IMG
+  WIDTH="400" HEIGHT="303" ALIGN="BOTTOM" BORDER="0"
+ SRC="./PSD_abs.png"
+ ALT="Image PSD_abs"><IMG
+  WIDTH="400" HEIGHT="303" ALIGN="BOTTOM" BORDER="0"
+ SRC="./PSD_norm.png"
+ ALT="Image PSD_norm">
+
+<P>
+
+<P></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+
+<H2><A NAME="SECTION00153000000000000000"></A><A NAME="sub:Electric-field"></A>
+<BR>
+Electric field
+</H2>
+
+<P>
+Any optical signal, like the electric field used by Optilux, is a
+bandpass signal, i.e. its frequency spectrum has energy concentrated
+around an high frequency sinusoidal carrier. Generally speaking, the
+Fourier transform of the generic optical field <!-- MATH
+ $\mathbf{A_{bp}}(t)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="63" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img9.png"
+ ALT="$ \mathbf{A_{bp}}(t)$"></SPAN>
+has zero or negligible energy for frequencies <SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img7.png"
+ ALT="$ f$"></SPAN> satisfying <!-- MATH
+ $\left|f\right|<f_{c}-B$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="108" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img10.png"
+ ALT="$ \left\vert f\right\vert&lt;f_{c}-B$"></SPAN>
+and <!-- MATH
+ $\left|f\right|>f_{c}+B$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="108" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img11.png"
+ ALT="$ \left\vert f\right\vert&gt;f_{c}+B$"></SPAN>. The carrier frequency <SPAN CLASS="MATH"><IMG
+ WIDTH="22" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img12.png"
+ ALT="$ f_{c}$"></SPAN> is usually
+expressed in terms of the central wavelength <!-- MATH
+ $\lambda_{c}=c/f_{c}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="84" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img13.png"
+ ALT="$ \lambda_{c}=c/f_{c}$"></SPAN>,
+being <SPAN CLASS="MATH"><IMG
+ WIDTH="14" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img14.png"
+ ALT="$ c$"></SPAN> the speed of light. Since usually the bandwidth <SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img15.png"
+ ALT="$ B$"></SPAN> is
+much smaller than <SPAN CLASS="MATH"><IMG
+ WIDTH="22" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img12.png"
+ ALT="$ f_{c}$"></SPAN>, it is customary to express <!-- MATH
+ $\mathbf{A_{bp}}(t)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="63" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img9.png"
+ ALT="$ \mathbf{A_{bp}}(t)$"></SPAN>
+in the following way:<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:bandpass"></A><!-- MATH
+ \begin{equation}
+\mathbf{A_{bp}}(t)=\mbox{Re}\left\{ \mathbf{A_{lp}}(t)\exp\left(j2\pi f_{c}t\right)\right\}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="84" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img16.png"
+ ALT="$\displaystyle \mathbf{A_{bp}}(t)=$">Re<IMG
+ WIDTH="181" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img17.png"
+ ALT="$\displaystyle \left\{ \mathbf{A_{lp}}(t)\exp\left(j2\pi f_{c}t\right)\right\}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+which emphasizes the role of the carrier frequency. <!-- MATH
+ $\mathbf{A_{lp}}(t)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="59" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img18.png"
+ ALT="$ \mathbf{A_{lp}}(t)$"></SPAN>
+in (<A HREF="#eq:bandpass">1.1</A>) is a low-pass signal of bandwidth <SPAN CLASS="MATH"><IMG
+ WIDTH="21" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img15.png"
+ ALT="$ B$"></SPAN>, and
+is the one on which actually Optilux works. <!-- MATH
+ $\mathbf{A_{lp}}(t)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="59" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img18.png"
+ ALT="$ \mathbf{A_{lp}}(t)$"></SPAN>
+in the general case is a 2x1 vector <!-- MATH
+ $\mathbf{A_{lp}}(t)=\left[A_{x}(t);\, A_{y}(t)\right]$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="196" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img19.png"
+ ALT="$ \mathbf{A_{lp}}(t)=\left[A_{x}(t);\, A_{y}(t)\right]$"></SPAN>
+in a reference system whose main axes are usually called x and y,
+respectively. In absence of polarization effects <!-- MATH
+ $\mathbf{A_{lp}}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="37" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img20.png"
+ ALT="$ \mathbf{A_{lp}}$"></SPAN>
+is a scalar function satisfying <!-- MATH
+ $A_{lp}(t)\equiv A_{x}(t)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="125" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img21.png"
+ ALT="$ A_{lp}(t)\equiv A_{x}(t)$"></SPAN>, i.e.
+Optilux assumes the field aligned with the x axis. The discrete version
+of <!-- MATH
+ $\mathbf{A_{lp}}(t)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="59" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img18.png"
+ ALT="$ \mathbf{A_{lp}}(t)$"></SPAN> is saved in Optilux into the global variable
+<TT>GSTATE.FIELDX</TT> for <SPAN CLASS="MATH"><IMG
+ WIDTH="29" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img22.png"
+ ALT="$ A_{x}$"></SPAN> and into <TT>GSTATE.FIELDY</TT>
+for <SPAN CLASS="MATH"><IMG
+ WIDTH="29" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img23.png"
+ ALT="$ A_{y}$"></SPAN>. Both fields are of size <TT>[NFFT,GSTATE.NCH]</TT>
+or <TT>[NFFT,1</TT>], depending on the propagation type (separate
+fields or unique field, see <A HREF="create_field.html#sec:create_field">create_field</A>).
+The number of rows is the number of discrete samples <TT>NFFT=GSTATE.NT*GSTATE.NSYMB</TT>. 
+
+<P>
+<TT>GSTATE.FIELDX</TT> and <TT>GSTATE.FIELDY</TT> are initialized
+by <A HREF="reset_all.html#sec:reset_all">reset_all</A> to empty and created by <A HREF="create_field.html#sec:create_field">create_field</A>.
+<TT>GSTATE.FIELDX</TT> is always not empty after <A HREF="create_field.html#sec:create_field">create_field</A>,
+while <TT>GSTATE.FIELDY</TT> remains empty in absence of polarization
+effects. 
+
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=400>
+<DIV ALIGN="CENTER">
+<B>Note:</B><SPAN  CLASS="textbf"> </SPAN>Remember that longer signals in the time domain
+(<TT>GSTATE.NSYMB</TT> <SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img24.png"
+ ALT="$ \gg$"></SPAN>1) have greater resolution in the frequency
+domain, i.e. neighboring discrete frequencies are closer. On the contrary,
+by increasing the Nyquist frequency (<TT>GSTATE.NT</TT>) it is possible
+to increase the resolution in the time domain, i.e. the number of
+points x symbol. 
+</DIV></TD>
+</TR>
+</TABLE>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html98"
+  HREF="Glossary.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html96"
+  HREF="Getting_Started.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html90"
+  HREF="Optilux_Structure.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html99"
+  HREF="Glossary.html">Glossary</A>
+<B> Up:</B> <A NAME="tex2html97"
+  HREF="Getting_Started.html">Getting Started</A>
+<B> Previous:</B> <A NAME="tex2html91"
+  HREF="Optilux_Structure.html">Optilux Structure</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

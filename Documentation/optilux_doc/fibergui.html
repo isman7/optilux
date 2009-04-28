@@ -1,0 +1,208 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>fibergui</TITLE>
+<META NAME="description" CONTENT="fibergui">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="ampliflat.html">
+<LINK REL="previous" HREF="fiber.html">
+<LINK REL="up" HREF="List_Functions.html">
+<LINK REL="next" HREF="ampliflat.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html442"
+  HREF="ampliflat.html">ampliflat</A>
+<B>Up:</B> <A NAME="tex2html440"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html434"
+  HREF="fiber.html">fiber</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION002190000000000000000"></A><A NAME="sec:fibergui"></A>
+<BR>
+fibergui
+</H1>
+
+<P>
+Optical fiber in the nonlinear regime (GUI tool).
+
+<P>
+
+<H2><A NAME="SECTION002191000000000000000">
+Syntax</A>
+</H2>
+
+<P>
+<TT>FIBERGUI(LF,ALPHAdB,AEFF,N2,LAMBDA,DC,SLOPE,DZMAX,DPHIMAX,FLAG,INFOAX)</TT>
+
+<P>
+
+<H2><A NAME="SECTION002192000000000000000">
+Description</A>
+</H2>
+
+<P>
+<TT>FIBERGUI(LF,ALPHAdB,AEFF,N2,LAMBDA,DC,SLOPE,DZMAX,DPHIMAX,FLAG,INFOAX)</TT>
+solves the nonlinear Schr&#246;dinger equation (NLSE) in absence of
+polarization effects using a graphical user interface (GUI). 
+
+<P>
+The fiber parameters are: 
+
+<UL>
+<LI><TT>LF</TT>: length [m] 
+</LI>
+<LI><TT>ALPHAdB</TT>: attenuation [dB/km] 
+</LI>
+<LI><TT>AEFF</TT>: effective area [<SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img50.png"
+ ALT="$ \mu$"></SPAN>m<SPAN CLASS="MATH"><IMG
+ WIDTH="14" HEIGHT="21" ALIGN="BOTTOM" BORDER="0"
+ SRC="img51.png"
+ ALT="$ ^{2}$"></SPAN>] 
+</LI>
+<LI><TT>N2</TT>: nonlinear index [m<SPAN CLASS="MATH"><IMG
+ WIDTH="14" HEIGHT="21" ALIGN="BOTTOM" BORDER="0"
+ SRC="img51.png"
+ ALT="$ ^{2}$"></SPAN>/W] 
+</LI>
+<LI><TT>LAMBDA</TT>: wavelength [nm] of <TT>DC</TT> 
+</LI>
+<LI><TT>DC</TT>: fiber chromatic dispersion coefficient [ps/nm/km]
+@ <TT>LAMBDA </TT>
+</LI>
+<LI><TT>SLOPE</TT>: fiber slope, i.e. derivative of <TT>DC</TT> [ps/nm<SPAN CLASS="MATH"><IMG
+ WIDTH="14" HEIGHT="21" ALIGN="BOTTOM" BORDER="0"
+ SRC="img51.png"
+ ALT="$ ^{2}$"></SPAN>/km] 
+</LI>
+<LI><TT>DZMAX</TT>: max. step for the split-step algorithm [m] 
+</LI>
+<LI><TT>DPHIMAX</TT>: max. nonlinear phase rotation in each step [rad] 
+</LI>
+</UL>
+The NLSE is solved by a split-step Fourier algorithm with a variable
+step so as to have a maximum nonlinear phase rotation into each step
+equal to <TT>DPHIMAX</TT>. However, the step cannot be larger than
+<TT>DZMAX</TT>. 
+<BR>
+<P>
+<TT>FLAG</TT> is a string of three characters governing the type of
+propagation. 
+
+<P>
+The first character is <TT>'g'</TT> if GVD (i.e. <!-- MATH
+ $\beta_{2},\,\beta_{3}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="55" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img52.png"
+ ALT="$ \beta_{2},\,\beta_{3}$"></SPAN>)
+is on or <TT>'-'</TT> in absence of GVD. Note that with <TT>'sepfields'</TT>
+in <A HREF="create_field.html#sec:create_field">create_field</A> this function accounts
+for the walkoff effect even with the GVD flag set to <TT>'-'</TT>.
+The third is <TT>'s'</TT> if SPM is on or <TT>'-'</TT> in absence
+of SPM. Likewise, the fourth character is <TT>'x'</TT> or <TT>'-'</TT>
+in presence/absence of XPM. The most complete case is <TT>FLAG='gsx'</TT>
+and corresponds to propagation in presence of fiber GVD+SPM+XPM. 
+<BR>
+E.g. Propagation with GVD+XPM, without SPM -&gt; <TT>FLAG='g-x'</TT>.
+
+<P>
+The third character of <TT>FLAG</TT> is active only with channels
+separated (see option <TT>'sepfields'</TT> in <A HREF="create_field.html#sec:create_field">create_field</A>).
+In this case, the propagation neglects the effect of four-wave mixing,
+which can be taken in account only by combining all channels into
+a unique field and hence it is a special case of SPM. 
+<BR>
+<P>
+<TT>INFOAX</TT> governs the GUI tool. The options of <TT>INFOAX</TT>
+are: 
+
+<UL>
+<LI><TT>INFOAX.ch</TT> = channel under investigation. 
+</LI>
+<LI><TT>INFOAX.flag1d = [a b c]. a=1</TT> -&gt; plot the power. <TT>b=1</TT>
+-&gt; plot the phase. <TT>c=1 </TT>-&gt; plot the chirp. <TT>a</TT> or <TT>b</TT>
+or <TT>c=0 </TT>-&gt; don't plot. 
+</LI>
+<LI><TT>INFOAX.flag3d</TT> = same form as <TT>INFOAX.flag1d</TT>, but
+for 3D plot. 
+</LI>
+<LI><TT>INFOAX.ch</TT> = channel to be plotted. E.g. <TT>INFOAX.ch
+= [1 3]</TT> indicates that only channels 1 and 3 will be plotted. 
+</LI>
+<LI><TT>INFOAX.axprop</TT> = cell array containing valid pairs of axes
+properties (see <TT>AXES</TT> for more details). E.g. <TT>INFOAX.axprop
+= {'XLim',[0 10],'YLim',[0 2],'FontSize',24}.</TT> 
+</LI>
+</UL>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=400> 
+<B>Note 1</B>: <TT>FIBERGUI</TT> does not account for PMD yet. In
+future versions of Optilux it will be implemented like <A HREF="fiber.html#sec:fiber">fiber</A>.
+
+<P>
+<B>Note 2</B>: This function contains some known minor bugs.
+
+<P>
+<B>Note 3</B>: <TT>FIBERGUI</TT> does not work under Octave. </TD>
+</TR>
+</TABLE>
+
+<P>
+
+<H2><A NAME="SECTION002193000000000000000">
+See Also</A>
+</H2>
+
+<P>
+<A HREF="fiber.html#sec:fiber">fiber</A> 
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html441"
+  HREF="ampliflat.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html439"
+  HREF="List_Functions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html433"
+  HREF="fiber.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html442"
+  HREF="ampliflat.html">ampliflat</A>
+<B> Up:</B> <A NAME="tex2html440"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html434"
+  HREF="fiber.html">fiber</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

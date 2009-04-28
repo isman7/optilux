@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>checkfields</TITLE>
+<META NAME="description" CONTENT="checkfields">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="offmat.html">
+<LINK REL="previous" HREF="fprintmsg.html">
+<LINK REL="up" HREF="List_Functions.html">
+<LINK REL="next" HREF="offmat.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html921"
+  HREF="offmat.html">offmat</A>
+<B>Up:</B> <A NAME="tex2html919"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html913"
+  HREF="fprintmsg.html">fprintmsg</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION002550000000000000000"></A><A NAME="sec:checkfields"></A>
+<BR>
+checkfields
+</H1>
+
+<P>
+Check for valid input fields
+
+<P>
+
+<H2><A NAME="SECTION002551000000000000000">
+Syntax</A>
+</H2>
+
+<P>
+<TT>CHECKFIELDS(X,ALLFIELDS)</TT>
+
+<P>
+
+<H2><A NAME="SECTION002552000000000000000">
+Description</A>
+</H2>
+
+<P>
+<TT>CHECKFIELDS(X,ALLFIELDS)</TT> checks if the struct variable <TT>X</TT>
+has valid fields. <TT>ALLFIELDS</TT> is a cell variable containing
+all possible valid fields of <TT>X</TT>. Each element of the cell
+is a string. The check is case insensitive. 
+<BR>
+<P>
+Note: Use <TT>CHECKFIELDS</TT> only for low level functions. If a
+function calls a subfunction, <TT>CHECKFIELDS</TT> should be run only
+in the nested subfunction. Do not abuse the function use. Beware. 
+
+<P>
+<BR><HR>
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,217 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>lasersource</TITLE>
+<META NAME="description" CONTENT="lasersource">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="linear_modulator.html">
+<LINK REL="previous" HREF="electricsource.html">
+<LINK REL="up" HREF="List_Functions.html">
+<LINK REL="next" HREF="linear_modulator.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html359"
+  HREF="linear_modulator.html">linear_modulator</A>
+<B>Up:</B> <A NAME="tex2html357"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html351"
+  HREF="electricsource.html">electricsource</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION002130000000000000000"></A><A NAME="sec:lasersource"></A>
+<BR>
+lasersource
+</H1>
+
+<P>
+Multichannel laser transmitter
+
+<P>
+
+<H2><A NAME="SECTION002131000000000000000">
+Syntax</A>
+</H2>
+
+<P>
+<TT>E=LASERSOURCE(PTX,LAM)</TT>&nbsp;
+<BR><TT>E=LASERSOURCE(PTX,LAM,SPAC)</TT>&nbsp;
+<BR><TT>E=LASERSOURCE(PTX,LAM,SPAC,OPTIONS)</TT>
+
+<P>
+
+<H2><A NAME="SECTION002132000000000000000">
+Description</A>
+</H2>
+
+<P>
+<TT>E=LASERSOURCE(PTX, LAM)</TT> creates the WDM optical field whose
+channels are saved into the columns of the matrix <TT>E</TT>. 
+
+<P>
+<TT>PTX</TT> contains the channel's peak power. <TT>PTX </TT>can be
+vector <TT>[1,Nch]</TT>, being <TT>Nch</TT> the number of channels,
+or a scalar. In the last case, the same value is used for all channels.
+The signal's peak powers are all saved here into the global variable
+<TT>GSTATE.POWER</TT>. 
+
+<P>
+<TT>LAM</TT> are the wavelengths [nm] of the channels. In this
+function they are associated with the global variable <TT>GSTATE.LAMBD</TT>A,
+here and for all. <TT>LAM</TT> can be a vector <TT>[1,Nch]</TT>
+or a scalar: if it is a scalar, the additional parameter <TT>SPAC</TT>
+is required, which indicates the spacing between channels [nm],
+while <TT>LAM</TT> is assumed as the central wavelength.
+<BR>
+<P>
+<TT>E=LASERSOURCE(PTX, LAM, SPAC)</TT> creates a WDM optical field
+whose channels are spaced by <TT>SPAC</TT> [nm]. In this case
+<TT>LAM</TT> is a scalar and assumed to be the central wavelength.
+<BR>
+<P>
+<TT>E=LASERSOURCE(PTX, LAM, SPAC, OPTIONS)</TT> is used to set optional
+parameters of the WDM:
+
+<OL>
+<LI><TT>OPTIONS.single</TT>: if exists and it is true, <TT>LASERSOURCE</TT>
+generates a single laser line and thus, <TT>PTX</TT>, <TT>LAM</TT>
+and <TT>OPTIONS.linewidth</TT>, <TT>OPTIONS.n0</TT>, if present, must
+be scalar. In this case <TT>SPAC</TT> must still be specified, but
+its value is neglected and thus could be safely set to 0.
+</LI>
+<LI><TT>OPTIONS.linewidth</TT>: represents the 3 dB width of the laser
+line, normalized to the symbolrate. The linewidth can be a scalar
+or a vector whose length equals the number of channels. 
+</LI>
+<LI><TT>OPTIONS.n0</TT>: represents the one-sided spectral density of
+a Gaussian complex noise added to the laser, in dB. This way it's
+possible to set the desired OSNR of the laser. 
+</LI>
+<LI><TT>OPTIONS.anoise</TT>: the matrix with amplitude complex noise samples.
+<TT>OPTIONS.anoise</TT> dimensions must be <TT>[GSTATE.NSYMB*GSTATE.NT
+; GSTATE.NCH] </TT>unless<TT> OPTIONS.single </TT>is set to true<TT>. </TT>In
+this case the dimensions must be<TT> [GSTATE.NSYMB*GSTATE.NT
+; 1]</TT>
+</LI>
+<LI><TT>OPTIONS.pnoise</TT>: the matrix with phase noise samples. <TT>OPTIONS.pnoise</TT>
+dimensions must be
+<BR> <TT>[GSTATE.NSYMB*GSTATE.NT ; GSTATE.NCH] </TT>unless<TT>
+OPTIONS.single </TT>is set to true. In this case the dimensions must be
+<TT>[GSTATE.NSYMB*GSTATE.NT ; 1]</TT>
+</LI>
+</OL>
+The matrices representing amplitude and phase noise are ignored if
+<TT>OPTIONS.linewidth</TT> and <TT>OPTIONS.n0</TT> are specified.
+<BR>
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=400>
+<DIV ALIGN="CENTER">
+<B>Note</B>: <TT>GSTATE.POWER</TT> may be modified by
+<A HREF="create_field.html#sec:create_field">create_field</A> if the user indicates that
+the power is the average power. See <A HREF="create_field.html#sec:create_field">create_field</A>. 
+</DIV></TD>
+</TR>
+</TABLE>
+
+<P>
+
+<H2><A NAME="SECTION002133000000000000000">
+Example 1</A>
+</H2>
+
+<P>
+Fig. <A HREF="#fig:lasersource_comb">2.2</A> shows an example of WDM comb with
+<TT>SPAC</TT>=0.4 nm (50 GHz) and baudrate 10 Gb/s.
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:lasersource_comb"></A><A NAME="5635"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 2.2:</STRONG>
+Equivalent lowpass of A 5-channel WDM created using lasersource. Since
+the frequency is normalized, SPAC is expressed in multiple of the
+baudrate.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV><IMG
+ WIDTH="626" HEIGHT="427" ALIGN="BOTTOM" BORDER="0"
+ SRC="img34.png"
+ ALT="\includegraphics[width=0.8\linewidth]{Figure/example_comb}">
+
+<P>
+
+<P></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+
+<H2><A NAME="SECTION002134000000000000000">
+Example 2</A>
+</H2>
+
+<P>
+<TT>E=LASERSOURCE(PTX, 1550, 0.8)</TT>&nbsp;
+<BR>
+creates the following vector<TT> GSTATE.LAMBDA:</TT>
+
+<P>
+GSTATE.LAMBDA = [1548.8 1549.6 1550.4 1551.2]
+
+<P>
+
+<H2><A NAME="SECTION002135000000000000000">
+See Also</A>
+</H2>
+
+<P>
+<A HREF="pattern.html#sec:pattern">pattern</A>, <A HREF="mz_modulator.html#sec:mz_modulator">mz_modulator</A>,
+<A HREF="electricsource.html#sec:electricsource">electricsource</A>, <A HREF="create_field.html#sec:create_field">create_field</A>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html358"
+  HREF="linear_modulator.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html356"
+  HREF="List_Functions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html350"
+  HREF="electricsource.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html359"
+  HREF="linear_modulator.html">linear_modulator</A>
+<B> Up:</B> <A NAME="tex2html357"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html351"
+  HREF="electricsource.html">electricsource</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

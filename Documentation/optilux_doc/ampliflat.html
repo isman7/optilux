@@ -1,0 +1,217 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>ampliflat</TITLE>
+<META NAME="description" CONTENT="ampliflat">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="inverse_pmd.html">
+<LINK REL="previous" HREF="fibergui.html">
+<LINK REL="up" HREF="List_Functions.html">
+<LINK REL="next" HREF="inverse_pmd.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html455"
+  HREF="inverse_pmd.html">inverse_pmd</A>
+<B>Up:</B> <A NAME="tex2html453"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html447"
+  HREF="fibergui.html">fibergui</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION002200000000000000000"></A><A NAME="sec:ampliflat"></A>
+<BR>
+ampliflat
+</H1>
+
+<P>
+Ideal Optical amplifier with ASE noise.
+
+<P>
+
+<H2><A NAME="SECTION002201000000000000000">
+Syntax</A>
+</H2>
+
+<P>
+<TT>AMPLIFLAT(X,ATYPE)</TT>&nbsp;
+<BR><TT>AMPLIFLAT(X,ATYPE,OPTIONS)</TT>
+
+<P>
+
+<H2><A NAME="SECTION002202000000000000000">
+Description</A>
+</H2>
+
+<P>
+<TT>AMPLIFLAT(X,ATYPE)</TT> amplifies the optical field. <TT>ATYPE</TT>
+is a string equal to <TT>'gain'</TT> if the amplifier has a flat power
+gain equal to <TT>X</TT> [dB]. Otherwise, <TT>ATYPE</TT> can be
+<TT>'fixpower'</TT> if the amplifier takes the gain so as to have
+an output average power for channel <TT>ceil(Nch/2)</TT> equal to
+<TT>X</TT> [mW], <TT>Nch</TT> being the number of channels. This
+options works only with channels separated (see <A HREF="create_field.html#sec:create_field">create_field</A>).
+
+<BR><TT>AMPLIFLAT(X,ATYPE,OPTIONS)</TT> has the additional variable
+<TT>OPTIONS</TT> to insert the amplified spontaneous emission (ASE)
+noise. 
+<BR>
+<P>
+<TT>OPTIONS</TT> is a sctructure whose fields can be: 
+
+<UL>
+<LI><TT>OPTIONS.f</TT>: [dB] is the optical ASE noise figure, which
+corresponds to a one-sided ASE power spectral density, on two polarizations,
+N0 = F*(Gain-1)*h*nu, with Gain the amplifier gain, h the Planck's
+constant and nu the channel central frequency. Hence, ASE power on
+a frequency band B is Pase = N0*B. 
+</LI>
+<LI><TT>OPTIONS.asepol</TT>: If <TT>'asex'</TT> allows to force to zero
+the ASE noise added to <TT>GSTATE.FIELDY</TT>, while for <TT>'asey'</TT>
+allows to force to zero the noise added to <TT>GSTATE.FIELDX</TT>. 
+</LI>
+<LI><TT>OPTIONS.noise</TT>: A matrix containing user's defined complex,
+unit variance, ASE noise samples. <TT>OPTIONS.noise</TT> must have
+the same size of <TT>[GSTATE.FIELDX, GSTATE.FIELDY]</TT> and must
+be read in that way. 
+</LI>
+</UL>
+If the amplifier does not generate ASE noise, don't set <TT>OPTIONS</TT>.
+
+<BR>
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="CENTER"><B>Note</B>: <TT>AMPLIFLAT</TT> assumes the same gain for both polarizations.</TD>
+</TR>
+</TABLE>
+
+<P>
+
+<H2><A NAME="SECTION002203000000000000000">
+Example</A>
+</H2>
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:periodic-line"></A><A NAME="5674"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 2.5:</STRONG>
+Periodic optical link of <TT>nampli</TT> spans.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV><IMG
+  WIDTH="700" HEIGHT="119" ALIGN="BOTTOM" BORDER="0"
+ SRC="./periodic_line.png"
+ ALT="Image periodic_line">
+
+<P>
+
+<P></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+Suppose an optical transparent system composed of <TT>nampli</TT>
+identical spans, each amplified at the end; a signal of average power
+<TT>Pavg</TT>, central wavelength <TT>lam</TT>, propagating in such
+a system. Given the link optical signal to noise ratio <TT>osnr</TT>
+in [dB] over a bandwidth of <TT>osnbw</TT> (e.g. 0.1 nm), the
+noise figure <TT>F</TT> [dB] of each amplifier of gain <TT>Gflat</TT>
+can be evaluated as follows:
+<BR>
+<P>
+<TT>CLIGHT= 299792458;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;% speed of light in vacuum
+[m/s] </TT>
+
+<P>
+<TT>HPLANCK= 6.62606896e-34; % Planck's constant [J*s] </TT>
+
+<P>
+<TT>lam = 1550;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;% central wavelength
+[nm]</TT>
+
+<P>
+<TT>osnr = 12;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;% OSNR [dB] over
+a bandwidth osnrbw</TT>
+
+<P>
+<TT>osnrbw = 0.1;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;% OSNR reference bandwidth
+[nm]</TT>
+
+<P>
+<TT>Gflat = 10;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;% amplifiers' flat
+gain [dB]</TT>
+
+<P>
+<TT>nampli = 20;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;% number of identical
+amplifiers</TT>
+
+<P>
+<TT>hvdl = -30-10*log10(HPLANCK*CLIGHT/lam*...</TT>
+
+<P>
+<TT>&nbsp;&nbsp;&nbsp;&nbsp;CLIGHT*osnrbw/lam&#94;2*1e18); %
+conv. factor </TT>
+
+<P>
+<TT>nsp = 10*log10(Pavg) + hvdl - 10*log10(10&#94;(Gflat/10)-1)
+- 3 - ... </TT>
+
+<P>
+<TT>&nbsp;&nbsp;&nbsp;&nbsp;10*log10(nampli) - osnr; % spontaneous emission
+factor [dB] </TT>
+
+<P>
+<TT>F = nsp + 3;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;% noise figure
+[dB] </TT>
+
+<P>
+<TT>OPTIONS.f = F;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;% OPTIONS for
+ampliflat</TT>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html454"
+  HREF="inverse_pmd.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html452"
+  HREF="List_Functions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html446"
+  HREF="fibergui.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html455"
+  HREF="inverse_pmd.html">inverse_pmd</A>
+<B> Up:</B> <A NAME="tex2html453"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html447"
+  HREF="fibergui.html">fibergui</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

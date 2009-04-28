@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>avg_power</TITLE>
+<META NAME="description" CONTENT="avg_power">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="corrdelay.html">
+<LINK REL="previous" HREF="phi2pow.html">
+<LINK REL="up" HREF="List_Functions.html">
+<LINK REL="next" HREF="corrdelay.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html726"
+  HREF="corrdelay.html">corrdelay</A>
+<B>Up:</B> <A NAME="tex2html724"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html718"
+  HREF="phi2pow.html">phi2pow</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION002400000000000000000"></A><A NAME="sec:avg_power"></A>
+<BR>
+avg_power
+</H1>
+
+<P>
+Evaluate the average power per symbol.
+
+<P>
+
+<H2><A NAME="SECTION002401000000000000000">
+Syntax</A>
+</H2>
+
+<P>
+<TT>E=AVG_POWER(ICH)</TT>&nbsp;
+<BR><TT>E=AVG_POWER(ICH,FLAG)</TT>&nbsp;
+<BR><TT>E=AVG_POWER(ICH,FLAG,FIL,BW,ORD)</TT>
+
+<P>
+
+<H2><A NAME="SECTION002402000000000000000">
+Description</A>
+</H2>
+
+<P>
+<TT>E=AVG_POWER(ICH)</TT> returns in <TT>E</TT> the average power
+[mW] per symbol of channel <TT>ICH</TT>. 
+<BR>
+<P>
+<TT>E=AVG_POWER(ICH,FLAG) </TT>has the optional parameter <TT>FLAG</TT>
+that can be <TT>'abs'</TT> or <TT>'norm'</TT>. <TT>FLAG='norm'</TT>
+allows to return the power normalized to the transmitted peak power,
+otherwise with <TT>FLAG='abs'</TT> (default) the power is in [mW].
+
+<BR>
+<P>
+<TT>E=AVG_POWER(ICH,FLAG,FIL,OBW,ORD)</TT>temporary extracts the
+channel using the filter <TT>FIL</TT> with bandwidth <TT>OBW </TT>and
+order <TT>ORD</TT> (see <A HREF="myfilter.html#sec:myfilter">myfilter</A>).
+
+<P>
+The average power is evaluated in the frequency domain. 
+<BR>
+In the case of a unique field (see <A HREF="create_field.html#sec:create_field">create_field</A>)
+the function evaluates the power of channel <TT>ICH</TT> (e.g. <TT>ICH</TT>
+may be the one centered on f1 or f2 or f3 in the bottom figure) over
+the window D1, D2 or D3, respectively.
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:avg_energy"></A><A NAME="5800"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 2.13:</STRONG>
+<!-- MATH
+ $D_{1,}D_{2},D_{3}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="91" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img1.png"
+ ALT="$ D_{1,}D_{2},D_{3}$"></SPAN> are the regions over which
+the average power is evaluated for channel 1,2,3, respectively.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV><IMG
+ WIDTH="637" HEIGHT="502" ALIGN="BOTTOM" BORDER="0"
+ SRC="img78.png"
+ ALT="\includegraphics[width=0.8\linewidth]{Figure/avg_energy}">
+
+<P>
+
+<P></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+<TT>E</TT> contains also the contribute of <TT>GSTATE.FIELDY</TT>,
+if it exists. 
+
+<P>
+
+<H2><A NAME="SECTION002403000000000000000">
+Example</A>
+</H2>
+
+<P>
+An ideal On-off keying signal with non-return to zero pulses has <TT>E=0.5</TT>
+with <TT>FLAG='norm'</TT>.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html725"
+  HREF="corrdelay.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html723"
+  HREF="List_Functions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html717"
+  HREF="phi2pow.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html726"
+  HREF="corrdelay.html">corrdelay</A>
+<B> Up:</B> <A NAME="tex2html724"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html718"
+  HREF="phi2pow.html">phi2pow</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

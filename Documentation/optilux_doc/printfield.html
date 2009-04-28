@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>printfield</TITLE>
+<META NAME="description" CONTENT="printfield">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="ber2q.html">
+<LINK REL="previous" HREF="plotfile.html">
+<LINK REL="up" HREF="List_Functions.html">
+<LINK REL="next" HREF="ber2q.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html870"
+  HREF="ber2q.html">ber2q</A>
+<B>Up:</B> <A NAME="tex2html868"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html862"
+  HREF="plotfile.html">plotfile</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION002510000000000000000"></A><A NAME="sec:printfield"></A>
+<BR>
+printfield
+</H1>
+
+<P>
+Print the optical field to file.
+
+<P>
+
+<H2><A NAME="SECTION002511000000000000000">
+Syntax</A>
+</H2>
+
+<P>
+<TT>PRINTFIELD(POL,ICH,NAME,FLAG)</TT>&nbsp;
+<BR><TT>PRINTFIELD(POL,ICH,NAME,FLAG,NCYCLE,FIL,BW)</TT>
+
+<P>
+
+<H2><A NAME="SECTION002512000000000000000">
+Description</A>
+</H2>
+
+<P>
+<TT>PRINTFIELD(POL,ICH,NAME,FLAG)</TT> prints the electric field of
+channel <TT>ICH</TT> into the file <TT>NAME</TT> in the global directory
+<TT>GSTATE.DIR</TT>. <TT>POL</TT> can be either <TT>'x'</TT> for x-polarization,
+<TT>'y'</TT> for y-polarization or <TT>'xy'</TT> for printing both
+polarizations. 
+<BR><TT>FLAG</TT> is a string that indicates the type of files to be
+printed. It can be <TT>'papa'</TT> in the most complete case, indicating
+that it will be printed both the power and angle (phase) in the time
+domain (first two chars of <TT>FLAG</TT>) and the power (<TT>abs(.)&#94;2</TT>)
+and phase of the spectrum (last two chars of <TT>FLAG</TT>). If you
+don't want to print a specific component set it to <TT>'-'</TT>. 
+<BR>
+<P>
+<TT>PRINTFIELD(POL,ICH,NAME,FLAG,NCYCLE,FIL,BW) NCYCLE</TT> is a counter
+that will be added to the output file name, and can be useful in presence
+of an external cycle to the function. 
+
+<P>
+If all channels are combined into a unique field, you can temporary
+extract the <TT>ICH</TT> channel with the filter <TT>FIL</TT> having
+3-dB bandwidth <TT>BW</TT> (see <A HREF="myfilter.html#sec:myfilter">myfilter</A>).
+In this case and in absence of an external cycle, leave <TT>NCYCLE=[]</TT>.
+However, if only the spectrum is requested in <TT>FLAG, ICH</TT> is
+ignored and all the complete spectrum is saved into one file. 
+
+<P>
+<TT>PRINTFIELD(POL,ICH,NAME,FLAG,NCYCLE,FIL,BW,ORD)</TT> use the special
+parameter <TT>ORD</TT> for special filters. E.g. <TT>ORD</TT> is the
+supergauss order for the supergaussian filter (see <A HREF="myfilter.html#sec:myfilter">myfilter</A>).
+
+<BR>
+<P>
+The power will be printed in a directory (see <A HREF="reset_all.html#sec:reset_all">reset_all</A>)
+with the suffix .MOD, while the phase
+with the suffix .ANG. 
+
+<P>
+
+<H2><A NAME="SECTION002513000000000000000">
+Example 1</A>
+</H2>
+
+<P>
+Print only the power in time and the phase of the spectrum: <TT>FLAG
+= 'p-a'</TT> 
+
+<P>
+
+<H2><A NAME="SECTION002514000000000000000">
+Example 2</A>
+</H2>
+
+<P>
+<TT>POL='x';</TT>&nbsp;
+<BR><TT>ICH=1;</TT>&nbsp;
+<BR><TT>NCYCLE=81;</TT>&nbsp;
+<BR><TT>FLAG='p--';</TT>&nbsp;
+<BR><TT>NAME='Tx'; </TT>&nbsp;
+<BR><TT>printfield(POL,ICH,NAME,FLAG,NCYCLE) % creates tempx_ch01_Tx_Cycle_0081
+</TT>&nbsp;
+<BR>
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=400> 
+<B>Note</B>: <TT>PRINTFIELD</TT> presumes that the user initialized
+<TT>GSTATE.DIR</TT> in <A HREF="reset_all.html#sec:reset_all">reset_all</A>. If not,
+a temporary directory is used and a warning is displayed.  </TD>
+</TR>
+</TABLE>
+
+<P>
+
+<H2><A NAME="SECTION002515000000000000000">
+See Also</A>
+</H2>
+
+<P>
+<A HREF="plotfield.html#sec:plotfield">plotfield</A>, <A HREF="reset_all.html#sec:reset_all">reset_all</A>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html869"
+  HREF="ber2q.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html867"
+  HREF="List_Functions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html861"
+  HREF="plotfile.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html870"
+  HREF="ber2q.html">ber2q</A>
+<B> Up:</B> <A NAME="tex2html868"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html862"
+  HREF="plotfile.html">plotfile</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

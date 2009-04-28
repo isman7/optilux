@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>receiver_cohmix</TITLE>
+<META NAME="description" CONTENT="receiver_cohmix">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="eval_eye.html">
+<LINK REL="previous" HREF="receiver_dqpsk.html">
+<LINK REL="up" HREF="List_Functions.html">
+<LINK REL="next" HREF="eval_eye.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html537"
+  HREF="eval_eye.html">eval_eye</A>
+<B>Up:</B> <A NAME="tex2html535"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html529"
+  HREF="receiver_dqpsk.html">receiver_dqpsk</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION002260000000000000000"></A><A NAME="sec:receiver_cohmix"></A>
+<BR>
+receiver_cohmix
+</H1>
+
+<P>
+Complete COHerent MIXer receiver. (POST fiber+OBPF+MIX+PD+LPF). 
+
+<P>
+
+<H2><A NAME="SECTION002261000000000000000">
+Syntax</A>
+</H2>
+
+<P>
+<TT>IRIC=RECEIVER_COHMIX(ICH,X)</TT>&nbsp;
+<BR><TT>[IRIC,SN]=RECEIVER_COHMIX(ICH,X)</TT>
+
+<P>
+
+<H2><A NAME="SECTION002262000000000000000">
+Description</A>
+</H2>
+
+<P>
+<TT>IRIC=RECEIVER_COHMIX(ICH,X)</TT> returns the received current
+<TT>IRIC</TT> of channel <TT>ICH</TT> of an OOK transmission using
+a coherent receiver.
+
+<P>
+<TT>[IRIC,SN]=RECEIVER_COHMIX(ICH,X)</TT> also returns the vector
+<TT>SN</TT> containing the FFT coefficients of the electric field
+after the optical filter. <TT>SN</TT> is used by <A HREF="ber_kl.html#sec:ber_kl">ber_kl</A>.
+<BR>
+<P>
+<TT>X</TT> is a structure of fields: 
+
+<UL>
+<LI><TT>X.oftype</TT> = optical filter (OBPF) type (see <A HREF="myfilter.html#sec:myfilter">myfilter</A>) 
+</LI>
+<LI><TT>X.obw</TT> = OBPF 3 dB bandwidth normalized to the symbol rate. 
+</LI>
+<LI><TT>X.oord</TT> = optical filter order (for special filters, see <A HREF="myfilter.html#sec:myfilter">myfilter</A>) 
+</LI>
+<LI><TT>X.eftype</TT> = electrical filter (LPF) type (see <A HREF="myfilter.html#sec:myfilter">myfilter</A>) 
+</LI>
+<LI><TT>X.ebw</TT> = LPF 3-dB bandwidth normalized to the symbol rate. 
+</LI>
+<LI><TT>X.eord</TT> = electrical filter order (for special filters, see
+<A HREF="myfilter.html#sec:myfilter">myfilter</A>) 
+</LI>
+</UL>
+Optional parameters of <TT>X</TT>: 
+
+<UL>
+<LI><TT>X.lodetuning</TT> = Local Oscillator Detuning frequency [Hz] 
+</LI>
+<LI><TT>X.lophasenoise</TT> = Local Oscillator Phase Noise Vector [rad] 
+</LI>
+<LI><TT>X.lopower</TT> = Local Oscillator Power [dBm] 
+</LI>
+<LI><TT>X.dpost</TT> = post compensating fiber cumulated dispersion [ps/nm] 
+</LI>
+<LI><TT>X.slopez</TT> = post compensating fiber cumulated slope [ps/nm&#94;2] 
+</LI>
+<LI><TT>X.lambda</TT> = wavelength [nm] at which the post compensating
+fiber has a cumulated dispersion equal to <TT>X.dpost</TT>. 
+</LI>
+<LI><TT>X.b2b = 'b2b'</TT> evaluates the current in back-to-back configuration,
+i.e. with the transmitter connected directly to the receiver. With
+this option the values of <TT>x.dpost</TT> and <TT>x.slopez</TT> are
+discarded.
+</LI>
+</UL>
+The post-compensating fiber is assumed as a purely ideal-linear fiber,
+while the photodiode is ideal (<TT>abs(.)&#94;2</TT>).
+
+<BR>
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=400> 
+<B>Note:</B> This function works over a copy of the electric field.
+All fields of the global variable <TT>GSTATE</TT> are left unchanged. </TD>
+</TR>
+</TABLE>
+
+<P>
+
+<H2><A NAME="SECTION002263000000000000000">
+See also </A>
+</H2>
+
+<P>
+<A HREF="receiver_dpsk.html#sec:receiver_dpsk">receiver_dpsk</A> 
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html536"
+  HREF="eval_eye.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html534"
+  HREF="List_Functions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html528"
+  HREF="receiver_dqpsk.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html537"
+  HREF="eval_eye.html">eval_eye</A>
+<B> Up:</B> <A NAME="tex2html535"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html529"
+  HREF="receiver_dqpsk.html">receiver_dqpsk</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>linear_modulator</TITLE>
+<META NAME="description" CONTENT="linear_modulator">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="mz_modulator.html">
+<LINK REL="previous" HREF="lasersource.html">
+<LINK REL="up" HREF="List_Functions.html">
+<LINK REL="next" HREF="mz_modulator.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html374"
+  HREF="mz_modulator.html">mz_modulator</A>
+<B>Up:</B> <A NAME="tex2html372"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html366"
+  HREF="lasersource.html">lasersource</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION002140000000000000000"></A><A NAME="sec:linear_modulator"></A>
+<BR>
+linear_modulator
+</H1>
+
+<P>
+Modulate the optical field with a linear modulator
+
+<P>
+
+<H2><A NAME="SECTION002141000000000000000">
+Syntax</A>
+</H2>
+
+<P>
+<TT>E=LINEAR_MODULATOR(E,MODSIG)</TT>&nbsp;
+<BR><TT>E=LINEAR_MODULATOR(E,MODSIG,EXRATIO)</TT>
+
+<P>
+
+<H2><A NAME="SECTION002142000000000000000">
+Description</A>
+</H2>
+
+<P>
+<TT>E=LINEAR_MODULATOR(E,MODSIG)</TT> modulates the optical field
+<TT>E</TT> using a linear modulator, i.e. the modulating electrical
+signal is impress exactly on the optical signal with an infinite extinction
+ratio. The parameter <TT>MODSIG</TT> is the electrical driving signal
+produced by <TT><A HREF="electricsource.html#sec:electricsource">electricsource</A></TT>.
+<TT>LINEAR_MODULATOR</TT> acts on a per channel basis, so if you
+want to create optical signals for a N-channel WDM system you have
+to call <TT>LINEAR_MODULATOR</TT> N times.
+<BR>
+<P>
+<TT>E=LINEAR_MODULATOR(E,MODSIG,EXRATIO)</TT> adds a finite extinction
+ratio <TT>EXRATIO</TT> [dB] to the signal.
+
+<P>
+
+<H2><A NAME="SECTION002143000000000000000">
+See Also</A>
+</H2>
+
+<P>
+<A HREF="electricsource.html#sec:electricsource">electricsource</A>, <A HREF="lasersource.html#sec:lasersource">lasersource</A>,
+<A HREF="mz_modulator.html#sec:mz_modulator">mz_modulator</A> 
+
+<P>
+<BR><HR>
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Style rules</TITLE>
+<META NAME="description" CONTENT="Style rules">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="Optilux_Structure.html">
+<LINK REL="previous" HREF="GNU_General_Public_License.html">
+<LINK REL="up" HREF="Getting_Started.html">
+<LINK REL="next" HREF="Optilux_Structure.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html76"
+  HREF="Optilux_Structure.html">Optilux Structure</A>
+<B>Up:</B> <A NAME="tex2html74"
+  HREF="Getting_Started.html">Getting Started</A>
+<B> Previous:</B> <A NAME="tex2html68"
+  HREF="GNU_General_Public_License.html">GNU General Public License</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00130000000000000000"></A><A NAME="sec:Style-rules"></A>
+<BR>
+Style rules
+</H1>
+
+<P>
+A good software is first of all clear to the reader. To this aim Optilux
+follows some general style rules that hopefully should help the readability
+of the code. To support the spirit of the free cooperation which is
+at the base of this open source project, any user that wants to share
+his functions with the Optilux community is encouraged to follow the
+rules:
+
+<OL>
+<LI>All the global variables characterizing the system must be fields
+of a unique struct-global variable called <TT>GSTATE</TT>. The fields
+must be upper case. Please, do not add other fields to existing ones
+if not strongly motivated.
+</LI>
+<LI>Each function is followed by its help description, which follows the
+Matlab rules: i) the first line is a brief description of the function,
+ii) all input/output variables in the help must be upper case, iii)
+at the end of the help a list of reference functions is present, iv)
+all lines except the first begins with a tab, v) each possible syntax
+of the function call is described separately, etc.
+</LI>
+<LI>All functions must work both under <A NAME="tex2html5"
+  HREF="http://www.mathworks.com/">Matlab</A>
+and <A NAME="tex2html6"
+  HREF="http://www.gnu.org/software/octave/">Octave</A>.
+</LI>
+<LI>All primary functions that run non-trivial operations must write a
+brief summary into a file that must be called <TT>simul_out</TT>
+and must be place in <TT>GSTATE.DIR</TT>.
+</LI>
+<LI>If a function updates a field of <TT>GSTATE</TT> that is not the electric
+field, please note it in the summary file <TT>simul_out</TT>. 
+</LI>
+<LI>Please, if possible, call the integer variables by starting them with
+<TT>i,j,k,l,m,n</TT>. E.g. use <TT>nfield = 5</TT> instead of <TT>field
+= 5.</TT> 
+</LI>
+<LI>All variables must have English names.
+</LI>
+<LI>If a new function requires a long list of arguments, please collect
+them into a struct variable. The fields of the struct must be lower
+case. 
+</LI>
+<LI>Please, insert at the beginning of each function the main test conditions
+on the input variables to avoid common errors. E.g. if the input variable
+<TT>x</TT> is a probability check that satisfies <TT>0 &lt;= x &lt;=
+1</TT>. 
+</LI>
+<LI>It is very kind from you if you write a <TT>.m</TT> example file to
+show your new functions. 
+</LI>
+<LI>When you add a new function that is stable, do the following: i) check
+its efficiency, for instance using the Matlab profiler; ii) update
+the file <TT>Contents.m</TT>; iii) let your function available to
+all other people. 
+</LI>
+</OL>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html75"
+  HREF="Optilux_Structure.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html73"
+  HREF="Getting_Started.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html67"
+  HREF="GNU_General_Public_License.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html76"
+  HREF="Optilux_Structure.html">Optilux Structure</A>
+<B> Up:</B> <A NAME="tex2html74"
+  HREF="Getting_Started.html">Getting Started</A>
+<B> Previous:</B> <A NAME="tex2html68"
+  HREF="GNU_General_Public_License.html">GNU General Public License</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

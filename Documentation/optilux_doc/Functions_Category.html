@@ -1,0 +1,319 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Functions - by Category</TITLE>
+<META NAME="description" CONTENT="Functions - by Category">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="Examples.html">
+<LINK REL="previous" HREF="List_Functions.html">
+<LINK REL="up" HREF="List_Functions.html">
+<LINK REL="next" HREF="Examples.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html189"
+  HREF="Examples.html">Examples</A>
+<B>Up:</B> <A NAME="tex2html187"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html181"
+  HREF="List_Functions.html">List of Functions</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION00210000000000000000"></A><A NAME="sec:Functions--by"></A>
+<BR>
+Functions - by Category
+</H1>
+
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="CENTER"><A HREF="#sub:fund_func">Fundamental functions</A></TD>
+<TD ALIGN="CENTER">Mandatory blocks</TD>
+</TR>
+<TR><TD ALIGN="CENTER"><A HREF="#sub:Pattern-and-coding">Pattern and Coding</A></TD>
+<TD ALIGN="CENTER">Pattern generation and elaboration</TD>
+</TR>
+<TR><TD ALIGN="CENTER"><A HREF="#sub:Transmitter-side">Transmitter Side</A></TD>
+<TD ALIGN="CENTER">Components before propagation in the channel</TD>
+</TR>
+<TR><TD ALIGN="CENTER"><A HREF="#sub:Channel-side">Channel side</A></TD>
+<TD ALIGN="CENTER">Channel components, including optical fibers</TD>
+</TR>
+<TR><TD ALIGN="CENTER"><A HREF="#sub:Receiver-side">Receiver Side</A></TD>
+<TD ALIGN="CENTER">Components after propagation in the channel</TD>
+</TR>
+<TR><TD ALIGN="CENTER"><A HREF="#sub:Utility-functions">Utility functions</A></TD>
+<TD ALIGN="CENTER">Utility functions</TD>
+</TR>
+<TR><TD ALIGN="CENTER"><A HREF="#sub:MeX-and-MeX">MeX and MeX support functions</A></TD>
+<TD ALIGN="CENTER">Functions compiled with MeX</TD>
+</TR>
+</TABLE>
+
+<P>
+
+<H2><A NAME="SECTION00211000000000000000"></A><A NAME="sub:fund_func"></A>
+<BR>
+Fundamental functions
+</H2>
+
+<UL>
+<LI>[<A HREF="reset_all.html#sec:reset_all">reset_all</A>] Reset all global variables
+and initialize the simulation.
+</LI>
+<LI>[<A HREF="create_field.html#sec:create_field">create_field</A>] Create the electric
+field.
+</LI>
+</UL>
+<P>
+
+<H2><A NAME="SECTION00212000000000000000"></A><A NAME="sub:Pattern-and-coding"></A>
+<BR>
+Pattern and coding
+</H2>
+
+<UL>
+<LI>[<A HREF="pattern.html#sec:pattern">pattern</A>] Create the sequence pattern with
+rules.
+</LI>
+<LI>[<A HREF="pat_encoder.html#sec:pat_encoder">pat_encoder</A>] Symbols encoder.
+</LI>
+<LI>[<A HREF="pat_decoder.html#sec:pat_decoder">pat_decoder</A>] Symbols decoder.
+</LI>
+<LI>[<A HREF="pat2stars.html#sec:pat2stars">pat2stars</A>] Convert an M-ary pattern
+into a complex constellation.
+</LI>
+<LI>[<A HREF="samp2pat.html#sec:samp2pat">samp2pat</A>] Convert received samples into
+a pattern.
+</LI>
+<LI>[<A HREF="stars2pat.html#sec:stars2pat">stars2pat</A>] Convert a complex constellation
+into a pattern.
+</LI>
+</UL>
+<P>
+
+<H2><A NAME="SECTION00213000000000000000"></A><A NAME="sub:Transmitter-side"></A>
+<BR>
+Transmitter side
+</H2>
+
+<UL>
+<LI>[<A HREF="electricsource.html#sec:electricsource">electricsource</A>] Create the electric
+modulating signal.
+</LI>
+<LI>[<A HREF="lasersource.html#sec:lasersource">lasersource</A>] Multichannel laser transmitter.
+</LI>
+<LI>[<A HREF="linear_modulator.html#sec:linear_modulator">linear_modulator</A>] Modulate the
+optical field with a linear modulator.
+</LI>
+<LI>[<A HREF="mz_modulator.html#sec:mz_modulator">mz_modulator</A>] Modulate the optical
+field with a Mach-Zehnder Interferometer.
+</LI>
+<LI>[<A HREF="phase_modulator.html#sec:phase_modulator">phase_modulator</A>] Modulate the
+optical field with a phase modulator.
+</LI>
+<LI>[<A HREF="qi_modulator.html#sec:qi_modulator">qi_modulator</A>] Modulate the optical
+field using a QI Mach-Zehnder modulator.
+</LI>
+</UL>
+<P>
+
+<H2><A NAME="SECTION00214000000000000000"></A><A NAME="sub:Channel-side"></A>
+<BR>
+Channel side
+</H2>
+
+<UL>
+<LI>[<A HREF="fiber.html#sec:fiber">fiber</A>] Optical fiber in the nonlinear regime.
+</LI>
+<LI>[<A HREF="fibergui.html#sec:fibergui">fibergui</A>] Optical fiber in the nonlinear
+regime (GUI tool).
+</LI>
+<LI>[<A HREF="ampliflat.html#sec:ampliflat">ampliflat</A>] Ideal Optical amplifier with
+ASE noise.
+</LI>
+<LI>[<A HREF="inverse_pmd.html#sec:inverse_pmd">inverse_pmd</A>] Inverse PMD matrix.
+</LI>
+<LI>[<A HREF="optfilter.html#sec:optfilter">optfilter</A>] Optical filter.
+</LI>
+</UL>
+<P>
+
+<H2><A NAME="SECTION00215000000000000000"></A><A NAME="sub:Receiver-side"></A>
+<BR>
+Receiver side
+</H2>
+
+<UL>
+<LI>[<A HREF="receiver_ook.html#sec:receiver_ook">receiver_ook</A>] Complete OOK receiver
+(POST fiber+OBPF+photodiode+LPF).
+</LI>
+<LI>[<A HREF="receiver_dpsk.html#sec:receiver_dpsk">receiver_dpsk</A>] Complete DPSK receiver
+(POST fiber+OBPF+MZ+LPF).
+</LI>
+<LI>[<A HREF="receiver_dqpsk.html#sec:receiver_dqpsk">receiver_dqpsk</A>] Complete DQPSK
+receiver (POST fiber+OBPF+MZs+LPF).
+</LI>
+<LI>[<A HREF="receiver_cohmix.html#sec:receiver_cohmix">receiver_cohmix</A>] Complete coherent
+mixer receiver.
+</LI>
+<LI>[<A HREF="eval_eye.html#sec:eval_eye">eval_eye</A>] Evaluate the eye opening for
+a non-coherent transmission.
+</LI>
+<LI>[<A HREF="ber_kl.html#sec:ber_kl">ber_kl</A>] Evaluate the ber for a non-coherent
+receiver by Karhunen-Loève method. 
+</LI>
+<LI>[<A HREF="best_eye.html#sec:best_eye">best_eye</A>] Search algorithm for the best
+eye opening.
+</LI>
+<LI>[<A HREF="best_sp.html#sec:best_sp">best_sp</A>] Search algorithm for the best
+OSNR penalty vs. back-to-back. 
+</LI>
+<LI>[<A HREF="ber_estimate.html#sec:ber_estimate">ber_estimate</A>] Bit-error rate estimate
+by Monte Carlo simulation.
+</LI>
+<LI>[<A HREF="mc_estimate.html#sec:mc_estimate">mc_estimate</A>] Monte Carlo estimation
+of a random variable mean and variance.
+</LI>
+<LI>[<A HREF="cmaadaptivefilter.html#sec:cmaadaptivefilter">cmaadaptivefilter</A>] Polarization
+demultiplexing filter using CMA algorithm.
+</LI>
+<LI>[<A HREF="dsp4cohdec.html#sec:dsp4cohdec">dsp4cohdec</A>] Digital signal processing
+for a coherent receiver.
+</LI>
+<LI>[<A HREF="easiadaptivefilter.html#sec:easiadaptivefilter">easiadaptivefilter</A>] Source
+separation filter using EASI algorithm.
+</LI>
+</UL>
+<P>
+
+<H2><A NAME="SECTION00216000000000000000"></A><A NAME="sub:Utility-functions"></A>
+<BR>
+Utility functions
+</H2>
+
+<UL>
+<LI>[<A HREF="nmod.html#sec:nmod">nmod</A>] N-modulus of an integer.
+</LI>
+<LI>[<A HREF="fastshift.html#sec:fastshift">fastshift</A>] Fast but simplified circular
+shift.
+</LI>
+<LI>[<A HREF="pow2phi.html#sec:pow2phi">pow2phi</A>] Convert power into nonlinear
+phase.
+</LI>
+<LI>[<A HREF="phi2pow.html#sec:phi2pow">phi2pow</A>] Convert nonlinear phase into
+power.
+</LI>
+<LI>[<A HREF="avg_power.html#sec:avg_power">avg_power</A>] Evaluate the average energy
+per symbol.
+</LI>
+<LI>[<A HREF="corrdelay.html#sec:corrdelay">corr_delay</A> ] System delay by cross-correlation
+measurement
+</LI>
+<LI>[<A HREF="evaldelay.html#sec:evaldelay">evaldelay</A>] Evaluate the group-delay
+of the filter.
+</LI>
+<LI>[<A HREF="myfilter.html#sec:myfilter">myfilter</A>] Filter device in the frequency
+domain.
+</LI>
+<LI>[<A HREF="lpfilter.html#sec:lpfilter">lpfilter</A>] Filtering with a lowpass filter.
+</LI>
+<LI>[<A HREF="pol_scrambler.html#sec:pol_scrambler">pol_scrambler</A>] Rotates the SOP
+of signal samples on the Poincaré sphere.
+</LI>
+<LI>[<A HREF="dop_meter.html#sec:dop_meter">dop_meter</A>] Compute the Degree of Polarization
+of the optical field.
+</LI>
+<LI>[<A HREF="set_sop.html#sec:set_sop">set_sop</A>] Set the average State Of Polarization
+of the transmitted signal.
+</LI>
+<LI>[<A HREF="polarizer.html#sec:polarizer">polarizer</A>] Linear optical polarizer.
+</LI>
+<LI>[<A HREF="plotfield.html#sec:plotfield">plotfield</A>] Plot the optical field.
+</LI>
+<LI>[<A HREF="plotfile.html#sec:plotfile">plotfile</A>] Plot file from disk.
+</LI>
+<LI>[<A HREF="printfield.html#sec:printfield">printfield</A>] Print the optical field
+to file.
+</LI>
+<LI>[<A HREF="ber2q.html#sec:ber2q">ber2q</A>] Convert the bit-error rate in Q-factor.
+</LI>
+<LI>[<A HREF="mdoc.html#sec:mdoc">mdoc</A>] Display Optilux HTML documentation
+in the browser.
+</LI>
+<LI>[<A HREF="fprintmsg.html#sec:fprintmsg">fprintmsg</A>] Write a message into the
+file simul_out.
+</LI>
+<LI>[<A HREF="checkfields.html#sec:checkfields">checkfields</A>] Check for valid input
+fields
+</LI>
+<LI>[<A HREF="offmat.html#sec:offmat">offmat</A>] Run Matlab/Octave simulations offline.
+</LI>
+</UL>
+<P>
+
+<H2><A NAME="SECTION00217000000000000000"></A><A NAME="sub:MeX-and-MeX"></A>
+<BR>
+MeX and MeX support functions
+</H2>
+
+<UL>
+<LI>[<A HREF="fastexp.html#sec:fastexp">fastexp</A>] Calculate <TT>exp( i *
+x )</TT> quickly.
+</LI>
+<LI>[<A HREF="saddle.html#sec:saddle">saddle</A>] Evaluate the MGF saddle point.
+</LI>
+<LI>[<A HREF="cmaadaptivefilter.html#sec:cmaadaptivefilter">cmaadaptivefilter</A>] Polarization
+demultiplexing filter using CMA algorithm.
+</LI>
+<LI>[<A HREF="easiadaptivefilter.html#sec:easiadaptivefilter">easiadaptivefilter</A>] Source
+separation filter using EASI algorithm.
+</LI>
+<LI>[<A HREF="comp_mex.html#sec:comp_mex">comp_mex</A>] Compile all <TT>.c</TT> files
+into the directory.
+</LI>
+</UL>
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html188"
+  HREF="Examples.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html186"
+  HREF="List_Functions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html180"
+  HREF="List_Functions.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html189"
+  HREF="Examples.html">Examples</A>
+<B> Up:</B> <A NAME="tex2html187"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html181"
+  HREF="List_Functions.html">List of Functions</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

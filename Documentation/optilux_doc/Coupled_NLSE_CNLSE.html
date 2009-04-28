@@ -1,0 +1,604 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Coupled-NLSE (CNLSE)</TITLE>
+<META NAME="description" CONTENT="Coupled-NLSE (CNLSE)">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="NLSE_in_WDM_case.html">
+<LINK REL="previous" HREF="NLSE.html">
+<LINK REL="up" HREF="Background.html">
+<LINK REL="next" HREF="NLSE_in_WDM_case.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html1009"
+  HREF="NLSE_in_WDM_case.html">NLSE in the WDM case</A>
+<B>Up:</B> <A NAME="tex2html1007"
+  HREF="Background.html">Background</A>
+<B> Previous:</B> <A NAME="tex2html1001"
+  HREF="NLSE.html">NLSE</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION00320000000000000000"></A><A NAME="sec:CNLSE"></A>
+<BR>
+Coupled-NLSE (CNLSE)
+</H1>
+
+<P>
+The CNLSE is the vectorial version of the NLSE. It is used whenever
+polarization effects are to be considered, since the optical (transverse)
+propagating field envelope is represented by <!-- MATH
+ $\mathbf{A}(z,t)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="62" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img189.png"
+ ALT="$ \mathbf{A}(z,t)$"></SPAN>, where
+the bold face stands for a complex vector with 2 elements (<SPAN  CLASS="textit">Jones
+vector</SPAN>). The CNLSE, in a general form, has the following expression
+[<A
+ HREF="Bibliography.html#Menyuk_PMD_derivation">34</A>,<A
+ HREF="Bibliography.html#Menyuk_Manakov">35</A>,<A
+ HREF="Bibliography.html#menyuk_nlpmd_inv">36</A>]: <P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:CNLSE_general"></A><!-- MATH
+ \begin{equation}
+\frac{\partial\mathbf{A}(z,\tau)}{\partial z}=-\frac{\alpha}{2}\mathbf{A}-i\frac{\Delta\beta_{0}}{2}(\hat{l}(z)\cdot\vec{\sigma})\mathbf{A}-\frac{\Delta\beta_{1}}{2}(\hat{l}(z)\cdot\vec{\sigma})\frac{\partial\mathbf{A}}{\partial\tau}+j\frac{\beta_{2}}{2}\frac{\partial^{2}\mathbf{A}}{\partial\tau^{2}}-j\gamma\left[|\mathbf{A}|^{2}\mathbf{A}-\frac{1}{3}\left(\mathbf{A}^{\dagger}\sigma_{3}\mathbf{A}\right)\sigma_{3}\mathbf{A}\right]
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="847" HEIGHT="66" ALIGN="MIDDLE" BORDER="0"
+ SRC="img190.png"
+ ALT="$\displaystyle \frac{\partial\mathbf{A}(z,\tau)}{\partial z}=-\frac{\alpha}{2}\m...
+...left(\mathbf{A}^{\dagger}\sigma_{3}\mathbf{A}\right)\sigma_{3}\mathbf{A}\right]$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">9</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+where <!-- MATH
+ $\tau=t-\frac{z}{v_{g}}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="91" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img191.png"
+ ALT="$ \tau=t-\frac{z}{v_{g}}$"></SPAN> is the retarded time frame, discussed
+in Sec. <A HREF="NLSE.html#sub:Group-velocity">3.1.2</A>, while <!-- MATH
+ $^{\dagger}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="13" HEIGHT="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="img192.png"
+ ALT="$ ^{\dagger}$"></SPAN> means transpose-conjugate.
+Note that for the sake of simplicity we are neglecting the fiber slope.
+Comparing (<A HREF="#eq:CNLSE_general">3.9</A>) with the <SPAN  CLASS="textit">scalar </SPAN>NLSE, described
+in Sec. <A HREF="NLSE.html#sec:NLSE">3.1</A>, two new terms (those with <!-- MATH
+ $\Delta\beta_{0,1}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="52" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img193.png"
+ ALT="$ \Delta\beta_{0,1}$"></SPAN>)
+appear in the linear part, while the nonlinear part of the equation
+is modified by an extra term (that with <!-- MATH
+ $\sigma_{3}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="25" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img194.png"
+ ALT="$ \sigma_{3}$"></SPAN>). 
+
+<P>
+The linear terms are due to the fiber <SPAN  CLASS="textit">birefringence</SPAN>: when a
+polarized optical field propagates through a <SPAN  CLASS="textit">birefringent </SPAN>fiber,
+the propagation constant depends on the field polarization. This behavior
+can be due to imperfections in the fiber core as well as geometrical
+asymmetries, stresses, bends, etc. Birefringence is stochastic and
+fluctuates both in time (slowly, compared to the symbol period; hence
+it is assumed constant in <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img185.png"
+ ALT="$ \tau$"></SPAN> in the CNLSE) and along fiber length,
+depending on the characteristics of the fiber and on local condition,
+such as temperature. At each position <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img93.png"
+ ALT="$ z$"></SPAN>, the fiber is characterized
+by an <SPAN  CLASS="textit">eigenmode</SPAN> <!-- MATH
+ $\hat{l}(z)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="36" HEIGHT="46" ALIGN="MIDDLE" BORDER="0"
+ SRC="img195.png"
+ ALT="$ \hat{l}(z)$"></SPAN>, corresponding to the field polarization
+with slowest propagation constant <!-- MATH
+ $\beta_{s}(\omega)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="51" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img196.png"
+ ALT="$ \beta_{s}(\omega)$"></SPAN>; at the same,
+time, the orthogonal eigenmode <!-- MATH
+ $\hat{l}_{o}(z)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="44" HEIGHT="46" ALIGN="MIDDLE" BORDER="0"
+ SRC="img197.png"
+ ALT="$ \hat{l}_{o}(z)$"></SPAN>, is the field polarization
+with fastest propagation constant <!-- MATH
+ $\beta_{f}(\omega)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="53" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img198.png"
+ ALT="$ \beta_{f}(\omega)$"></SPAN>. The difference
+<!-- MATH
+ $\Delta\beta(\omega)=\beta_{s}(\omega)-\beta_{f}(\omega)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="202" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img199.png"
+ ALT="$ \Delta\beta(\omega)=\beta_{s}(\omega)-\beta_{f}(\omega)$"></SPAN> between
+these propagation constants is the strength of the birefringence,
+while <!-- MATH
+ $\hat{l}(z)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="36" HEIGHT="46" ALIGN="MIDDLE" BORDER="0"
+ SRC="img195.png"
+ ALT="$ \hat{l}(z)$"></SPAN> represents the birefringence orientation. <!-- MATH
+ $\hat{l}(z)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="36" HEIGHT="46" ALIGN="MIDDLE" BORDER="0"
+ SRC="img195.png"
+ ALT="$ \hat{l}(z)$"></SPAN>
+is a 3D unit-magnitude real vector (a <SPAN  CLASS="textit">Stokes vector</SPAN>) [<A
+ HREF="Bibliography.html#Kogelnik_PMDfund">37</A>,<A
+ HREF="Bibliography.html#Math_primer">38</A>].
+As a simple example, <!-- MATH
+ $\hat{l}(z)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="36" HEIGHT="46" ALIGN="MIDDLE" BORDER="0"
+ SRC="img195.png"
+ ALT="$ \hat{l}(z)$"></SPAN> can represent the ``horizontal''
+linear polarization, where the field oscillates in the <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img200.png"
+ ALT="$ x$"></SPAN> direction
+(hence, the second element of <!-- MATH
+ $\mathbf{A}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="22" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img201.png"
+ ALT="$ \mathbf{A}$"></SPAN> is null); in this case,
+<!-- MATH
+ $\hat{l}_{o}(z)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="44" HEIGHT="46" ALIGN="MIDDLE" BORDER="0"
+ SRC="img197.png"
+ ALT="$ \hat{l}_{o}(z)$"></SPAN> is the the ``vertical'' linear polarization
+(<!-- MATH
+ $\mathbf{A}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="22" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img201.png"
+ ALT="$ \mathbf{A}$"></SPAN> oscillates along the <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img202.png"
+ ALT="$ y$"></SPAN> direction and its first element
+is null). It is generally believed that silica fibers are characterized
+by linear birefringence [<A
+ HREF="Bibliography.html#Kaminow_JQE">39</A>]: this implies that the
+third component of <!-- MATH
+ $\hat{l}(z)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="36" HEIGHT="46" ALIGN="MIDDLE" BORDER="0"
+ SRC="img195.png"
+ ALT="$ \hat{l}(z)$"></SPAN> is null.
+
+<P>
+In (<A HREF="#eq:CNLSE_general">3.9</A>), birefringence is modeled by a Stokes
+vector <!-- MATH
+ $\vec{W}(z,\omega)=(\Delta\beta_{0}+\Delta\beta_{1}\omega)\hat{l}(z)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="247" HEIGHT="47" ALIGN="MIDDLE" BORDER="0"
+ SRC="img203.png"
+ ALT="$ \vec{W}(z,\omega)=(\Delta\beta_{0}+\Delta\beta_{1}\omega)\hat{l}(z)$"></SPAN>
+with a linear frequency dependence, although other models are possible;
+the variations in <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img93.png"
+ ALT="$ z$"></SPAN> of its orientation cause ``random mode coupling'',
+i.e., the exchange of energy between the field components parallel
+or perpendicular to <!-- MATH
+ $\hat{l}(z)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="36" HEIGHT="46" ALIGN="MIDDLE" BORDER="0"
+ SRC="img195.png"
+ ALT="$ \hat{l}(z)$"></SPAN>, eventually leading to Polarization
+Mode Dispersion (PMD), a distortion of the pulse shape causing signal
+degradation and intersymbol interference. If the frequency dependent
+term <!-- MATH
+ $\Delta\beta_{1}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="40" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img204.png"
+ ALT="$ \Delta\beta_{1}$"></SPAN> is set to zero, there is no pulse distortion,
+and the overall result of birefringence is just a rotation of the
+signal State Of Polarization (SOP) on the <SPAN  CLASS="textit">Poincaré sphere</SPAN>.
+If <SPAN CLASS="MATH"><IMG
+ WIDTH="11" HEIGHT="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="img205.png"
+ ALT="$ \hat{l}$"></SPAN> is constant along <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img93.png"
+ ALT="$ z$"></SPAN>, the fiber is called Polarization
+Maintaining Fiber (PMF): its input-output behavior amounts to splitting
+each input pulse into two ``shadow pulses'' arriving at the fiber
+output with a mutual delay equal to <!-- MATH
+ $\Delta\beta_{1}z$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="50" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img206.png"
+ ALT="$ \Delta\beta_{1}z$"></SPAN>: this effect,
+known as <SPAN  CLASS="textit">first-order PMD</SPAN>, causes intersymbol interference.
+In the more general case, mode coupling produces PMD at all orders,
+hence a pulse is not only split in two (first-order PMD), but each
+of the shadow pulses suffers a different amount of linear distortion,
+including GVD, that differently affects the polarized components of
+the signal (<SPAN  CLASS="textit">Polarization-dependent Chromatic Dispersion</SPAN>, PCD).
+
+<P>
+The symbol <!-- MATH
+ $\vec{\sigma}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img207.png"
+ ALT="$ \vec{\sigma}$"></SPAN>, appearing in (<A HREF="#eq:CNLSE_general">3.9</A>),
+is the so-called <SPAN  CLASS="textit">spin-vector</SPAN>, whose elements are the three
+Pauli matrices (hence, <!-- MATH
+ $\vec{\sigma}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img207.png"
+ ALT="$ \vec{\sigma}$"></SPAN> is actually a tensor!); the
+scalar product <!-- MATH
+ $(\hat{l}(z)\cdot\vec{\sigma})$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="76" HEIGHT="46" ALIGN="MIDDLE" BORDER="0"
+ SRC="img208.png"
+ ALT="$ (\hat{l}(z)\cdot\vec{\sigma})$"></SPAN> yields a <SPAN  CLASS="textit">unitary
+Jones matrix</SPAN>, i.e. a <SPAN CLASS="MATH"><IMG
+ WIDTH="47" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img209.png"
+ ALT="$ 2\times2$"></SPAN> complex matrix with unit determinant,
+that acts on the elements of the field vector <!-- MATH
+ $\mathbf{A}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="22" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img201.png"
+ ALT="$ \mathbf{A}$"></SPAN> and produces
+mode-coupling.
+
+<P>
+Of the three Pauli matrices, only the third, <!-- MATH
+ $\sigma_{3}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="25" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img194.png"
+ ALT="$ \sigma_{3}$"></SPAN>, appears
+in the nonlinear term in (<A HREF="#eq:CNLSE_general">3.9</A>): despite many different
+(but equivalent) expressions are possible for the nonlinear term in
+(<A HREF="#eq:CNLSE_general">3.9</A>), the concept is that the circular component
+of the signal polarization (associated to the third Stokes component,
+whose mathematical expression is <!-- MATH
+ $\left(\mathbf{A}^{\dagger}\sigma_{3}\mathbf{A}\right)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="83" HEIGHT="42" ALIGN="MIDDLE" BORDER="0"
+ SRC="img210.png"
+ ALT="$ \left(\mathbf{A}^{\dagger}\sigma_{3}\mathbf{A}\right)$"></SPAN>)
+plays a special role in the CNLSE. This peculiarity is not always
+remarked in the literature, since other alternative and simplified
+forms of the CNLSE are implemented for its numerical solution.
+
+<P>
+
+<H2><A NAME="SECTION00321000000000000000"></A><A NAME="sub:Poincare-sphere-notation"></A>
+<BR>
+Poincaré sphere notation
+</H2>
+
+<P>
+The Stokes representation of the complex electric field <!-- MATH
+ $\mathbf{A}=\left[A_{x},\, A_{y}\right]^{T}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="128" HEIGHT="47" ALIGN="MIDDLE" BORDER="0"
+ SRC="img211.png"
+ ALT="$ \mathbf{A}=\left[A_{x},\, A_{y}\right]^{T}$"></SPAN>
+is by definition [<A
+ HREF="Bibliography.html#Math_primer">38</A>,<A
+ HREF="Bibliography.html#Kogelnik_PMDfund">37</A>]:<P><!-- MATH
+ \begin{displaymath}
+\vec{A}=\mathbf{A}^{\dagger}\vec{\sigma}\mathbf{A}
+\end{displaymath}
+ -->
+</P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<IMG
+ WIDTH="97" HEIGHT="47" ALIGN="MIDDLE" BORDER="0"
+ SRC="img212.png"
+ ALT="$\displaystyle \vec{A}=\mathbf{A}^{\dagger}\vec{\sigma}\mathbf{A}$">
+</DIV><P></P>
+and hence it is a 4-dimensional vector equal to: <P><!-- MATH
+ \begin{displaymath}
+\vec{A}=\left[\begin{array}{c}
+\left|A_{x}\right|^{2}+\left|A_{y}\right|^{2}\\
+\left|A_{x}\right|^{2}-\left|A_{y}\right|^{2}\\
+2\Re\left\{ A_{x}^{*}A_{y}\right\} \\
+2\Im\left\{ A_{x}^{*}A_{y}\right\} \end{array}\right]=\left(\left|A_{x}\right|+\left|A_{y}\right|^{2}\right)\left[\begin{array}{c}
+1\\
+\widehat{a}\end{array}\right]
+\end{displaymath}
+ -->
+</P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<IMG
+ WIDTH="402" HEIGHT="201" ALIGN="MIDDLE" BORDER="0"
+ SRC="img213.png"
+ ALT="$\displaystyle \vec{A}=\left[\begin{array}{c}
+\left\vert A_{x}\right\vert^{2}+\l...
+...\right\vert^{2}\right)\left[\begin{array}{c}
+1\\
+\widehat{a}\end{array}\right]$">
+</DIV><P></P>
+
+<P>
+where <!-- MATH
+ $\widehat{a}=\left[a_{1},\, a_{2},\, a_{3}\right]^{T}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="142" HEIGHT="47" ALIGN="MIDDLE" BORDER="0"
+ SRC="img214.png"
+ ALT="$ \widehat{a}=\left[a_{1},\, a_{2},\, a_{3}\right]^{T}$"></SPAN> is the
+Poincaré unit vector or Stokes SOP vector. The Poincaré sphere represents
+this vector as a point on the unit sphere, whose main axes are generally
+called <!-- MATH
+ $\left(s_{1},\, s_{2},\, s_{3}\right)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="95" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img215.png"
+ ALT="$ \left(s_{1},\, s_{2},\, s_{3}\right)$"></SPAN>. Being <!-- MATH
+ $\widehat{a}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img216.png"
+ ALT="$ \widehat{a}$"></SPAN>
+a unit vector it can be written as:
+
+<P>
+<P><!-- MATH
+ \begin{displaymath}
+\widehat{a}=\left[\begin{array}{c}
+\cos2\theta\cos2\varepsilon\\
+\sin2\theta\cos2\varepsilon\\
+\sin2\varepsilon\end{array}\right]
+\end{displaymath}
+ -->
+</P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<IMG
+ WIDTH="182" HEIGHT="156" ALIGN="MIDDLE" BORDER="0"
+ SRC="img217.png"
+ ALT="$\displaystyle \widehat{a}=\left[\begin{array}{c}
+\cos2\theta\cos2\varepsilon\\
+\sin2\theta\cos2\varepsilon\\
+\sin2\varepsilon\end{array}\right]$">
+</DIV><P></P>
+
+<P>
+where <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img218.png"
+ ALT="$ \theta$"></SPAN> and <!-- MATH
+ $\varepsilon$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="14" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img219.png"
+ ALT="$ \varepsilon$"></SPAN> are the azimuth and ellipticity
+of the field <!-- MATH
+ $\mathbf{A}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="22" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img201.png"
+ ALT="$ \mathbf{A}$"></SPAN>. Hence, linear polarized light lies on
+the equator of the sphere, while circular polarized light lies on
+one of the poles of the sphere. Any other position over the sphere
+identifies an elliptical polarized field. Moreover, orthogonal fields
+have Stokes vectors in opposite directions on the Poincaré sphere.
+
+<P>
+
+<H2><A NAME="SECTION00322000000000000000">
+Numerical solution of the CNLSE</A>
+</H2>
+
+<P>
+The numerical integration of (<A HREF="#eq:CNLSE_general">3.9</A>) requires choosing
+a sufficiently small step (in <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img93.png"
+ ALT="$ z$"></SPAN>): in fact, the birefringence term
+with <!-- MATH
+ $\Delta\beta_{0}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="40" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img220.png"
+ ALT="$ \Delta\beta_{0}$"></SPAN> is purely imaginary and causes a differential
+phase rotation in the signal components (hence a change of its state
+of polarization). Such a phase rotation is frequency-independent and
+does not cause signal distortion, but indeed affects the nonlinear
+term in the CNLSE. An important parameter of transmission fibers is
+the <SPAN  CLASS="textit">beat length</SPAN> <!-- MATH
+ $L_{B}=\frac{2\pi}{\Delta\beta_{0}}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="90" HEIGHT="42" ALIGN="MIDDLE" BORDER="0"
+ SRC="img221.png"
+ ALT="$ L_{B}=\frac{2\pi}{\Delta\beta_{0}}$"></SPAN>: one
+mist then choose an integration step <SPAN CLASS="MATH"><IMG
+ WIDTH="31" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img222.png"
+ ALT="$ \Delta z$"></SPAN> such that the phase
+rotation <!-- MATH
+ $\Delta\beta_{0}\Delta z$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="66" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img223.png"
+ ALT="$ \Delta\beta_{0}\Delta z$"></SPAN> is small compared to <SPAN CLASS="MATH"><IMG
+ WIDTH="26" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img86.png"
+ ALT="$ 2\pi$"></SPAN>.
+Since <SPAN CLASS="MATH"><IMG
+ WIDTH="31" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img224.png"
+ ALT="$ L_{B}$"></SPAN> is typically of the orders of meters (or tens of meters),
+for standard fibers, the integration of (<A HREF="#eq:CNLSE_general">3.9</A>)
+is extremely time-consuming.
+
+<P>
+An alternative approach, requiring much smaller computation times,
+is that of averaging the impact of signal polarization over the nonlinear
+term in (<A HREF="#eq:CNLSE_general">3.9</A>): if <SPAN CLASS="MATH"><IMG
+ WIDTH="31" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img224.png"
+ ALT="$ L_{B}$"></SPAN> is small enough, the
+rapid variations in the state of polarization of <!-- MATH
+ $\mathbf{A}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="22" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img201.png"
+ ALT="$ \mathbf{A}$"></SPAN> are
+such that the term <!-- MATH
+ $\frac{1}{3}\left(\mathbf{A}^{\dagger}\sigma_{3}\mathbf{A}\right)\sigma_{3}\mathbf{A}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="137" HEIGHT="42" ALIGN="MIDDLE" BORDER="0"
+ SRC="img225.png"
+ ALT="$ \frac{1}{3}\left(\mathbf{A}^{\dagger}\sigma_{3}\mathbf{A}\right)\sigma_{3}\mathbf{A}$"></SPAN>
+undergoes a <SPAN  CLASS="textit">complete mixing </SPAN>and reduces to <!-- MATH
+ $\frac{1}{9}\mathbf{A}|\mathbf{A}|^{2}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="69" HEIGHT="42" ALIGN="MIDDLE" BORDER="0"
+ SRC="img226.png"
+ ALT="$ \frac{1}{9}\mathbf{A}\vert\mathbf{A}\vert^{2}$"></SPAN>,
+on average. The CNLSE is then simplified to<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:Manakov_PMD"></A><!-- MATH
+ \begin{equation}
+\frac{\partial\mathbf{A}(z,\tau)}{\partial z}=-\frac{\alpha}{2}\mathbf{A}-i\frac{\Delta\beta_{0}}{2}(\hat{l}(z)\cdot\vec{\sigma})\mathbf{A}-\frac{\Delta\beta_{1}}{2}(\hat{l}(z)\cdot\vec{\sigma})\frac{\partial\mathbf{A}}{\partial\tau}+j\frac{\beta_{2}}{2}\frac{\partial^{2}\mathbf{A}}{\partial\tau^{2}}-j\gamma\frac{8}{9}|\mathbf{A}|^{2}\mathbf{A}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="681" HEIGHT="66" ALIGN="MIDDLE" BORDER="0"
+ SRC="img227.png"
+ ALT="$\displaystyle \frac{\partial\mathbf{A}(z,\tau)}{\partial z}=-\frac{\alpha}{2}\m...
+...thbf{A}}{\partial\tau^{2}}-j\gamma\frac{8}{9}\vert\mathbf{A}\vert^{2}\mathbf{A}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">10</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+which is known as the Manakov-PMD equation [<A
+ HREF="Bibliography.html#Menyuk_Manakov">35</A>,<A
+ HREF="Bibliography.html#Evangelides_Manakov">40</A>].
+Here, the nonlinear term introduces <SPAN  CLASS="textit">common-mode</SPAN> phase rotations
+that do not alter the signal SOP; moreover, nonlinear distortions
+only depend on the signal intensity and not on its polarization, although
+there is an interplay between the nonlinear distortions and the polarization
+distortions due to the linear term. Note that although the birefringence
+term (that with <!-- MATH
+ $\Delta\beta_{0}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="40" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img220.png"
+ ALT="$ \Delta\beta_{0}$"></SPAN>) is still there, there is no need
+for integration steps smaller than <SPAN CLASS="MATH"><IMG
+ WIDTH="31" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img224.png"
+ ALT="$ L_{B}$"></SPAN>: the effect of birefringence
+can be analytically accounted for in the linear step of the SSFM algorithm
+(see Sec.<A HREF="Numerical_solution_NLSE_SSF.html#sec:SSFM">3.4</A>). The Manakov-PMD equation is generally regarded
+as a simple and reliable way to model optical fibers affected both
+by Kerr effects and PMD.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1008"
+  HREF="NLSE_in_WDM_case.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1006"
+  HREF="Background.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1000"
+  HREF="NLSE.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html1009"
+  HREF="NLSE_in_WDM_case.html">NLSE in the WDM case</A>
+<B> Up:</B> <A NAME="tex2html1007"
+  HREF="Background.html">Background</A>
+<B> Previous:</B> <A NAME="tex2html1001"
+  HREF="NLSE.html">NLSE</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>
