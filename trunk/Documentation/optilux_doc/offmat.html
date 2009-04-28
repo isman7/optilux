@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>offmat</TITLE>
+<META NAME="description" CONTENT="offmat">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="fastexp.html">
+<LINK REL="previous" HREF="checkfields.html">
+<LINK REL="up" HREF="List_Functions.html">
+<LINK REL="next" HREF="fastexp.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html933"
+  HREF="fastexp.html">fastexp</A>
+<B>Up:</B> <A NAME="tex2html931"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html925"
+  HREF="checkfields.html">checkfields</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION002560000000000000000"></A><A NAME="sec:offmat"></A>
+<BR>
+offmat
+</H1>
+
+<P>
+Run Matlab/Octave simulation offline
+
+<P>
+
+<H2><A NAME="SECTION002561000000000000000">
+Syntax</A>
+</H2>
+
+<P>
+<TT>offmat [OPTIONS] FILE.m</TT>
+
+<P>
+
+<H2><A NAME="SECTION002562000000000000000">
+Description</A>
+</H2>
+
+<P>
+offmat is a bash script for running Matlab/Octave simulations offline
+using <TT>nohup</TT> under Linux-based operating systems. This way
+the user can logout from the host leaving the simulation still running.
+<TT>OPTIONS</TT> can be any of the following:
+
+<UL>
+<LI><TT>-s</TT> save simulation results in <TT>FILE.mat</TT>
+</LI>
+<LI><TT>-p PATH</TT> add <TT>PATH</TT> to the matlab/octave search path
+</LI>
+<LI><TT>-c LICENSEFILE</TT> Set location of the license file that MATLAB
+should use. See <TT>matlab -h</TT>
+</LI>
+<LI><TT>-o OFILE</TT> save simulation results in <TT>OFILE.mat</TT>
+</LI>
+<LI><TT>-O</TT> force to use Octave
+</LI>
+<LI><TT>-M</TT> force to use Matlab
+</LI>
+<LI><TT>-w</TT> write information about the simulation in <TT>/tmp/$USER_offmat</TT>
+</LI>
+<LI><TT>-m USER@addr</TT> Send a notification mail to <TT>USER@addr</TT>
+after the simulation
+</LI>
+<LI><TT>-n VALN</TT> Use nice value <TT>VALN</TT>
+</LI>
+<LI><TT>-h</TT> display help message and exit
+<BR>
+<P>
+</LI>
+</UL>
+With the option <TT>-m</TT> the program requires <TT>mailx</TT> and
+a <TT>mail</TT> sender installed and properly configured. The script
+by default run first matlab, then octave if matlab failed. 
+<BR>
+<P>
+This function uses nohup to run the process in background. All screen
+messages will be written into a file called <TT>FILE.nohup</TT>. If
+such file already exists, the output file will be <TT>FILE_n.nohup</TT>,
+being <TT>n</TT> an incremental integer until <TT>FILE_n.nohup</TT>
+is a new file.
+<BR>
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=400>
+<DIV ALIGN="CENTER">
+<B>Note:</B> This script assumes that your binary matlab
+calls <TT>'matlab'</TT> and your binary octave calls <TT>'octave'</TT>.
+If not, please manually change the first lines in this script under
+the voice Matlab/Octave binary names. 
+</DIV></TD>
+</TR>
+</TABLE>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html932"
+  HREF="fastexp.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html930"
+  HREF="List_Functions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html924"
+  HREF="checkfields.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html933"
+  HREF="fastexp.html">fastexp</A>
+<B> Up:</B> <A NAME="tex2html931"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html925"
+  HREF="checkfields.html">checkfields</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

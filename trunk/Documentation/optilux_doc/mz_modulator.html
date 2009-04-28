@@ -1,0 +1,181 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>mz_modulator</TITLE>
+<META NAME="description" CONTENT="mz_modulator">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="phase_modulator.html">
+<LINK REL="previous" HREF="linear_modulator.html">
+<LINK REL="up" HREF="List_Functions.html">
+<LINK REL="next" HREF="phase_modulator.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html387"
+  HREF="phase_modulator.html">phase_modulator</A>
+<B>Up:</B> <A NAME="tex2html385"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html379"
+  HREF="linear_modulator.html">linear_modulator</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION002150000000000000000"></A><A NAME="sec:mz_modulator"></A>
+<BR>
+mz_modulator
+</H1>
+
+<P>
+Modulate the optical field with a Mach-Zehnder Interferometer
+
+<P>
+
+<H2><A NAME="SECTION002151000000000000000">
+Syntax</A>
+</H2>
+
+<P>
+<TT>E=MZ_MODULATOR(E,MODSIG)</TT>&nbsp;
+<BR><TT>E=MZ_MODULATOR(E,MODSIG,OPTIONS)</TT>
+
+<P>
+
+<H2><A NAME="SECTION002152000000000000000">
+Description</A>
+</H2>
+
+<P>
+<TT>E=MZ_MODULATOR(E,MODSIG)</TT> modulates the optical field <TT>E</TT>
+using a Mach-Zehnder interferometer [<A
+ HREF="Bibliography.html#Conradi97">13</A>]. The parameter
+<TT>MODSIG</TT> is the electrical driving signal produced by <TT><A HREF="electricsource.html#sec:electricsource">electricsource</A></TT>.
+The model of the Mach-Zehnder is the same as in [<A
+ HREF="Bibliography.html#Conradi97">13</A>]:
+
+<P>
+<P><!-- MATH
+ \begin{displaymath}
+E_{out}=\frac{E_{in}}{2}\left[e^{j\frac{\pi(V_{1}(t)-V_{bias})}{V_{\pi}}}+\gamma e^{j\frac{\pi(V_{2}(t)+V_{bias})}{V_{\pi}}}\right]
+\end{displaymath}
+ -->
+</P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<IMG
+ WIDTH="386" HEIGHT="61" ALIGN="MIDDLE" BORDER="0"
+ SRC="img35.png"
+ ALT="$\displaystyle E_{out}=\frac{E_{in}}{2}\left[e^{j\frac{\pi(V_{1}(t)-V_{bias})}{V_{\pi}}}+\gamma e^{j\frac{\pi(V_{2}(t)+V_{bias})}{V_{\pi}}}\right]$">
+</DIV><P></P>
+
+<P>
+where <!-- MATH
+ $V_{1}=-V_{2}=\frac{MODSIG}{2}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="184" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
+ SRC="img36.png"
+ ALT="$ V_{1}=-V_{2}=\frac{MODSIG}{2}$"></SPAN> , <!-- MATH
+ $\gamma=\frac{\sqrt{\delta}-1}{\sqrt{\delta}+1}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="85" HEIGHT="50" ALIGN="MIDDLE" BORDER="0"
+ SRC="img37.png"
+ ALT="$ \gamma=\frac{\sqrt{\delta}-1}{\sqrt{\delta}+1}$"></SPAN>
+and <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img38.png"
+ ALT="$ \delta$"></SPAN> is the extinction ratio in linear units.
+
+<P>
+<TT>E=MZ_MODULATOR(E,MODSIG,OPTIONS)</TT> can modify the parameters
+of the Mach-Zehnder modulator. <TT>OPTIONS</TT> is an optional structure
+whose fields can be: 
+
+<UL>
+<LI><TT>exratio</TT> : extinction ratio [dB] (default = <TT>inf</TT>) 
+</LI>
+<LI><TT>bias</TT> : <SPAN CLASS="MATH"><IMG
+ WIDTH="45" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img39.png"
+ ALT="$ V_{bias}$"></SPAN> of the modulator (default = <TT>0</TT>) 
+</LI>
+<LI><TT>amplitude</TT>: <SPAN CLASS="MATH"><IMG
+ WIDTH="27" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img40.png"
+ ALT="$ V_{\pi}$"></SPAN> of the modulator (default = <TT>1</TT>) 
+</LI>
+<LI><TT>nochirp</TT>: reduce effect of chirp due to finite extinction
+ratio [<A
+ HREF="Bibliography.html#dualMZGnauck">14</A>] (default = <TT>false</TT>)
+</LI>
+</UL>
+<TT>MZ_MODULATOR</TT> acts on a per channel basis, so if you want
+to create optical signals for a N-channel WDM system you have to call
+<TT>MZ_MODULATOR</TT> N times.
+
+<P>
+
+<H2><A NAME="SECTION002153000000000000000">
+See Also</A>
+</H2>
+
+<P>
+<A HREF="electricsource.html#sec:electricsource">electricsource</A>, <A HREF="lasersource.html#sec:lasersource">lasersource</A>,
+<A HREF="linear_modulator.html#sec:linear_modulator">linear_modulator</A> , <A HREF="phase_modulator.html#sec:phase_modulator">phase_modulator</A> 
+
+<P>
+
+<H2><A NAME="SECTION002154000000000000000">
+References</A>
+</H2>
+
+<P>
+This function implements the model proposed in [<A
+ HREF="Bibliography.html#Conradi97">13</A>] and
+a technique used to minimize the effect of chirp in presence of finite
+extinction ratio and presented in [<A
+ HREF="Bibliography.html#dualMZGnauck">14</A>].
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html386"
+  HREF="phase_modulator.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html384"
+  HREF="List_Functions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html378"
+  HREF="linear_modulator.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html387"
+  HREF="phase_modulator.html">phase_modulator</A>
+<B> Up:</B> <A NAME="tex2html385"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html379"
+  HREF="linear_modulator.html">linear_modulator</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

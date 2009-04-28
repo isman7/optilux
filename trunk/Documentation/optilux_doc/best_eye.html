@@ -1,0 +1,223 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>best_eye</TITLE>
+<META NAME="description" CONTENT="best_eye">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="best_sp.html">
+<LINK REL="previous" HREF="ber_kl.html">
+<LINK REL="up" HREF="List_Functions.html">
+<LINK REL="next" HREF="best_sp.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html576"
+  HREF="best_sp.html">best_sp</A>
+<B>Up:</B> <A NAME="tex2html574"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html568"
+  HREF="ber_kl.html">ber_kl</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION002290000000000000000"></A><A NAME="sec:best_eye"></A>
+<BR>
+best_eye
+</H1>
+
+<P>
+Search algorithm for the best eye opening.
+
+<P>
+
+<H2><A NAME="SECTION002291000000000000000">
+Syntax</A>
+</H2>
+
+<P>
+<TT>BEYE=BEST_EYE(ICH,X,PAT)</TT>&nbsp;
+<BR><TT>[BEYE,BPOST]=BEST_EYE(ICH,X,PAT)</TT>
+
+<P>
+
+<H2><A NAME="SECTION002292000000000000000">
+Description</A>
+</H2>
+
+<P>
+<TT>BEYE=BEST_EYE(ICH,X,PAT)</TT> searches the minimum eye closure
+penalty <TT>BEYE</TT> of a non-coherent transmission by varying the
+post compensating fiber dispersion in front of the receiver (E.g.
+see <A HREF="receiver_ook.html#sec:receiver_ook">receiver_ook</A> or <A HREF="receiver_dpsk.html#sec:receiver_dpsk">receiver_dpsk</A>).
+
+<BR>
+<P>
+<TT>[BEYE,BPOST]=BEST_EYE(ICH,X,PAT)</TT> also returns in <TT>BPOST</TT>
+the best post compensating fiber cumulated dispersion in [ps/nm]. 
+
+<P>
+The eye closure penalty <TT>BEYE</TT> [dB] is defined as: 
+<BR>
+<P>
+<TT>BEYE = 10*log10(eob2b/eo1)</TT> 
+<BR>
+<P>
+where <TT>eo1=max(min1-max0)</TT> is the eye opening after propagation,
+being <TT>min1</TT> and <TT>max0</TT> the worst mark/space samples.
+<TT>eob2b</TT> is the eye opening in back to back configuration. 
+
+<P>
+<TT>PAT</TT> contains the symbols pattern after decoding (see <A HREF="pat_decoder.html#sec:pat_decoder">pat_decoder</A>).
+
+<BR>
+<P>
+<TT>X</TT> is a structure whose fields are: 
+
+<UL>
+<LI><TT>X.rec</TT> = receiver type. Valid arguments are: <TT>'ook','psbt','nf-dpsk'</TT>
+to use <A HREF="receiver_ook.html#sec:receiver_ook">receiver_ook</A>, <TT>'dpsk'</TT>
+to use <A HREF="receiver_dpsk.html#sec:receiver_dpsk">receiver_dpsk</A>, <TT>'dqpsk'</TT>
+to use with <A HREF="receiver_dqpsk.html#sec:receiver_dqpsk">receiver_dqpsk</A>. 
+</LI>
+<LI><TT>X.oftype</TT> = optical filter type (see <A HREF="myfilter.html#sec:myfilter">myfilter</A>) 
+</LI>
+<LI><TT>X.obw</TT> = optical filter 3 dB bandwidth normalized to the bit
+rate 
+</LI>
+<LI><TT>X.oord</TT> = optical filter order (if <TT>X.oftype</TT> is <TT>'supergaussian'</TT>) 
+</LI>
+<LI><TT>X.eftype</TT> = electrical filter type (see <A HREF="myfilter.html#sec:myfilter">myfilter</A>) 
+</LI>
+<LI><TT>X.ebw</TT> = electrical filter 3-dB bandwidth normalized to the
+bit rate 
+</LI>
+<LI><TT>X.eord</TT> = electrical filter order (if <TT>X.eftype</TT> is<TT>
+'supergaussian'</TT>) 
+</LI>
+<LI><TT>X.dpost</TT> = post compensating fiber cumulated dispersion [ps/nm]:
+Vector of two elements <TT>[d1 d2]</TT> that is the range within
+it the best post compensation is searched. <TT>X.dpost</TT> can also
+be a scalar: in this case, the function returns the eye closure penalty
+at this value of <TT>X.dpost</TT>. 
+</LI>
+<LI><TT>X.slopez</TT> = post compensating fiber cumulated slope [ps/nm&#94;2] 
+</LI>
+<LI><TT>X.lambda</TT> = wavelength [nm] at which the post compensating
+fiber has a cumulated dispersion equal to <TT>X.dpost</TT>. 
+</LI>
+</UL>
+Optional parameters for <TT>X</TT>: 
+
+<UL>
+<LI><TT>X.tol</TT> = tolerance of the golden search algorithm (fractional
+precision: +/-tol). 
+</LI>
+<LI><TT>X.print</TT>= structure for print. E.g. <TT>X.print = {'nomefile','eye'}</TT>
+or <TT>X.print = {'nomefile',</TT>&nbsp;
+<BR>
+<TT>'current'}</TT>, prints to file <TT>nomefile</TT>
+the eye or the current, respectively. <TT>nomefile</TT> will be placed
+into <TT>GSTATE.DIR</TT> within a directory ending with <TT>'.MOD'</TT>. 
+</LI>
+<LI><TT>X.plot = 'ploteye'</TT>: plots the eye in the active figure; <TT>'plotcur'</TT>
+plots the received current. 
+</LI>
+<LI><TT>X.color</TT>= color string for the plot (see plot.m). E.g. <TT>'b-'</TT>. 
+</LI>
+<LI><TT>X.ts</TT> = Fixed sampling time (<TT>-0.5 &lt;= X.ts &lt;= 0.5</TT>). 
+</LI>
+<LI><TT>X.comp</TT> = component on which evaluate eye and calculate BER
+(dqpsk modulation only). Can be <TT>'phase'</TT> or <TT>'quadrature'</TT>
+or <TT>'both'</TT>. In the last case the function gets two measurements
+over the in-phase and quadrature components, sampled with the same
+clock time. <TT>X.comp='both'</TT> requires <TT>PAT</TT> to be a two-column
+matrix with the phase/quadrature binary patterns on column 1,2, respectively. 
+</LI>
+<LI><TT>X.delay = 'theory'</TT> means that the delay uses the theoretical
+delay saved within <TT>GSTATE.DELAY</TT> (see <A HREF="create_field.html#sec:create_field">create_field</A>).
+By default the delay is measured by a cross-correlation measurement
+between the received current and an artifical pulse amplitude modulation
+(PAM) signal with ideal non-return to zero bits with symbols equal
+to <TT>PAT</TT>. The correlation method is useful in presence of polarization
+mode dispersion (PMD). See <A HREF="corrdelay.html#sec:corrdelay">corrdelay</A>.
+</LI>
+</UL>
+The receiver is composed of an ideal, purely linear, post compensating
+fiber + optical filter + optical to electrical converter + electrical
+lowpass filter. For example see <A HREF="receiver_ook.html#sec:receiver_ook">receiver_ook</A>
+or <A HREF="receiver_dpsk.html#sec:receiver_dpsk">receiver_dpsk</A>. 
+<BR>
+<P>
+The best eye opening is searched through a golden search algorithm
+(see [<A
+ HREF="Bibliography.html#numrecipes">22</A>].) 
+<BR>
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=400> 
+<B>Note 1</B>: The golden search algorithm works when only one minimum
+is present within the range <TT>[d1 d2]</TT>. Otherwise the returned
+<TT>BEYE</TT> is just one of the local min, and may not be the lowest. 
+
+<P>
+<B>Note 2</B>: This function works over a copy of the electric field.
+All fields of the global variable <TT>GSTATE</TT> are left unchanged. </TD>
+</TR>
+</TABLE>
+
+<P>
+
+<H2><A NAME="SECTION002293000000000000000">
+See also </A>
+</H2>
+
+<P>
+<A HREF="eval_eye.html#sec:eval_eye">eval_eye</A>, <A HREF="best_sp.html#sec:best_sp">best_sp</A>,
+<A HREF="pattern.html#sec:pattern">pattern</A>, <A HREF="myfilter.html#sec:myfilter">myfilter</A>,
+<A HREF="receiver_ook.html#sec:receiver_ook">receiver_ook</A>, <A HREF="receiver_dpsk.html#sec:receiver_dpsk">receiver_dpsk</A>,
+<A HREF="receiver_dqpsk.html#sec:receiver_dqpsk">receiver_dqpsk</A> , <A HREF="corrdelay.html#sec:corrdelay">corrdelay</A>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html575"
+  HREF="best_sp.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html573"
+  HREF="List_Functions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html567"
+  HREF="ber_kl.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html576"
+  HREF="best_sp.html">best_sp</A>
+<B> Up:</B> <A NAME="tex2html574"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html568"
+  HREF="ber_kl.html">ber_kl</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

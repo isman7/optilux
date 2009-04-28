@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>dop_meter</TITLE>
+<META NAME="description" CONTENT="dop_meter">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="set_sop.html">
+<LINK REL="previous" HREF="pol_scrambler.html">
+<LINK REL="up" HREF="List_Functions.html">
+<LINK REL="next" HREF="set_sop.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html803"
+  HREF="set_sop.html">set_sop</A>
+<B>Up:</B> <A NAME="tex2html801"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html795"
+  HREF="pol_scrambler.html">pol_scrambler</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION002460000000000000000"></A><A NAME="sec:dop_meter"></A>
+<BR>
+dop_meter
+</H1>
+
+<P>
+Computes the Degree Of Polarization of the Optical field.
+
+<P>
+
+<H2><A NAME="SECTION002461000000000000000">
+Syntax</A>
+</H2>
+
+<P>
+<TT>DOP=DOP_METER(ICH)</TT>&nbsp;
+<BR><TT>DOP=DOP_METER(ICH,NFIG_FLAG)</TT>&nbsp;
+<BR><TT>DOP=DOP_METER(ICH,NFIG_FLAG,FIL,BW,ORD)</TT>&nbsp;
+<BR><TT>[DOP,PHI]=DOP_METER(ICH,NFIG_FLAG,FIL,BW,ORD)</TT>
+
+<P>
+
+<H2><A NAME="SECTION002462000000000000000">
+Description</A>
+</H2>
+
+<P>
+<TT>DOP=DOP_METER(ICH) </TT>returns the degree of polarization (DOP)
+of partially polarized light. <TT>ICH </TT>is the channel number<TT>.</TT>&nbsp;
+<BR>
+<P>
+<TT>DOP=DOP_METER(ICH,NFIG_FLAG)</TT> with NFIG_FLAG=1 indicates
+that the states of polarization (SOP) of channel <TT>ICH</TT> will
+be plotted in the current figure. 
+<BR>
+<P>
+<TT>DOP=DOP_METER(ICH,NFIG_FLAG)</TT> with <TT>NFIG_FLAG~=0</TT>
+or nonempty indicates that the SOP of channel <TT>ICH</TT> will be
+plotted in the current figure. <TT>NFIG_FLAG</TT> can be a char,
+e.g. <TT>NFIG_FLAG='b'</TT>, which means that the SOP plot will use
+that color for each sample. Otherwise, <TT>NFIG_FLAG</TT> can be
+a struct with fields: 
+
+<UL>
+<LI><TT>NFIG_FLAG.col</TT> = color of plot (e.g. <TT>'b'</TT>) 
+</LI>
+<LI><TT>NFIG_FLAG.avgcol</TT> = color of the average DOP (e.g. <TT>'r'</TT>)
+<BR>
+<P>
+</LI>
+</UL>
+The SOP shows the state of partially polarized light as a cloud of
+magenta points (one for each time sample) surrounding the polarized
+component of the field, shown with a black vector.
+The Poincaré sphere is plotted as a reference. As extreme case, the
+black circle is in the origin for unpolarized light (natural, light,
+ASE noise...), since the polarized component is null, while the magenta
+dots all collapse on the black circle for totally polarized light,
+since there is no unpolarized component. 
+<BR>
+<P>
+<TT>DOP=DOP_METER(ICH,NFIG_FLAG,FIL,BW,ORD)</TT> works for a unique
+field (see <A HREF="create_field.html#sec:create_field">create_field</A>) and temporary
+extracts channel <TT>ICH</TT> with an optical filter <TT>FIL</TT>
+of bandwidth <TT>BW</TT> and optional order <TT>ORD</TT> (see <A HREF="myfilter.html#sec:myfilter">myfilter</A>).
+<BR>
+<P>
+<TT>[DOP,PHI]=DOP_METER(ICH,NFIG_FLAG,FIL,BW)</TT> also returns
+in <TT>PHI.azi</TT> and <TT>PHI.ell</TT> the azimuth and ellipticity
+of the average SOP.
+
+<P>
+
+<H2><A NAME="SECTION002463000000000000000">
+See Also</A>
+</H2>
+
+<P>
+<A HREF="pol_scrambler.html#sec:pol_scrambler">pol_scrambler</A>, <A HREF="set_sop.html#sec:set_sop">set_sop</A>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html802"
+  HREF="set_sop.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html800"
+  HREF="List_Functions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html794"
+  HREF="pol_scrambler.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html803"
+  HREF="set_sop.html">set_sop</A>
+<B> Up:</B> <A NAME="tex2html801"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html795"
+  HREF="pol_scrambler.html">pol_scrambler</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

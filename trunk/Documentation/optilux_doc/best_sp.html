@@ -1,0 +1,260 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>best_sp</TITLE>
+<META NAME="description" CONTENT="best_sp">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="ber_estimate.html">
+<LINK REL="previous" HREF="best_eye.html">
+<LINK REL="up" HREF="List_Functions.html">
+<LINK REL="next" HREF="ber_estimate.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html589"
+  HREF="ber_estimate.html">ber_estimate</A>
+<B>Up:</B> <A NAME="tex2html587"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html581"
+  HREF="best_eye.html">best_eye</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION002300000000000000000"></A><A NAME="sec:best_sp"></A>
+<BR>
+best_sp
+</H1>
+
+<P>
+Search algorithm for the best OSNR penalty vs. back-to-back.
+
+<P>
+
+<H2><A NAME="SECTION002301000000000000000">
+Syntax</A>
+</H2>
+
+<P>
+<TT>BSP=BEST_SP(ICH,X,PAT)</TT>&nbsp;
+<BR><TT>[BSP,BPOST]=BEST_SP(ICH,X,PAT)</TT>&nbsp;
+<BR><TT>[BSP,BPOST,WARN]=BEST_SP(ICH,X,PAT)</TT>&nbsp;
+<BR><TT>[BSP,BPOST,WARN,ECP]=BEST_SP(ICH,X,PAT)</TT>
+
+<P>
+
+<H2><A NAME="SECTION002302000000000000000">
+Description</A>
+</H2>
+
+<P>
+<TT>BSP=BEST_SP(ICH,X,PAT)</TT> searches the minimum osnr penalty
+<TT>BSP</TT> [dB], also called sensitivity penalty, of channel
+<TT>ICH</TT> vs. back to back transmission, by varying the post compensating
+fiber dispersion. 
+
+<P>
+The function works for non-coherent transmissions. The target bit
+error rate (ber) of <TT>BSP</TT> is measured through the Karhunen-Loeve
+(kl) method (see <A HREF="ber_kl.html#sec:ber_kl">ber_kl</A> for more details).
+
+<BR>
+<P>
+<TT>[BSP,BPOST,WARN,ECP]=BEST_SP(ICH,X,PAT)</TT> also returns
+the best post-dispersion <TT>BPOST</TT> [ps/nm] that yields <TT>BSP</TT>.
+<TT>WARN</TT> is a flag equal to <TT>1</TT> when the function found
+a sensitivity penalty equal to <TT>NaN</TT> during the search of the
+optimal post, that corresponds to a possible wrong result. <TT>ECP</TT>
+is the eye closure penalty [dB] using <TT>BPOST</TT>. <TT>PAT</TT>
+is the symbols pattern. 
+<BR>
+<P>
+<TT>X</TT> is a structure whose fields are: 
+
+<UL>
+<LI><TT>X.rec</TT> = receiver type. Valid arguments are: <TT>'ook',
+,'nf-dpsk'</TT> to use <A HREF="receiver_ook.html#sec:receiver_ook">receiver_ook</A>, <TT>'dpsk'</TT>
+to use <A HREF="receiver_dpsk.html#sec:receiver_dpsk">receiver_dpsk</A>, <TT>'dqpsk'</TT>
+to use with <A HREF="receiver_dqpsk.html#sec:receiver_dqpsk">receiver_dqpsk</A>. 
+</LI>
+<LI><TT>X.ber</TT> = target ber at which the algorithm measures the OSNR
+penalty. 
+</LI>
+<LI><TT>X.oftype</TT> = optical filter type (see <A HREF="myfilter.html#sec:myfilter">myfilter</A>) 
+</LI>
+<LI><TT>X.obw</TT> = optical filter 3 dB bandwidth normalized to the bit
+rate 
+</LI>
+<LI><TT>X.oord</TT> = optical filter order (if <TT>X.oftype</TT> is <TT>'supergaussian'</TT>) 
+</LI>
+<LI><TT>X.eftype</TT> = electrical filter type (see <A HREF="myfilter.html#sec:myfilter">myfilter</A>) 
+</LI>
+<LI><TT>X.ebw</TT> = electrical filter 3-dB bandwidth normalized to the
+bit rate 
+</LI>
+<LI><TT>X.eord</TT> = electrical filter order (if <TT>X.eftype</TT> is
+<TT>'supergaussian'</TT>) 
+</LI>
+<LI><TT>X.dpost</TT> = post compensating fiber cumulated dispersion [ps/nm]:
+Vector of two elements <TT>[d1 d2]</TT> that is the range within
+it the best post compensation is searched. <TT>X.dpost</TT> can also
+be a scalar: in this case, the function returns the eye closure penalty
+at this value of <TT>X.dpost</TT>. 
+</LI>
+<LI><TT>X.slopez</TT> = post compensating fiber cumulated slope [ps/nm&#94;2] 
+</LI>
+<LI><TT>X.lambda</TT> = wavelength [nm] at which the post compensating
+fiber has a cumulated dispersion equal to <TT>X.dpost</TT>. 
+</LI>
+<LI><TT>X.osnr</TT> = Optical signal to noise ratios (osnr), [dB],
+over which the ber is evaluated. The osnr is over a conventional bandwidth
+of 0.1 nm and is measured immediately before the receiver. <TT>X.osnr</TT>
+refers to <TT>X.poln</TT> noise polarizations. <TT>X.osnr</TT> is
+a vector. 
+</LI>
+<LI><TT>X.poln</TT> = Noise polarizations, <TT>1</TT> or <TT>2</TT>. Note:
+<TT>X.poln</TT> is independent from the signal polarizations, e.g.
+the algorithm can work with two noise polarizations and just one signal
+polarization. 
+</LI>
+</UL>
+<TT>X</TT> have also the following parameters required by the kl-method: 
+
+<UL>
+<LI><TT>X.eta</TT> = Bandwidth expansion factor. The kl method samples
+the signal and the noise up to a frequency equal to <TT>X.eta</TT>
+times the bandwidth of the optical filter. Usually is (faster) <TT>1
+&lt; X.eta &lt; 3 </TT>(slower). 
+</LI>
+<LI><TT>X.mu</TT> = Time expansion factor. The memory of the receiver
+is <TT>X.mu</TT> times the time duration of the memory devices inside
+the receiver, i.e. the optical/electrical filter. For DPSK there is
+an additional memory due to the Mach-Zehnder delay interferometer.
+The memory of such devices is approximated by the inverse of their
+bandwidth, as suggested in [<A
+ HREF="Bibliography.html#forrest">20</A>]. Usually is (faster)<TT>
+1 &lt; X.mu &lt; 10</TT> (slower). 
+</LI>
+<LI><TT>X.saddle = 'yes'</TT>: the ber is evaluated through the saddle
+point approximation (faster). <TT>'no'</TT>: the ber is evaluated
+by numerical integration of the moment generating function (slower,
+but more accurate). 
+</LI>
+</UL>
+For more details about <TT>X.eta</TT>, <TT>X.mu</TT> and <TT>X.saddle</TT>
+see <A HREF="ber_kl.html#sec:ber_kl">ber_kl</A>. 
+<BR>
+<P>
+<TT>X</TT> can also have the optional parameters: 
+
+<UL>
+<LI><TT>X.interp</TT> = interpolation method for finding <TT>X.ber</TT>,
+see INTERP1. Default is <TT>'spline'</TT>. 
+</LI>
+<LI><TT>X.extrap = 'yes'</TT>: <TT>X.ber</TT> can be extrapolated outside
+<TT>X.osnr</TT>, see INTERP1. <TT>'no'</TT>: If <TT>X.ber</TT> is
+outside the range <TT>X.osnr</TT> the function returns <TT>BPOST
+= NaN</TT>, which is also the default strategy. 
+</LI>
+<LI><TT>X.tol</TT> = tolerance of the golden search algorithm (fractional
+precision: +/-tol). 
+</LI>
+<LI><TT>X.plot = 'ploteye'</TT>: plots the eye in the active figure; <TT>'plotcur'</TT>
+plots the received current. 
+</LI>
+<LI><TT>X.color</TT> = color string for the plot (see PLOT). E.g. <TT>'b-'</TT>. 
+</LI>
+<LI><TT>X.print</TT> = structure for print. E.g. <TT>X.print = {'nomefile','eye'}</TT>
+or <TT>X.print = {'nomefile','current'}</TT>, prints to file nomefile
+the eye or the current, respectively. <TT>nomefile</TT> will be place
+into <TT>GSTATE.DIR</TT> within a directory ending with <TT>'.MOD'</TT>. 
+</LI>
+<LI><TT>X.delay = 'theory'</TT> means that the delay uses the theoretical
+delay saved within <TT>GSTATE.DELAY</TT> (see <A HREF="create_field.html#sec:create_field">create_field</A>).
+By default the delay is measured by a cross-correlation measurement
+between the received current and an artificial pulse amplitude modulation
+(PAM) signal with ideal non-return to zero bits with symbols equal
+to <TT>PAT</TT>. The correlation method is useful in presence of polarization
+mode dispersion (PMD). See <A HREF="corrdelay.html#sec:corrdelay">corrdelay</A>.
+</LI>
+<LI><TT>X.ts</TT> = Fixed sampling time (<TT>-0.5 &lt;= X.ts &lt;= 0.5</TT>). 
+</LI>
+</UL>
+The receiver is composed of an ideal, purely linear, post compensating
+fiber + optical filter + optical to electrical converter + electrical
+lowpass filter. For example see <A HREF="receiver_ook.html#sec:receiver_ook">receiver_ook</A>
+or <A HREF="receiver_dpsk.html#sec:receiver_dpsk">receiver_dpsk</A>. 
+<BR>
+<P>
+The best ber is searched through a golden search algorithm (see [<A
+ HREF="Bibliography.html#numrecipes">22</A>]).
+<BR>
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=400> 
+<B>Note 1</B>: The golden search algorithm works when only one minimum
+is present within the range <TT>[d1 d2]</TT>. Otherwise the returned
+<TT>BSP</TT> is just one of the local minima, and may not be the lowest. 
+
+<P>
+<B>Note 2</B>: This function works over a copy of the electric field.
+All fields of the global variable <TT>GSTATE</TT> are left unchanged.  </TD>
+</TR>
+</TABLE>
+
+<P>
+
+<H2><A NAME="SECTION002303000000000000000">
+See also </A>
+</H2>
+
+<P>
+<A HREF="ber_kl.html#sec:ber_kl">ber_kl</A>, <A HREF="best_eye.html#sec:best_eye">best_eye</A>,
+<A HREF="pattern.html#sec:pattern">pattern</A>, <A HREF="myfilter.html#sec:myfilter">myfilter</A>,
+<A HREF="receiver_ook.html#sec:receiver_ook">receiver_ook</A>, <A HREF="receiver_dpsk.html#sec:receiver_dpsk">receiver_dpsk</A>,
+<A HREF="receiver_dqpsk.html#sec:receiver_dqpsk">receiver_dqpsk</A>, <A HREF="eval_eye.html#sec:eval_eye">eval_eye</A>,
+<A HREF="corrdelay.html#sec:corrdelay">corrdelay</A>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html588"
+  HREF="ber_estimate.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html586"
+  HREF="List_Functions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html580"
+  HREF="best_eye.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html589"
+  HREF="ber_estimate.html">ber_estimate</A>
+<B> Up:</B> <A NAME="tex2html587"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html581"
+  HREF="best_eye.html">best_eye</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

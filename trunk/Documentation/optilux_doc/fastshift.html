@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>fastshift</TITLE>
+<META NAME="description" CONTENT="fastshift">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="pow2phi.html">
+<LINK REL="previous" HREF="nmod.html">
+<LINK REL="up" HREF="List_Functions.html">
+<LINK REL="next" HREF="pow2phi.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html685"
+  HREF="pow2phi.html">pow2phi</A>
+<B>Up:</B> <A NAME="tex2html683"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html677"
+  HREF="nmod.html">nmod</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION002370000000000000000"></A><A NAME="sec:fastshift"></A>
+<BR>
+fastshift
+</H1>
+
+<P>
+Fast but simplified circular shift.
+
+<P>
+
+<H2><A NAME="SECTION002371000000000000000">
+Syntax</A>
+</H2>
+
+<P>
+<TT>Y=FASTSHIFT(X,N)</TT> 
+
+<P>
+
+<H2><A NAME="SECTION002372000000000000000">
+Description</A>
+</H2>
+
+<P>
+<TT>Y=FASTSHIFT(X,N)</TT> shifts the vector or matrix <TT>X</TT> circularly.
+If <TT>X</TT> is a vector then <TT>Y=FASTSHIFT(X,N)</TT> is equivalent
+to <TT>Y=CIRCSHIFT(X,N)</TT>. 
+
+<P>
+
+<H2><A NAME="SECTION002373000000000000000">
+Examples</A>
+</H2>
+
+<P>
+<TT>X=[0 1 2 3 4 5 6 7 8 9 10];</TT>&nbsp;
+<BR><TT>Y=fastshift(X,2);</TT>&nbsp;
+<BR><TT>yields: Y=[9 10 0 1 2 3 4 5 6 7 8] </TT>&nbsp;
+<BR>
+<P>
+If <TT>X</TT> is a matrix then FASTSHIFT acts on the first dimension
+(rows) and <TT>Y=FASTSHIFT(X,N)</TT> is equivalent to <TT>Y=CIRCSHIFT(X,[N
+0])</TT>. 
+
+<P>
+<TT>X = [1 2 3; 4 5 6;7 8 9 ]</TT> 
+
+<P>
+<TT>Y=fastshift(X,2);</TT>
+
+<P>
+<TT>yields: Y = [4 5 6 ;7 8 9;1 2 3 ] </TT>
+
+<P>
+
+<H2><A NAME="SECTION002374000000000000000">
+See also </A>
+</H2>
+
+<P>
+<A HREF="nmod.html#sec:nmod">nmod</A>
+
+<P>
+<BR><HR>
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

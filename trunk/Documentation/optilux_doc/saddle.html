@@ -1,0 +1,172 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>saddle</TITLE>
+<META NAME="description" CONTENT="saddle">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="comp_mex.html">
+<LINK REL="previous" HREF="fastexp.html">
+<LINK REL="up" HREF="List_Functions.html">
+<LINK REL="next" HREF="comp_mex.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html957"
+  HREF="comp_mex.html">comp_mex</A>
+<B>Up:</B> <A NAME="tex2html955"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html949"
+  HREF="fastexp.html">fastexp</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION002580000000000000000"></A><A NAME="sec:saddle"></A>
+<BR>
+saddle
+</H1>
+
+<P>
+Evaluate the MGF saddle point
+
+<P>
+
+<H2><A NAME="SECTION002581000000000000000">
+Syntax</A>
+</H2>
+
+<P>
+<TT>[U0,NSW] = SADDLE(SGN,XI,DX,DSG2,QSG2,QSG4,VARS,LD,LDEX,LD2,B2,POL2,NSYMB) </TT>
+
+<P>
+
+<H2><A NAME="SECTION002582000000000000000">
+Description</A>
+</H2>
+
+<P>
+<TT>[U0,NSW] = SADDLE(SGN,XI,DX,DSG2,QSG2,QSG4,VARS,LD,LDEX,LD2,B2,POL2,NSYMB)</TT>
+returns the real saddle point <TT>U0</TT> for all bits <TT>NSYMB</TT>
+of the moment generating function (MGF) of the sampled signal. 
+<BR>
+<P>
+<TT>NSW</TT> is a control parameter equal to: 
+
+<UL>
+<LI><TT>NSW=0</TT> if the saddle point has been evaluated with the desired
+accuracy 
+</LI>
+<LI><TT>NSW=1</TT> if the function did not found the saddle point 
+</LI>
+<LI><TT>NSW=2</TT> if the function found a saddle point with low accuracy 
+</LI>
+</UL>
+<TT>SGN</TT> is a flag equal to <TT>1</TT> for polar bit-formats,
+while for unipolar formats it takes <TT>1</TT> for spaces and <TT>-1</TT>
+for marks. 
+
+<P>
+<TT>XI</TT> is (22) of [<A
+ HREF="Bibliography.html#forrest">20</A>], <TT>DX</TT> is <TT>XI-eta</TT>,
+being <TT>eta</TT> eq.(19) of [<A
+ HREF="Bibliography.html#forrest">20</A>]. 
+
+<P>
+<TT>DSG2,QSG2,QSG4</TT> are respectively <TT>2*sigma&#94;2,4*sigma&#94;2,4*sigma&#94;4</TT>,
+being <TT>sigma&#94;2</TT> the noise variance of the
+sampled signal. 
+
+<P>
+<TT>VARS</TT> is (20) of [<A
+ HREF="Bibliography.html#forrest">20</A>]. <TT>LD</TT> and <TT>LD2</TT>
+are the eigenvalues, eq.(A.22) of [<A
+ HREF="Bibliography.html#forrest">20</A>], and the square
+of the eigenvalues, respectively. 
+
+<P>
+<TT>LDEX=[min(LD),max(LD)]</TT>. 
+
+<P>
+<TT>B2</TT> is (A.26) of [<A
+ HREF="Bibliography.html#forrest">20</A>], and here is of size (number
+of eigenvalues, number of symbols). 
+
+<P>
+<TT>POL2</TT> is the number of noise polarizations. 
+
+<P>
+<TT>NSYMB</TT> is the number of symbols. 
+<BR>
+<P>
+The function evaluates the saddle point by the Newton-Rhapson method
+[<A
+ HREF="Bibliography.html#numrecipes">22</A>] along the lines described in [<A
+ HREF="Bibliography.html#forrest">20</A>]. Note
+that some input parameters are actually not necessary, but they were
+inserted for speed reasons. The accuracy of the routine is taken under
+control through some parameters at the beginning of the function. 
+
+<P>
+It is recommended to use the equivalent mex file of this function
+when possible. Try to compile <TT>saddle.c</TT> by <TT>mex saddle.c.</TT> 
+
+<P>
+If the mex is created successfully, matlab/octave work with it and
+discards such function.
+
+<P>
+
+<H2><A NAME="SECTION002583000000000000000">
+References</A>
+</H2>
+
+<P>
+This function implements the algorithm proposed by E. Forestieri in
+[<A
+ HREF="Bibliography.html#forrest">20</A>]. Further notes about the saddle point can be found
+in [<A
+ HREF="Bibliography.html#helstroem">33</A>]. 
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html956"
+  HREF="comp_mex.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html954"
+  HREF="List_Functions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html948"
+  HREF="fastexp.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html957"
+  HREF="comp_mex.html">comp_mex</A>
+<B> Up:</B> <A NAME="tex2html955"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html949"
+  HREF="fastexp.html">fastexp</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

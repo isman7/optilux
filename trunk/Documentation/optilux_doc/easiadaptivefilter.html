@@ -1,0 +1,187 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>easiadaptivefilter</TITLE>
+<META NAME="description" CONTENT="easiadaptivefilter">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="nmod.html">
+<LINK REL="previous" HREF="dsp4cohdec.html">
+<LINK REL="up" HREF="List_Functions.html">
+<LINK REL="next" HREF="nmod.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html658"
+  HREF="nmod.html">nmod</A>
+<B>Up:</B> <A NAME="tex2html656"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html650"
+  HREF="dsp4cohdec.html">dsp4cohdec</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION002350000000000000000"></A><A NAME="sec:easiadaptivefilter"></A>
+<BR>
+easiadaptivefilter
+</H1>
+
+<P>
+Source separation filter using EASI algorithm
+
+<P>
+
+<H2><A NAME="SECTION002351000000000000000">
+Syntax</A>
+</H2>
+
+<P>
+<TT>[Y H1 H2] = EASIADAPTIVEFILTER(XX, H1, H2, TAPS, MU, SPS
+)</TT>
+
+<P>
+
+<H2><A NAME="SECTION002352000000000000000">
+Description</A>
+</H2>
+
+<P>
+<TT>[Y H1 H2] = EASIADAPTIVEFILTER(XX, H1, H2, TAPS, MU, SPS
+)</TT> applies an adaptive matrix whose initial stati are written in <TT>H1</TT>
+and <TT>H2</TT>. The matrix elements are updated with the equivariant
+adaptive source separation via Independence (EASI) proposed in [<A
+ HREF="Bibliography.html#Cardoso96">30</A>].
+The parameters of this algorithm are the convergence parameter <TT>MU</TT>
+and the number of samples per symbol <TT>SPS</TT>. <TT>TAPS</TT> should
+be always set to 1. Normally there are four elements, let's call them
+<TT>H11</TT>, <TT>H12</TT>, <TT>H21</TT>, <TT>H22</TT> and the relation
+between the inputs and the outputs of this function is the following: 
+
+<P>
+<BR>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray*}
+Y_{1} & = & X_{1}\otimes H11+X_{2}\otimes H12\\
+Y_{2} & = & X_{1}\otimes H21+X_{2}\otimes H22
+\end{eqnarray*}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="25" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img68.png"
+ ALT="$\displaystyle Y_{1}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="20" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img43.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="196" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img69.png"
+ ALT="$\displaystyle X_{1}\otimes H11+X_{2}\otimes H12$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="25" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img70.png"
+ ALT="$\displaystyle Y_{2}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="20" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img43.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="196" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img71.png"
+ ALT="$\displaystyle X_{1}\otimes H21+X_{2}\otimes H22$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+where <SPAN CLASS="MATH"><IMG
+ WIDTH="20" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img72.png"
+ ALT="$ \otimes$"></SPAN> is the convolution, <SPAN CLASS="MATH"><IMG
+ WIDTH="30" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img73.png"
+ ALT="$ X_{1}$"></SPAN> and <SPAN CLASS="MATH"><IMG
+ WIDTH="30" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img74.png"
+ ALT="$ X_{2}$"></SPAN> are the
+two inputs signals and <SPAN CLASS="MATH"><IMG
+ WIDTH="25" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img75.png"
+ ALT="$ Y_{1}$"></SPAN> and <SPAN CLASS="MATH"><IMG
+ WIDTH="25" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img76.png"
+ ALT="$ Y_{2}$"></SPAN> are the two output signals.
+<BR>
+<BR>
+It is recommended to use the equivalent mex file of this function
+when possible. Try to compile
+<BR>
+ <TT>easiadaptivefilter.c</TT> by <TT>mex easiadaptivefilter.c.</TT>
+
+<P>
+
+<H2><A NAME="SECTION002353000000000000000">
+See Also</A>
+</H2>
+
+<P>
+<A HREF="dsp4cohdec.html#sec:dsp4cohdec">dsp4cohdec</A>, <A HREF="cmaadaptivefilter.html#sec:cmaadaptivefilter">cmaadaptivefilter</A>
+
+<P>
+
+<H2><A NAME="SECTION002354000000000000000">
+References</A>
+</H2>
+
+<P>
+The algorithm implemented by this function was proposed for the first
+time in [<A
+ HREF="Bibliography.html#Cardoso96">30</A>].
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html657"
+  HREF="nmod.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html655"
+  HREF="List_Functions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html649"
+  HREF="dsp4cohdec.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html658"
+  HREF="nmod.html">nmod</A>
+<B> Up:</B> <A NAME="tex2html656"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html650"
+  HREF="dsp4cohdec.html">dsp4cohdec</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

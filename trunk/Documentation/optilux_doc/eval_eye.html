@@ -1,0 +1,243 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>eval_eye</TITLE>
+<META NAME="description" CONTENT="eval_eye">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="ber_kl.html">
+<LINK REL="previous" HREF="receiver_cohmix.html">
+<LINK REL="up" HREF="List_Functions.html">
+<LINK REL="next" HREF="ber_kl.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html550"
+  HREF="ber_kl.html">ber_kl</A>
+<B>Up:</B> <A NAME="tex2html548"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html542"
+  HREF="receiver_cohmix.html">receiver_cohmix</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION002270000000000000000"></A><A NAME="sec:eval_eye"></A>
+<BR>
+eval_eye
+</H1>
+
+<P>
+Evaluate the eye opening for a non-coherent transmission.
+
+<P>
+
+<H2><A NAME="SECTION002271000000000000000">
+Syntax</A>
+</H2>
+
+<P>
+<TT>EO=EVAL_EYE(ICH,X,PAT)</TT>&nbsp;
+<BR><TT>[EO, TS]=EVAL_EYE(ICH,X,PAT)</TT>&nbsp;
+<BR><TT>[EO, TS, IS]=EVAL_EYE(ICH,X,PAT)</TT>&nbsp;
+<BR><TT>[EO, TS, IS, SN]=EVAL_EYE(ICH,X,PAT)</TT>&nbsp;
+<BR><TT>[EO, TS, IS, SN, DELAY]=EVAL_EYE(ICH,X,PAT)</TT>
+
+<P>
+
+<H2><A NAME="SECTION002272000000000000000">
+Description</A>
+</H2>
+
+<P>
+<TT>EO=EVAL_EYE(ICH,X,PAT)</TT> evaluates the eye opening <TT>EO</TT>
+of channel <TT>ICH</TT> of a non-coherent transmission. The eye opening
+[mA] is defined as: max(worst1-worst0) being worst1 and worst0
+the worst mark/space samples. 
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:example_eye"></A><A NAME="5725"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 2.10:</STRONG>
+Example of eye for OOK transmission.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV><IMG
+ WIDTH="391" HEIGHT="307" ALIGN="BOTTOM" BORDER="0"
+ SRC="img66.png"
+ ALT="\includegraphics[width=0.5\linewidth]{Figure/eye_example}">
+
+<P>
+
+<P></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+<TT>[EO,TS] =EVAL_EYE(ICH,X,PAT)</TT> returns also the best sampling
+time <TT>TS</TT> normalized to the bit time. 
+
+<P>
+<TT>EO</TT> and <TT>TS</TT> are evaluated by parabolic interpolation
+of the available data. <TT>PAT</TT> is the symbol pattern, after decoding
+(see <A HREF="pat_decoder.html#sec:pat_decoder">pat_decoder</A>). <TT>PAT</TT> can be
+a vector or a matrix, depending on the modulation format (see next).
+
+<BR>
+<P>
+<TT>X</TT> is a structure whose fields are: 
+
+<UL>
+<LI><TT>X.rec</TT> = receiver type. Valid arguments are: <TT>'ook','psbt','nf-dpsk'</TT>
+to use <A HREF="receiver_ook.html#sec:receiver_ook">receiver_ook</A>, <TT>'dpsk'</TT>
+to use <A HREF="receiver_dpsk.html#sec:receiver_dpsk">receiver_dpsk</A>, <TT>'dqpsk'</TT>
+to use <A HREF="receiver_dqpsk.html#sec:receiver_dqpsk">receiver_dqpsk</A>. 
+</LI>
+<LI><TT>X.oftype</TT> = optical filter type (see <A HREF="myfilter.html#sec:myfilter">myfilter</A>) 
+</LI>
+<LI><TT>X.obw</TT> = optical filter 3 dB bandwidth normalized to the bit
+rate 
+</LI>
+<LI><TT>X.oord</TT> = optical filter order (if <TT>X.oftype</TT> is <TT>'supergaussian'</TT>) 
+</LI>
+<LI><TT>X.eftype</TT> = electrical filter type (see <A HREF="myfilter.html#sec:myfilter">myfilter</A>) 
+</LI>
+<LI><TT>X.ebw</TT> = electrical filter 3-dB bandwidth normalized to the
+bit rate 
+</LI>
+<LI><TT>X.eord</TT> = electrical filter order (if <TT>X.eftype</TT> is
+<TT>'supergaussian'</TT>)
+</LI>
+</UL>
+<TT>X</TT> can also have the optional parameters: 
+
+<UL>
+<LI><TT>X.ts</TT> = Fixed sampling time (<TT>-0.5 &lt;= X.ts &lt;= 0.5</TT>). 
+</LI>
+<LI><TT>X.plot = 'ploteye'</TT>: plots the eye in the active figure; <TT>'plotcur'</TT>
+plots the received current. 
+</LI>
+<LI><TT>X.color</TT> = color string for the plot (see PLOT). E.g. <TT>'b-'</TT>. 
+</LI>
+<LI><TT>X.dpost</TT> = post compensating fiber cumulated dispersion [ps/nm] 
+</LI>
+<LI><TT>X.slopez</TT> = post compensating fiber cumulated slope [ps/nm&#94;2] 
+</LI>
+<LI><TT>X.lambda</TT> = wavelength [nm] at which the post compensating
+fiber has a cumulated dispersion equal to <TT>X.dpost</TT>. 
+</LI>
+<LI><TT>X.comp</TT> = component on which evaluate eye and calculate BER
+(dqpsk modulation only). Can be <TT>'phase'</TT> or <TT>'quadrature'</TT>
+or <TT>'both'</TT>. In the last case the function gets two measurements
+over the in-phase and quadrature components, sampled with the same
+clock time. <TT>X.comp='both'</TT> requires <TT>PAT</TT> to be a two-column
+matrix with the phase/quadrature binary patterns on column 1,2, respectively. 
+</LI>
+<LI><TT>X.print</TT> = structure for print. E.g. <TT>X.print = {'nomefile','eye'}</TT>
+or <TT>X.print ={'nomefile',</TT>
+<BR>
+<TT>'current'}</TT>, prints to file <TT>nomefile</TT>
+the eye or the current, respectively. nomefile will be place into
+<TT>GSTATE.DIR</TT> within a directory ending with <TT>'.MOD'</TT>. 
+</LI>
+<LI><TT>X.delay = 'theory'</TT> means that the delay uses the theoretical
+delay saved within <TT>GSTATE.DELAY</TT> (see <A HREF="create_field.html#sec:create_field">create_field</A>).
+By default the delay is measured by a cross-correlation measurement
+between the received current and an artificial pulse amplitude modulation
+(PAM) signal with ideal non-return to zero bits with symbols equal
+to <TT>PAT</TT>. The correlation method is useful in presence of polarization
+mode dispersion (PMD). See <A HREF="corrdelay.html#sec:corrdelay">corrdelay</A>.
+</LI>
+</UL>
+The receiver is composed of an ideal, purely linear, post compensating
+fiber + optical filter + optical to electrical converter + electrical
+lowpass filter. For example see <A HREF="receiver_ook.html#sec:receiver_ook">receiver_ook</A>
+or <A HREF="receiver_dpsk.html#sec:receiver_dpsk">receiver_dpsk</A>. 
+<BR>
+<P>
+<TT>[EO, TS, IS, SN, DELAY]=EVAL_EYE(ICH,X,PAT)</TT> also returns
+in <TT>IS</TT> a column vector containing the sampled bits. <TT>SN</TT>
+is a vector containing the FFT coefficients of the signal after the
+optical filter (<TT>SN</TT> is used by <A HREF="ber_kl.html#sec:ber_kl">ber_kl</A>).
+<TT>DELAY</TT> is the overall system delay in bits. 
+<BR>
+With <TT>X.comp='both'</TT> all variables on output are doubled
+in size for accounting for the in-phase and quadrature component.
+
+<BR>
+<P>
+It is <TT>-0.5 &lt;= TS &lt;= 0.5</TT>, with usually <TT>TS ~=
+0</TT>. 
+<BR>
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=400> 
+<B>Note 1</B>: This function works over a copy of the electric field.
+All fields of the global variable <TT>GSTATE</TT> are left unchanged. 
+
+<P>
+<B>Note 2</B>: All fields of <TT>X</TT> must be lowercase. 
+
+<P>
+<B>Note 3</B>: Please, beware that <TT>EVAL_EYE</TT> needs the decoded
+pattern, not the transmitted one. See the examples. </TD>
+</TR>
+</TABLE>
+
+<P>
+
+<H2><A NAME="SECTION002273000000000000000">
+See also </A>
+</H2>
+
+<P>
+<A HREF="pattern.html#sec:pattern">pattern</A>, <A HREF="myfilter.html#sec:myfilter">myfilter</A>,
+<A HREF="best_eye.html#sec:best_eye">best_eye</A>, <A HREF="receiver_ook.html#sec:receiver_ook">receiver_ook</A>,
+<A HREF="receiver_dpsk.html#sec:receiver_dpsk">receiver_dpsk</A>, <A HREF="receiver_dqpsk.html#sec:receiver_dqpsk">receiver_dqpsk</A>,
+<A HREF="ber_kl.html#sec:ber_kl">ber_kl</A>, <A HREF="pat_decoder.html#sec:pat_decoder">pat_decoder</A>,
+<A HREF="corrdelay.html#sec:corrdelay">corrdelay</A> 
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html549"
+  HREF="ber_kl.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html547"
+  HREF="List_Functions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html541"
+  HREF="receiver_cohmix.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html550"
+  HREF="ber_kl.html">ber_kl</A>
+<B> Up:</B> <A NAME="tex2html548"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html542"
+  HREF="receiver_cohmix.html">receiver_cohmix</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

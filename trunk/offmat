@@ -1,0 +1,200 @@
+#!/bin/sh
+#
+# Run  matlab/octave simulations offline using nohup. 
+# After offmat, the user can logout from the console
+# leaving the matlab/octave simulation still running.
+#
+# Syntax: offmat [Options] FILE.m
+# 
+# Options:
+#
+# -s             save simulation results in FILE.mat
+# -p PATH	 add PATH to the matlab/octave search path
+# -c LICENSEFILE Set location of the license file that MATLAB 
+#		 should use. See matlab -h
+# -o OFILE       save simulation results in OFILE.mat
+# -O       	 force to use Octave. 
+# -M    	 force to use Matlab. 
+# -w 	         write information about the simulation in /tmp/$USER_offmat
+# -m USER@addr   Send a notification mail to USER@addr after the simulation
+# -n VALN        Use nice value VALN 
+# -h             display help message and exit
+#
+# With the option -m the program requires mailx and a mail sender installed.
+# The script by default run first matlab, then octave if matlab failed.
+# Note: This script assumes that your binary matlab calls 'matlab' and 
+# your binary octave calls 'octave'. If not, please manually change
+# the first lines in this script under the voice "Matlab/Octave binary names".
+#
+# This function uses nohup to run the process in background. All screen
+# messages will be written into a file called FILE.nohup. If such file already
+# exists, the output file will be FILE_n.nohup, being n an incremental integer
+# until FILE_n.nohup is a new file.
+#
+# Paolo Serena, serena@tlc.unipr.it, 
+# University of Parma (Italy)
+#
+#
+#    This file is part of Optilux, the optical simulator toolbox.
+#    Copyright (C) 2009  Paolo Serena, <serena@tlc.unipr.it>
+#			 
+#    Optilux is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    Optilux is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+########## Matlab/Octave binary names
+
+matname='matlab' # change these lines if your matlab or octave have different names
+octname='octave'
+##########
+
+outname=/tmp/"$USER"_offmat
+# help
+
+saveto=0	
+lochost=`hostname`
+
+Usage() {
+cat <<-EOF
+
+Usage: `basename "$0"` [options]  FILENAME.m
+
+OPTIONS
+
+    -s             save simulation results in FILENAME.mat
+    -p PATH	   add PATH to the matlab/octave search path
+    -c LICENSEFILE Set location of the license file for Matlab
+    -o OFILE       save simulation results in OFILE.mat
+    -O             force to use Octave. 
+    -M             force to use Matlab. 
+    -w 		   write information about the simulation in /tmp/USER_offmat
+    -m USER@addr   send a notification mail to USER@addr after the simulation
+    -n VALN        use nice value VALN 
+    -h             display help message and exit
+
+`basename "$0"` by default run first matlab, then octave if matlab failed.
+
+Note: `basename "$0"` assumes that your binary matlab calls 'matlab' and 
+your binary octave calls 'octave'. If not, please manually change
+the first lines in this script under the voice "Matlab/Octave binary names".
+
+EOF
+}
+
+checkmatlab=`which $matname`
+if [ -z "$checkmatlab" ]; then
+    checkmatlab=`which $octname`
+    if [ -z "$checkmatlab" ]; then
+       echo "Cannot find matlab or octave"
+       exit 2
+    else
+       progname=$octname
+    fi
+else
+    progname=$matname
+fi
+
+addpath=''
+licenseopt=''
+niceval=0
+writeinf=0
+while getopts swho:c:m:n:p:MO name
+do	case "$name" in
+	s)	saveto=1;;
+	p)	addpath="$OPTARG";;
+	c)	licenseopt="-c $OPTARG";;
+	w)	writeinf=1;;
+	o)	saveto=1
+		fname="$OPTARG"
+		fname=`basename $fname .mat`
+		fname=$fname.mat;;
+	O)	progname=$octname;;
+	M)	progname=$matname;;	
+	m)	destaddr="$OPTARG";;	
+	n)	niceval="$OPTARG";;
+	h)	Usage
+		exit 0;;
+	\?)	Usage
+		exit 1;;
+	esac
+done
+shift `expr $OPTIND - 1`
+dirfile=`dirname $1`
+filename=`basename $1 .m` 
+filenohup=$filename.nohup   
+cd $dirfile
+
+nfcount=1
+while [ -f "$filenohup" ]; do
+    filenohup=$filename'_'$nfcount.nohup
+    nfcount=`expr $nfcount + 1`
+done
+              
+if [ $saveto -eq 1 ]; then
+    if [ -z "$fname" ]; then
+        fname=$filename.mat
+    fi
+    fname2=$fname
+    while [ -f "$fname2" ]; do
+        echo -e "Overwrite $fname2 [y/n]? \c"
+	read prop
+	if [ $prop = y ]; then
+	    fname2=""
+	else
+	    echo -e "Enter new file name: \c"
+	    read fname
+	    fname=`basename $fname .mat`
+	    fname=$fname.mat
+	    fname2=$fname
+	fi
+    done	
+    if [ -z "$addpath" ]; then
+        if [ $progname = $octname ]; then
+	    echo "$filename; save $fname;" | nohup nice -$niceval $octname --silent > $filenohup&
+	else
+	    nohup nice -$niceval $matname "$licenseopt" -nodisplay -r "$filename; save $fname; exit" > $filenohup&   
+        fi
+    else
+        if [ $progname = $octname ]; then
+	    echo "addpath('$addpath');$filename; save $fname;" | nohup nice -$niceval $octname --silent > $filenohup&
+	else
+	    nohup nice -$niceval $matname "$licenseopt" -nodisplay -r "addpath $addpath; $filename; save $fname; exit" > $filenohup&   
+        fi
+    fi	        	
+else
+    if [ -z "$addpath" ]; then
+        if [ $progname = $octname ]; then
+	    echo "$filename;" | nohup nice -$niceval $octname --silent > $filenohup&
+	else
+	    nohup nice -$niceval $matname "$licenseopt" -nodisplay -r "$filename; exit" > $filenohup&    
+        fi
+    else
+        if [ $progname = $octname ]; then
+	    echo "addpath('$addpath');$filename;" | nohup nice -$niceval $octname --silent > $filenohup&
+	else
+	    nohup nice -$niceval $matname "$licenseopt" -nodisplay -r "addpath $addpath; $filename; exit" > $filenohup&    
+        fi
+    fi
+  
+fi        
+if [ $writeinf -eq 1 ]; then
+   echo `date` >> $outname
+   echo $matname. PID=$! >> $outname 
+   echo path = "$addpath" >> $outname
+   echo FILENAME = $filename >> $outname
+   echo >> $outname
+fi   
+if [ -n "$destaddr" ]
+   then
+       echo "Look at $lochost in $PWD" | mail -s "News from $lochost" "$destaddr"
+fi

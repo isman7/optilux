@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>pol_scrambler</TITLE>
+<META NAME="description" CONTENT="pol_scrambler">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="dop_meter.html">
+<LINK REL="previous" HREF="lpfilter.html">
+<LINK REL="up" HREF="List_Functions.html">
+<LINK REL="next" HREF="dop_meter.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html790"
+  HREF="dop_meter.html">dop_meter</A>
+<B>Up:</B> <A NAME="tex2html788"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html782"
+  HREF="lpfilter.html">lpfilter</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION002450000000000000000"></A><A NAME="sec:pol_scrambler"></A>
+<BR>
+pol_scrambler
+</H1>
+
+<P>
+Rotates the SOP of signal samples on the Poincaré sphere.
+
+<P>
+
+<H2><A NAME="SECTION002451000000000000000">
+Syntax</A>
+</H2>
+
+<P>
+<TT>POL_SCRAMBLER(TYPE, COH_TIMER, THETA, EPSILON, DELPHI)</TT>
+
+<P>
+
+<H2><A NAME="SECTION002452000000000000000">
+Description</A>
+</H2>
+
+<P>
+<TT>POL_SCRAMBLER(TYPE, COH_TIMER, THETA, EPSILON, DELPHI)</TT>
+rotates the signal State Of Polarization (SOP) on the Poincaré sphere. 
+
+<UL>
+<LI>If <TT>TYPE = 'rand'</TT> then a random rotation is used, so that
+the signal SOP is uniformly scattered on the Poincaré sphere, as is
+typical of long SMF fibers. The rotation
+parameters are changed randomly every <TT>COH_TIMER</TT> symbol periods.
+For the method used to randomize rotations, see eqs.(13-15) and following
+observation in [<A
+ HREF="Bibliography.html#VannucciPMD">31</A>]. <TT>COH_TIMER</TT> is the coherence
+time of the scrambler, normalized to the symbol interval
+(i.e., multiplied by the symbol rate R).
+Use <TT>COH_TIMER= 1/NT</TT> to scramble each sample independently
+and produce a DOP that approaches zero; <TT>COH_TIMER= NSYMB</TT>
+to scramble all samples equally and preserve the original DOP (<TT>NSYMB</TT>=#
+of transmitted symbols; <TT>NT</TT>=# of samples per symbol).
+</LI>
+<LI>If <TT>TYPE = 'fixed'</TT> then <TT>THETA, EPSILON</TT> and <TT>DELPHI</TT>
+should be provided: the signal SOP is then rotated by a fixed amount
+<TT>DELPHI</TT> [rad.] (the Jones matrix retardation)
+about a fixed rotation axis (the Jones matrix eigenmode)
+with azimuth <TT>THETA</TT> and ellipticity <TT>EPSILON. COH_TIMER</TT>
+is ignored in this case.
+</LI>
+</UL>
+
+<P>
+
+<H2><A NAME="SECTION002453000000000000000">
+See Also</A>
+</H2>
+
+<P>
+<A HREF="set_sop.html#sec:set_sop">set_sop</A>, <A HREF="dop_meter.html#sec:dop_meter">dop_meter</A>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html789"
+  HREF="dop_meter.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html787"
+  HREF="List_Functions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html781"
+  HREF="lpfilter.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html790"
+  HREF="dop_meter.html">dop_meter</A>
+<B> Up:</B> <A NAME="tex2html788"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html782"
+  HREF="lpfilter.html">lpfilter</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,301 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>electricsource</TITLE>
+<META NAME="description" CONTENT="electricsource">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="lasersource.html">
+<LINK REL="previous" HREF="stars2pat.html">
+<LINK REL="up" HREF="List_Functions.html">
+<LINK REL="next" HREF="lasersource.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html344"
+  HREF="lasersource.html">lasersource</A>
+<B>Up:</B> <A NAME="tex2html342"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html336"
+  HREF="stars2pat.html">stars2pat</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION002120000000000000000"></A><A NAME="sec:electricsource"></A>
+<BR>
+electricsource
+</H1>
+
+<P>
+Create the electric modulating signal.
+
+<P>
+
+<H2><A NAME="SECTION002121000000000000000">
+Syntax</A>
+</H2>
+
+<P>
+<TT>ELEC=ELECTRICSOURCE(PAT, FORMAT, SYMBRATE, PTYPE, DUTY, ROLL)</TT>&nbsp;
+<BR><TT>ELEC=ELECTRICSOURCE(...,INPOW, ...)</TT>&nbsp;
+<BR><TT>ELEC=ELECTRICSOURCE(..., ORD, ...)</TT>&nbsp;
+<BR><TT>ELEC=ELECTRICSOURCE(..., PAR, ...)</TT>
+
+<P>
+
+<H2><A NAME="SECTION002122000000000000000">
+Description</A>
+</H2>
+
+<P>
+<TT>ELEC=ELECTRICSOURCE(PAT, FORMAT, SYMBRATE, PTYPE, DUTY, ROLL)</TT>
+returns in <TT>ELEC</TT> the electric signal which is passed to one
+input of the modulator, using the pattern <TT>PAT</TT>, created using
+the <TT><A HREF="pattern.html#sec:pattern">pattern</A></TT> function.
+<BR>
+<P>
+<TT>ELECTRICSOURCE</TT> acts on a per channel basis, so if you want
+to create the driving signals for a N-channel WDM system you have
+to call <TT>ELECTRICSOURCE</TT> N times. <TT>FORMAT</TT> is a string
+that described the modulation format. The supported formats are (see
+the <A HREF="Glossary.html#sec:Glossary">Glossary</A> for a list of acronyms):
+
+<OL>
+<LI><TT>'ook'</TT> (using <TT><A HREF="mz_modulator.html#sec:mz_modulator">mz_modulator</A></TT>):
+lower/upper values of the electric signal are 0 and 1.
+</LI>
+<LI><TT>'bpsk'</TT> (and thus <TT>'dpsk'</TT> and <TT>'nf-dpsk'</TT>,
+using <TT><A HREF="mz_modulator.html#sec:mz_modulator">mz_modulator</A></TT> or <A HREF="phase_modulator.html#sec:phase_modulator">phase_modulator</A>):
+lower/upper values of the electric signal are -1 and 1. 
+</LI>
+<LI><TT>'psbt'</TT> (using <TT><A HREF="mz_modulator.html#sec:mz_modulator">mz_modulator</A></TT>):
+lower/upper values of the electric signal are -1 and 1. You can also
+specify two fields in the structure of parameters <TT>PAR</TT> to
+model the electrical filter: 
+
+<P>
+
+<UL>
+<LI><TT>par.efilt</TT> = electrical filter type (default: <TT>'bessel5</TT>') 
+</LI>
+<LI><TT>par.efiltbw</TT> = electrical filter bandwidth (default: <TT>0.3</TT>) 
+</LI>
+</UL>
+</LI>
+<LI><TT>'qpsk'</TT> (and thus <TT>dqpsk</TT> and <TT>nf-dqpsk</TT>): lower/upper
+values of the electric signal are -1 and 1. Only the driving signal
+for one of the two quadratures is created and thus <TT>ELECTRICSOURCE</TT>
+must be called twice to get the required inputs of <TT><A HREF="qi_modulator.html#sec:qi_modulator">qi_modulator</A>.</TT> 
+</LI>
+<LI><TT>'userdef</TT>': a custom electric signal is generated: the user
+must specify the following fields of the structure <TT>PAR</TT>: 
+
+<P>
+
+<UL>
+<LI><TT>PAR.alphabet</TT> = size of the alphabet of <TT>PAT</TT> 
+</LI>
+<LI><TT>PAR.limits</TT> = a <TT>[2x1]</TT> vector containing lower
+and upper values of the generated signal. Symbols are assumed equally
+spaced
+<BR>
+OR
+</LI>
+<LI><TT>PAR.ampls</TT> = an <TT>[PAR.alphabet,1]</TT> vector containing
+amplitudes associated to every symbol of <TT>PAT</TT>
+</LI>
+</UL>
+</LI>
+</OL>
+<TT>SYMBRATE</TT> is the signal's baudrate in [Gbaud], and it
+is associated to the global variable <TT>GSTATE.SYMBOLRATE</TT>. <TT>PTYPE</TT>
+is the pulse type used to create the electric signal. It can be one
+of the following strings:
+
+<OL>
+<LI>&lt;string used in <A HREF="myfilter.html#sec:myfilter">myfilter</A>&gt;: filters an ideal
+signal with the correspondent filter in <TT>MYFILTER</TT>. In this
+case <TT>ROLL</TT> is the 3dB bandwidth and <TT>ORD</TT> is the order
+for special filters. 
+</LI>
+<LI>'<TT>cosroll</TT>': Pulses with a raised cosine behavior during the
+commutation states. In this case 0<SPAN CLASS="MATH"><IMG
+ WIDTH="20" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img27.png"
+ ALT="$ &lt;$"></SPAN><TT>ROLL</TT><SPAN CLASS="MATH"><IMG
+ WIDTH="20" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img28.png"
+ ALT="$ \leq$"></SPAN>1 indicates
+the roll-off. The elementary pulse assumes the form [<A
+ HREF="Bibliography.html#Proakis">4</A>]:
+<P><!-- MATH
+ \begin{displaymath}
+p(t)=\begin{cases}
+1 & 0\leq\left|t\right|\leq\frac{(1-r)\cdot d}{2}\\
+\frac{1}{2}\left\{ 1+\cos\left[\frac{\pi}{r\cdot d}\cdot\left(\left|t\right|-\frac{(1-r)\cdot d}{2}\right)\right]\right\}  & \frac{(1-r)\cdot d}{2}\leq\left|t\right|\leq\frac{(1+r)\cdot d}{2}\\
+0 & \left|t\right|>\frac{(1+r)\cdot d}{2}\end{cases}
+\end{displaymath}
+ -->
+</P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<IMG
+ WIDTH="555" HEIGHT="110" ALIGN="MIDDLE" BORDER="0"
+ SRC="img29.png"
+ ALT="$\displaystyle p(t)=\begin{cases}
+1 &amp; 0\leq\left\vert t\right\vert\leq\frac{(1-r...
+...+r)\cdot d}{2}\\
+0 &amp; \left\vert t\right\vert&gt;\frac{(1+r)\cdot d}{2}\end{cases}$">
+</DIV><P></P>
+
+<BR>
+where <SPAN CLASS="MATH"><IMG
+ WIDTH="14" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img30.png"
+ ALT="$ r$"></SPAN> is the roll-off and <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img31.png"
+ ALT="$ d$"></SPAN> the duty cycle
+</LI>
+<LI>'<TT>dirac</TT>': Dirac's delta pulses. <TT>'idpulse'</TT>: Ideal
+pulses with only two levels. Do not confuse with the string <TT>'ideal'</TT>
+which calls for the ideal filter in <TT><A HREF="myfilter.html#sec:myfilter">myfilter</A></TT>. 
+</LI>
+<LI>'<TT>sech</TT>': Bright solitons (still to be implemented) 
+</LI>
+<LI>'<TT>tanh</TT>': Dark solitons (still to be implemented)
+</LI>
+</OL>
+<TT>ROLL</TT> must be always declared. If you don't need <TT>ROLL</TT>,
+set it, for instance, equal to the empty variable, i.e. <TT>ROLL</TT><SPAN CLASS="MATH"><IMG
+ WIDTH="20" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img32.png"
+ ALT="$ =$"></SPAN>[].
+<TT>DUTY</TT> is the duty-cycle, and must be 0<SPAN CLASS="MATH"><IMG
+ WIDTH="20" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img28.png"
+ ALT="$ \leq$"></SPAN><TT>DUTY</TT><SPAN CLASS="MATH"><IMG
+ WIDTH="20" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img28.png"
+ ALT="$ \leq$"></SPAN>1.
+
+<BR>
+<P>
+<TT>ELEC=ELECTRICSOURCE(...,INPOW, ...) , INPOW</TT> is set to <TT>'power'</TT>,
+allows to do the pulse shaping on the signal's power (<TT>abs(.)&#94;2</TT>);
+otherwise the shaping is done on the electric field.
+
+<P>
+<TT>ELEC=ELECTRICSOURCE(..., ORD , ...)</TT> is used to specify the
+order <TT>ORD</TT> of the special filter employed to shape the pulse.
+
+<P>
+<TT>ELEC=ELECTRICSOURCE(...,PAR, ...)</TT> is used in conjunction
+with <TT>PSBT</TT> modulation. It is a structure used to define the
+type of filter and its bandwidth used at the transmitter side.
+
+<P>
+
+<H2><A NAME="SECTION002123000000000000000">
+Example</A>
+</H2>
+
+<P>
+Fig. <A HREF="#fig:electricsource_pulses">2.1</A> shows the electric signal for
+an <TT>OOK</TT> modulation using the pattern <TT>'010'</TT> and duty-cycle
+1, for some different types of pulse.
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:electricsource_pulses"></A><A NAME="5626"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 2.1:</STRONG>
+Electric signal obtained using ELECTRICSOURCE with four different
+type of pulse.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV><IMG
+ WIDTH="604" HEIGHT="422" ALIGN="BOTTOM" BORDER="0"
+ SRC="img33.png"
+ ALT="\includegraphics[width=0.8\linewidth]{Figure/example_pulse}">
+
+<P>
+
+<P></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+
+<H2><A NAME="SECTION002124000000000000000">
+See Also</A>
+</H2>
+
+<P>
+<A HREF="pattern.html#sec:pattern">pattern</A>, <A HREF="mz_modulator.html#sec:mz_modulator">mz_modulator</A>,
+<A HREF="lasersource.html#sec:lasersource">lasersource</A>
+
+<P>
+
+<H2><A NAME="SECTION002125000000000000000">
+References</A>
+</H2>
+
+<P>
+A detailed analysis of DPSK and QPSK modulation formats is available
+in [<A
+ HREF="Bibliography.html#GnaWin05">5</A>]. PSBT and Enhanced PSBT (EPSBT) are described
+in [<A
+ HREF="Bibliography.html#Penninckx97">6</A>,<A
+ HREF="Bibliography.html#Penninckx00">7</A>,<A
+ HREF="Bibliography.html#Kim02">8</A>]. NF-DPSK was presented in
+[<A
+ HREF="Bibliography.html#Penninckx01">9</A>] and analyzed in [<A
+ HREF="Bibliography.html#Forestieri04">10</A>,<A
+ HREF="Bibliography.html#Lyubomirsky05">11</A>].
+Finally NF-DQPSK was proposed in [<A
+ HREF="Bibliography.html#Lyubomirsky08">12</A>]. 
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html343"
+  HREF="lasersource.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html341"
+  HREF="List_Functions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html335"
+  HREF="stars2pat.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html344"
+  HREF="lasersource.html">lasersource</A>
+<B> Up:</B> <A NAME="tex2html342"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html336"
+  HREF="stars2pat.html">stars2pat</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

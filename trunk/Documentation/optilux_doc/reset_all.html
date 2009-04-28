@@ -1,0 +1,204 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>reset_all</TITLE>
+<META NAME="description" CONTENT="reset_all">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="create_field.html">
+<LINK REL="previous" HREF="myfunction.html">
+<LINK REL="up" HREF="List_Functions.html">
+<LINK REL="next" HREF="create_field.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html233"
+  HREF="create_field.html">create_field</A>
+<B>Up:</B> <A NAME="tex2html231"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html225"
+  HREF="myfunction.html">myfunction</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION00240000000000000000"></A><A NAME="sec:reset_all"></A>
+<BR>
+reset_all
+</H1>
+
+<P>
+Reset all global variables and initializes the simulation.
+
+<P>
+
+<H2><A NAME="SECTION00241000000000000000">
+Syntax</A>
+</H2>
+
+<P>
+<TT>RESET_ALL(NSYMB,NT,NCH)</TT>&nbsp;
+<BR><TT>RESET_ALL(NSYMB,NT,NCH,OPT1)</TT>&nbsp;
+<BR><TT>WRN=RESET_ALL(NSYMB,NT,NCH,OPT1)</TT>&nbsp;
+<BR><TT>RESET_ALL(NSYMB,NT,NCH,OPT1,OPT2)</TT>
+
+<P>
+
+<H2><A NAME="SECTION00242000000000000000">
+Description</A>
+</H2>
+
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="CENTER"><B>Note:</B><SPAN  CLASS="textbf"> </SPAN>THIS FUNCTION MUST BE CALLED IN EACH SIMULATION.</TD>
+</TR>
+</TABLE>
+<BR>
+<P>
+<TT>RESET_ALL(NSYMB,NT,NCH)</TT> initializes the global struct variable
+<TT>GSTATE</TT>. 
+<BR>
+<P>
+The fields of the structure <TT>GSTATE</TT> are the following: 
+
+<UL>
+<LI><TT>GSTATE.NSYMB</TT>: Number of symbols = <TT>NSYMB</TT>. For binary
+transmissions <TT>NSYMB</TT> is the number of bits. 
+</LI>
+<LI><TT>GSTATE.NT</TT>: Number of discrete points x symbol = <TT>NT</TT>.
+See <A HREF="NLSE_in_WDM_case.html#sub:Unique-and-separate">here</A> for more details about
+the choice of <TT>GSTATE.NT.</TT>
+</LI>
+<LI><TT>GSTATE.NCH</TT>: Number of channels = <TT>NCH</TT>.
+</LI>
+<LI><TT>GSTATE.FN</TT>: Frequency normalized to the symbol rate (R), i.e.
+<TT>GSTATE.FN</TT> = freq/R with freq the frequency in [Hertz],
+R the symbol rate in [baud]. See <A HREF="Signals_description.html#sub:Frequency-domain-representation">_description</A>
+for more details.
+</LI>
+<LI><TT>GSTATE.SYMBOLRATE</TT>: Symbol rate (R) in [GBaud] equal for
+all channel. See the examples for how to manage different channel
+symbol rates. The symbolrate will be initialized to a numerical value
+in <A HREF="electricsource.html#sec:electricsource">electricsource</A>. 
+</LI>
+<LI><TT>GSTATE.PRINT</TT>: true/false. True: Print functions details to
+file. 
+<BR>
+<P>
+</LI>
+</UL>
+<TT>RESET_ALL(NSYMB,NT,NCH,OPT1)</TT> creates the output directory
+<TT>OPT1</TT> that will collect a summary of each function operation
+within the file <TT>simul_out</TT>. The file <TT>simul_out</TT>
+is appended each call. The output directory will also contain any
+signal printed to file by Optilux. In presence of <TT>OPT1</TT> there
+is the additional field: 
+
+<UL>
+<LI><TT>GSTATE.DIR = OPT1</TT>
+<BR>
+<P>
+</LI>
+</UL>
+<TT>WRN=RESET_ALL(NSYMB,NT,NCH,OPT1)</TT> sets <TT>WRN=true</TT>
+if the dimension of <TT>simul_out</TT> exceeds 50 Mbytes, otherwise
+<TT>WRN=false</TT>. 
+<BR>
+<P>
+<TT>RESET_ALL(NSYMB,NT,NCH,OPT1,OPT2)</TT> with <TT>OPT2='noprint'</TT>
+creates the output directory <TT>OPT1</TT> but all functions called
+by Optilux will not print any detail in <TT>simul_out</TT>. 
+<BR>
+<P>
+<TT>RESET_ALL</TT> initializes the fundamental constants (like Planck's,
+speed of light, etc) in the global variable <TT>CONSTANTS</TT>. 
+<BR>
+There are other fields of <TT>GSTATE</TT> that are set to empty
+by <TT>RESET_ALL</TT> and will be initialized by <A HREF="create_field.html#sec:create_field">create_field</A>.
+They are: 
+
+<UL>
+<LI><TT>GSTATE.FIELDX</TT>: x-component of the electric field. 
+</LI>
+<LI><TT>GSTATE.FIELDY</TT>: y-component of the electric field. 
+</LI>
+<LI><TT>GSTATE.FIELDX_TX</TT>: copy of <TT>GSTATE.FIELDX</TT>. Useful
+for back-to-back measurements. 
+</LI>
+<LI><TT>GSTATE.FIELDY_TX</TT>: same as <TT>GSTATE.FIELDX_TX</TT>, but
+for y polarization. 
+</LI>
+<LI><TT>GSTATE.DELAY</TT>: Overall delay cumulated in the optical line,
+normalized to 1/R. Size: <TT>[2,NCH]</TT> if the y-component is
+empty, else <TT>[1,NCH].</TT>
+</LI>
+<LI><TT>GSTATE.DISP</TT>: cumulated dispersion [ps/nm] in the system.
+Size: <TT>[2,NCH]</TT> if the y-component is empty, else <TT>[1,NCH].</TT>
+
+<BR>
+<P>
+</LI>
+</UL>
+Other fields of <TT>GSTATE</TT> will be initialized by <A HREF="lasersource.html#sec:lasersource">lasersource</A>.
+They are: 
+
+<UL>
+<LI><TT>GSTATE.LAMBDA</TT>: Channels wavelength [nm]. Size: <TT>[1,NCH] </TT>
+</LI>
+<LI><TT>GSTATE.POWER</TT>: Transmitted Signal PEAK power [mW]. Size:
+<TT>[1,NCH] </TT>
+</LI>
+</UL>
+
+<P>
+
+<H2><A NAME="SECTION00243000000000000000">
+See also</A>
+</H2>
+
+<P>
+<A HREF="create_field.html#sec:create_field">create_field</A>, <A HREF="electricsource.html#sec:electricsource">electricsource</A>,
+<A HREF="lasersource.html#sec:lasersource">lasersource</A>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html232"
+  HREF="create_field.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html230"
+  HREF="List_Functions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html224"
+  HREF="myfunction.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html233"
+  HREF="create_field.html">create_field</A>
+<B> Up:</B> <A NAME="tex2html231"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html225"
+  HREF="myfunction.html">myfunction</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

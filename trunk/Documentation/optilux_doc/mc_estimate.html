@@ -1,0 +1,199 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>mc_estimate</TITLE>
+<META NAME="description" CONTENT="mc_estimate">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="cmaadaptivefilter.html">
+<LINK REL="previous" HREF="ber_estimate.html">
+<LINK REL="up" HREF="List_Functions.html">
+<LINK REL="next" HREF="cmaadaptivefilter.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html616"
+  HREF="cmaadaptivefilter.html">cmaadaptivefilter</A>
+<B>Up:</B> <A NAME="tex2html614"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html608"
+  HREF="ber_estimate.html">ber_estimate</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION002320000000000000000"></A><A NAME="sec:mc_estimate"></A>
+<BR>
+mc_estimate
+</H1>
+
+<P>
+Monte Carlo estimation of a random variable mean and variance
+
+<P>
+
+<H2><A NAME="SECTION002321000000000000000">
+Syntax</A>
+</H2>
+
+<P>
+<TT>[COND,OUT]=MC_ESTIMATE(S,X)</TT>&nbsp;
+<BR><TT>[COND,OUT]=MC_ESTIMATE(S,X,NIND)</TT>
+
+<P>
+
+<H2><A NAME="SECTION002322000000000000000">
+Description</A>
+</H2>
+
+<P>
+<TT>[COND,OUT]=MC_ESTIMATE(S,X)</TT> estimates the average value
+and variance of a random variable by standard Monte Carlo (MC) simulation.
+
+<BR>
+<P>
+<TT>S</TT> is the vector of random samples. <TT>X</TT> is a struct
+with one or both of the following fields: 
+
+<UL>
+<LI><TT>X.stop</TT> = vector <TT>[t1 t2]</TT>. <TT>t1</TT> is the
+relative accuracy of the estimator, while <TT>t2</TT> the Gaussian
+confidence of the accuracy. In such a case the MC simulation tests
+a sufficient number of runs as soon as the accuracy is reached. For
+instance, with <TT>t1=0.01</TT> and <TT>t2=95</TT>, the simulation
+ends as soon as the ratio <TT>OUT.stdmean/OUT.mean &lt; 0.01</TT>, if
+<TT>X.method = 'mean'</TT>. Otherwise the simulation ends with <TT>(O2-O1)/OUT.var
+&lt; 0.01</TT> if <TT>X.method = 'var'</TT> (see <TT>OUT.varlim</TT> next).
+In the previous example the Gaussian confidence was 95%. Beware that
+the concept of confidence works for Gaussian distributed random variables,
+while in the general case with few samples it is just a rule of thumb.
+A Gaussian confidence of 68% means that the exact mean of a Gaussian
+distributed <TT>S</TT> is within +/- <TT>OUT.stdmean</TT> of <TT>OUT.mean</TT>
+with probability 68%. 
+</LI>
+<LI><TT>X.nmin</TT> = minimum number of samples for applying <TT>X.stop</TT>.
+In absence of <TT>X.stop</TT> this is also the overall number of samples
+tested. 
+</LI>
+<LI><TT>X.method</TT> = <TT>'mean'</TT> means that <TT>X.stop</TT> is
+applied on the estimated average value. <TT>'var'</TT> means that
+<TT>X.stop</TT> is applied to the variance. Default is <TT>'mean'</TT>. 
+</LI>
+</UL>
+On output the function returns <TT>COND</TT> which is true during
+the MC cycle, and false when the convergence stop criterion has been
+reached. 
+<BR>
+<P>
+<TT>OUT</TT> is a struct containing the results, i.e.: 
+
+<UL>
+<LI><TT>OUT.mean</TT> = estimated average value of <TT>X</TT>; 
+</LI>
+<LI><TT>OUT.var</TT> = estimated variance of <TT>X</TT>; 
+</LI>
+<LI><TT>OUT.nruns</TT> = overall number of samples tested; 
+</LI>
+<LI><TT>OUT.stdmean</TT> = standard deviation of <TT>OUT.mean</TT>. Note:
+this is not <TT>sqrt(OUT.var)</TT>, but the standard deviation of
+the average value. Hence, for increasing <TT>OUT.nruns</TT>, <TT>OUT.stdmean</TT>
+decreases making <TT>OUT.mean</TT> a good measure of the exact average
+value; 
+</LI>
+<LI><TT>OUT.varlim = [O1 O2]</TT>. The unknown exact variance satisfies:
+<TT>O1</TT> &lt; exact variance &lt; <TT>O2</TT> with confidence <TT>X.stop(2)</TT>.
+Note: <TT>O1</TT> and <TT>O2</TT> are functions of chi square percentiles.
+Since for <TT>OUT.nruns &gt; 50</TT> they can be safely approximated
+with Gaussian percentiles we adopted such approximation (see [<A
+ HREF="Bibliography.html#Papoulis">24</A>]).
+
+<BR>
+<P>
+</LI>
+</UL>
+<TT>[COND,OUT]=MC_ESTIMATE(S,X,NIND)</TT> runs a vectorial MC.
+In this case <TT>X</TT> must have the additional field: 
+
+<UL>
+<LI><TT>X.dim</TT> = dimension of <TT>OUT.mean</TT> (external cycle dimension). 
+</LI>
+</UL>
+<TT>COND,OUT.mean,OUT.nruns,OUT.var,OUT.stdmean</TT> are vectors of
+size <TT>X.dim</TT>, and they are currently evaluated in position
+(or index) <TT>NIND</TT>. <TT>S</TT> can be a matrix or a vector.
+In the matrix case,  all samples of column <TT>NIND</TT> are used
+to update the estimation of <TT>OUT</TT> at index <TT>NIND</TT>, while
+in the vector case the entire vector (row or column) is used to update
+index <TT>NIND</TT> of <TT>OUT</TT>. Such options is useful for MC
+estimation inside a loop and allows to evaluate all the entries of
+<TT>OUT.mean</TT> with the same accuracy given by <TT>X.stop</TT>
+and <TT>X.nmin</TT>. <TT>COND</TT> is a vector of logical. 
+<BR>
+<P>
+<TT>MC_ESTIMATE</TT> is a generalization of <A HREF="ber_estimate.html#sec:ber_estimate">ber_estimate</A>. 
+
+<P>
+
+<H2><A NAME="SECTION002323000000000000000">
+See also </A>
+</H2>
+
+<P>
+<A HREF="ber_estimate.html#sec:ber_estimate">ber_estimate</A>, <A HREF="eval_eye.html#sec:eval_eye">eval_eye</A>,
+<A HREF="ber_kl.html#sec:ber_kl">ber_kl</A> , <A HREF="pat_decoder.html#sec:pat_decoder">pat_decoder</A>
+
+<P>
+
+<H2><A NAME="SECTION002324000000000000000">
+References</A>
+</H2>
+
+<P>
+An exhaustive description of the Monte Carlo method can be found in
+[<A
+ HREF="Bibliography.html#fishman">23</A>]. Other significant contributions are in [<A
+ HREF="Bibliography.html#Papoulis">24</A>,<A
+ HREF="Bibliography.html#numrecipes">22</A>].
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html615"
+  HREF="cmaadaptivefilter.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html613"
+  HREF="List_Functions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html607"
+  HREF="ber_estimate.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html616"
+  HREF="cmaadaptivefilter.html">cmaadaptivefilter</A>
+<B> Up:</B> <A NAME="tex2html614"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html608"
+  HREF="ber_estimate.html">ber_estimate</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

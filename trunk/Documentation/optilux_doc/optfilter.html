@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>optfilter</TITLE>
+<META NAME="description" CONTENT="optfilter">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="receiver_ook.html">
+<LINK REL="previous" HREF="inverse_pmd.html">
+<LINK REL="up" HREF="List_Functions.html">
+<LINK REL="next" HREF="receiver_ook.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html481"
+  HREF="receiver_ook.html">receiver_ook</A>
+<B>Up:</B> <A NAME="tex2html479"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html473"
+  HREF="inverse_pmd.html">inverse_pmd</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION002220000000000000000"></A><A NAME="sec:optfilter"></A>
+<BR>
+optfilter
+</H1>
+
+<P>
+Optical filter.
+
+<P>
+
+<H2><A NAME="SECTION002221000000000000000">
+Syntax</A>
+</H2>
+
+<P>
+<TT>OPTFILTER(ICH,FTYPE,BW)</TT>&nbsp;
+<BR><TT>OPTFILTER(ICH,FTYPE,BW,ORD)</TT>
+
+<P>
+
+<H2><A NAME="SECTION002222000000000000000">
+Description</A>
+</H2>
+
+<P>
+<TT>OPTFILTER(ICH,FTYPE,BW) </TT>filters the optical field <TT>GSTATE.FIELDX</TT>
+and <TT>GSTATE.FIELDY</TT> with the filter <TT>FTYPE</TT> (see <TT><A HREF="myfilter.html#sec:myfilter">myfilter</A></TT>)
+having 3-dB bandwidth <TT>BW</TT> (normalized to the symbolrate),
+with central frequency centered on the <TT>ICH</TT> channel. The resulting
+filtered field is again associated to <TT>GSTATE.FIELDX</TT> and <TT>GSTATE.FIELDY</TT>,
+respectively, hence the the field is overwritten. 
+<BR>
+<P>
+In the case of separate fields (see <A HREF="create_field.html#sec:create_field">create_field</A>)
+only the <TT>ICH</TT> column of <TT>GSTATE.FIELDX</TT> and <TT>GSTATE.FIELDY</TT>
+is filtered, while the other columns remain unchanged. 
+
+<P>
+The global variable <TT>GSTATE.DELAY</TT> is updated. 
+<BR>
+<P>
+<TT>OPTFILTER(ICH,FTYPE,BW,ORD)</TT> use the additional parameter
+<TT>ORD</TT> for special filter. E.g. <TT>ORD</TT> is the supergauss
+order for the supergaussian filter (see <A HREF="myfilter.html#sec:myfilter">myfilter</A>)
+
+<P>
+
+<H2><A NAME="SECTION002223000000000000000">
+Note</A>
+</H2>
+
+<P>
+Remember that an optical filter of bandwidth <TT>BW</TT> ha an equivalent
+low pass description of bandwidth <TT>BW/2</TT>. Since Optilux works
+with the <A HREF="Signals_description.html#sub:Electric-field">equivalent lowpass</A>, applying
+an optical filter of bandwidth <TT>BW</TT> is equivalent to applying
+a lowpass filter of bandwidth <TT>BW/2</TT> to <TT>GSTATE.FIELDX</TT>
+and <TT>GSTATE.FIELDY</TT> [<A
+ HREF="Bibliography.html#Proakis">4</A>,<A
+ HREF="Bibliography.html#Carlson">17</A>].
+
+<P>
+
+<H2><A NAME="SECTION002224000000000000000">
+Examples</A>
+</H2>
+
+<P>
+Assume that the symbolrate has been initialized to 20 Gsymb/s. Filtering
+only channel 3 with a supergaussian filter having bandwidth 30 GHz
+and order 4 can be done with:
+<BR>
+<P>
+<TT>OPTFILTER(3,'supergauss',30/20,4)</TT> 
+
+<P>
+
+<H2><A NAME="SECTION002225000000000000000">
+See also</A>
+</H2>
+
+<P>
+<A HREF="myfilter.html#sec:myfilter">myfilter</A>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html480"
+  HREF="receiver_ook.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html478"
+  HREF="List_Functions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html472"
+  HREF="inverse_pmd.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html481"
+  HREF="receiver_ook.html">receiver_ook</A>
+<B> Up:</B> <A NAME="tex2html479"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html473"
+  HREF="inverse_pmd.html">inverse_pmd</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

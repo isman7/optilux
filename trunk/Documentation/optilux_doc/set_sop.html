@@ -1,0 +1,223 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>set_sop</TITLE>
+<META NAME="description" CONTENT="set_sop">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="polarizer.html">
+<LINK REL="previous" HREF="dop_meter.html">
+<LINK REL="up" HREF="List_Functions.html">
+<LINK REL="next" HREF="polarizer.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html816"
+  HREF="polarizer.html">polarizer</A>
+<B>Up:</B> <A NAME="tex2html814"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html808"
+  HREF="dop_meter.html">dop_meter</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION002470000000000000000"></A><A NAME="sec:set_sop"></A>
+<BR>
+set_sop
+</H1>
+
+<P>
+Sets the average State Of Polarization of the transmitted signal.
+
+<P>
+
+<H2><A NAME="SECTION002471000000000000000">
+Syntax</A>
+</H2>
+
+<P>
+<TT>[EX,EY]=SET_SOP(EX,EY,ANG1,ANG2)</TT>&nbsp;
+<BR><TT>[EX,EY]=SET_SOP(EX,EY,ANG1,ANG2,ANGTYPE)</TT>&nbsp;
+<BR><TT>[EX,EY,MAT]=SET_SOP(EX,EY,ANG1,ANG2)</TT>&nbsp;
+<BR><TT>[EX,EY]=SET_SOP(EX,EY,ANG1,ANG2,RTYPE)</TT>
+
+<P>
+
+<H2><A NAME="SECTION002472000000000000000">
+Description</A>
+</H2>
+
+<P>
+<TT>[EX,EY]=SET_SOP(EX,EY,ANG1,ANG2) </TT>sets the State Of Polarization
+(SOP) of the electric field having x component <TT>EX</TT> and y component
+<TT>EY</TT>. <TT>EX</TT> and <TT>EY</TT> are column vectors (see <A HREF="mz_modulator.html#sec:mz_modulator">mz_modulator</A>).
+<TT>ANG1</TT>, <TT>ANG2</TT> are the azimuth and ellipticity [rad]
+of the output SOP, respectively.
+<BR>
+<BR><TT>[EX,EY]=SET_SOP(EX,EY,ANG1,ANG2,ANGTYPE) </TT>specifies
+<TT>ANG1</TT> and <TT>ANG2</TT> according to <TT>ANGTYPE</TT>. Available
+options are:
+<BR>
+<P>
+
+<UL>
+<LI><TT>ANGTYPE = 'aziell'</TT>; user specifies azimuth and ellipticity
+angles. Latitude and longitude on the Poincaré sphere are equal to
+<TT>2*ANG2</TT> and <TT>2*ANG1</TT>, respectively. Note: azimuth,
+normally in <!-- MATH
+ $[-\frac{\pi}{2};\frac{\pi}{2}]$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="67" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img79.png"
+ ALT="$ [-\frac{\pi}{2};\frac{\pi}{2}]$"></SPAN>, is interpreted modulo
+<SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img80.png"
+ ALT="$ \pi$"></SPAN>; ellipticity, normally in <!-- MATH
+ $[-\frac{\pi}{4};\frac{\pi}{4}]$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="67" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img81.png"
+ ALT="$ [-\frac{\pi}{4};\frac{\pi}{4}]$"></SPAN>,
+is interpreted modulo <!-- MATH
+ $\frac{\pi}{2}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="19" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img41.png"
+ ALT="$ \frac{\pi}{2}$"></SPAN>;
+</LI>
+<LI><TT>ANGTYPE = 'aarphd'</TT>; user specifies the absolute
+amplitude ratio angle <!-- MATH
+ $(=\arctan\left(\left|\frac{E_{y}}{E_{x}}\right|\right))$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="155" HEIGHT="53" ALIGN="MIDDLE" BORDER="0"
+ SRC="img82.png"
+ ALT="$ (=\arctan\left(\left\vert\frac{E_{y}}{E_{x}}\right\vert\right))$"></SPAN>
+and the phase difference between field components <!-- MATH
+ $(=\arg\left(E_{y}\cdot E_{x}^{*}\right))$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="145" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img83.png"
+ ALT="$ (=\arg\left(E_{y}\cdot E_{x}^{*}\right))$"></SPAN>.
+Note: absolute amplitude ratio, normally in <!-- MATH
+ $[0;\frac{\pi}{2}]$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="48" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img84.png"
+ ALT="$ [0;\frac{\pi}{2}]$"></SPAN>,
+is interpreted modulo <!-- MATH
+ $\frac{\pi}{2}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="19" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img41.png"
+ ALT="$ \frac{\pi}{2}$"></SPAN>; phase difference, normally
+in <!-- MATH
+ $[-\pi;\pi]$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="62" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img85.png"
+ ALT="$ [-\pi;\pi]$"></SPAN>, is interpreted modulo <SPAN CLASS="MATH"><IMG
+ WIDTH="26" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img86.png"
+ ALT="$ 2\pi$"></SPAN>.
+</LI>
+</UL>
+<TT>[EX,EY,MAT]=SET_SOP(EX,EY,ANG1,ANG2)</TT> also returns in
+<TT>MAT</TT> the unitary matrix that rotates the SOP. <TT>MAT</TT>
+can be used by <A HREF="inverse_pmd.html#sec:inverse_pmd">inverse_pmd</A>. 
+<BR><TT>[EX,EY]=SET_SOP(EX,EY,ANG1,ANG2,RTYPE)</TT> with <TT>RTYPE='mean'</TT>
+change the default behavior by setting the output SOP with <TT>ANG1</TT>
+and <TT>ANG2</TT> rotations relatively to a reference system aligned
+with the input average SOP. The degree of polarization (DOP) is preserved.
+
+<BR>
+<P>
+
+<H2><A NAME="SECTION002473000000000000000">
+Examples</A>
+</H2>
+
+<P>
+An ideal polarization division multiplexed signal (PDM) signal before
+<TT>SET_SOP</TT> lies in the plane (<!-- MATH
+ $s_{2},\, s_{3}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="52" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img87.png"
+ ALT="$ s_{2},\, s_{3}$"></SPAN>), because the
+X polarization carries the same power as the Y polarization. Calling:
+<BR>
+<P>
+<TT>[EX,EY]=SET_SOP(EX,EY,pi/2,pi/4)</TT> 
+<BR>
+<P>
+let it lie in the plane (<!-- MATH
+ $s_{1},\, s_{2}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="52" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img88.png"
+ ALT="$ s_{1},\, s_{2}$"></SPAN>) . See Section&nbsp;<A HREF="Coupled_NLSE_CNLSE.html#sub:Poincare-sphere-notation">3.2.1</A>
+for more information about the signals Poincarè description.
+
+<P>
+
+<H2><A NAME="SECTION002474000000000000000">
+See Also</A>
+</H2>
+
+<P>
+<A HREF="dop_meter.html#sec:dop_meter">dop_meter</A>, <A HREF="mz_modulator.html#sec:mz_modulator">mz_modulator</A>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html815"
+  HREF="polarizer.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html813"
+  HREF="List_Functions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html807"
+  HREF="dop_meter.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html816"
+  HREF="polarizer.html">polarizer</A>
+<B> Up:</B> <A NAME="tex2html814"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html808"
+  HREF="dop_meter.html">dop_meter</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

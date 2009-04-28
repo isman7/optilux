@@ -1,0 +1,920 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>NLSE in the WDM case</TITLE>
+<META NAME="description" CONTENT="NLSE in the WDM case">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="Numerical_solution_NLSE_SSF.html">
+<LINK REL="previous" HREF="Coupled_NLSE_CNLSE.html">
+<LINK REL="up" HREF="Background.html">
+<LINK REL="next" HREF="Numerical_solution_NLSE_SSF.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html1021"
+  HREF="Numerical_solution_NLSE_SSF.html">Numerical solution of the NLSE: SSFM</A>
+<B>Up:</B> <A NAME="tex2html1019"
+  HREF="Background.html">Background</A>
+<B> Previous:</B> <A NAME="tex2html1013"
+  HREF="Coupled_NLSE_CNLSE.html">Coupled-NLSE (CNLSE)</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION00330000000000000000"></A><A NAME="sec:NLSE-WDM"></A>
+<BR>
+NLSE in the WDM case
+</H1>
+
+<P>
+Assume that the input field to an optical fiber is a wavelength division
+multiplexing (WDM) comb of <SPAN CLASS="MATH"><IMG
+ WIDTH="26" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img228.png"
+ ALT="$ M$"></SPAN> channels. Such global, or unique,
+field has lowpass envelope <SPAN CLASS="MATH"><IMG
+ WIDTH="59" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img91.png"
+ ALT="$ A(z,t)$"></SPAN> at coordinate <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img93.png"
+ ALT="$ z$"></SPAN> and time <SPAN CLASS="MATH"><IMG
+ WIDTH="12" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img5.png"
+ ALT="$ t$"></SPAN>.
+Calling <!-- MATH
+ $\omega_{0}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="26" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img229.png"
+ ALT="$ \omega_{0}$"></SPAN> the central bandpass frequency of this electric
+field, it is possible to express the unique field as: <P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:comb"></A><!-- MATH
+ \begin{equation}
+A(z,t)=\sum_{k=1}^{M}A_{k}(z,t)e^{j\Delta\omega_{k}t}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="231" HEIGHT="79" ALIGN="MIDDLE" BORDER="0"
+ SRC="img230.png"
+ ALT="$\displaystyle A(z,t)=\sum_{k=1}^{M}A_{k}(z,t)e^{j\Delta\omega_{k}t}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">11</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+where <!-- MATH
+ $A_{k}(z,t)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="68" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img231.png"
+ ALT="$ A_{k}(z,t)$"></SPAN> is the lowpass envelope of channel <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img232.png"
+ ALT="$ k$"></SPAN> while
+<!-- MATH
+ $\Delta\omega_{k}=\omega_{k}-\omega_{0}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="132" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img233.png"
+ ALT="$ \Delta\omega_{k}=\omega_{k}-\omega_{0}$"></SPAN> is the difference between
+the central frequency of channel <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img232.png"
+ ALT="$ k$"></SPAN> and the central frequency of
+the WDM comb. We want to derive a propagation equation for <!-- MATH
+ $A_{k}(z,t)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="68" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img231.png"
+ ALT="$ A_{k}(z,t)$"></SPAN>
+for <!-- MATH
+ $k=1,\ldots,M$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="113" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img234.png"
+ ALT="$ k=1,\ldots,M$"></SPAN>. To this aim we start from the NLSE (<A HREF="NLSE.html#eq:NLSE_freq">3.7</A>)
+written in the frequency domain:
+
+<P>
+<BR>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:NLSE_freq2"></A><!-- MATH
+ \begin{eqnarray}
+\frac{\partial\widetilde{A}(z,\omega)}{\partial z} & = & -\frac{\alpha}{2}\widetilde{A}-j\beta(\omega)\widetilde{A}\nonumber \\
+ &  & -j\gamma\iint\widetilde{A}\left(z,\omega+\omega_{1}\right)\widetilde{A}\left(z,\omega+\omega_{2}\right)\widetilde{A}^{*}\left(z,\omega+\omega_{1}+\omega_{2}\right)\frac{d\omega_{1}}{2\pi}\frac{d\omega_{2}}{2\pi}
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="81" HEIGHT="73" ALIGN="MIDDLE" BORDER="0"
+ SRC="img235.png"
+ ALT="$\displaystyle \frac{\partial\widetilde{A}(z,\omega)}{\partial z}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="20" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img43.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="136" HEIGHT="52" ALIGN="MIDDLE" BORDER="0"
+ SRC="img236.png"
+ ALT="$\displaystyle -\frac{\alpha}{2}\widetilde{A}-j\beta(\omega)\widetilde{A}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="521" HEIGHT="62" ALIGN="MIDDLE" BORDER="0"
+ SRC="img181.png"
+ ALT="$\displaystyle -j\gamma\iint\widetilde{A}\left(z,\omega+\omega_{1}\right)\wideti...
+...ga+\omega_{1}+\omega_{2}\right)\frac{d\omega_{1}}{2\pi}\frac{d\omega_{2}}{2\pi}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">12</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+<P>
+where <!-- MATH
+ $\widetilde{A}(z,\omega)=\sum_{k}\widetilde{A}_{k}\left(z,\omega-\Delta\omega_{k}\right)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="255" HEIGHT="47" ALIGN="MIDDLE" BORDER="0"
+ SRC="img237.png"
+ ALT="$ \widetilde{A}(z,\omega)=\sum_{k}\widetilde{A}_{k}\left(z,\omega-\Delta\omega_{k}\right)$"></SPAN>
+is the Fourier transform of <SPAN CLASS="MATH"><IMG
+ WIDTH="59" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img91.png"
+ ALT="$ A(z,t)$"></SPAN>, <!-- MATH
+ $\beta(\omega)=\beta_{1}\omega+\frac{\beta_{2}}{2}\omega^{2}+\frac{\beta_{3}}{6}\omega^{3}+\ldots$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="276" HEIGHT="45" ALIGN="MIDDLE" BORDER="0"
+ SRC="img238.png"
+ ALT="$ \beta(\omega)=\beta_{1}\omega+\frac{\beta_{2}}{2}\omega^{2}+\frac{\beta_{3}}{6}\omega^{3}+\ldots$"></SPAN>
+and all parameters are evaluated at the bandpass frequency <!-- MATH
+ $\omega_{0}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="26" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img229.png"
+ ALT="$ \omega_{0}$"></SPAN>.
+Let us first investigate the linear part of (<A HREF="#eq:NLSE_freq2">3.12</A>).
+From the superposition principle we have:<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:NLSE-wdm-l"></A><!-- MATH
+ \begin{equation}
+\frac{\partial\widetilde{A}_{k}\left(z,\omega\right)}{\partial z}=-\frac{\alpha}{2}\widetilde{A}_{k}(z,\omega)-j\beta\left(\omega+\Delta\omega_{k}\right)\widetilde{A}_{k}\left(z,\omega\right)
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="428" HEIGHT="73" ALIGN="MIDDLE" BORDER="0"
+ SRC="img239.png"
+ ALT="$\displaystyle \frac{\partial\widetilde{A}_{k}\left(z,\omega\right)}{\partial z}...
+...\beta\left(\omega+\Delta\omega_{k}\right)\widetilde{A}_{k}\left(z,\omega\right)$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">13</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+where <!-- MATH
+ $\beta\left(\omega+\Delta\omega_{k}\right)=\beta_{0k}+\beta_{1k}\omega+\frac{\beta_{2k}}{2}\omega^{2}+\frac{\beta_{3k}}{6}\omega^{3}+\ldots$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="413" HEIGHT="45" ALIGN="MIDDLE" BORDER="0"
+ SRC="img240.png"
+ ALT="$ \beta\left(\omega+\Delta\omega_{k}\right)=\beta_{0k}+\beta_{1k}\omega+\frac{\beta_{2k}}{2}\omega^{2}+\frac{\beta_{3k}}{6}\omega^{3}+\ldots$"></SPAN>
+being <!-- MATH
+ $\beta_{nk}=\left.\frac{\text{d}^{n}\beta(\omega)}{\text{d}\omega^{n}}\right|_{\omega=\Delta\omega_{k}}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="175" HEIGHT="53" ALIGN="MIDDLE" BORDER="0"
+ SRC="img241.png"
+ ALT="$ \beta_{nk}=\left.\frac{\text{d}^{n}\beta(\omega)}{\text{d}\omega^{n}}\right\vert _{\omega=\Delta\omega_{k}}$"></SPAN>.
+For the assumptions it is <!-- MATH
+ $\beta_{0k}=0$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="68" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img242.png"
+ ALT="$ \beta_{0k}=0$"></SPAN> if channel <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img232.png"
+ ALT="$ k$"></SPAN> has <!-- MATH
+ $\Delta\omega_{k}=0$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="77" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img243.png"
+ ALT="$ \Delta\omega_{k}=0$"></SPAN>.
+For instance, if <!-- MATH
+ $\beta(\omega)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="44" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img53.png"
+ ALT="$ \beta(\omega)$"></SPAN> is cubic in <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img132.png"
+ ALT="$ \omega$"></SPAN>, we have that
+<!-- MATH
+ $\beta_{2k}=\beta_{2}+\beta_{3}\Delta\omega_{k}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="157" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img244.png"
+ ALT="$ \beta_{2k}=\beta_{2}+\beta_{3}\Delta\omega_{k}$"></SPAN>.
+
+<P>
+The nonlinear part of (<A HREF="#eq:NLSE_freq2">3.12</A>) is more easy to manage
+in the time domain yielding:<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:NLSE-wdm_nl"></A><!-- MATH
+ \begin{equation}
+\sum_{k}\frac{\partial A_{k}}{\partial z}e^{j\Delta\omega_{k}t}=-j\gamma\sum_{n,l,m}A_{n}A_{l}A_{m}^{*}e^{j\left(\Delta\omega_{k}+\Delta\omega_{l}-\Delta\omega_{m}\right)t}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="454" HEIGHT="64" ALIGN="MIDDLE" BORDER="0"
+ SRC="img245.png"
+ ALT="$\displaystyle \sum_{k}\frac{\partial A_{k}}{\partial z}e^{j\Delta\omega_{k}t}=-...
+...}A_{m}^{*}e^{j\left(\Delta\omega_{k}+\Delta\omega_{l}-\Delta\omega_{m}\right)t}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">14</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+We are tempted to split (<A HREF="#eq:NLSE-wdm_nl">3.14</A>) into the following
+system of differential equations:<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:NLSE-wdm-nl-2"></A><!-- MATH
+ \begin{equation}
+\frac{\partial A_{k}}{\partial z}=-j\gamma_{k}\sum_{{n,l,m\atop \omega_{n}+\omega_{l}-\omega_{m}=\omega_{k}}}^{M}A_{n}A_{l}A_{m}^{*},\qquad k=1,\ldots,M
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="450" HEIGHT="82" ALIGN="MIDDLE" BORDER="0"
+ SRC="img246.png"
+ ALT="$\displaystyle \frac{\partial A_{k}}{\partial z}=-j\gamma_{k}\sum_{{n,l,m\atop \...
+...}+\omega_{l}-\omega_{m}=\omega_{k}}}^{M}A_{n}A_{l}A_{m}^{*},\qquad k=1,\ldots,M$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">15</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+where <!-- MATH
+ $n,\, l,\, m$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="62" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img247.png"
+ ALT="$ n,\, l,\, m$"></SPAN> can range from <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img248.png"
+ ALT="$ 1$"></SPAN> to <SPAN CLASS="MATH"><IMG
+ WIDTH="26" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img228.png"
+ ALT="$ M$"></SPAN> but must satisfy
+<!-- MATH
+ $\omega_{n}+\omega_{l}-\omega_{m}=\omega_{k}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="164" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img249.png"
+ ALT="$ \omega_{n}+\omega_{l}-\omega_{m}=\omega_{k}$"></SPAN>. The substitution of
+<!-- MATH
+ $\gamma_{k}=\gamma\left(\omega_{k}\right)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="100" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img250.png"
+ ALT="$ \gamma_{k}=\gamma\left(\omega_{k}\right)$"></SPAN> for <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img101.png"
+ ALT="$ \gamma$"></SPAN> in (<A HREF="#eq:NLSE-wdm-nl-2">3.15</A>)
+follows the same steps as done for <!-- MATH
+ $\beta_{nk}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="35" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img251.png"
+ ALT="$ \beta_{nk}$"></SPAN> in the linear equation
+(<A HREF="#eq:NLSE-wdm-l">3.13</A>), but since <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img101.png"
+ ALT="$ \gamma$"></SPAN> is slowly varying with
+<SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img132.png"
+ ALT="$ \omega$"></SPAN> (see <A HREF="NLSE.html#eq:gamma-def">3.5</A>) we set <!-- MATH
+ $\gamma_{k}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img252.png"
+ ALT="$ \gamma_{k}$"></SPAN> constant
+over the bandwidth of <!-- MATH
+ $A_{k}(z,t)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="68" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img231.png"
+ ALT="$ A_{k}(z,t)$"></SPAN>. 
+
+<P>
+The solution of (<A HREF="#eq:NLSE-wdm-nl-2">3.15</A>) does not coincide with the
+solution of (<A HREF="#eq:NLSE-wdm_nl">3.14</A>) since in (<A HREF="#eq:NLSE-wdm-nl-2">3.15</A>)
+we discarded all terms of the sum falling outside the bandwidth of
+<SPAN CLASS="MATH"><IMG
+ WIDTH="59" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img91.png"
+ ALT="$ A(z,t)$"></SPAN>, i.e. all <!-- MATH
+ $n,\, l,\, m$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="62" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img247.png"
+ ALT="$ n,\, l,\, m$"></SPAN> such that <!-- MATH
+ $\omega_{n}+\omega_{l}-\omega_{m}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="118" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img253.png"
+ ALT="$ \omega_{n}+\omega_{l}-\omega_{m}$"></SPAN>
+cannot be associated to a frequency <!-- MATH
+ $\omega_{k}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="26" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img254.png"
+ ALT="$ \omega_{k}$"></SPAN>, <!-- MATH
+ $k=1,\ldots,M$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="113" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img234.png"
+ ALT="$ k=1,\ldots,M$"></SPAN>
+of the comb. However, such terms are usually of small energy for weakly
+nonlinear systems, hence the solution of (<A HREF="#eq:NLSE-wdm-nl-2">3.15</A>)
+is of great interest. It turns out that we are investigating a system
+of differential equations (<A HREF="#eq:NLSE-wdm-nl-2">3.15</A>) behaving as a
+closed system. 
+
+<P>
+We are now in position to merge the linear (<A HREF="#eq:NLSE-wdm-l">3.13</A>)
+and the nonlinear (<A HREF="#eq:NLSE-wdm-nl-2">3.15</A>) differential equations
+together. After inserting <!-- MATH
+ $\beta_{0k}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="33" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img255.png"
+ ALT="$ \beta_{0k}$"></SPAN> into a constant phase shift
+as <!-- MATH
+ $A_{k}(z,t)=E_{k}(z,\omega)\exp\left(-j\beta_{0k}z\right)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="273" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img256.png"
+ ALT="$ A_{k}(z,t)=E_{k}(z,\omega)\exp\left(-j\beta_{0k}z\right)$"></SPAN>, the
+NLSE, which we call the NLSE for separate fields, in the time domain
+writes as:
+
+<P>
+<BR>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:NLSE_WDM_time"></A><!-- MATH
+ \begin{eqnarray}
+\frac{\partial E_{k}}{\partial z} & = & -\frac{\alpha}{2}E_{k}-\left(\beta_{1k}\frac{\partial}{\partial t}-j\frac{\beta_{2k}}{2}\frac{\partial^{2}}{\partial t^{2}}-\frac{\beta_{3k}}{6}\frac{\partial^{3}}{\partial t^{3}}\right)E_{k}\nonumber \\
+ &  & -j\gamma_{k}\sum_{{n,l,m\atop \omega_{n}+\omega_{l}-\omega_{m}=\omega_{k}}}E_{n}\left(z,t\right)E_{l}\left(z,t\right)E_{m}^{*}\left(z,t\right)e^{-j\Delta\beta_{nlm}z}
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="44" HEIGHT="62" ALIGN="MIDDLE" BORDER="0"
+ SRC="img257.png"
+ ALT="$\displaystyle \frac{\partial E_{k}}{\partial z}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="20" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img43.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="369" HEIGHT="66" ALIGN="MIDDLE" BORDER="0"
+ SRC="img258.png"
+ ALT="$\displaystyle -\frac{\alpha}{2}E_{k}-\left(\beta_{1k}\frac{\partial}{\partial t...
+...tial t^{2}}-\frac{\beta_{3k}}{6}\frac{\partial^{3}}{\partial t^{3}}\right)E_{k}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="451" HEIGHT="82" ALIGN="MIDDLE" BORDER="0"
+ SRC="img259.png"
+ ALT="$\displaystyle -j\gamma_{k}\sum_{{n,l,m\atop \omega_{n}+\omega_{l}-\omega_{m}=\o...
+...,t\right)E_{l}\left(z,t\right)E_{m}^{*}\left(z,t\right)e^{-j\Delta\beta_{nlm}z}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">16</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+<P>
+where <!-- MATH
+ $\Delta\beta_{nlm}=\beta_{0n}+\beta_{0l}-\beta_{0m}-\beta_{0k}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="268" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img260.png"
+ ALT="$ \Delta\beta_{nlm}=\beta_{0n}+\beta_{0l}-\beta_{0m}-\beta_{0k}$"></SPAN>
+is called the phase matching coefficient. By varying the indexes <!-- MATH
+ $n,\, l,\, m$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="62" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img247.png"
+ ALT="$ n,\, l,\, m$"></SPAN>
+we can identify the following terms:
+
+<UL>
+<LI>self phase modulation (SPM): <!-- MATH
+ $\omega_{n}=\omega_{l}=\omega_{m}=\omega_{k}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="168" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img261.png"
+ ALT="$ \omega_{n}=\omega_{l}=\omega_{m}=\omega_{k}$"></SPAN>
+<!-- MATH
+ $\Rightarrow$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img262.png"
+ ALT="$ \Rightarrow$"></SPAN><!-- MATH
+ $\left|E_{k}\right|^{2}E_{k}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="74" HEIGHT="46" ALIGN="MIDDLE" BORDER="0"
+ SRC="img263.png"
+ ALT="$ \left\vert E_{k}\right\vert^{2}E_{k}$"></SPAN>
+</LI>
+<LI>cross phase modulation (XPM): <!-- MATH
+ $\left(\omega_{n}=\omega_{m}\right)\ne\left(\omega_{l}=\omega_{k}\right)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="198" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img264.png"
+ ALT="$ \left(\omega_{n}=\omega_{m}\right)\ne\left(\omega_{l}=\omega_{k}\right)$"></SPAN>
+or <!-- MATH
+ $\left(\omega_{n}=\omega_{k}\right)\ne\left(\omega_{l}=\omega_{m}\right)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="198" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img265.png"
+ ALT="$ \left(\omega_{n}=\omega_{k}\right)\ne\left(\omega_{l}=\omega_{m}\right)$"></SPAN>
+<!-- MATH
+ $\Rightarrow$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img262.png"
+ ALT="$ \Rightarrow$"></SPAN> <!-- MATH
+ $\sum_{m\ne k}\left|E_{m}\right|^{2}E_{k}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="137" HEIGHT="46" ALIGN="MIDDLE" BORDER="0"
+ SRC="img266.png"
+ ALT="$ \sum_{m\ne k}\left\vert E_{m}\right\vert^{2}E_{k}$"></SPAN>
+</LI>
+<LI>four wave mixing (FWM): set <SPAN CLASS="MATH"><IMG
+ WIDTH="22" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img267.png"
+ ALT="$ {\cal H}$"></SPAN> of all terms that are not
+SPM or XPM <!-- MATH
+ $\Rightarrow$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img262.png"
+ ALT="$ \Rightarrow$"></SPAN><P><!-- MATH
+ \begin{displaymath}
+\sum_{n,l,m\in\mathcal{H}}E_{n}\left(z,t\right)E_{l}\left(z,t\right)E_{m}^{*}\left(z,t\right)e^{j\Delta\beta_{nlm}z}
+\end{displaymath}
+ -->
+</P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<IMG
+ WIDTH="350" HEIGHT="64" ALIGN="MIDDLE" BORDER="0"
+ SRC="img268.png"
+ ALT="$\displaystyle \sum_{n,l,m\in\mathcal{H}}E_{n}\left(z,t\right)E_{l}\left(z,t\right)E_{m}^{*}\left(z,t\right)e^{j\Delta\beta_{nlm}z}$">
+</DIV><P></P>
+
+<P>
+</LI>
+</UL>
+Exploiting these terms in (<A HREF="#eq:NLSE_WDM_time">3.16</A>) yields:
+
+<P>
+<BR>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:NLSE-WDM-time-fin"></A><!-- MATH
+ \begin{eqnarray}
+\frac{\partial E_{k}}{\partial z} & = & -\frac{\alpha}{2}E_{k}-\left(\beta_{1k}\frac{\partial}{\partial t}-j\frac{\beta_{2k}}{2}\frac{\partial^{2}}{\partial t^{2}}-\frac{\beta_{3k}}{6}\frac{\partial^{3}}{\partial t^{3}}\right)E_{k}\nonumber \\
+ &  & -j\gamma_{k}\left(\left|E_{k}\right|^{2}E_{k}+2\sum_{m\ne k}\left|E_{m}\right|^{2}E_{k}+\sum_{n,l,m\in{\cal H}}E_{n}\left(z,t\right)E_{l}\left(z,t\right)E_{m}^{*}\left(z,t\right)e^{j\Delta\beta_{nlm}z}\right)
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="44" HEIGHT="62" ALIGN="MIDDLE" BORDER="0"
+ SRC="img257.png"
+ ALT="$\displaystyle \frac{\partial E_{k}}{\partial z}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="20" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img43.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="369" HEIGHT="66" ALIGN="MIDDLE" BORDER="0"
+ SRC="img258.png"
+ ALT="$\displaystyle -\frac{\alpha}{2}E_{k}-\left(\beta_{1k}\frac{\partial}{\partial t...
+...tial t^{2}}-\frac{\beta_{3k}}{6}\frac{\partial^{3}}{\partial t^{3}}\right)E_{k}$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="667" HEIGHT="88" ALIGN="MIDDLE" BORDER="0"
+ SRC="img269.png"
+ ALT="$\displaystyle -j\gamma_{k}\left(\left\vert E_{k}\right\vert^{2}E_{k}+2\sum_{m\n...
+...ht)E_{l}\left(z,t\right)E_{m}^{*}\left(z,t\right)e^{j\Delta\beta_{nlm}z}\right)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">17</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+<P>
+Note that <!-- MATH
+ $E_{k}(z,t)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="68" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img270.png"
+ ALT="$ E_{k}(z,t)$"></SPAN> may differ from zero even if <!-- MATH
+ $E_{k}(0,t)=0$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="103" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img271.png"
+ ALT="$ E_{k}(0,t)=0$"></SPAN>
+because of the FWM process due to the other terms. If we further assume
+that such terms remains undepleted in <SPAN CLASS="MATH"><IMG
+ WIDTH="20" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img272.png"
+ ALT="$ z,$"></SPAN> the resulting FWM over
+<SPAN CLASS="MATH"><IMG
+ WIDTH="29" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img273.png"
+ ALT="$ E_{k}$"></SPAN> is called first order FWM. See [<A
+ HREF="Bibliography.html#Agrawal">1</A>] for an introduction
+to FWM and [<A
+ HREF="Bibliography.html#Eiselt_FWM">41</A>,<A
+ HREF="Bibliography.html#kumar_FWM">42</A>] for advanced studies of FWM.
+
+<P>
+Also note that in absence of FWM the solution of (<A HREF="#eq:NLSE-wdm-nl-2">3.15</A>)
+coincides with the solution of (<A HREF="#eq:NLSE-wdm_nl">3.14</A>) since XPM and
+SPM alone cannot generate <SPAN CLASS="MATH"><IMG
+ WIDTH="29" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img273.png"
+ ALT="$ E_{k}$"></SPAN> if <!-- MATH
+ $E_{k}(0,t)=0$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="103" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img271.png"
+ ALT="$ E_{k}(0,t)=0$"></SPAN>.
+
+<P>
+
+<H2><A NAME="SECTION00331000000000000000"></A><A NAME="sub:Unique-and-separate"></A>
+<BR>
+Unique and separate fields
+</H2>
+
+<P>
+Solving the NLSE for <SPAN CLASS="MATH"><IMG
+ WIDTH="60" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img274.png"
+ ALT="$ E(z,t)$"></SPAN> corresponds to solve the NLSE for a
+<SPAN  CLASS="textit">unique field</SPAN>. Solving the NLSE for <!-- MATH
+ $E_{k}(z,t)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="68" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img270.png"
+ ALT="$ E_{k}(z,t)$"></SPAN>, <!-- MATH
+ $k=1,2,\ldots$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="99" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img98.png"
+ ALT="$ k=1,2,\ldots$"></SPAN>
+corresponds to solve the NLSE for <SPAN  CLASS="textit">separate fields. </SPAN>Such options
+must be indicated in <A HREF="create_field.html#sec:create_field">create_field</A>. The
+unique field solution is the most complete one, since it correctly
+includes SPM, XPM and FWM. The solution for separate fields is possible
+in a simple and numerically efficient form only in absence of FWM,
+for which a closed form expression of the solution in presence of
+the nonlinear operator only exists. In such a case the NLSE (<A HREF="#eq:NLSE_WDM_time">3.16</A>)
+for channel <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img232.png"
+ ALT="$ k$"></SPAN> is:<P><!-- MATH
+ \begin{displaymath}
+\frac{\partial E_{k}}{\partial z}=-\frac{\alpha}{2}E_{k}-\beta_{1k}\frac{\partial E_{k}}{\partial t}-j\gamma\left|E_{k}\right|^{2}E_{k}-j2\gamma\sum_{m\ne k}\left|E_{m}\right|^{2}E_{k}
+\end{displaymath}
+ -->
+</P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<IMG
+ WIDTH="495" HEIGHT="64" ALIGN="MIDDLE" BORDER="0"
+ SRC="img275.png"
+ ALT="$\displaystyle \frac{\partial E_{k}}{\partial z}=-\frac{\alpha}{2}E_{k}-\beta_{1...
+...}\right\vert^{2}E_{k}-j2\gamma\sum_{m\ne k}\left\vert E_{m}\right\vert^{2}E_{k}$">
+</DIV><P></P>
+
+<P>
+where for the sake of simplicity we assumed <!-- MATH
+ $\alpha_{k}=\alpha$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="64" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img276.png"
+ ALT="$ \alpha_{k}=\alpha$"></SPAN> and
+<!-- MATH
+ $\gamma_{k}=\gamma$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="61" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img277.png"
+ ALT="$ \gamma_{k}=\gamma$"></SPAN>, <SPAN CLASS="MATH"><IMG
+ WIDTH="26" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img278.png"
+ ALT="$ \forall k$"></SPAN>. The solution in the retarded frame
+time <!-- MATH
+ $\tau=\left(t-z/\beta_{1k}\right)/T_{0}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="165" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img279.png"
+ ALT="$ \tau=\left(t-z/\beta_{1k}\right)/T_{0}$"></SPAN> is:<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:NL-phase-sepfields"></A><!-- MATH
+ \begin{equation}
+E_{k}(z,\tau)=E_{k}(0,\tau)e^{-j\gamma\left(\left|E_{k}(0,\tau)\right|^{2}+2\sum_{m\ne k}\left|E_{m}(0,\tau-zd_{km})\right|^{2}\right)L_{\text{eff}}(z)}\,.
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="525" HEIGHT="52" ALIGN="MIDDLE" BORDER="0"
+ SRC="img280.png"
+ ALT="$\displaystyle E_{k}(z,\tau)=E_{k}(0,\tau)e^{-j\gamma\left(\left\vert E_{k}(0,\t...
+...e k}\left\vert E_{m}(0,\tau-zd_{km})\right\vert^{2}\right)L_{\text{eff}}(z)}\,.$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">18</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+being <SPAN CLASS="MATH"><IMG
+ WIDTH="38" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img281.png"
+ ALT="$ d_{km}$"></SPAN> the walkoff parameter (<A HREF="NLSE.html#eq:dsp">3.2</A>). A parallel
+SSFM algorithm applied to each channel is therefore possible. Note
+that the nonlinear phase rotation due to XPM is in principle two times
+as larger than the one of SPM. However, XPM is reduced by the filtering
+effect of the walk-off effect [<A
+ HREF="Bibliography.html#Agrawal">1</A>].
+
+<P>
+The main motivations for using a separate field approach are the following:
+
+<OL>
+<LI>With separate fields it is possible to allocate a lower Nyquist frequency,
+i.e. a lower number of points per symbol. Infact the electric field
+(e.g. <TT>GSTATE.FIELDX</TT>) is now a matrix where each column represent
+a channel. hence the number of points per symbol must be sufficient
+to describe just a single channel. The figure below, showing the power
+spectrum vs. the frequency normalized to the symbol rate, sketches
+the idea.
+<DIV ALIGN="CENTER"><A NAME="fig:nt_alloc_sepuniq"></A><A NAME="6010"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 3.1:</STRONG>
+Left: Spectrum of a generic channel in
+a separate field scenario of <SPAN CLASS="MATH"><IMG
+ WIDTH="72" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$ N_{ch}=5$"></SPAN> channels. Right: Spectrum
+in a unique field scenario.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV><IMG
+ WIDTH="389" HEIGHT="308" ALIGN="BOTTOM" BORDER="0"
+ SRC="img282.png"
+ ALT="\includegraphics[width=0.5\linewidth]{Figure/1ch_wdm}"><IMG
+ WIDTH="401" HEIGHT="307" ALIGN="BOTTOM" BORDER="0"
+ SRC="img283.png"
+ ALT="\includegraphics[width=0.5\linewidth]{Figure/5ch_wdm}">
+
+<P>
+
+<P></TD></TR>
+</TABLE>
+</DIV>
+The unique field is a WDM comb of <SPAN CLASS="MATH"><IMG
+ WIDTH="72" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$ N_{ch}=5$"></SPAN> OOK channels, spaced
+<!-- MATH
+ $\Delta f=100$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="86" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img284.png"
+ ALT="$ \Delta f=100$"></SPAN> [GHz] @ <SPAN CLASS="MATH"><IMG
+ WIDTH="64" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img285.png"
+ ALT="$ R=10$"></SPAN> Gbs. Suppose that <!-- MATH
+ $N_{\text{symb}}=64$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="100" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img286.png"
+ ALT="$ N_{\text{symb}}=64$"></SPAN>
+symbols are sufficient to describe such a system. It remains the problem
+of finding a good value for <SPAN CLASS="MATH"><IMG
+ WIDTH="33" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img287.png"
+ ALT="$ N_{T}$"></SPAN>, i.e. the number of points per
+symbol. For the right figure we note that from the first to the fifth
+channel the spacing is <!-- MATH
+ $B=\left(N_{ch}-1\right)\Delta f$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="155" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img288.png"
+ ALT="$ B=\left(N_{ch}-1\right)\Delta f$"></SPAN> [GHz]
+which in normalized units is <SPAN CLASS="MATH"><IMG
+ WIDTH="45" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img289.png"
+ ALT="$ B/R$"></SPAN>. In a unique field scenario, since
+FWM enlarges the spectrum during the propagation, in order to capture
+at least 1st order FWM the bandwidth allocation must be at least three
+times larger, yielding <!-- MATH
+ $N_{T}=3\left\lceil B/R\right\rceil =3\left(N_{ch}-1\right)\left\lceil \Delta f/R\right\rceil$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="315" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img290.png"
+ ALT="$ N_{T}=3\left\lceil B/R\right\rceil =3\left(N_{ch}-1\right)\left\lceil \Delta f/R\right\rceil $"></SPAN>
+points per symbol. We obtain <SPAN CLASS="MATH"><IMG
+ WIDTH="86" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img291.png"
+ ALT="$ N_{T}=120$"></SPAN> and hence use <SPAN CLASS="MATH"><IMG
+ WIDTH="86" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img292.png"
+ ALT="$ N_{T}=128$"></SPAN>
+for working the FFT efficiently. In a separate field scenario the
+allocation is different. Now FWM is absent, but SPM still enlarges
+the spectrum. A good choice is to describe the spectrum with some
+lobes to capture this enlargement. In the left figure we used <SPAN CLASS="MATH"><IMG
+ WIDTH="75" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img293.png"
+ ALT="$ N_{T1}=8$"></SPAN>
+points per symbol which allows to capture the first four lobes. <SPAN CLASS="MATH"><IMG
+ WIDTH="40" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img294.png"
+ ALT="$ N_{T1}$"></SPAN>
+is used for all channels, hence each step a basic SSFM runs <SPAN CLASS="MATH"><IMG
+ WIDTH="37" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img295.png"
+ ALT="$ N_{ch}$"></SPAN>
+FFTs and IFFTs of size <!-- MATH
+ $N=N_{T1}N_{\text{symb}}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="133" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img296.png"
+ ALT="$ N=N_{T1}N_{\text{symb}}$"></SPAN> each, while the
+unique field runs one FFT/IFFT of <!-- MATH
+ $N=N_{T}N_{\text{symb}}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="126" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img297.png"
+ ALT="$ N=N_{T}N_{\text{symb}}$"></SPAN> points.
+Assuming the cost of the FFT equal to <!-- MATH
+ $N\log_{2}N$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="79" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img298.png"
+ ALT="$ N\log_{2}N$"></SPAN>, the FFT algorithm
+in the separate field scenario costs <SPAN CLASS="MATH"><IMG
+ WIDTH="53" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img299.png"
+ ALT="$ 23040$"></SPAN> while using the unique
+field costs <SPAN CLASS="MATH"><IMG
+ WIDTH="62" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img300.png"
+ ALT="$ 106496$"></SPAN>.
+</LI>
+<LI>In the separate field case the step of the SSFM algorithm can be significantly
+larger. For instance, by adopting a step with fixed maximum nonlinear
+phase rotation as in Section&nbsp;<A HREF="Numerical_solution_NLSE_SSF.html#sub:Constant-nonlinear-phase">3.4.1.2</A>,
+the step size is inversely proportional to the maximum power. In a
+separate field scenario the maximum power at coordinate <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img93.png"
+ ALT="$ z$"></SPAN> is <!-- MATH
+ ${\displaystyle \max_{k}}\left({\displaystyle \max_{t}}\left(\left|E_{k}(z,t)\right|^{2}\right)\right)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="210" HEIGHT="53" ALIGN="MIDDLE" BORDER="0"
+ SRC="img301.png"
+ ALT="$ {\displaystyle \max_{k}}\left({\displaystyle \max_{t}}\left(\left\vert E_{k}(z,t)\right\vert^{2}\right)\right)$"></SPAN>,
+while in a unique field scenario it is: <P><!-- MATH
+ \begin{displaymath}
+\max_{t}\left(\left|E(z,t)\right|^{2}\right)=\max_{t}\left(\left|\sum_{k}E_{k}(z,t)e^{j\Delta\omega_{k}t}\right|^{2}\right)<\max_{t}\left(\sum_{k}\left|E_{k}(z,t)\right|^{2}\right)
+\end{displaymath}
+ -->
+</P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<IMG
+ WIDTH="611" HEIGHT="88" ALIGN="MIDDLE" BORDER="0"
+ SRC="img302.png"
+ ALT="$\displaystyle \max_{t}\left(\left\vert E(z,t)\right\vert^{2}\right)=\max_{t}\le...
+...rt^{2}\right)&lt;\max_{t}\left(\sum_{k}\left\vert E_{k}(z,t)\right\vert^{2}\right)$">
+</DIV><P></P>
+The last bound is greater than the maximum power of the separate field
+case, hence with a unique field the propagating power may be greater
+than with separate fields, thus giving smaller steps. 
+</LI>
+</OL>
+The separate field approach is discouraged for the following motivations:
+
+<OL>
+<LI>The approach, as implemented in Optilux, neglects FWM, hence it works
+only for optical systems with non negligible dispersion management.
+</LI>
+<LI>The separate fields method basically neglects the channels spectrum
+overlap, hence it is inappropriate for dense WDM systems. 
+</LI>
+</OL>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1020"
+  HREF="Numerical_solution_NLSE_SSF.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1018"
+  HREF="Background.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1012"
+  HREF="Coupled_NLSE_CNLSE.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html1021"
+  HREF="Numerical_solution_NLSE_SSF.html">Numerical solution of the NLSE: SSFM</A>
+<B> Up:</B> <A NAME="tex2html1019"
+  HREF="Background.html">Background</A>
+<B> Previous:</B> <A NAME="tex2html1013"
+  HREF="Coupled_NLSE_CNLSE.html">Coupled-NLSE (CNLSE)</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

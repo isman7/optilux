@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>samp2pat</TITLE>
+<META NAME="description" CONTENT="samp2pat">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="stars2pat.html">
+<LINK REL="previous" HREF="pat2stars.html">
+<LINK REL="up" HREF="List_Functions.html">
+<LINK REL="next" HREF="stars2pat.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html317"
+  HREF="stars2pat.html">stars2pat</A>
+<B>Up:</B> <A NAME="tex2html315"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html309"
+  HREF="pat2stars.html">pat2stars</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION002100000000000000000"></A><A NAME="sec:samp2pat"></A>
+<BR>
+samp2pat
+</H1>
+
+<P>
+Convert received samples into a pattern
+
+<P>
+
+<H2><A NAME="SECTION002101000000000000000">
+Syntax</A>
+</H2>
+
+<P>
+<TT>PAT_RX = SAMP2PAT(X,S,OUTVALUE)</TT>
+
+<P>
+
+<H2><A NAME="SECTION002102000000000000000">
+Description</A>
+</H2>
+
+<P>
+<TT>PAT_RX = SAMP2PAT(X,S,OUTVALUE)</TT> takes the samples <TT>OUTVALUE</TT>
+returned by <A HREF="eval_eye.html#sec:eval_eye">eval_eye</A> or <A HREF="dsp4cohdec.html#sec:dsp4cohdec">dsp4cohdec</A>
+and converts them into a receiver pattern <TT>PAT_RX</TT>. Currently
+supported modulation formats are '<TT>ook</TT>', '<TT>dpsk</TT>',
+  '<TT>dqpsk</TT>', '<TT>qpsk</TT>'.   
+
+<P>
+<TT>X</TT> is a structure that describes the receiver, while <TT>S</TT>
+is a structure used to specify how to convert the samples into a pattern.
+Its fields are: 
+
+<UL>
+<LI><TT>S.alphabet</TT> = vector of the alphabet of the desired output
+pattern
+</LI>
+<LI><TT>S.thr</TT> = vector of threshold values to apply in order to decide
+how to map a sample into an alphabet symbol. <TT>S.thr</TT> length
+must be equal to <TT>S.alphabet</TT> length minus one     
+</LI>
+</UL>
+
+<P>
+
+<H2><A NAME="SECTION002103000000000000000">
+See Also</A>
+</H2>
+
+<P>
+<A HREF="eval_eye.html#sec:eval_eye">eval_eye</A>, <A HREF="dsp4cohdec.html#sec:dsp4cohdec">dsp4cohdec</A>,
+<A HREF="ber_estimate.html#sec:ber_estimate">ber_estimate</A>
+
+<P>
+<BR><HR>
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

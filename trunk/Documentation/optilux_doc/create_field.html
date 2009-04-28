@@ -1,0 +1,182 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>create_field</TITLE>
+<META NAME="description" CONTENT="create_field">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="pattern.html">
+<LINK REL="previous" HREF="reset_all.html">
+<LINK REL="up" HREF="List_Functions.html">
+<LINK REL="next" HREF="pattern.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html246"
+  HREF="pattern.html">pattern</A>
+<B>Up:</B> <A NAME="tex2html244"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html238"
+  HREF="reset_all.html">reset_all</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION00250000000000000000"></A><A NAME="sec:create_field"></A>
+<BR>
+create_field
+</H1>
+
+<P>
+create the electric field
+
+<P>
+
+<H2><A NAME="SECTION00251000000000000000">
+Syntax</A>
+</H2>
+
+<P>
+<TT>CREATE_FIELD(FTYPE,SIGX)</TT>&nbsp;
+<BR><TT>CREATE_FIELD(FTYPE,SIGX,SIGY)</TT>&nbsp;
+<BR><TT>CREATE_FIELD(FTYPE,SIGX,SIGY,OPTIONS)</TT>
+
+<P>
+
+<H2><A NAME="SECTION00252000000000000000">
+Description</A>
+</H2>
+
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=500> 
+<B>Note:</B><SPAN  CLASS="textbf"> </SPAN>THIS FUNCTION MUST BE CALLED IN EACH SIMULATION
+THAT OPERATES ON THE ELECTRIC FIELD. </TD>
+</TR>
+</TABLE>
+<BR>
+<P>
+<TT>CREATE_FIELD(FTYPE,SIGX)</TT> creates the electric field. <TT>SIGX</TT>
+is a matrix <TT>[Nfft,Nch]</TT> containing on columns the x polarization
+of the electric fields to be multiplexed together. <TT>Nch</TT> is
+the overall number of channels, <TT>Nfft</TT> the number of FFT points.
+<TT>CREATE_FIELD</TT> creates new fields of the global variable <TT>GSTATE</TT>,
+<TT>GSTATE.FIELDX</TT> and its copy <TT>GSTATE.FIELDX_TX</TT>, respectively.
+<TT>GSTATE.FIELDX</TT> is the electric field that will be propagated
+in the optical system. 
+<BR>
+<P>
+<TT>FTYPE</TT> can be <TT>'sepfields'</TT> or <TT>'unique'</TT>. With
+<TT>'sepfields'</TT> <TT>GSTATE.FIELDX</TT> is a copy of <TT>SIGX</TT>.
+<TT>'sepfields'</TT> is useful for propagation in optical fibers in
+absence of four wave mixing (FWM) and allows to obtain faster runs.
+<TT>'unique'</TT> combines all channels into a unique channel and
+allows to account for FWM in optical fibers. <TT>'unique'</TT> allows
+therefore more accurate results even if it is slow since requires
+larger value of <TT>GSTATE.NT</TT> (see <A HREF="reset_all.html#sec:reset_all">reset_all</A>)
+for accounting all channels. With option <TT>'unique' CREATE_FIELD</TT>
+acts as an ideal multiplexer and yields <TT>GSTATE.FIELDX</TT> of
+size <TT>[Nfft,1]</TT>. More information can be found <A HREF="NLSE_in_WDM_case.html#sub:Unique-and-separate">here</A>.
+<BR>
+<P>
+<TT>CREATE_FIELD(FTYPE,SIGX,SIGY)</TT> operates on the x <TT>(SIGX)</TT>
+and y <TT>(SIGY)</TT> polarization creating <TT>GSTATE.FIELDX</TT>,
+and <TT>GSTATE.FIELDY</TT> (and their copies, <TT>GSTATE.FIELDX_TX
+</TT>and <TT>GSTATE.FIELDY_TX</TT>, respectively). <TT>SIGX</TT> and
+<TT>SIGY </TT>must have the same size <TT>[Nfft,Nch]</TT>.
+<BR>
+<P>
+<TT>CREATE_FIELD(FTYPE,SIGX,SIGY,OPTIONS)</TT> accepts the optional
+parameter <TT>OPTIONS</TT>, containing: 
+
+<UL>
+<LI><TT>OPTIONS.delay</TT>: can be the string <TT>'rand'</TT> or a vector
+of double. In the first case a uniform distributed random delay between
+<TT>[0,1]</TT> is added to the channels before creating the electric
+field. In the second case the vector is used as delay. The values
+are normalized to <TT>1/GSTATE.SYMBOLRATE</TT>, i.e. the symbol time.
+See <A HREF="Signals_description.html#sec:Signals-description">signal convention</A> for more
+details. 
+</LI>
+<LI><TT>OPTIONS.power</TT>: if set to <TT>'average'</TT>, the power defined
+in <A HREF="lasersource.html#sec:lasersource">lasersource</A> is not the peak power (default)
+but the average power. In such a case <TT>GSTATE.POWER</TT> is changed
+accordingly.
+<BR>
+<P>
+</LI>
+</UL>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=400> 
+<B>Note:</B><SPAN  CLASS="textbf"> </SPAN>for hybrid symbol-rate systems, the delay is
+normalized to the current (last defined) symbol time (<TT>1/GSTATE.SYMBOLRATE</TT>)
+for all channels. </TD>
+</TR>
+</TABLE>
+<BR>
+<P>
+In absence of y polarization simply use: 
+
+<P>
+<TT>CREATE_FIELD(FTYPE,SIGX,[],OPTIONS)</TT> 
+<BR>
+<P>
+<TT>CREATE_FIELD</TT> initializes the global variable <TT>GSTATE.DELAY</TT>
+to zero or to the value imposed by <TT>OPTIONS.delay</TT>. 
+
+<P>
+<TT>CREATE_FIELD</TT> initializes the global variable <TT>GSTATE.DISP</TT>
+to zero. 
+
+<P>
+
+<H2><A NAME="SECTION00253000000000000000">
+See also</A>
+</H2>
+
+<P>
+<A HREF="reset_all.html#sec:reset_all">reset_all</A>, <A HREF="lasersource.html#sec:lasersource">lasersource</A>,
+<A HREF="electricsource.html#sec:electricsource">electricsource</A>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html245"
+  HREF="pattern.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html243"
+  HREF="List_Functions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html237"
+  HREF="reset_all.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html246"
+  HREF="pattern.html">pattern</A>
+<B> Up:</B> <A NAME="tex2html244"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html238"
+  HREF="reset_all.html">reset_all</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

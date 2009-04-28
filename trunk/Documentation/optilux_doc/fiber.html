@@ -1,0 +1,316 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>fiber</TITLE>
+<META NAME="description" CONTENT="fiber">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="fibergui.html">
+<LINK REL="previous" HREF="qi_modulator.html">
+<LINK REL="up" HREF="List_Functions.html">
+<LINK REL="next" HREF="fibergui.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html428"
+  HREF="fibergui.html">fibergui</A>
+<B>Up:</B> <A NAME="tex2html426"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html420"
+  HREF="qi_modulator.html">qi_modulator</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION002180000000000000000"></A><A NAME="sec:fiber"></A>
+<BR>
+fiber
+</H1>
+
+<P>
+Optical fiber in the nonlinear regime.
+
+<P>
+
+<H2><A NAME="SECTION002181000000000000000">
+Syntax</A>
+</H2>
+
+<P>
+<TT>FIBER(X,FLAG)</TT>
+
+<P>
+
+<H2><A NAME="SECTION002182000000000000000">
+Description</A>
+</H2>
+
+<P>
+<TT>FIBER(X,FLAG)</TT> solves the nonlinear Schr&#246;dinger equation
+(<A HREF="NLSE.html#sec:NLSE">NLSE</A>) in absence of polarization effects, or
+the Coupled-NLSE (<A HREF="Coupled_NLSE_CNLSE.html#sec:CNLSE">CNLSE</A>) with polarization effects.
+<BR>
+<P>
+<TT>X</TT> is a structure of fields:
+
+<UL>
+<LI><TT>X.length</TT>: fiber length [m] 
+</LI>
+<LI><TT>X.alphadB</TT>: fiber attenuation [dB/km] 
+</LI>
+<LI><TT>X.aeff</TT>: fiber effective area [<SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img50.png"
+ ALT="$ \mu$"></SPAN>m<SPAN CLASS="MATH"><IMG
+ WIDTH="14" HEIGHT="21" ALIGN="BOTTOM" BORDER="0"
+ SRC="img51.png"
+ ALT="$ ^{2}$"></SPAN>] 
+</LI>
+<LI><TT>X.n2</TT>: fiber nonlinear index [m<SPAN CLASS="MATH"><IMG
+ WIDTH="14" HEIGHT="21" ALIGN="BOTTOM" BORDER="0"
+ SRC="img51.png"
+ ALT="$ ^{2}$"></SPAN>/W] 
+</LI>
+<LI><TT>X.lambda</TT>: wavelength [nm] at which <TT>X.disp </TT>is
+evaluated 
+</LI>
+<LI><TT>X.disp</TT>: fiber chromatic dispersion coefficient [ps/nm/km]
+@ <TT>X.lambda</TT>
+</LI>
+<LI><TT>X.slope</TT>: fiber slope, i.e. derivative of <TT>X.disp</TT>
+[ps/nm<SPAN CLASS="MATH"><IMG
+ WIDTH="14" HEIGHT="21" ALIGN="BOTTOM" BORDER="0"
+ SRC="img51.png"
+ ALT="$ ^{2}$"></SPAN>/km] @ <TT>X.lambda</TT>
+</LI>
+<LI><TT>X.dzmax</TT>: max. step for the split-step algorithm [m]
+</LI>
+<LI><TT>X.dphimax</TT>: max. nonlinear phase rotation in each step [rad]
+</LI>
+</UL>
+The attenuation is assumed independent from the wavelength.
+<BR>
+<P>
+For the solution of the CNLSE, i.e. with two polarizations, there
+are also the following additional parameters:
+
+<UL>
+<LI><TT>X.dgd</TT>: fiber average differential group delay [symbols]
+</LI>
+<LI><TT>X.nplates</TT>: number of waveplates or trunks for PMD emulation
+</LI>
+<LI><TT>X.manakov</TT>: <TT>'yes'</TT>: Solve the Manakov equation. <TT>'no'</TT>:
+Solve the CNLSE. Default: <TT>'no'</TT>.
+</LI>
+</UL>
+In the general case with two polarizations the fiber is the concatenation
+of randomly oriented polarization maintaining fibers (PMF) fibers.
+The user can force the use of a single PMF by adding the following
+optional parameters:
+
+<UL>
+<LI><TT>X.db0</TT>: birefringence of the PMF fiber at <TT>GSTATE.FN=0</TT>
+</LI>
+<LI><TT>X.theta</TT>: azimuth [rad] of the PMF fiber
+</LI>
+<LI><TT>X.epsilon</TT>: ellipticity [rad] of the PMF fiber
+</LI>
+</UL>
+The NLSE is solved by a split-step Fourier algorithm <A HREF="Numerical_solution_NLSE_SSF.html#sec:SSFM">SSFM</A>
+with a variable step so as to have a maximum nonlinear phase rotation
+into each step equal to <TT>X.dphimax</TT>. However, the step cannot
+be larger than <TT>X.dzmax</TT>. See Section&nbsp;<A HREF="Numerical_solution_NLSE_SSF.html#sub:Constant-nonlinear-phase">3.4.1.2</A>
+for more details. The CNLSE uses the same rules except that the step
+cannot be larger than <TT>min(X.dzmax,X.length/X.nplates)</TT>. For
+waveplates shorter than the nonlinear step, the waveplate length is
+rounded in order to apply the nonlinearity on multiples of the waveplates
+lengths. On the contrary, the birefringence is applied every nonlinear
+step. 
+<BR>
+<P>
+Alternatively, the step can be chosen <A HREF="Numerical_solution_NLSE_SSF.html#sub:Adaptive-step-based">adaptively</A>
+basing the choice on a target local truncation error (NLSE only).
+In such a case the following parameters should be added to <TT>X</TT>: 
+
+<UL>
+<LI><TT>X.ltol</TT>: local truncation error, i.e. max distance between
+the field obtained by moving once or twice in a step.
+</LI>
+<LI><TT>X.dphiadapt: true/false</TT>. True: the local truncation error
+method is applied only in the first step and used to correct <TT>X.dphimax</TT>.
+After the first step the SSFM proceeds using the approach based on
+<TT>X.dphimax</TT>. Default: <TT>false</TT>. See Section&nbsp;<A HREF="Numerical_solution_NLSE_SSF.html#sub:Adaptive-step-just">3.4.1.4</A>
+for more details. 
+</LI>
+</UL>
+<TT>FLAG</TT> is a string of four characters governing the type of
+propagation.
+
+<P>
+The first character is <TT>'g'</TT> if GVD (i.e. <!-- MATH
+ $\beta_{2},\,\beta_{3}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="55" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img52.png"
+ ALT="$ \beta_{2},\,\beta_{3}$"></SPAN>)
+is on or <TT>'-'</TT> in absence of GVD. Note that with <TT>'sepfields'</TT>
+in <A HREF="create_field.html#sec:create_field">create_field</A> this function accounts
+for the walkoff effect even with the GVD flag set to <TT>'-'</TT>.
+
+<P>
+The second character is <TT>'p'</TT> for propagation of a polarized
+field in presence of birefringence and PMD or <TT>'-'</TT> in absence
+of such effects. 
+
+<P>
+The third is <TT>'s'</TT> if SPM is on or<TT> '-'</TT> in absence
+of SPM. Likewise, the fourth character is <TT>'x'</TT> or <TT>'-'</TT>
+in presence/absence of XPM. 
+
+<P>
+The most complete case is <TT>FLAG='gpsx'</TT> and corresponds to
+propagation in presence of fiber GVD + PMD + SPM + XPM.
+
+<P>
+The fourth character of FLAG is active only with channels separated
+(see option <TT>'sepfields'</TT> in <A HREF="create_field.html#sec:create_field">create_field</A>).
+In this case, the propagation neglects the effect of four-wave mixing,
+which can be taken in account only by combining all channels into
+a unique field and hence it is a special case of SPM. 
+<BR>
+<P>
+<TT>OUT=FIBER(X,FLAG)</TT> returns in <TT>OUT </TT>a struct containing
+the birefringence parameters used by <TT>FIBER</TT>: 
+
+<UL>
+<LI><TT>OUT.db0</TT> = birefringence [rad] at <TT>GSTATE.FN=0</TT>
+(see <A HREF="reset_all.html#sec:reset_all">reset_all</A>). 
+</LI>
+<LI><TT>OUT.theta</TT> = azimuth [rad] of all the PMFs composing the
+fiber. 
+</LI>
+<LI><TT>OUT.epsilon</TT> = ellipticity [rad] of all the PMFs composing
+the fiber. 
+</LI>
+<LI><TT>OUT.dgd</TT> = DGD [symbols]. 
+</LI>
+<LI><TT>OUT.lcorr</TT> = length [m] of each PMF trunk. 
+</LI>
+<LI><TT>OUT.betat</TT> = beta(omega), i.e. scalar phase shift [rad]
+including GVD, slope,etc, where omega/2/pi is the vector of FFT frequencies.
+<TT>betat</TT> is common to both polarizations. 
+</LI>
+<LI><TT>OUT.db1</TT> = differential phase shift [rad] induced by PMD. 
+</LI>
+</UL>
+<TT>OUT</TT> can be used to recover the PMD transfer matrix of the
+fiber (see <A HREF="inverse_pmd.html#sec:inverse_pmd">inverse_pmd</A>). The CNLSE is
+described as the concatenation of <TT>X.nplates</TT> PMF trunks, each
+with principal states of polarization randomly distributed over the
+Poincaré sphere. Each PMF has constant DGD and randomly distributed
+birefringence. The nonlinearity is inserted after a certain number
+of trunks, depending on <TT>X.dzmax</TT> and <TT>X.dphimax</TT>. The
+diagram is the following in Fig.&nbsp;<A HREF="#fig:PMD_step">2.4</A>:
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:PMD_step"></A><A NAME="5663"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 2.4:</STRONG>
+Concatenation of linear and nonlinear steps.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV><IMG
+  WIDTH="700" HEIGHT="68" ALIGN="BOTTOM" BORDER="0"
+ SRC="./diagram_SSFM.png"
+ ALT="Image diagram_SSFM">
+
+<P>
+
+<P></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+where PMF k, k=1,2,... is a PMF fiber randomly chosen on the Poincaré
+sphere.
+<BR>
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=400> 
+<B>Note 1</B>: The DGD is in [symbols]. The DGD expressed in [ps]
+is <TT>x.dgd/GSTATE.SYMBOLRATE*1e3.</TT>
+
+<P>
+<B>Note 2</B>: <TT>FIBER</TT> updates the global variables <TT>GSTATE.DELAY</TT>
+and <TT>GSTATE.DISP</TT>. At the output of the fiber <TT>GSTATE.DISP</TT>
+is increased of <TT>X.disp*X.length*1e-3</TT> [ps/nm] compared
+to the fiber input. </TD>
+</TR>
+</TABLE>
+
+<P>
+
+<H2><A NAME="SECTION002183000000000000000">
+See also</A>
+</H2>
+
+<P>
+<A HREF="fibergui.html#sec:fibergui">fiber_gui</A>, <A HREF="NLSE.html#sec:NLSE">NLSE</A>, <A HREF="Numerical_solution_NLSE_SSF.html#sec:SSFM">SSFM</A>
+
+<P>
+
+<H2><A NAME="SECTION002184000000000000000">
+References</A>
+</H2>
+
+<P>
+A nice reference about the NLSE can be found in [<A
+ HREF="Bibliography.html#Agrawal">1</A>]. See
+also the tutorial about the <A HREF="NLSE.html#sec:NLSE">NLSE</A> in Optilux.
+Concerning the choice of the step see Section&nbsp;<A HREF="Numerical_solution_NLSE_SSF.html#sub:Step-choice">3.4.1</A>.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html427"
+  HREF="fibergui.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html425"
+  HREF="List_Functions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html419"
+  HREF="qi_modulator.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html428"
+  HREF="fibergui.html">fibergui</A>
+<B> Up:</B> <A NAME="tex2html426"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html420"
+  HREF="qi_modulator.html">qi_modulator</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

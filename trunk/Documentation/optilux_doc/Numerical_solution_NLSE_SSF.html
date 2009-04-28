@@ -1,0 +1,1168 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Numerical solution of the NLSE: SSFM </TITLE>
+<META NAME="description" CONTENT="Numerical solution of the NLSE: SSFM ">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="previous" HREF="NLSE_in_WDM_case.html">
+<LINK REL="up" HREF="Background.html">
+<LINK REL="next" HREF="Bibliography.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html1030"
+  HREF="Bibliography.html">Bibliography</A>
+<B>Up:</B> <A NAME="tex2html1028"
+  HREF="Background.html">Background</A>
+<B> Previous:</B> <A NAME="tex2html1024"
+  HREF="NLSE_in_WDM_case.html">NLSE in the WDM case</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION00340000000000000000"></A><A NAME="sec:SSFM"></A>
+<BR>
+Numerical solution of the NLSE: SSFM 
+</H1>
+
+<P>
+The split-step Fourier Method (SSFM) is an efficient algorithm for
+the numerical solution of the NLSE. It is a special application of
+the splitting method for solving a PDE. Generally speaking, the method
+is useful to face out the problem [<A
+ HREF="Bibliography.html#ssfm_jstor">43</A>]:<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:split_general"></A><!-- MATH
+ \begin{equation}
+\frac{\partial A(z,t)}{\partial z}={\cal D}A(z,t)
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="169" HEIGHT="64" ALIGN="MIDDLE" BORDER="0"
+ SRC="img303.png"
+ ALT="$\displaystyle \frac{\partial A(z,t)}{\partial z}={\cal D}A(z,t)$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">19</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+where <SPAN CLASS="MATH"><IMG
+ WIDTH="20" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img304.png"
+ ALT="$ {\cal D}$"></SPAN> is a differential operator that can be written in
+the form <!-- MATH
+ ${\cal D}={\cal L}+{\cal N}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="100" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img305.png"
+ ALT="$ {\cal D}={\cal L}+{\cal N}$"></SPAN>, being <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img306.png"
+ ALT="$ {\cal L}$"></SPAN> and <SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img307.png"
+ ALT="$ {\cal N}$"></SPAN>
+differential operators as well, such that:
+<BR>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray*}
+\frac{\partial A}{\partial z} & = & {\cal L}A\\
+\frac{\partial A}{\partial z} & = & {\cal N}A
+\end{eqnarray*}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="35" HEIGHT="62" ALIGN="MIDDLE" BORDER="0"
+ SRC="img308.png"
+ ALT="$\displaystyle \frac{\partial A}{\partial z}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="20" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img43.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="33" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img309.png"
+ ALT="$\displaystyle {\cal L}A$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="35" HEIGHT="62" ALIGN="MIDDLE" BORDER="0"
+ SRC="img308.png"
+ ALT="$\displaystyle \frac{\partial A}{\partial z}$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="20" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img43.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="38" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img310.png"
+ ALT="$\displaystyle {\cal N}A$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+<P>
+are two differential equations easy to solve. This is the case of
+the NLSE where closed form solutions exist with only dispersion or
+with only nonlinearity. If <SPAN CLASS="MATH"><IMG
+ WIDTH="20" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img304.png"
+ ALT="$ {\cal D}$"></SPAN> does not depends on <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img93.png"
+ ALT="$ z$"></SPAN> and
+<SPAN CLASS="MATH"><IMG
+ WIDTH="35" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img311.png"
+ ALT="$ {\cal D}A$"></SPAN> is continuous with continuous derivatives, from the Peano-Picard-Liouville
+theorem the following succession in <SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img312.png"
+ ALT="$ n$"></SPAN> uniformly converges to the
+exact solution of (<A HREF="#eq:split_general">3.19</A>):<P><!-- MATH
+ \begin{displaymath}
+\frac{\partial A_{n+1}(z,t)}{\partial z}={\cal D}A_{n}(z,t)
+\end{displaymath}
+ -->
+</P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<IMG
+ WIDTH="209" HEIGHT="64" ALIGN="MIDDLE" BORDER="0"
+ SRC="img313.png"
+ ALT="$\displaystyle \frac{\partial A_{n+1}(z,t)}{\partial z}={\cal D}A_{n}(z,t)$">
+</DIV><P></P>
+yielding a solution that can formally be written as:<P><!-- MATH
+ \begin{displaymath}
+A(z,t)=\exp\left({\cal D}z\right)A(0,t)
+\end{displaymath}
+ -->
+</P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<IMG
+ WIDTH="213" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img314.png"
+ ALT="$\displaystyle A(z,t)=\exp\left({\cal D}z\right)A(0,t)$">
+</DIV><P></P>
+
+<P>
+where the exponential makes sense only after writing it into a series
+form:<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:series_exp"></A><!-- MATH
+ \begin{equation}
+\exp\left({\cal D}z\right)=\sum_{n=0}^{\infty}z^{n}\frac{{\cal D}^{n}}{n!}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="184" HEIGHT="72" ALIGN="MIDDLE" BORDER="0"
+ SRC="img315.png"
+ ALT="$\displaystyle \exp\left({\cal D}z\right)=\sum_{n=0}^{\infty}z^{n}\frac{{\cal D}^{n}}{n!}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">20</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+
+<P>
+and <!-- MATH
+ ${\cal D}^{n}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="31" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img316.png"
+ ALT="$ {\cal D}^{n}$"></SPAN> means the application of <SPAN CLASS="MATH"><IMG
+ WIDTH="20" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img304.png"
+ ALT="$ {\cal D}$"></SPAN> <SPAN CLASS="MATH"><IMG
+ WIDTH="17" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img312.png"
+ ALT="$ n$"></SPAN> times.
+If <SPAN CLASS="MATH"><IMG
+ WIDTH="20" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img304.png"
+ ALT="$ {\cal D}$"></SPAN> is non-constant the solution is more complicated. However,
+as we will see next, such operator is usually evaluated over small
+steps where it can be assumed almost constant. A possible generalization
+of the problem is with <!-- MATH
+ ${\cal D}=g(z){\cal D}_{1}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="103" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img317.png"
+ ALT="$ {\cal D}=g(z){\cal D}_{1}$"></SPAN> with <SPAN CLASS="MATH"><IMG
+ WIDTH="39" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img318.png"
+ ALT="$ g(z)$"></SPAN> a
+continuous function with continuous derivative and <!-- MATH
+ ${\cal D}_{1}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="28" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img319.png"
+ ALT="$ {\cal D}_{1}$"></SPAN>
+a constant differential operator, yielding <!-- MATH
+ $\exp\left({\cal D}_{1}\int_{0}^{z}g(x)dx\right)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="162" HEIGHT="42" ALIGN="MIDDLE" BORDER="0"
+ SRC="img320.png"
+ ALT="$ \exp\left({\cal D}_{1}\int_{0}^{z}g(x)dx\right)$"></SPAN>
+instead of <!-- MATH
+ $\exp\left({\cal D}z\right)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="77" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img321.png"
+ ALT="$ \exp\left({\cal D}z\right)$"></SPAN>.
+
+<P>
+Usually <!-- MATH
+ $\exp\left({\cal D}z\right)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="77" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img321.png"
+ ALT="$ \exp\left({\cal D}z\right)$"></SPAN> is unknown or very tedious to
+evaluate, while it is easy to evaluate <!-- MATH
+ $\exp\left({\cal L}z\right)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="75" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img322.png"
+ ALT="$ \exp\left({\cal L}z\right)$"></SPAN>
+and <!-- MATH
+ $\exp\left({\cal N}z\right)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="80" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img323.png"
+ ALT="$ \exp\left({\cal N}z\right)$"></SPAN>. Using (<A HREF="#eq:series_exp">3.20</A>) it
+is simple to show that:
+<BR>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:standard_splitting"></A><!-- MATH
+ \begin{eqnarray}
+\exp\left({\cal D}z\right) & = & \exp\left(\left({\cal L}+{\cal N}\right)z\right)=\exp\left({\cal L}z\right)\cdot\exp\left({\cal N}z\right)+O\left(z^{2}\right)\nonumber \\
+ & = & \exp\left({\cal N}z\right)\cdot\exp\left({\cal L}z\right)+O\left(z^{2}\right)
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="77" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img324.png"
+ ALT="$\displaystyle \exp\left({\cal D}z\right)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="20" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img43.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="394" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
+ SRC="img325.png"
+ ALT="$\displaystyle \exp\left(\left({\cal L}+{\cal N}\right)z\right)=\exp\left({\cal L}z\right)\cdot\exp\left({\cal N}z\right)+O\left(z^{2}\right)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="20" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img43.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="240" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
+ SRC="img326.png"
+ ALT="$\displaystyle \exp\left({\cal N}z\right)\cdot\exp\left({\cal L}z\right)+O\left(z^{2}\right)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">21</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+<P>
+where <!-- MATH
+ $O\left(z^{2}\right)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="59" HEIGHT="42" ALIGN="MIDDLE" BORDER="0"
+ SRC="img327.png"
+ ALT="$ O\left(z^{2}\right)$"></SPAN> indicates a term that is bounded by a
+constant times <SPAN CLASS="MATH"><IMG
+ WIDTH="23" HEIGHT="19" ALIGN="BOTTOM" BORDER="0"
+ SRC="img328.png"
+ ALT="$ z^{2}$"></SPAN>. Such term is zero only when the operators
+<SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img306.png"
+ ALT="$ {\cal L}$"></SPAN> and <SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img307.png"
+ ALT="$ {\cal N}$"></SPAN> commute, i.e. <!-- MATH
+ ${\cal L}{\cal N}={\cal N}{\cal L}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="94" HEIGHT="18" ALIGN="BOTTOM" BORDER="0"
+ SRC="img329.png"
+ ALT="$ {\cal L}{\cal N}={\cal N}{\cal L}$"></SPAN>.
+Unfortunately this is not the case of the NLSE, hence applying separately
+the two operators leaves an error that decreases quadratically by
+decreasing <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img93.png"
+ ALT="$ z$"></SPAN>. The <!-- MATH
+ $O\left(z^{2}\right)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="59" HEIGHT="42" ALIGN="MIDDLE" BORDER="0"
+ SRC="img327.png"
+ ALT="$ O\left(z^{2}\right)$"></SPAN> is usually called local
+truncation error. The SSFM consists therefore in subdividing the fiber
+in small steps and by applying in each step the two operators separately
+(splitting). Summarizing, if <!-- MATH
+ $z_{k+1}=h_{k}+z_{k}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="129" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img330.png"
+ ALT="$ z_{k+1}=h_{k}+z_{k}$"></SPAN> with <SPAN CLASS="MATH"><IMG
+ WIDTH="57" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img331.png"
+ ALT="$ z_{0}=0$"></SPAN>
+and <SPAN CLASS="MATH"><IMG
+ WIDTH="69" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img332.png"
+ ALT="$ z_{M}=L$"></SPAN> being <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img333.png"
+ ALT="$ L$"></SPAN> the fiber length, the algorithm is the following:<P><!-- MATH
+ \begin{displaymath}
+A\left(z_{k+1},t\right)=\exp\left({\cal L}h_{k}\right)\cdot\exp\left({\cal N}h_{k}\right)A\left(z_{k},t\right),\quad k=0,1,\ldots,M-1
+\end{displaymath}
+ -->
+</P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<IMG
+ WIDTH="552" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img334.png"
+ ALT="$\displaystyle A\left(z_{k+1},t\right)=\exp\left({\cal L}h_{k}\right)\cdot\exp\left({\cal N}h_{k}\right)A\left(z_{k},t\right),\quad k=0,1,\ldots,M-1$">
+</DIV><P></P>
+
+<P>
+If the steps are sufficiently small, the local truncation error is
+``small'' as well and hopefully <SPAN CLASS="MATH"><IMG
+ WIDTH="62" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img335.png"
+ ALT="$ A(L,t)$"></SPAN> is very close to the
+exact solution.
+
+<P>
+The local truncation error can be reduced to <!-- MATH
+ $O\left(z^{3}\right)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="59" HEIGHT="42" ALIGN="MIDDLE" BORDER="0"
+ SRC="img336.png"
+ ALT="$ O\left(z^{3}\right)$"></SPAN>
+by using the two alternative splitting:
+<BR>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:symmetric-forms"></A><!-- MATH
+ \begin{eqnarray}
+\exp\left({\cal D}z\right) & = & \exp\left(\frac{{\cal L}}{2}z\right)\cdot\exp\left({\cal N}z\right)\cdot\exp\left(\frac{{\cal L}}{2}z\right)+O\left(z^{3}\right)\nonumber \\
+\exp\left({\cal D}z\right) & = & \exp\left(\frac{{\cal N}}{2}z\right)\cdot\exp\left({\cal L}z\right)\cdot\exp\left(\frac{{\cal N}}{2}z\right)+O\left(z^{3}\right)
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="77" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img324.png"
+ ALT="$\displaystyle \exp\left({\cal D}z\right)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="20" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img43.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="359" HEIGHT="65" ALIGN="MIDDLE" BORDER="0"
+ SRC="img337.png"
+ ALT="$\displaystyle \exp\left(\frac{{\cal L}}{2}z\right)\cdot\exp\left({\cal N}z\right)\cdot\exp\left(\frac{{\cal L}}{2}z\right)+O\left(z^{3}\right)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="77" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img324.png"
+ ALT="$\displaystyle \exp\left({\cal D}z\right)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="20" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img43.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="364" HEIGHT="65" ALIGN="MIDDLE" BORDER="0"
+ SRC="img338.png"
+ ALT="$\displaystyle \exp\left(\frac{{\cal N}}{2}z\right)\cdot\exp\left({\cal L}z\right)\cdot\exp\left(\frac{{\cal N}}{2}z\right)+O\left(z^{3}\right)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">22</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+<P>
+The verify can be done by substituting the exponentials with their
+series expansion up to <SPAN CLASS="MATH"><IMG
+ WIDTH="23" HEIGHT="19" ALIGN="BOTTOM" BORDER="0"
+ SRC="img339.png"
+ ALT="$ z^{3}$"></SPAN> in (<A HREF="#eq:symmetric-forms">3.22</A>).
+
+<P>
+Such idea, called the symmetric split-step, resemble the trapezoidal
+rule for numerically evaluate integrals [<A
+ HREF="Bibliography.html#mathews_numerical_2004">44</A>,<A
+ HREF="Bibliography.html#numrecipes">22</A>].
+Note that in principle the symmetric split-step requires three exponential
+evaluations instead of two of the standard split-step. However, when
+many steps are applied successively and the step sizes are known a
+priori, adjacent operators can be combined into a single operator,
+yielding:
+<BR>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray*}
+A\left(L,t\right) & = & \left\{ \exp\left(\frac{{\cal N}}{2}h_{M-1}\right)\cdot\exp\left({\cal L}h_{M-1}\right)\cdot\exp\left({\cal N}\left(h_{M-1}+h_{M-2}\right)\right)\cdot\ldots\right.\\
+ &  & \left.\cdot\exp\left({\cal N}\left(h_{0}+h_{1}\right)\right)\cdot\exp\left({\cal L}h_{0}\right)\exp\left(\frac{{\cal N}}{2}h_{0}\right)\right\} A(0,t)
+\end{eqnarray*}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT"><IMG
+ WIDTH="66" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img340.png"
+ ALT="$\displaystyle A\left(L,t\right)$"></TD>
+<TD WIDTH="10" ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="20" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img43.png"
+ ALT="$\displaystyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="523" HEIGHT="65" ALIGN="MIDDLE" BORDER="0"
+ SRC="img341.png"
+ ALT="$\displaystyle \left\{ \exp\left(\frac{{\cal N}}{2}h_{M-1}\right)\cdot\exp\left(...
+...ht)\cdot\exp\left({\cal N}\left(h_{M-1}+h_{M-2}\right)\right)\cdot\ldots\right.$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP WIDTH="50%" ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP WIDTH="50%"><IMG
+ WIDTH="431" HEIGHT="65" ALIGN="MIDDLE" BORDER="0"
+ SRC="img342.png"
+ ALT="$\displaystyle \left.\cdot\exp\left({\cal N}\left(h_{0}+h_{1}\right)\right)\cdot...
+...eft({\cal L}h_{0}\right)\exp\left(\frac{{\cal N}}{2}h_{0}\right)\right\} A(0,t)$"></TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+&nbsp;</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL">
+
+<P>
+For the NLSE, the SSFM can be applied to the form (<A HREF="NLSE.html#eq:NLSE_x_U">3.8</A>),
+while the electric field <!-- MATH
+ $A\left(z_{k},t\right)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="71" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img343.png"
+ ALT="$ A\left(z_{k},t\right)$"></SPAN> of (<A HREF="NLSE.html#eq:NLSE">3.1</A>)
+can be recovered by applying the step-attenuation at the end of each
+step. The operator <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img306.png"
+ ALT="$ {\cal L}$"></SPAN> is therefore a constant linear operator:<P><!-- MATH
+ \begin{displaymath}
+{\cal L}z=z\left(-\beta_{1}\frac{\partial}{\partial t}+j\beta_{2}\frac{\partial^{2}}{\partial t^{2}}+\beta_{3}\frac{\partial^{3}}{\partial t^{3}}\right)
+\end{displaymath}
+ -->
+</P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<IMG
+ WIDTH="306" HEIGHT="66" ALIGN="MIDDLE" BORDER="0"
+ SRC="img344.png"
+ ALT="$\displaystyle {\cal L}z=z\left(-\beta_{1}\frac{\partial}{\partial t}+j\beta_{2}...
+...artial^{2}}{\partial t^{2}}+\beta_{3}\frac{\partial^{3}}{\partial t^{3}}\right)$">
+</DIV><P></P>
+
+<P>
+while <!-- MATH
+ $\exp\left({\cal N}h_{k}\right)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="91" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img345.png"
+ ALT="$ \exp\left({\cal N}h_{k}\right)$"></SPAN> applied between coordinate
+<SPAN CLASS="MATH"><IMG
+ WIDTH="58" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img346.png"
+ ALT="$ z=z_{k}$"></SPAN> and <!-- MATH
+ $z=z_{k}+h_{k}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="102" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img347.png"
+ ALT="$ z=z_{k}+h_{k}$"></SPAN> is generalized in <!-- MATH
+ $\exp\left(\int_{0}^{h_{k}}e^{-\alpha x}dx{\cal N}\left(z_{k}\right)\right)=\exp\left(-L_{\text{eff}}\left(h_{k}\right){\cal N}\left(z_{k}\right)\right)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="421" HEIGHT="53" ALIGN="MIDDLE" BORDER="0"
+ SRC="img348.png"
+ ALT="$ \exp\left(\int_{0}^{h_{k}}e^{-\alpha x}dx{\cal N}\left(z_{k}\right)\right)=\exp\left(-L_{\text{eff}}\left(h_{k}\right){\cal N}\left(z_{k}\right)\right)$"></SPAN>
+with <!-- MATH
+ ${\cal N}\left(z_{k}\right)=\left|A\left(z_{k},t\right)\right|^{2}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="170" HEIGHT="46" ALIGN="MIDDLE" BORDER="0"
+ SRC="img349.png"
+ ALT="$ {\cal N}\left(z_{k}\right)=\left\vert A\left(z_{k},t\right)\right\vert^{2}$"></SPAN>
+a <SPAN CLASS="MATH"><IMG
+ WIDTH="15" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img93.png"
+ ALT="$ z$"></SPAN>-independent nonlinear operator and <P><!-- MATH
+ \begin{displaymath}
+L_{\text{eff}}\left(h_{k}\right)=\left(1-\exp\left(-\alpha h_{k}\right)\right)/\alpha
+\end{displaymath}
+ -->
+</P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<IMG
+ WIDTH="265" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img350.png"
+ ALT="$\displaystyle L_{\text{eff}}\left(h_{k}\right)=\left(1-\exp\left(-\alpha h_{k}\right)\right)/\alpha$">
+</DIV><P></P>
+the effective length due to the fiber attenuation <SPAN CLASS="MATH"><IMG
+ WIDTH="18" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img96.png"
+ ALT="$ \alpha$"></SPAN>. 
+
+<P>
+The linear operator is efficiently evaluated in the Fourier domain
+while the nonlinear operator in the time domain. Such approach calls
+for the FFT and IFFT algorithm for switching between the two domains
+efficiently.
+
+<P>
+
+<H2><A NAME="SECTION00341000000000000000"></A><A NAME="sub:Step-choice"></A>
+<BR>
+Step choice
+</H2>
+
+<P>
+The choice of the SSFM step size is an hard task for which is difficult
+to give an universal answer, suitable for any optical system. The
+most accurate approach for choosing the SSFM step size is to run many
+simulations for decreasing step sizes until some convergence is observed.
+The convergence criterion is based on a distance measurement applied
+to some parameter, like the electric field, the sensitivity penalty,
+etc. 
+
+<P>
+In Optilux the step can be chosen in different ways. These calls are
+active only in the nonlinear regime where the SSFM is an approximate
+algorithm. In cases where the exact solution is known, Optilux ignores
+the step method and evaluates the solution in a single step (e.g.
+with only GVD). 
+
+<P>
+Assuming that fiber is called as <TT>fiber(x,flag)</TT> we have the
+following options for the step.
+
+<P>
+
+<H3><A NAME="SECTION00341100000000000000"></A><A NAME="sub:Constant-step-size"></A>
+<BR>
+Constant step size
+</H3>
+
+<P>
+Simply call fiber with <TT>x.dzmax=C</TT> and <TT>x.dphimax=Inf</TT>.
+The step is fixed and equal to <TT>C</TT> [m]. This method uses
+a standard-SSFM.
+
+<P>
+
+<H3><A NAME="SECTION00341200000000000000"></A><A NAME="sub:Constant-nonlinear-phase"></A>
+<BR>
+Constant nonlinear phase rotation x step 
+</H3>
+
+<P>
+The step is adaptively chosen so as to have a maximum nonlinear phase
+rotation (<A HREF="NLSE_in_WDM_case.html#eq:NL-phase-sepfields">3.18</A>) over the step equal to <TT>x.dphimax</TT>
+[rad]. If also <TT>x.dzmax </TT>exists and satisfies <TT>x.dzmax&lt;x.length</TT>,
+the step is chosen in the same way, but cannot be larger than <TT>x.dzmax</TT>.
+This method allows short steps in regions of high power (usually at
+the beginning of the fiber) and large steps in regions of low power
+(usually at the end of the fiber). With a unique field the nonlinear
+phase rotation is the one of SPM; with separate fields it also accounts
+for XPM. See Section&nbsp;<A HREF="NLSE_in_WDM_case.html#sub:Unique-and-separate">3.3.1</A> for more details.
+The method of constant nonlinear phase rotation per  step uses a standard
+SSFM. See [<A
+ HREF="Bibliography.html#Sinkin_ssfm">45</A>,<A
+ HREF="Bibliography.html#splitstep_zhang">46</A>] for more details about
+the method.
+
+<P>
+
+<H3><A NAME="SECTION00341300000000000000"></A><A NAME="sub:Adaptive-step-based"></A>
+<BR>
+Adaptive step based on the local error 
+</H3>
+
+<OL>
+<LI>This method implements an adaptive search of the step based on local
+information as described in [<A
+ HREF="Bibliography.html#Feldman">47</A>]. The method is similar
+to the algorithm proposed in [<A
+ HREF="Bibliography.html#Sinkin_ssfm">45</A>], except for the step
+updating rule. With the additional option <TT>x.ltol</TT>, the step
+is adaptively chosen so as to have a local truncation error equal
+to <TT>x.ltol</TT>. The local truncation error is defined as:<P><!-- MATH
+ \begin{displaymath}
+e_{l}=\max\left(\left\Vert A_{1}-A_{2}\right\Vert \right)
+\end{displaymath}
+ -->
+</P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<IMG
+ WIDTH="186" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img351.png"
+ ALT="$\displaystyle e_{l}=\max\left(\left\Vert A_{1}-A_{2}\right\Vert \right)$">
+</DIV><P></P>
+being <SPAN CLASS="MATH"><IMG
+ WIDTH="28" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img352.png"
+ ALT="$ A_{1}$"></SPAN> the electric field evaluated after the step and <SPAN CLASS="MATH"><IMG
+ WIDTH="28" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img353.png"
+ ALT="$ A_{2}$"></SPAN>
+the electric field evaluated after propagating in the step twice,
+each with an halved step compared with <SPAN CLASS="MATH"><IMG
+ WIDTH="28" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img352.png"
+ ALT="$ A_{1}$"></SPAN>. This method is based
+on the symmetric-SSFM. Optilux uses the following norm for a matrix
+y:<P><!-- MATH
+ \begin{displaymath}
+\left\Vert y\right\Vert =\mbox{\texttt{max(max(abs(y)));}}
+\end{displaymath}
+ -->
+</P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<IMG
+ WIDTH="54" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img354.png"
+ ALT="$\displaystyle \left\Vert y\right\Vert =$"><TT>max(max(abs(y)));</TT>
+</DIV><P></P>
+With such method x.dphimax is used to get a trial for the first step
+only. Please, note that the adaptive step is active for scalar propagations
+only (PMD flag is <TT>'-'</TT>).
+<BR>
+The basic idea behind the adaptive step method is the following.
+Denote with <!-- MATH
+ $A_{e}(z,t)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="67" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img355.png"
+ ALT="$ A_{e}(z,t)$"></SPAN> the exact solution of the NLSE given the
+initial condition <!-- MATH
+ $A_{e}(z_{n},t)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="77" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img356.png"
+ ALT="$ A_{e}(z_{n},t)$"></SPAN>, and with <!-- MATH
+ $A_{1}(z,t)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="68" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img357.png"
+ ALT="$ A_{1}(z,t)$"></SPAN> the approximate
+estimation of <!-- MATH
+ $A_{e}(z,t)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="67" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img355.png"
+ ALT="$ A_{e}(z,t)$"></SPAN> using the symmetric-SSFM with a single
+step from <SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img358.png"
+ ALT="$ z_{n}$"></SPAN> to <SPAN CLASS="MATH"><IMG
+ WIDTH="94" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img359.png"
+ ALT="$ z=z_{n}+h$"></SPAN> . From the theory we have that
+the following relation holds:<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:one_step"></A><!-- MATH
+ \begin{equation}
+A_{1}(z_{n}+h,t)=A_{e}(z_{n}+h,t)+Kh^{3}+O\left(h^{4}\right)
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="380" HEIGHT="43" ALIGN="MIDDLE" BORDER="0"
+ SRC="img360.png"
+ ALT="$\displaystyle A_{1}(z_{n}+h,t)=A_{e}(z_{n}+h,t)+Kh^{3}+O\left(h^{4}\right)$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">23</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+where <SPAN CLASS="MATH"><IMG
+ WIDTH="42" HEIGHT="19" ALIGN="BOTTOM" BORDER="0"
+ SRC="img361.png"
+ ALT="$ Kh^{3}$"></SPAN> is the local truncation error, while <!-- MATH
+ $O\left(h^{4}\right)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="60" HEIGHT="42" ALIGN="MIDDLE" BORDER="0"
+ SRC="img362.png"
+ ALT="$ O\left(h^{4}\right)$"></SPAN>
+is a term that we assume negligible compared to <SPAN CLASS="MATH"><IMG
+ WIDTH="42" HEIGHT="19" ALIGN="BOTTOM" BORDER="0"
+ SRC="img361.png"
+ ALT="$ Kh^{3}$"></SPAN>. <SPAN CLASS="MATH"><IMG
+ WIDTH="87" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img363.png"
+ ALT="$ K=K(t)$"></SPAN>
+is an unknown multiplying factor at this stage. Let us now advance
+from <SPAN CLASS="MATH"><IMG
+ WIDTH="59" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img364.png"
+ ALT="$ z=z_{n}$"></SPAN> to <SPAN CLASS="MATH"><IMG
+ WIDTH="94" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img359.png"
+ ALT="$ z=z_{n}+h$"></SPAN> with two SSFM steps, each of length
+<SPAN CLASS="MATH"><IMG
+ WIDTH="35" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img365.png"
+ ALT="$ h/2$"></SPAN>. Along the first step of length <SPAN CLASS="MATH"><IMG
+ WIDTH="35" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img365.png"
+ ALT="$ h/2$"></SPAN> the local error is <!-- MATH
+ $K\left(h/2\right)^{3}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="79" HEIGHT="46" ALIGN="MIDDLE" BORDER="0"
+ SRC="img366.png"
+ ALT="$ K\left(h/2\right)^{3}$"></SPAN>.
+Under the assumption that the <!-- MATH
+ $O\left(h^{4}\right)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="60" HEIGHT="42" ALIGN="MIDDLE" BORDER="0"
+ SRC="img362.png"
+ ALT="$ O\left(h^{4}\right)$"></SPAN> term is negligible,
+we can say that even along the second step we have an error <SPAN CLASS="MATH"><IMG
+ WIDTH="42" HEIGHT="19" ALIGN="BOTTOM" BORDER="0"
+ SRC="img361.png"
+ ALT="$ Kh^{3}$"></SPAN>,
+with the same <SPAN CLASS="MATH"><IMG
+ WIDTH="23" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img367.png"
+ ALT="$ K$"></SPAN> since (<A HREF="#eq:one_step">3.23</A>) <SPAN CLASS="MATH"><IMG
+ WIDTH="23" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img367.png"
+ ALT="$ K$"></SPAN> comes from a Taylor
+expansion evaluated in <SPAN CLASS="MATH"><IMG
+ WIDTH="59" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img364.png"
+ ALT="$ z=z_{n}$"></SPAN>. Summing the errors, we have that
+the two-step SSFM gives the following answer:<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:two-step"></A><!-- MATH
+ \begin{equation}
+A_{2}(z_{n}+h,t)=A_{e}(z_{n}+h,t)+2K\left(\frac{h}{2}\right)^{3}+O\left(h^{4}\right)
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="426" HEIGHT="73" ALIGN="MIDDLE" BORDER="0"
+ SRC="img368.png"
+ ALT="$\displaystyle A_{2}(z_{n}+h,t)=A_{e}(z_{n}+h,t)+2K\left(\frac{h}{2}\right)^{3}+O\left(h^{4}\right)$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">24</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+which is more accurate than <SPAN CLASS="MATH"><IMG
+ WIDTH="28" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img352.png"
+ ALT="$ A_{1}$"></SPAN>. We can evaluate the local error
+between <!-- MATH
+ $A_{1}(z_{n}+h,t)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="111" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img369.png"
+ ALT="$ A_{1}(z_{n}+h,t)$"></SPAN> and <!-- MATH
+ $A_{2}(z_{n}+h,t)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="111" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img370.png"
+ ALT="$ A_{2}(z_{n}+h,t)$"></SPAN> which is our indicator
+of the step reliability:<P><!-- MATH
+ \begin{displaymath}
+e_{L}=\max_{t}\left(\left|A_{1}-A_{2}\right|\right)\simeq\frac{3}{4}K_{m}h^{3}
+\end{displaymath}
+ -->
+</P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<IMG
+ WIDTH="272" HEIGHT="60" ALIGN="MIDDLE" BORDER="0"
+ SRC="img371.png"
+ ALT="$\displaystyle e_{L}=\max_{t}\left(\left\vert A_{1}-A_{2}\right\vert\right)\simeq\frac{3}{4}K_{m}h^{3}$">
+</DIV><P></P>
+being <!-- MATH
+ $K_{m}={\displaystyle \max_{t}}\left(K(t)\right)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="153" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img372.png"
+ ALT="$ K_{m}={\displaystyle \max_{t}}\left(K(t)\right)$"></SPAN>. From the
+local error we introduce the local error rate x unit step:<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:locerr"></A><!-- MATH
+ \begin{equation}
+r=\frac{e_{L}}{h}\simeq\frac{3}{4}K_{m}h^{2}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="154" HEIGHT="60" ALIGN="MIDDLE" BORDER="0"
+ SRC="img373.png"
+ ALT="$\displaystyle r=\frac{e_{L}}{h}\simeq\frac{3}{4}K_{m}h^{2}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">25</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+If <!-- MATH
+ $r>\varepsilon$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="49" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img374.png"
+ ALT="$ r&gt;\varepsilon$"></SPAN>, being <!-- MATH
+ $\varepsilon$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="14" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img219.png"
+ ALT="$ \varepsilon$"></SPAN> a target local error in
+which we trust, the step must be rejected and repeated with a shorter
+one. Otherwise the step is accurate enough (on the basis of our target)
+and accepted. There remain two fundamental questions: how much we
+reduce <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img375.png"
+ ALT="$ h$"></SPAN> in case of failure and what <SPAN CLASS="MATH"><IMG
+ WIDTH="16" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img375.png"
+ ALT="$ h$"></SPAN> can we use for the next
+step in case of success? 
+<BR>
+After multiplying both members of (<A HREF="#eq:locerr">3.25</A>) by <!-- MATH
+ $\varepsilon/r$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="33" HEIGHT="38" ALIGN="MIDDLE" BORDER="0"
+ SRC="img376.png"
+ ALT="$ \varepsilon/r$"></SPAN>
+we have the following:<P></P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay"><A NAME="eq:new-step"></A><!-- MATH
+ \begin{equation}
+\varepsilon\simeq\frac{3}{4}K_{m}\left(\sqrt{\frac{\varepsilon}{r}}h\right)^{2}=\frac{3}{4}K_{m}\left(h^{'}\right)^{2}
+\end{equation}
+ -->
+<TABLE CLASS="equation" CELLPADDING="0" WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE">
+<TD NOWRAP ALIGN="CENTER"><SPAN CLASS="MATH"><IMG
+ WIDTH="288" HEIGHT="76" ALIGN="MIDDLE" BORDER="0"
+ SRC="img377.png"
+ ALT="$\displaystyle \varepsilon\simeq\frac{3}{4}K_{m}\left(\sqrt{\frac{\varepsilon}{r}}h\right)^{2}=\frac{3}{4}K_{m}\left(h^{'}\right)^{2}$"></SPAN></TD>
+<TD NOWRAP CLASS="eqno" WIDTH="10" ALIGN="RIGHT">
+(<SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">26</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+It turns out that the new step <SPAN CLASS="MATH"><IMG
+ WIDTH="22" HEIGHT="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="img378.png"
+ ALT="$ h^{'}$"></SPAN> should give the desired target
+error <!-- MATH
+ $\varepsilon$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="14" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img219.png"
+ ALT="$ \varepsilon$"></SPAN>. To give ourself more confidence in this guess
+we introduce a safety factor by using <!-- MATH
+ $h^{'}=0.9h\sqrt{\varepsilon/r}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="129" HEIGHT="46" ALIGN="MIDDLE" BORDER="0"
+ SRC="img379.png"
+ ALT="$ h^{'}=0.9h\sqrt{\varepsilon/r}$"></SPAN>.
+If <!-- MATH
+ $r>\varepsilon$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="49" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img374.png"
+ ALT="$ r&gt;\varepsilon$"></SPAN> we have <SPAN CLASS="MATH"><IMG
+ WIDTH="59" HEIGHT="46" ALIGN="MIDDLE" BORDER="0"
+ SRC="img380.png"
+ ALT="$ h^{'}&lt;h$"></SPAN>, otherwise the opposite. Such
+a behavior agrees with the intuition besides the adaptive step size,
+e.g. use short steps when the accuracy is small. In Optilux <!-- MATH
+ $\varepsilon$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="14" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img219.png"
+ ALT="$ \varepsilon$"></SPAN>
+is <TT>x.ltol.</TT> Having identified a reasonable method for adapting
+the step, we can further improve the solution. When the step is accepted,
+we could use <SPAN CLASS="MATH"><IMG
+ WIDTH="28" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img353.png"
+ ALT="$ A_{2}$"></SPAN> as candidate to propagate for the next step
+since is more accurate than <SPAN CLASS="MATH"><IMG
+ WIDTH="28" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img352.png"
+ ALT="$ A_{1}$"></SPAN>. But maybe we can use use the
+information inside <SPAN CLASS="MATH"><IMG
+ WIDTH="28" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img352.png"
+ ALT="$ A_{1}$"></SPAN> to increase the accuracy of <SPAN CLASS="MATH"><IMG
+ WIDTH="28" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img353.png"
+ ALT="$ A_{2}$"></SPAN>.
+From (<A HREF="#eq:one_step">3.23</A>) and (<A HREF="#eq:two-step">3.24</A>), we have the following
+relation in <!-- MATH
+ $z=z_{n}+h^{'}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="99" HEIGHT="46" ALIGN="MIDDLE" BORDER="0"
+ SRC="img381.png"
+ ALT="$ z=z_{n}+h^{'}$"></SPAN>:<P><!-- MATH
+ \begin{displaymath}
+A_{R}=\frac{4}{3}A_{2}-\frac{1}{3}A_{1}=A_{e}+O\left(h^{4}\right)
+\end{displaymath}
+ -->
+</P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<IMG
+ WIDTH="280" HEIGHT="60" ALIGN="MIDDLE" BORDER="0"
+ SRC="img382.png"
+ ALT="$\displaystyle A_{R}=\frac{4}{3}A_{2}-\frac{1}{3}A_{1}=A_{e}+O\left(h^{4}\right)$">
+</DIV><P></P>
+which is accurate as <!-- MATH
+ $O\left(h^{4}\right)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="60" HEIGHT="42" ALIGN="MIDDLE" BORDER="0"
+ SRC="img362.png"
+ ALT="$ O\left(h^{4}\right)$"></SPAN>, and hence is a best guess
+than <SPAN CLASS="MATH"><IMG
+ WIDTH="28" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img353.png"
+ ALT="$ A_{2}$"></SPAN>. Such a linear combination is called Richardson extrapolation
+[<A
+ HREF="Bibliography.html#Feldman">47</A>,<A
+ HREF="Bibliography.html#Sinkin_ssfm">45</A>].
+<BR>
+The algorithm is therefore the following: 
+
+<P>
+
+<OL>
+<LI>Evaluate <SPAN CLASS="MATH"><IMG
+ WIDTH="28" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img352.png"
+ ALT="$ A_{1}$"></SPAN> using a single step starting from <SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img358.png"
+ ALT="$ z_{n}$"></SPAN>;
+</LI>
+<LI>Evaluate <SPAN CLASS="MATH"><IMG
+ WIDTH="28" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img353.png"
+ ALT="$ A_{2}$"></SPAN> using two steps starting from <SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img358.png"
+ ALT="$ z_{n}$"></SPAN>;
+</LI>
+<LI>Compute the local error-rate <SPAN CLASS="MATH"><IMG
+ WIDTH="14" HEIGHT="16" ALIGN="BOTTOM" BORDER="0"
+ SRC="img30.png"
+ ALT="$ r$"></SPAN>;
+</LI>
+<LI>Compute <SPAN CLASS="MATH"><IMG
+ WIDTH="22" HEIGHT="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="img378.png"
+ ALT="$ h^{'}$"></SPAN>;
+</LI>
+<LI>If <!-- MATH
+ $r>\varepsilon$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="49" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img374.png"
+ ALT="$ r&gt;\varepsilon$"></SPAN> reject the step and repeat using <SPAN CLASS="MATH"><IMG
+ WIDTH="22" HEIGHT="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="img378.png"
+ ALT="$ h^{'}$"></SPAN>. If
+<!-- MATH
+ $r<\varepsilon$
+ -->
+<SPAN CLASS="MATH"><IMG
+ WIDTH="49" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img383.png"
+ ALT="$ r&lt;\varepsilon$"></SPAN> accept the step and use <SPAN CLASS="MATH"><IMG
+ WIDTH="22" HEIGHT="22" ALIGN="BOTTOM" BORDER="0"
+ SRC="img378.png"
+ ALT="$ h^{'}$"></SPAN> for the next step
+using <SPAN CLASS="MATH"><IMG
+ WIDTH="32" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img384.png"
+ ALT="$ A_{R}$"></SPAN> as initial condition.
+<BR>
+<P>
+</LI>
+</OL>
+</LI>
+</OL>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=400> 
+<B>Note 1</B>: The adaptive step needs to keep memory of three electric
+fields: <SPAN CLASS="MATH"><IMG
+ WIDTH="28" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img352.png"
+ ALT="$ A_{1}$"></SPAN>, <SPAN CLASS="MATH"><IMG
+ WIDTH="28" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img353.png"
+ ALT="$ A_{2}$"></SPAN> and the electric field at the beginning
+of the step in <SPAN CLASS="MATH"><IMG
+ WIDTH="24" HEIGHT="34" ALIGN="MIDDLE" BORDER="0"
+ SRC="img358.png"
+ ALT="$ z_{n}$"></SPAN>. Hence the RAM consumption is at least three
+times larger than the method in Section&nbsp;<A HREF="#sub:Constant-nonlinear-phase">3.4.1.2</A>.
+
+<P>
+<B>Note 2</B>: The adaptive step uses <TT>x.phimax</TT> and <TT>x.dzmax</TT>
+to evaluate the trial for the first step only.
+
+<P>
+<B>Note 3</B>: Remember that the local truncation error differs from
+the global truncation error, i.e. the output error. The relation between
+such errors is generally unknown, but an upper bound can be found
+[<A
+ HREF="Bibliography.html#Feldman">47</A>]. </TD>
+</TR>
+</TABLE>
+
+<P>
+
+<H3><A NAME="SECTION00341400000000000000"></A><A NAME="sub:Adaptive-step-just"></A>
+<BR>
+Adaptive step just in the first step
+</H3>
+
+<P>
+This option is active with the additional flag <TT>x.dphiadapt=true</TT>.
+The first step is evaluated basing on the local truncation error as
+in Section&nbsp;<A HREF="#sub:Adaptive-step-based">3.4.1.3</A>. Once the first step is
+known, <TT>fiber</TT> corrects the value of <TT>x.dphimax</TT> to
+have that step, and then proceeds as for the method of the constant
+nonlinear phase rotation x step. It turns out that the first step
+is evaluated with a symmetric-SSFM, while all the others with a standard
+SSFM.
+<BR>
+<P>
+Summarizing we can set the step by activating the following flags
+(O: optional, *: required):
+
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="CENTER">flag</TD>
+<TD ALIGN="CENTER"><A HREF="#sub:Constant-step-size">3.4.1.1</A></TD>
+<TD ALIGN="CENTER"><A HREF="#sub:Constant-nonlinear-phase">3.4.1.2</A></TD>
+<TD ALIGN="CENTER"><A HREF="#sub:Adaptive-step-based">3.4.1.3</A></TD>
+<TD ALIGN="CENTER"><A HREF="#sub:Adaptive-step-just">3.4.1.4</A></TD>
+</TR>
+<TR><TD ALIGN="CENTER"><TT>x.dzmax</TT></TD>
+<TD ALIGN="CENTER">*</TD>
+<TD ALIGN="CENTER">O</TD>
+<TD ALIGN="CENTER">O</TD>
+<TD ALIGN="CENTER">O</TD>
+</TR>
+<TR><TD ALIGN="CENTER"><TT>x.dphimax</TT></TD>
+<TD ALIGN="CENTER">*</TD>
+<TD ALIGN="CENTER">*</TD>
+<TD ALIGN="CENTER">*</TD>
+<TD ALIGN="CENTER">*</TD>
+</TR>
+<TR><TD ALIGN="CENTER"><TT>x.ltol</TT></TD>
+<TD ALIGN="CENTER">&nbsp;</TD>
+<TD ALIGN="CENTER">&nbsp;</TD>
+<TD ALIGN="CENTER">*</TD>
+<TD ALIGN="CENTER">*</TD>
+</TR>
+<TR><TD ALIGN="CENTER"><TT>x.dphiadapt</TT></TD>
+<TD ALIGN="CENTER">&nbsp;</TD>
+<TD ALIGN="CENTER">&nbsp;</TD>
+<TD ALIGN="CENTER">&nbsp;</TD>
+<TD ALIGN="CENTER">*</TD>
+</TR>
+</TABLE>
+<BR>
+<BR>
+Note that the flag <TT>x.dphimax</TT> is always active since we
+want the user conscious of its choice. In cases where the solution
+of the NLSE is known exactly, the step is automatically set equal
+to the  fiber length.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1029"
+  HREF="Bibliography.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1027"
+  HREF="Background.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1023"
+  HREF="NLSE_in_WDM_case.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html1030"
+  HREF="Bibliography.html">Bibliography</A>
+<B> Up:</B> <A NAME="tex2html1028"
+  HREF="Background.html">Background</A>
+<B> Previous:</B> <A NAME="tex2html1024"
+  HREF="NLSE_in_WDM_case.html">NLSE in the WDM case</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

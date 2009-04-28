@@ -1,0 +1,168 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>phi2pow</TITLE>
+<META NAME="description" CONTENT="phi2pow">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="avg_power.html">
+<LINK REL="previous" HREF="pow2phi.html">
+<LINK REL="up" HREF="List_Functions.html">
+<LINK REL="next" HREF="avg_power.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html713"
+  HREF="avg_power.html">avg_power</A>
+<B>Up:</B> <A NAME="tex2html711"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html705"
+  HREF="pow2phi.html">pow2phi</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION002390000000000000000"></A><A NAME="sec:phi2pow"></A>
+<BR>
+phi2pow
+</H1>
+
+<P>
+Convert nonlinear phase into power.
+
+<P>
+
+<H2><A NAME="SECTION002391000000000000000">
+Syntax</A>
+</H2>
+
+<P>
+<TT>PWR=PHI2POW(PHI,L,ALPHA,GAM,G,NSPAN)</TT> yields the transmitted
+power <TT>PWR</TT> [mW] corresponding to a cumulated nonlinear
+phase into the overall optical link equal to <TT>PHI</TT> [rad].
+<TT>PHI</TT> is the self-phase modulation (SPM) rotation induced by
+the link over a constant signal of power <TT>PWR</TT>. 
+
+<P>
+<TT>L</TT> is a vector of size equal to the number of nonlinear fibers
+in the link and contains the fiber lengths in [m]. <TT>ALPHA</TT>
+are the fibers attenuation [dB/km], <TT>GAM</TT> are the fibers
+nonlinear coefficients, usually called gamma [1/W/m]. <TT>G</TT>
+is the net gain [dB] from fiber to fiber (see the example). 
+<BR>
+<P>
+If <TT>L,ALPHA,GAM,G</TT> are of length <TT>1</TT>, the same value
+is used for a total of <TT>NSPAN</TT> spans. 
+
+<P>
+
+<H2><A NAME="SECTION002392000000000000000">
+Example</A>
+</H2>
+
+<P>
+Two-fiber periodic link of <TT>N</TT> spans. One of the <TT>NSPAN</TT>
+periods is: 
+
+<P>
+
+<DIV ALIGN="CENTER"><A NAME="fig:phi2pow"></A><A NAME="5793"></A>
+<TABLE>
+<CAPTION ALIGN="BOTTOM"><STRONG>Figure 2.12:</STRONG>
+Single period of a periodical optical link.</CAPTION>
+<TR><TD>
+<DIV ALIGN="CENTER">
+
+</DIV><IMG
+  WIDTH="700" HEIGHT="315" ALIGN="BOTTOM" BORDER="0"
+ SRC="./phi2pow_fig.png"
+ ALT="Image phi2pow_fig">
+
+<P>
+
+<P></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+Call the function with: 
+
+<P>
+<TT>L = [L1,L2]; </TT>
+
+<P>
+<TT>ALPHA = [a1,a2];</TT>
+
+<P>
+<TT>GAM = [gam1,gam2];</TT>
+
+<P>
+<TT>G=[G0,G1];</TT>&nbsp;
+<BR>
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=400> 
+<B>Note 1</B>: If the laser is directly connected to the link, <TT>G0=0</TT>
+dB.
+
+<P>
+<B>Note 2</B>: Transparent link of <TT>N</TT> equal spans -&gt; <TT>L
+= L1, ALPHA=a1, G=0</TT> and <TT>NSPAN = N</TT>.  </TD>
+</TR>
+</TABLE>
+<BR>
+<P>
+The function returns <TT>PWR</TT> [mW] that entering the amplifier
+ampli0 gives the cumulated nonlinear phase <TT>PHI</TT>. 
+
+<P>
+
+<H2><A NAME="SECTION002393000000000000000">
+See also </A>
+</H2>
+
+<P>
+<A HREF="pow2phi.html#sec:pow2phi">pow2phi</A>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html712"
+  HREF="avg_power.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html710"
+  HREF="List_Functions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html704"
+  HREF="pow2phi.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html713"
+  HREF="avg_power.html">avg_power</A>
+<B> Up:</B> <A NAME="tex2html711"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html705"
+  HREF="pow2phi.html">pow2phi</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

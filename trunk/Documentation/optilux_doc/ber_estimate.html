@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>ber_estimate</TITLE>
+<META NAME="description" CONTENT="ber_estimate">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="mc_estimate.html">
+<LINK REL="previous" HREF="best_sp.html">
+<LINK REL="up" HREF="List_Functions.html">
+<LINK REL="next" HREF="mc_estimate.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html602"
+  HREF="mc_estimate.html">mc_estimate</A>
+<B>Up:</B> <A NAME="tex2html600"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html594"
+  HREF="best_sp.html">best_sp</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION002310000000000000000"></A><A NAME="sec:ber_estimate"></A>
+<BR>
+ber_estimate
+</H1>
+
+<P>
+Bit-error rate estimate by Monte Carlo simulation
+
+<P>
+
+<H2><A NAME="SECTION002311000000000000000">
+Syntax</A>
+</H2>
+
+<P>
+<TT>[COND,AVGBER,NRUNS,STDBER]=BER_ESTIMATE(PAT_HAT,PAT,X)</TT>&nbsp;
+<BR><TT>[COND,AVGBER,NRUNS,STDBER]=BER_ESTIMATE(PAT_HAT,PAT,X,NIND)</TT>
+
+<P>
+
+<H2><A NAME="SECTION002312000000000000000">
+Description</A>
+</H2>
+
+<P>
+<TT>[COND,AVGBER,NRUNS,STDBER]=BER_ESTIMATE(PAT_HAT,PAT,X)</TT>
+estimates the average bit error rate (<TT>AVGBER</TT>) by standard
+Monte Carlo (MC) simulation. 
+
+<P>
+<TT>NRUNS</TT> is the number of samples used in the estimation. <TT>STDBER</TT>
+is the standard deviation of the measured BER. <TT>COND</TT> is true
+during the MC cycle, and false when the convergence stop criterion
+has been reached. <TT>PAT</TT> is the bit pattern, decoded with <A HREF="pat_decoder.html#sec:pat_decoder">pat_decoder</A>
+if necessary, while <TT>PAT_HAT</TT> is the received estimated pattern
+given by <A HREF="samp2pat.html#sec:samp2pat">samp2pat</A>. 
+<BR>
+<P>
+<TT>X</TT> is a struct with one or both of the following fields: 
+
+<UL>
+<LI><TT>X.stop</TT> = vector <TT>[t1 t2]</TT>. <TT>t1</TT> is the
+relative BER accuracy, while <TT>t2</TT> the Gaussian confidence of
+the accuracy. In such a case the MC simulation tests a sufficient
+number of runs as soon as the accuracy is reached. For instance, with
+<TT>t1=0.01</TT> and <TT>t2=95</TT>, the simulation ends as soon as
+the ratio<P><!-- MATH
+ \begin{displaymath}
+\texttt{error/AVGBER<0.01}
+\end{displaymath}
+ -->
+</P>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<IMG
+ WIDTH="174" HEIGHT="36" ALIGN="MIDDLE" BORDER="0"
+ SRC="img67.png"
+ ALT="$\displaystyle \texttt{error/AVGBER&lt;0.01}$">
+</DIV><P></P>
+being error the estimated error on <TT>AVGBER</TT> with a Gaussian
+confidence of 95%. Beware that the concept of confidence works for
+Gaussian distributed random variables, while in the general case with
+few samples it is just a rule of thumb. A Gaussian confidence of 68%
+means that a Gaussian distributed BER is within +/- <TT>STDBER</TT>
+with probability 68%. 
+</LI>
+<LI><TT>X.nmin</TT> = minimum number of errors counted. In absence of
+<TT>X.stop</TT> this is also the overall number of errors counted.
+If not specified, the default value is <TT>1</TT>. 
+<BR>
+<P>
+</LI>
+</UL>
+<TT>[COND,AVGBER,NRUNS,STDBER]=BER_ESTIMATE(PAT_HAT,PAT,X,NIND)</TT>
+runs a vectorial MC. In this case <TT>X</TT> must have the additional
+field: 
+
+<UL>
+<LI><TT>X.dim</TT> = dimension of <TT>AVGBER</TT> (external cycle dimension). 
+</LI>
+</UL>
+<TT>COND,AVGBER,NRUNS,STDBER</TT> are vectors of size <TT>X.dim</TT>,
+and they are currently evaluated in position (or index) <TT>NIND</TT>.
+Such options is useful for MC estimation inside a loop and allows
+to evaluate all the entries of <TT>AVGBER</TT> with the same accuracy
+given by <TT>X.stop</TT> and <TT>X.nmin</TT>. <TT>COND</TT> is a vector
+of logical. Example: MC estimation for a system by testing a vector
+of post-compensating fibers placed at the end of the link. See the
+examples for more information. 
+<BR>
+<BR><TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=400> 
+<B>Note</B>: A Monte Carlo estimation of the bit error rate requires
+that the sampling time is fixed, hence call <A HREF="eval_eye.html#sec:eval_eye">eval_eye</A>
+using the option <TT>X.ts (see </TT><A HREF="eval_eye.html#sec:eval_eye">eval_eye</A>).
+Otherwise <A HREF="eval_eye.html#sec:eval_eye">eval_eye</A> may uses different sampling
+time from run to run due to different sampling time optimizations. </TD>
+</TR>
+</TABLE>
+
+<P>
+
+<H2><A NAME="SECTION002313000000000000000">
+See also </A>
+</H2>
+
+<P>
+<A HREF="eval_eye.html#sec:eval_eye">eval_eye</A>, <A HREF="ber_kl.html#sec:ber_kl">ber_kl</A>,
+<A HREF="pat_decoder.html#sec:pat_decoder">pat_decoder</A> 
+
+<P>
+
+<H2><A NAME="SECTION002314000000000000000">
+References</A>
+</H2>
+
+<P>
+An exhaustive description of the Monte Carlo method can be found in
+[<A
+ HREF="Bibliography.html#fishman">23</A>]. Other significant contributions are in [<A
+ HREF="Bibliography.html#Papoulis">24</A>,<A
+ HREF="Bibliography.html#numrecipes">22</A>].
+A tutorial about the evaluation of the bit error rate in digital systems
+is in [<A
+ HREF="Bibliography.html#jeruchim">25</A>].
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html601"
+  HREF="mc_estimate.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html599"
+  HREF="List_Functions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html593"
+  HREF="best_sp.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html602"
+  HREF="mc_estimate.html">mc_estimate</A>
+<B> Up:</B> <A NAME="tex2html600"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html594"
+  HREF="best_sp.html">best_sp</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

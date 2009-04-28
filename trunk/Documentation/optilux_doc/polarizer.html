@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>polarizer</TITLE>
+<META NAME="description" CONTENT="polarizer">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="plotfield.html">
+<LINK REL="previous" HREF="set_sop.html">
+<LINK REL="up" HREF="List_Functions.html">
+<LINK REL="next" HREF="plotfield.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html830"
+  HREF="plotfield.html">plotfield</A>
+<B>Up:</B> <A NAME="tex2html828"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html822"
+  HREF="set_sop.html">set_sop</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION002480000000000000000"></A><A NAME="sec:polarizer"></A>
+<BR>
+polarizer
+</H1>
+
+<P>
+Linear optical polarizer
+
+<P>
+
+<H2><A NAME="SECTION002481000000000000000">
+Syntax</A>
+</H2>
+
+<P>
+<TT>POLARIZER(ANG1,ANG2)</TT>&nbsp;
+<BR><TT>POLARIZER(ANG1,ANG2,ANGTYPE)</TT>&nbsp;
+<BR><TT>POLARIZER(ANG1,ANG2,ANGTYPE,T)</TT>
+
+<P>
+
+<H2><A NAME="SECTION002482000000000000000">
+Description</A>
+</H2>
+
+<P>
+<TT>POLARIZER(ANG1,ANG2)</TT> polarizes the electric field contained
+in <TT>GSTATE</TT> (see <A HREF="reset_all.html#sec:reset_all">reset_all</A>) into
+the direction having azimuth <TT>ANG1</TT> and ellipticity <TT>ANG2</TT>.
+
+<BR>
+<P>
+<TT>POLARIZER(ANG1,ANG2,ANGTYPE)</TT> has the additional <TT>ANGTYPE</TT>
+selecting the type of angular coordinates used to specify the position
+of the state of polarization (SOP) on the Poincaré sphere. Available
+options are: 
+
+<UL>
+<LI><TT>ANGTYPE = 'aziell'</TT>; user specifies azimuth and ellipticity
+angles. Latitude and longitude on the Poincaré sphere equal <TT>2*ANG2</TT>
+and <TT>2*ANG1</TT>, respectively. NOTE: azimuth, normally in <TT>[-pi/2;pi/2]</TT>,
+is interpreted modulo pi; ellipticity, normally in <TT>[-pi/4;pi/4]</TT>,
+is interpreted modulo pi/2; 
+</LI>
+<LI><TT>ANGTYPE = 'aarphd'</TT>; user specifies the absolute
+amplitude ratio<TT> atan(abs(EY/EX))</TT> and the phase
+difference between field components <TT>arg(EY*conj(EX))</TT>. In
+this function it is  <TT>EX=GSTATE.FIELDX</TT> and <TT>EY=GSTATE.FIELDY</TT>.
+NOTE: absolute amplitude ratio, normally in <TT>[0;pi/2]</TT>,
+is interpreted modulo pi/2; phase difference, normally in <TT>[-pi;pi]</TT>,
+is interpreted modulo 2*pi. 
+<BR>
+<P>
+</LI>
+</UL>
+<TT>POLARIZER(ANG1,ANG2,ANGTYPE,T)</TT> indicates in <TT>T = [TM,
+Tm]</TT> the power transmittance [<A
+ HREF="Bibliography.html#Saleh">32</A>] of the polarizer, being
+<TT>TM</TT> the maximum power flow and <TT>Tm </TT>the minimum power
+flow along the polarizer's axes. <TT>TM</TT> and <TT>Tm</TT> must
+be within 0 and 1. 
+
+<P>
+
+<H2><A NAME="SECTION002483000000000000000">
+See also: </A>
+</H2>
+
+<P>
+<A HREF="pol_scrambler.html#sec:pol_scrambler">pol_scrambler</A>, <A HREF="set_sop.html#sec:set_sop">set_sop</A>,
+<A HREF="dop_meter.html#sec:dop_meter">dop_meter</A> , <A HREF="reset_all.html#sec:reset_all">reset_all</A> 
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html829"
+  HREF="plotfield.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html827"
+  HREF="List_Functions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html821"
+  HREF="set_sop.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html830"
+  HREF="plotfield.html">plotfield</A>
+<B> Up:</B> <A NAME="tex2html828"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html822"
+  HREF="set_sop.html">set_sop</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

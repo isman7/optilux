@@ -1,0 +1,273 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>ber_kl</TITLE>
+<META NAME="description" CONTENT="ber_kl">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="best_eye.html">
+<LINK REL="previous" HREF="eval_eye.html">
+<LINK REL="up" HREF="List_Functions.html">
+<LINK REL="next" HREF="best_eye.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html563"
+  HREF="best_eye.html">best_eye</A>
+<B>Up:</B> <A NAME="tex2html561"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html555"
+  HREF="eval_eye.html">eval_eye</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION002280000000000000000"></A><A NAME="sec:ber_kl"></A>
+<BR>
+ber_kl
+</H1>
+
+<P>
+Evaluate the ber for noncoherent transmission by Karhunen-Loève method.
+
+<P>
+
+<H2><A NAME="SECTION002281000000000000000">
+Syntax</A>
+</H2>
+
+<P>
+<TT>PB=BER_KL(ICH,X,PAT)</TT>&nbsp;
+<BR><TT>[PB,OSNR]==BER_KL(ICH,X,PAT)</TT>&nbsp;
+<BR><TT>[PB,OSNR,EO]==BER_KL(ICH,X,PAT)</TT>
+
+<P>
+
+<H2><A NAME="SECTION002282000000000000000">
+Description</A>
+</H2>
+
+<P>
+<TT>PB=BER_KL(ICH,X,PAT)</TT> evaluates the bit error rate <TT>PB</TT>
+of channel <TT>ICH</TT> of a non-coherent transmission by means of
+the Karhunen-Loeve (kl) method. Available modulation formats are OOK,
+DPSK, PSBT, DQPSK (see <A HREF="electricsource.html#sec:electricsource">electricsource</A>). 
+
+<P>
+<TT>PAT</TT> is the pattern for the <TT>ICH</TT> channel, after decoding
+(see <A HREF="pat_decoder.html#sec:pat_decoder">pat_decoder</A>). 
+<BR>
+<P>
+<TT>X</TT> is a structure whose fields are: 
+
+<UL>
+<LI><TT>X.rec = 'ook'</TT> to use <A HREF="receiver_ook.html#sec:receiver_ook">receiver_ook</A>,
+<TT>'dpsk'</TT> to use <A HREF="receiver_dpsk.html#sec:receiver_dpsk">receiver_dpsk</A>,
+<TT>'dqpsk'</TT> to use <A HREF="receiver_dqpsk.html#sec:receiver_dqpsk">receiver_dqpsk</A> 
+</LI>
+<LI><TT>X.oftype</TT> = optical filter type (see <A HREF="myfilter.html#sec:myfilter">myfilter</A>) 
+</LI>
+<LI><TT>X.obw</TT> = optical filter 3 dB bandwidth normalized to the bit
+rate 
+</LI>
+<LI><TT>X.oord</TT> = optical filter order (for special filter, see <A HREF="myfilter.html#sec:myfilter">myfilter</A>) 
+</LI>
+<LI><TT>X.eftype</TT> = electrical filter type (see <A HREF="myfilter.html#sec:myfilter">myfilter</A>) 
+</LI>
+<LI><TT>X.ebw</TT> = electrical filter 3-dB bandwidth normalized to the
+bit rate 
+</LI>
+<LI><TT>X.eord</TT> = electrical filter order (for special filter, see
+<A HREF="myfilter.html#sec:myfilter">myfilter</A>) 
+</LI>
+<LI><TT>X.osnr</TT> = Optical signal to noise ratios (osnr), [dB],
+over which the ber is evaluated. The osnr is over a conventional bandwidth
+of 0.1 nm and is measured immediately before the receiver. Can be
+a vector, and its size is also the size of <TT>PB</TT>.<TT> X.osnr</TT>
+refers to <TT>X.poln</TT> noise polarizations. 
+</LI>
+<LI><TT>X.poln</TT> = Noise polarizations, 1 or 2. Note: <TT>X.poln</TT>
+is independent from the signal polarizations, e.g. the algorithm can
+work with two noise polarizations and just one signal polarization.
+However, with two signal polarizations <TT>X.poln</TT> must be 2. 
+</LI>
+</UL>
+<TT>X</TT> has also the following parameters required by the kl-method: 
+
+<UL>
+<LI><TT>X.eta</TT> = bandwidth expansion factor. The kl method samples
+the signal and the noise up to a frequency equal to <TT>X.eta</TT>
+times the bandwidth of the optical filter. Usually it is <TT>1
+&lt; X.eta &lt; 3</TT>. 
+</LI>
+<LI><TT>X.mu</TT> = Time expansion factor. The memory of the receiver
+is <TT>X.mu</TT> times the time duration of the memory devices inside
+the receiver, i.e. the optical/electrical filter. For DPSK there is
+an additional memory due to the Mach-Zehnder delay interferometer.
+The memory of such devices is approximated by the inverse of their
+bandwidths, as suggested in [<A
+ HREF="Bibliography.html#forrest">20</A>]. Usually it is <TT>1
+&lt; X.mu &lt; 10</TT>. 
+</LI>
+<LI><TT>X.saddle = 'yes'</TT>: the ber is evaluated through the saddle
+point approximation (faster). <TT>'no'</TT>: the ber is evaluated
+by numerical integration of the moment generating function (slower,
+but more accurate). 
+</LI>
+</UL>
+For more details about <TT>X.eta</TT>, <TT>X.mu</TT> and <TT>X.saddle</TT>
+see [<A
+ HREF="Bibliography.html#forrest">20</A>]. <TT>X</TT> can also have the optional parameters: 
+
+<UL>
+<LI><TT>X.ber</TT> = reference ber at which the algorithm returns the
+corresponding osnr, searched within the range <TT>X.osnr</TT> by numerical
+interpolation. 
+</LI>
+<LI><TT>X.interp</TT> = interpolation method for finding <TT>X.ber</TT>,
+see INTERP1. Default is <TT>'spline'</TT>. 
+</LI>
+<LI><TT>X.extrap = 'yes'</TT>: <TT>X.ber</TT> can be extrapolated outside
+<TT>X.osnr</TT>, see INTERP1. <TT>'no'</TT>: If <TT>X.ber</TT> is
+outside the range <TT>X.osnr</TT> the function returns <TT>OSNR
+= NaN</TT>, which is also the default strategy. 
+</LI>
+<LI><TT>X.plot = 'ploteye'</TT>: plots the eye in the active figure; <TT>'plotcur'</TT>
+plots the received current. 
+</LI>
+<LI><TT>X.color</TT> = color string for the plot (see PLOT). E.g. <TT>'b-'</TT>. 
+</LI>
+<LI><TT>X.dpost</TT> = post compensating fiber cumulated dispersion [ps/nm],
+i.e. the product chromatic dispersion times fiber length. 
+</LI>
+<LI><TT>X.slopez</TT> = post compensating fiber cumulated slope [ps/nm&#94;2],
+i.e. the product dispersion slope times fiber length. 
+</LI>
+<LI><TT>X.lambda</TT> = wavelength [nm] at which the post compensating
+fiber has a cumulated dispersion equal to <TT>X.dpost</TT>. 
+</LI>
+<LI><TT>X.comp</TT> = component on which evaluate eye and calculate BER
+(DQPSK modulation only). Can be <TT>'phase'</TT> or <TT>'quadrature'</TT>. 
+</LI>
+<LI><TT>X.b2b = 'b2b'</TT>: The function works in back-to-back transmission. 
+</LI>
+<LI><TT>X.print</TT> = structure for print. E.g. <TT>X.print = {'nomefile','eye'}</TT>
+or <TT>X.print = {'nomefile',</TT>&nbsp;
+<BR>
+<TT>'current'}</TT>, prints to file <TT>nomefile</TT>
+the eye or the current, respectively. nomefile will be place into
+<TT>GSTATE.DIR</TT> within a directory ending with <TT>'.MOD'</TT>. 
+</LI>
+<LI><TT>X.delay = 'theory'</TT> means that the delay uses the theoretical
+delay saved within <TT>GSTATE.DELAY</TT> (see <A HREF="create_field.html#sec:create_field">create_field</A>).
+Per default the delay is measured by a cross-correlation measurement
+between the received current and an artifical pulse amplitude modulation
+(PAM) signal with ideal non-return to zero bits with symbols equal
+to <TT>PAT</TT>. The correlation method is useful in presence of polarization
+mode dispersion (PMD). See <A HREF="corrdelay.html#sec:corrdelay">corrdelay</A>.
+</LI>
+<LI>X.mzdel = specify the delay of the upper brace of the MZDI interferometer
+for DPSK/DQPSK. The default delay is 1 and it must be comprised in
+the interval <TT>0 &lt; mzdel &lt;=1</TT>. Setting <TT>mzdel</TT> to a value
+smaller than 1 implements the Partial DPSK/DQPSK (P-DPSK/DQPSK) [<A
+ HREF="Bibliography.html#partial_dpsk">18</A>]. 
+</LI>
+<LI><TT>X.threshold</TT> = Fixed threshold for the threshold detector.
+By default the threshold is optimized for OOK and set to zero for
+DPSK/DQPSK. The ook receiver is composed of an ideal, purely linear,
+post compensating fiber + optical filter + photodiode + electrical
+lowpass filter (see <A HREF="receiver_ook.html#sec:receiver_ook">receiver_ook</A> or
+<A HREF="receiver_dpsk.html#sec:receiver_dpsk">receiver_dpsk</A>). For DPSK there is also
+a Mach-Zehnder interferometer before the photodiodes. 
+<BR>
+<P>
+</LI>
+</UL>
+<TT>[PB,OSNR,EO]=BER_KL(X,ICH,PAT)</TT> returns in <TT>OSNR</TT>
+the signal-to-noise ratio [dB] that yields <TT>X.ber</TT>, and
+in <TT>EO</TT> the normalized eye opening (see <A HREF="eval_eye.html#sec:eval_eye">eval_eye</A>).
+
+<BR>
+<P>
+This function implements the algorithm proposed by E. Forestieri in
+[<A
+ HREF="Bibliography.html#forrest">20</A>]. The DPSK version of the algorithm can be found in
+[<A
+ HREF="Bibliography.html#serena_dpsk">21</A>]. Note that in this function noise parametric gain
+is neglected. 
+
+<P>
+Many thanks to E. Forestieri for the fortran code of his algorithm,
+which has been the main inspiration for this function. 
+<BR>
+<P>
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=400> 
+<B>Note 1</B>: This function works over a copy of the electric field.
+All fields of the global variable <TT>GSTATE</TT> are left unchanged. 
+
+<P>
+<B>Note 2</B>: All fields of <TT>X</TT> must be lowercase. 
+
+<P>
+<B>Note 3</B>: The noise is assumed white over the frequency. The
+possible presence of parametric gain [<A
+ HREF="Bibliography.html#serena_dpsk">21</A>] is not accounted
+by this function in this version of Optilux. </TD>
+</TR>
+</TABLE>
+
+<P>
+
+<H2><A NAME="SECTION002283000000000000000">
+See also </A>
+</H2>
+
+<P>
+<A HREF="pattern.html#sec:pattern">pattern</A>, <A HREF="myfilter.html#sec:myfilter">myfilter</A>,
+<A HREF="receiver_ook.html#sec:receiver_ook">receiver_ook</A>, <A HREF="receiver_dpsk.html#sec:receiver_dpsk">receiver_dpsk</A>,
+<A HREF="best_eye.html#sec:best_eye">best_eye</A>, <A HREF="eval_eye.html#sec:eval_eye">eval_eye</A>,
+<A HREF="best_sp.html#sec:best_sp">best_sp</A>, <A HREF="pat_decoder.html#sec:pat_decoder">pat_decoder</A>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html562"
+  HREF="best_eye.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html560"
+  HREF="List_Functions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html554"
+  HREF="eval_eye.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html563"
+  HREF="best_eye.html">best_eye</A>
+<B> Up:</B> <A NAME="tex2html561"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html555"
+  HREF="eval_eye.html">eval_eye</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

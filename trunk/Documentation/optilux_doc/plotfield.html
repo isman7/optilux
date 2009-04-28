@@ -1,0 +1,159 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>plotfield</TITLE>
+<META NAME="description" CONTENT="plotfield">
+<META NAME="keywords" CONTENT="optilux_doc">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-15">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="../optilux_style.css">
+
+<LINK REL="next" HREF="plotfile.html">
+<LINK REL="previous" HREF="polarizer.html">
+<LINK REL="up" HREF="List_Functions.html">
+<LINK REL="next" HREF="plotfile.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><B> Next:</B> <A NAME="tex2html843"
+  HREF="plotfile.html">plotfile</A>
+<B>Up:</B> <A NAME="tex2html841"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html835"
+  HREF="polarizer.html">polarizer</A>
+</DIV>
+<!--End of Navigation Panel-->
+
+<HR>
+
+<H1><A NAME="SECTION002490000000000000000"></A><A NAME="sec:plotfield"></A>
+<BR>
+plotfield
+</H1>
+
+<P>
+Plot the optical field.
+
+<P>
+
+<H2><A NAME="SECTION002491000000000000000">
+Syntax</A>
+</H2>
+
+<P>
+<TT>PLOTFIELD(POL,ICH,FLAG)</TT>&nbsp;
+<BR><TT>PLOTFIELD(POL,ICH,FLAG,COL,FIL,BW,ORD)</TT>
+
+<P>
+
+<H2><A NAME="SECTION002492000000000000000">
+Description</A>
+</H2>
+
+<P>
+<TT>PLOTFIELD(POL,ICH,FLAG)</TT> plots the power and/or phase of channel
+<TT>ICH</TT> contained into the global variable <TT>GSTATE.FIELDX</TT>
+if <TT>POL='x'</TT>, <TT>GSTATE.FIELDY</TT> if <TT>POL='y'</TT>, or
+both if <TT>POL='xy'</TT>. <TT>POL</TT> can also be <TT>'tot'</TT>
+and indicates to plot the overall power in the time domain, or the
+overall power of the spectrum. Such options works only with <TT>FLAG='p--',
+'n--'</TT>, <TT>'-p-' </TT>or<TT> '-n-'</TT> see later. 
+<BR>
+<P>
+<TT>FLAG</TT> is a 4-char string indicating the type of plot: 
+
+<UL>
+<LI><TT>FLAG(1)= 'p'</TT>: power in the time domain (normalized to the
+symbol time). Use <TT>'n'</TT> if you want the power normalized to
+the transmitted peak power of channel <TT>ICH</TT>. See <A HREF="Signals_description.html#sub:Time-domain-representation">Time domain representation</A>
+for more details about the description of time in Optilux.
+</LI>
+<LI><TT>FLAG(2)= 'a'</TT>: angle (phase) in the same time domain 
+</LI>
+<LI><TT>FLAG(3)= 'p': 10*log10(abs(.)&#94;2)</TT> of the
+spectrum (FFT) in the frequency domain (normalized to the symbol rate).
+Use <TT>'n'</TT> for a spectrum normalized to the transmitted peak
+power of channel <TT>ICH</TT>. See <A HREF="Signals_description.html#sub:Frequency-domain-representation">Frequency domain representation</A>
+for more details about the description of frequency in Optilux.
+</LI>
+<LI><TT>FLAG(4)= 'a'</TT>: angle (phase) of the spectrum in the same frequency
+domain. 
+</LI>
+<LI>A specific char of <TT>FLAG</TT> should be set to <TT>'-'</TT> to
+avoid its plot. 
+<BR>
+<P>
+</LI>
+</UL>
+<TT>PLOTFIELD(POL,ICH,FLAG,COL,FIL,BW,ORD)</TT> With this call the
+specific channel <TT>ICH</TT> can be temporary extracted using the
+filter <TT>FIL</TT> having 3-dB bandwidth <TT>BW</TT> and order <TT>ORD</TT>
+(see <A HREF="myfilter.html#sec:myfilter">myfilter</A>). Such a requirement is necessary
+when the fields are combined into a unique field (see <A HREF="create_field.html#sec:create_field">create_field</A>).
+Otherwise, if <TT>ICH=1</TT> and <TT>FIL</TT> and <TT>BW</TT> are
+not indicated, all the complete unique field is plotted. The option
+<TT>POL='tot'</TT> is unactive with <TT>FIL</TT> present .
+<BR>
+<P>
+<TT>COL</TT> is the color of the lines (see PLOT. E.g. <TT>COL='b-','r-x'</TT>,etc) 
+
+<P>
+
+<H2><A NAME="SECTION002493000000000000000">
+Examples</A>
+</H2>
+
+<P>
+Plot only the power in time and the phase of the spectrum: <TT>FLAG
+= 'p-a'</TT> 
+<BR>
+Plot both power and phase in time and frequency: <TT>FLAG =
+'papa'</TT> 
+
+<P>
+
+<H2><A NAME="SECTION002494000000000000000">
+See also </A>
+</H2>
+
+<P>
+<A HREF="printfield.html#sec:printfield">printfield</A>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A NAME="tex2html842"
+  HREF="plotfile.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html840"
+  HREF="List_Functions.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html834"
+  HREF="polarizer.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A>   
+<BR>
+<B> Next:</B> <A NAME="tex2html843"
+  HREF="plotfile.html">plotfile</A>
+<B> Up:</B> <A NAME="tex2html841"
+  HREF="List_Functions.html">List of Functions</A>
+<B> Previous:</B> <A NAME="tex2html835"
+  HREF="polarizer.html">polarizer</A></DIV>
+<!--End of Navigation Panel-->
+<ADDRESS>
+Optilux toolbox reference manual
+</ADDRESS>
+</BODY>
+</HTML>

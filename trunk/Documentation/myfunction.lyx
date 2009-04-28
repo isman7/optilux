@@ -1,0 +1,519 @@
+#LyX 1.6.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 345
+\begin_document
+\begin_header
+\textclass book
+\begin_preamble
+\usepackage{html}
+\parindent0ex 
+
+\hypersetup{colorlinks=true, citecolor=red, filecolor=blue,linkcolor=blue, urlcolor=blue}
+\renewcommand{\arraystretch}{2}
+\end_preamble
+\use_default_options false
+\language english
+\inputencoding auto
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_amsmath 1
+\use_esint 1
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\leftmargin 1in
+\topmargin 1in
+\rightmargin 1in
+\bottommargin 1in
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\author "" 
+\author "" 
+\end_header
+
+\begin_body
+
+\begin_layout Title
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+htmladdnormallink{Optilux Toolbox}{http://www.optilux.sourceforge.net}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+This is a template for the documentation of any Optilux function.
+ Please, follow the indications and send your .m and .lyx files to the Optilux
+ team.
+ If suitable for Optilux, your function will be included in the next release.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+myfunction
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+here the function name lowercase
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:myfunction"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+This section shows a template of function reference.
+\end_layout
+
+\end_inset
+
+Write here the first comment line (the H1 line) of the help of your function.
+ In the following "Syntax" section write all the possible calls to your
+ function (
+\family typewriter
+myfunction
+\family default
+ in this example)
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+myfunction is a template for writing a function help in Optilux.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Syntax
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+d = myfunction(A) 
+\begin_inset Newline newline
+\end_inset
+
+d = myfunction(A,B) 
+\begin_inset Newline newline
+\end_inset
+
+[x,y] = myfunction(A)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+remember to use the typewriter (
+\family typewriter
+
+\backslash
+texttt
+\family default
+ in LaTeX) font for any reference to matlab/octave line code.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Description
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+d = myfunction(A)
+\family default
+ write here the description of the first syntax form
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="1">
+<features>
+<column alignment="center" valignment="top" width="80line%">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\backslash
+bf Note:}
+\end_layout
+
+\end_inset
+
+
+\series bold
+ 
+\series default
+If you have some notes about the function, use the table environment with
+ one cell.
+ Set properly the cell width as a % of the line width (in this example it
+ is 80%).
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+d = myfunction(A,B)
+\family default
+ description of the second syntax form.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+[x,y] = myfunction(A)
+\family default
+ description of the third syntax.
+ And so on.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Separate different sentences with a Line-break like here.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+If you have a flag with many values use the following syntax: 
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+flag
+\family default
+ can be (use the itemize environment): 
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+'option1'
+\family default
+ Computes the absolute value...
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+'option2'
+\family default
+ Evaluates the...
+\end_layout
+
+\begin_layout Standard
+The following subsections remarks, example, details are optional.
+ 
+\end_layout
+
+\begin_layout Subsection
+Remarks
+\end_layout
+
+\begin_layout Standard
+If you have some important remarks.
+ E.g.
+ limitations, input types, approximations.
+\end_layout
+
+\begin_layout Subsection
+Example
+\end_layout
+
+\begin_layout Standard
+Add here some examples.
+ Use the typewriter character for any piece of code.
+ E.g.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+A=sin(2x);
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+d = myfunction(A);
+\end_layout
+
+\begin_layout Standard
+
+\family typewriter
+fprintf('x=%.3f yields d=%.3f
+\backslash
+n',x,d);
+\family default
+ 
+\end_layout
+
+\begin_layout Subsection
+Details
+\end_layout
+
+\begin_layout Standard
+A list of some details.
+ You can also call this subsection theory, algorithm, or with other names
+ that are useful to focus on specific aspects of the function.
+ This subsection may have other subsubsections.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="1">
+<features>
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+The final subsection 
+\begin_inset Quotes eld
+\end_inset
+
+See Also
+\begin_inset Quotes erd
+\end_inset
+
+ is mandatory except for very simple functions.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+In the optilux directory you can find the template 
+\family typewriter
+myfunction.lyx
+\family default
+ in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+htmladdnormallink{LyX}{www.lyx.org}
+\end_layout
+
+\end_inset
+
+ or 
+\family typewriter
+myfunction.tex
+\family default
+ in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+htmladdnormallink{LaTeX}{http://www.latex-project.org}
+\end_layout
+
+\end_inset
+
+.
+ Write your function doc following the template and then send it to the
+ Optilux team for comparing in a next Optilux release.
+ In the same files you can also find a template for adding a new Section
+ to the Background part of the documentation.
+ Any contribution is welcome.
+\end_layout
+
+\begin_layout Subsection
+See Also
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+htmlref{reset
+\backslash
+_all}{sec:reset_all}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+htmlref{lasersource}{sec:lasersource}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Please, note that any underscore in the first part of the htmlref call requires
+ the 
+\backslash
+, but not in the second part (e.g.
+ see reset_all).
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+References
+\end_layout
+
+\begin_layout Standard
+Cite the reference using the standard way and support them with a brief
+ description.
+ E.g.
+ In 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Agrawal"
+
+\end_inset
+
+ you can find a good tutorial about the group-velocity dispersion.
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "IEEEabrv,optilux_biblio"
+options "bibtotoc,IEEEtran"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
