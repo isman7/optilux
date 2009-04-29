@@ -60,6 +60,11 @@ switch modformat
         stars_r=zeros(size(stars_t));
         stars_r=conj(stars_t).*fastshift(stars_t,1);
         pat = ~stars2pat(stars_r,'dpsk');
+    case 'csrz-dpsk'
+        stars_t = pat2stars(pat,'dpsk');
+        stars_r=zeros(size(stars_t));
+        stars_r=conj(stars_t).*fastshift(stars_t,1);
+        pat = stars2pat(stars_r,'dpsk');        
     case {'nf-dpsk','psbt'} % differential coding with ook receiver
         stars_t = pat2stars(pat,'nf-dpsk');
         stars_r=zeros(size(stars_t));
@@ -80,6 +85,15 @@ switch modformat
             pat = fastshift(pat,-1);
             patmat = fastshift(patmat,-1);
         end
+    case {'csrz-dqpsk'}
+        if binary
+            stars_t = pat2stars(pat,'dqpsk',struct('binary',binary));
+        else
+            stars_t = pat2stars(pat,'dqpsk');
+        end
+        stars_r=zeros(size(stars_t));
+        stars_r=conj(stars_t).*fastshift(stars_t,1);
+        [pat patmat] = stars2pat(stars_r,'dqpsk');
     otherwise
         error('wrong modulation format in pat_decoder');
 end

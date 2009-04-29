@@ -67,11 +67,11 @@ exr_lin = 10^(-exratio/10);
 gamma = (1-sqrt(exr_lin))/(sqrt(exr_lin)+1);
 
 if nochirp
-    Phi_U = (modsig *          pi/(1+gamma^2) * amplitude + bias);
-    Phi_L = (modsig * -gamma^2*pi/(1+gamma^2) * amplitude + bias);
+    Phi_U = pi/(1+gamma^2) * (modsig * amplitude + bias);
+    Phi_L = -gamma^2*pi/(1+gamma^2) * (modsig * amplitude + bias);    
 else
-    Phi_U = (modsig *  pi/2 * amplitude + bias);
-    Phi_L = (modsig * -pi/2 * amplitude + bias);
+    Phi_U = pi/2 * (modsig * amplitude + bias);
+    Phi_L = -pi/2 * (modsig * amplitude + bias);    
 end
 
 % Any phase shift due to the interferometric structure is neglected for the
