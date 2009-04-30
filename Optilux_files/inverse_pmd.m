@@ -140,7 +140,7 @@ U(2,1,:) = U21; U(2,2,:) = U22;
 if nargout >= 1, varargout{1} = Uinv; end
 if nargout >= 2, varargout{2} = U; end
 
-if ~isopt || ~isfield(options,'apply') || strcmp(options.apply,'n')
+if ~isopt || ~isfield(options,'apply') || ~strcmp(options.apply(1),'n')
     uux = fft(GSTATE.FIELDX);
     uuy = fft(GSTATE.FIELDY);
     GSTATE.FIELDX = Uinv11.* uux + Uinv12.*uuy;
