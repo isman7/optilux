@@ -104,15 +104,15 @@ if (nargin == 3)
         sigma=0;
     end
     if sigma
-        if max(strcmp(fields,'onepol'))
-            if strcmpi(options.onepol,'asex')   % noise only on X polarization
+        if max(strcmp(fields,'asepol'))
+            if strcmpi(options.asepol,'asex')   % noise only on X polarization
                 noy1 = 0; % only x
                 asepol = [true false];
-            elseif strcmpi(options.onepol,'asey')
+            elseif strcmpi(options.asepol,'asey')
                 noy1 = -1; % only y
                 asepol = [false true];
             else
-                error('ONEPOL, if exists, must be ''asex'' or ''asey''');
+                error('ASEPOL, if exists, must be ''asex'' or ''asey''');
             end
         else
             asepol = [true true];
