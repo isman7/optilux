@@ -4,8 +4,8 @@ function E=lasersource(Ptx,lam,spac,options)
 %   E = LASERSOURCE(PTX,LAM,SPAC,OPTIONS) creates the WDM optical field 
 %   whose channels are saved into the columns of the matrix E. 
 %
-%	PTX contains the channel's peak power. PTX can be vector [1,Nch], being 
-%	Nch the number of channels, or a scalar.
+%	PTX contains the channel's peak power [mW]. PTX can be vector [1,Nch], 
+%	being Nch the number of channels, or a scalar.
 %   In the last case, the same value is used for all channels. 
 %	PTX is saved by this function into the global variable GSTATE.POWER.
 %
@@ -27,9 +27,11 @@ function E=lasersource(Ptx,lam,spac,options)
 %      OPTIONS.linewidth: represents the 3 dB width of the laser line, 
 %           normalized to the symbolrate. LINEWIDTH can be a scalar or a 
 %           vector whose length equals the number of channels
-%      OPTIONS.n0: represents the one-sided spectral density of a gaussian 
-%           complex noise added to the laser, in dB. This way it's possible  
-%           to set the desired OSNR of the laser.
+%      OPTIONS.n0: represents the one-sided spectral density of a Gaussian 
+%           complex noise added to the laser field, in [dB/Hz]. Under a 
+%           small signal assumption, such a noise is related to the laser
+%           relative intensity noise (RIN), in [dB/Hz], by:
+%               RIN = 0.5*(3 + OPTIONS.n0 - 10*log10(PTX))  
 %      OPTIONS.anoise: the matrix with amplitude noise samples (real and 
 %           imag).
 %      OPTIONS.pnoise: the matrix with phase noise samples
@@ -197,9 +199,8 @@ end
 % Add gaussian complex white noise (ASE)
 if ~isinf(N0)
     N0_lin=10^(.1*N0);
-    ampl_noise = ( ones(1,nch) * sqrt(N0_lin) ) .* ...
-        complex(randn(nfft,nch),randn(nfft,nch)) ./ sqrt(nch-nfc+1);
-    E = E + ampl_noise;
+    sigma = sqrt(N0_lin/2*GSTATE.NT*GSTATE.SYMBOLRATE); % noise std
+    E = E + sigma*complex(randn(nfft,nch),randn(nfft,nch));
 elseif exist('anoise','var')
     E = E + anoise;
 end
