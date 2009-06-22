@@ -104,7 +104,7 @@ persistent n avgber varber first epsilon cond; % keep memory
 
 M = size(pat,1)*size(pat,2); % block dimension
 if isempty(first) 
-    n = ones(1,x.dim);  % first time only: initialization
+    n = zeros(1,x.dim);  % first time only: initialization
     avgber = zeros(1,x.dim);
     varber = zeros(1,x.dim);
     first = 1; % remember for next time (persistent variable)
@@ -113,6 +113,7 @@ if isempty(first)
             epsilon = sqrt(2)*erfcinv(1-x.stop(2)/100);
     end
 end
+n(nind) = n(nind) + 1;
 nnew = n(nind)*M;
 
 err = sum(sum(pat ~= pat_hat));
@@ -137,7 +138,7 @@ else
         if ~any(cond), first = []; end
     end
 end
-n(nind) = n(nind) + 1;   
-n2 = (n-1)*M;
+
+n2 = n*M;
 avgber2 = avgber;
 cond2 = cond;
