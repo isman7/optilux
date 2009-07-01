@@ -314,7 +314,7 @@ if seed > N % no more seeds -> apply a random delay shift
     nseed2 = ceil((seed-N+1)/N);
     nshift = mod(97*nseed2,2^ns-1)+1; % congruent random generator
     y = fastshift(y,-nshift); % shift on the right
-    tmat = fastshift(tmat.',-nshift).';
+    if q > 1, tmat = fastshift(tmat.',-nshift).';end
 end
 
 %--------------------------------------------------------------------------
