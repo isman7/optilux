@@ -2,12 +2,12 @@ function Eout=rz_carver( Ein, style, options)
 %RZ_CARVER carves the optical field to produce return to zero pulses
 %   E=RZ_CARVER(E,STYLE, OPTIONS) carves the optical field E with a  
 %   Mach-Zehnder interferometer to produce return to zero (RZ) pulses [1]. 
-%   The parameter STYLE designates the type of carving scheme. Supported
-%   schemes are:
+%   The parameter STYLE is a string that designates the type of carving 
+%   scheme. Supported schemes are:
 %
-%       - RZ 33%
-%       - RZ 50%
-%       - RZ 66% (CSRZ, [1])
+%       - RZ 33% (STYLE = 'RZ33')
+%       - RZ 50% (STYLE = 'RZ50')
+%       - RZ 66% (CSRZ, [1]) (STYLE = 'RZ66')
 %
 %   OPTIONS is an optional structure whose fields can be:
 %
