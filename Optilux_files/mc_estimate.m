@@ -149,7 +149,7 @@ else
 end
 M = size(s,1); % block dimension
 if isempty(first) 
-    n = ones(1,x.dim);  % first time only: initialization
+    n = zeros(1,x.dim);  % first time only: initialization
     avgout = zeros(1,x.dim);
     varout = zeros(1,x.dim);
     varlim = zeros(2,x.dim);
@@ -162,6 +162,7 @@ if isempty(first)
         epsilon = [0 0]; % not used in this case
     end
 end
+n(nind) = n(nind) + 1;
 runs = n*M;
 
 N = (n-1)*M; % cumulated number of samples
@@ -204,8 +205,7 @@ else
         if ~any(cond), first = []; end
     end
 end
-n(nind) = n(nind) + 1;   
-out.nruns = (n-1)*M;
+out.nruns = n*M;
 out.mean = avgout;
 out.var = varout;
 out.varlim = varlim;
