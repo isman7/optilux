@@ -205,7 +205,7 @@ for k=1:nend    % cycle over the polarizations
     if Lfreq > 0
         %fieldf = fft(fieldt)/sqrt(Nfft);
         if strcmp(pol,'tot')
-            fieldf = sqrt(abs(fft(GSTATE.FIELDY(:,ich))/Nfft).^2 + ...
+            fieldf = sqrt(abs(fft(GSTATE.FIELDX(:,ich))/Nfft).^2 + ...
                 abs(fft(GSTATE.FIELDY(:,ich))/Nfft).^2);
         else
             fieldf = fft(fieldt)/Nfft;
