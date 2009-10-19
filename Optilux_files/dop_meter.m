@@ -32,7 +32,9 @@ function varargout=dop_meter(ich,nfig_flag,fil,bw,ord)
 %   MYFILTER). 
 %
 %   [DOP,PHI]=DOP_METER(ICH,NFIG_FLAG,FIL,BW) also returns in PHI.azi and
-%   PHI.ell the azimuth and ellipticity of the average SOP.
+%   PHI.ell the azimuth and ellipticity of each sample of the channel SOP, 
+%   while in PHI.aziavg and PHI.ellavg the azimuth and ellepticity of the 
+%   average SOP.
 %
 %   See also: POL_SCRAMBLER, SET_SOP, POLARIZER
 %
@@ -148,9 +150,10 @@ varargout{1} = DOP;
 if nargout == 2
     phi.azi= sign(S2).*acos(S1./sqrt(S0.^2-S3.^2))/2 + (S2==0).*(1-sign(S1))*pi/4;
     phi.ell= asin(S3./S0)/2;
-    phi.aziavg= sign(S2avg)*acos(S1avg/sqrt(S0avg^2-S3avg^2))/2 + ...
+    S0avg_l = sqrt(S1avg^2+S2avg^2+S3avg^2);
+    phi.aziavg= sign(S2avg)*acos(S1avg/sqrt(S0avg_l^2-S3avg^2))/2 + ...
         (S2avg==0).*(1-sign(S1avg))*pi/4;
-    phi.ellavg= asin(S3avg/S0avg)/2;
+    phi.ellavg= asin(S3avg/S0avg_l)/2;
 
     varargout{2} = phi;
 end
