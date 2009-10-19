@@ -125,6 +125,9 @@ if nfc ~= GSTATE.NCH % temporary extract channel ich
     nch = 1;
 else
     if exist('fil','var')
+        if ~exist('ord','var')
+            ord = 0;     % not using special filter
+        end
         fieldx(:,ich) = ifft(fft(fieldx(:,ich)).*myfilter(fil,GSTATE.FN,bw*0.5,ord));
         fieldy(:,ich) = ifft(fft(fieldy(:,ich)).*myfilter(fil,GSTATE.FN,bw*0.5,ord));
     end        
