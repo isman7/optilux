@@ -27,9 +27,9 @@ function varargout=dop_meter(ich,nfig_flag,fil,bw,ord)
 %   null, while the colored dots all collapse on the black circle for
 %   totally polarized light, since there is no unpolarized component.
 %
-%   DOP=DOP_METER(ICH,NFIG_FLAG,FIL,BW,ORD) works for a unique field (see
-%   CREATE_FIELD) and temporary extracts channel ICH with an optical filter
-%   FIL of bandwidth BW and optional order ORD (see MYFILTER). 
+%   DOP=DOP_METER(ICH,NFIG_FLAG,FIL,BW,ORD) temporary extracts channel ICH
+%   with an optical filter FIL of bandwidth BW and optional order ORD (see 
+%   MYFILTER). 
 %
 %   [DOP,PHI]=DOP_METER(ICH,NFIG_FLAG,FIL,BW) also returns in PHI.azi and
 %   PHI.ell the azimuth and ellipticity of the average SOP.
@@ -122,6 +122,10 @@ if nfc ~= GSTATE.NCH % temporary extract channel ich
     fieldy = ifft(fieldy.*myfilter(fil,GSTATE.FN,bw*0.5,ord));
     nch = 1;
 else
+    if exist('fil','var')
+        fieldx(:,ich) = ifft(fft(fieldx(:,ich)).*myfilter(fil,GSTATE.FN,bw*0.5,ord));
+        fieldy(:,ich) = ifft(fft(fieldy(:,ich)).*myfilter(fil,GSTATE.FN,bw*0.5,ord));
+    end        
     nch = ich;
 end   
 %%%%%%%%%%%%%%%%%%%%%%%% EVALUATION + VISUALIZATION OF DOP %%%%%%%%%%%%%%%%%%%% 
