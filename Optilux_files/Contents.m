@@ -64,7 +64,7 @@
 %   pol_scrambler     - Rotates the SOP of signal samples on the Poincare sphere.
 %   dop_meter	      - Computes the Degree Of Polarization of the Optical field.
 %   inverse_pmd       - Inverse PMD matrix.
-%   set_sop 	      - Sets the average State Of Polarization of a signal.
+%   set_sop 	      - Sets the State Of Polarization of a signal.
 %   polarizer         - Linear optical polarizer
 %   plotfield         - Plot the optical field.
 %   plotfile          - Plot file from disk.

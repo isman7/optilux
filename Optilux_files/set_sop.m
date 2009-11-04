@@ -1,10 +1,13 @@
 function [Ex,Ey,matout]=set_sop(Ex,Ey,ang1,ang2,angtype,rtype)
 
-% SET_SOP sets the average State Of Polarization of a signal.
+% SET_SOP sets the State Of Polarization of a signal.
 %   [EX,EY]=SET_SOP(EX,EY,ANG1,ANG2) sets the State Of Polarization  
-%   (SOP) of the electric field having x component EX and y component EY. 
+%   (SOP) of the electric field having x component EX and y component EY 
+%   by a rotation on the Poincare' sphere.
 %   EX and EY are column vectors (see MZ_MODULATOR). ANG1, ANG2 are the
-%   azimuth and ellipticity [rad] of the output SOP.
+%   azimuth and ellipticity [rad] of the rotation around axis S1 of the
+%   Poincare' sphere (i.e. the vector [1;0;0] that in the Jones space
+%   corresponds to [1;0] up to an arbitrary phase).
 %
 %   [EX,EY]=SET_SOP(EX,EY,ANG1,ANG2,ANGTYPE) specifies ANG1 and ANG2 
 %   according to ANGTYPE. Available options are:
@@ -23,18 +26,26 @@ function [Ex,Ey,matout]=set_sop(Ex,Ey,ang1,ang2,angtype,rtype)
 %         phase difference, normally in [-pi;pi], is interpreted modulo
 %         2*pi.
 %
-%   [EX,EY,MAT]=SET_SOP(EX,EY,ANG1,ANG2) also returns in MAT the unitary
-%   matrix that rotates the SOP. MAT can be used by INVERSE_PMD.
+%   [EX,EY,MAT]=SET_SOP(EX,EY,ANG1,ANG2,ANGTYPE) also returns in MAT the 
+%   unitary matrix that rotates the SOP. MAT can be used by INVERSE_PMD.
 %
-%   [EX,EY]=SET_SOP(EX,EY,ANG1,ANG2,RTYPE) with RTYPE='mean' change the 
-%   default behavior by setting the output SOP with ANG1 and ANG2 rotations 
-%   relatively to a reference system aligned with the input average SOP. 
-%   The degree of polarization (DOP) is preserved.
+%   [EX,EY]=SET_SOP(EX,EY,ANG1,ANG2,ANGTYPE,RTYPE) with RTYPE='mean' change 
+%   the default behavior by setting the output SOP with ANG1 and ANG2 
+%   rotations relatively to a reference system aligned with the input 
+%   average SOP. The degree of polarization (DOP) is preserved.
 %
 %   Example: an ideal polarization division multiplexed signal (PDM) signal  
 %       before SET_SOP lies in the plane (S2,S3). 
 %       Calling [EX,EY]=SET_SOP(EX,EY,pi/2,pi/4) let it lie in the plane 
 %       (S1,S2).
+%
+%   Note: SET_SOP uses only two angles, hence it is not possible to set the 
+%   SOP in any desired direction. Only points aligned with S1 (points 
+%   aligned with the average SOP when RTYPE='mean') can be rotated to any 
+%   point of the sphere. The missing angle letting any possible rotation 
+%   of the "rigid body" SOP is a constant phase that should be added to EY  
+%   or EX before calling SET_SOP. 
+%   Azimuth, ellepticity and the constant phase form the Euler angles.
 %
 %   See also: DOP_METER, MZ_MODULATOR, INVERSE_PMD
 %
