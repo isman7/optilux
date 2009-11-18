@@ -119,8 +119,8 @@ F    = nsp + 3; % noise figure [dB]
 for ii=1:Nch
     [patx(:,ii) patmatx{ii}]        = pattern('debruijn',1,struct('alphabet',4));
     [paty(:,ii) patmaty{ii}]        = pattern('debruijn',2,struct('alphabet',4));
-    [patx_rx(:,ii)  patmatx_rx{ii}] = pat_decoder(patx,'dqpsk');
-    [paty_rx(:,ii)  patmaty_rx{ii}] = pat_decoder(paty,'dqpsk');
+    [patx_rx(:,ii)  patmatx_rx{ii}] = pat_decoder(patx(:,ii),'dqpsk');
+    [paty_rx(:,ii)  patmaty_rx{ii}] = pat_decoder(paty(:,ii),'dqpsk');
 end
 
 for knf=1:length(F) % cycle over the OSNRs
