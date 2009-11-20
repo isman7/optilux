@@ -30,9 +30,9 @@ function [Ex,Ey,matout]=set_sop(Ex,Ey,ang1,ang2,angtype,rtype)
 %   unitary matrix that rotates the SOP. MAT can be used by INVERSE_PMD.
 %
 %   [EX,EY]=SET_SOP(EX,EY,ANG1,ANG2,ANGTYPE,RTYPE) with RTYPE='mean' change 
-%   the default behavior by setting the output SOP with ANG1 and ANG2 
-%   rotations relatively to a reference system aligned with the input 
-%   average SOP. The degree of polarization (DOP) is preserved.
+%   the default behavior by a rotation that sets the time-averaged SOP with   
+%   azimuth ANG1 and ellepticity ANG2. 
+%   The degree of polarization (DOP) is preserved.
 %
 %   Example: an ideal polarization division multiplexed signal (PDM) signal  
 %       before SET_SOP lies in the plane (S2,S3). 
@@ -81,10 +81,10 @@ if ~exist('angtype','var'), angtype='aziell';end   % default
 % Evaluate Stokes coordinates, for every sample of k-th channel
 if exist('rtype','var') 
     if strcmp(rtype,'mean')
-        S0 = mean(abs(Ex).^2 + abs(Ey).^2);
         S1 = mean(abs(Ex).^2 - abs(Ey).^2);
         S2 = mean( 2.*real( Ex.*conj(Ey)));
         S3 = mean(-2.*imag( Ex.*conj(Ey))); % ref system: average SOP
+        S0 = sqrt(S1^2 + S2^2 + S3^2);
     else
         error('RTYPE must be ''mean''');
     end
