@@ -10,6 +10,8 @@ function q=ber2q(ber)
 %						1e-5 -> 12.60		2e-4 ~= 11
 %						1e-9 -> 15.56		
 %
+%   See Also Q2BER
+%
 %   Author: Massimiliano Salsi, 2009
 %   Comments: Armando Vannucci, 2009
 %   University of Parma, Italy
