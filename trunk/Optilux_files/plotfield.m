@@ -74,7 +74,7 @@ gcfhh = [1 1];        % [>2,>2] plots (Units normalized: full screen)
 if ~ischar(flag)
     error('FLAG must be a string');
 end
-if exist('col') ~= 1
+if exist('col','var') ~= 1
     col = 'b';
 elseif ~ischar(col)
     error('COL must be a string (E.g. ''b'',''r-o'')');
@@ -162,19 +162,28 @@ end
 Nfft = GSTATE.NSYMB*GSTATE.NT;
 for k=1:nend    % cycle over the polarizations
     kcycle = 1;
-    if (nfc == GSTATE.NCH) || ((ich == 1) && (exist('fil') ~= 1))
+    if (nfc == GSTATE.NCH) || ((ich == 1) && (exist('fil','var') ~= 1))
         if strcmp(pol(k),'x')
             fieldt = GSTATE.FIELDX(:,ich);
+            if exist('fil','var') == 1
+                fieldt = ifft(fft(fieldt).*myfilter(fil,GSTATE.FN,bw*0.5,ord));
+            end          
         elseif strcmp(pol(k),'y')
             fieldt = GSTATE.FIELDY(:,ich);
+            if exist('fil','var') == 1
+                fieldt = ifft(fft(fieldt).*myfilter(fil,GSTATE.FN,bw*0.5,ord));
+            end                      
         else
-            fieldt = sqrt(abs(GSTATE.FIELDX(:,ich)).^2+...
-                abs(GSTATE.FIELDY(:,ich)).^2);      
+            fieldt = GSTATE.FIELDX(:,ich);
+            fieldty = GSTATE.FIELDY(:,ich);
+            if exist('fil','var') == 1
+                fieldt = ifft(fft(fieldt).*myfilter(fil,GSTATE.FN,bw*0.5,ord));
+                fieldty = ifft(fft(fieldty).*myfilter(fil,GSTATE.FN,bw*0.5,ord));
+            end
+            fieldt = sqrt(abs(fieldt).^2 + abs(fieldty).^2);      
         end
-        locpow = GSTATE.POWER(ich);                    
-        if exist('fil') == 1
-            fieldt = ifft(fft(fieldt).*myfilter(fil,GSTATE.FN,bw*0.5,ord));
-        end
+        locpow = GSTATE.POWER(ich);     
+        
     else    % temporary extract the channel
         minfreq = GSTATE.FN(2)-GSTATE.FN(1);    
         maxl=max(GSTATE.LAMBDA);
