@@ -309,7 +309,7 @@ if q > 1 % multilevel DeBruijn
     end
     y = 2.^(q-1:-1:0) * tmat ; % bin2dec conversion
 else
-    tmat = [];
+    tmat = y;
 end
 if seed >= N % no more seeds -> apply a random delay shift 
     nseed2 = ceil((seed-N+1)/N);
