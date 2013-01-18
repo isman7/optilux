@@ -19,17 +19,20 @@ function Hf=myfilter(ftype,f,bw,ord)
 %   'supergauss': Super-Gaussian filter of order ORD
 %   'gauss_off' : Gaussian filter with offset ORD from the center of the
 %                 channel
+%   'rootrc'    : Root Raised Cosine filter with roll-off 0<=ORD<=1.
 %
 %   Note 1: The bandwidth BW is a lowpass bandwidth -> For optical bandpass
 %           filters having 3dB bandwidth Bo, it is BW=Bo/2.
 %   Note 2: For the moving average BW is not the 3dB bandwidth,
 %           but the first zero of the sinc, i.e. 1/BW is the duration of the
 %           moving average. The 3dB bandwidth is 0.443*BW.
-%   Note 3: For the Gaussian filter the bandwidth 1/e (B_ue) is related 
+%   Note 3: The rootrc reaches the zero value at absolute frequency equal
+%           to BW/2*(1+ORD).
+%   Note 4: For the Gaussian filter the bandwidth 1/e (B_ue) is related 
 %           to the 3dB bandwidth by  B_ue = 1.6986*BW
-%   Note 4: if the frequency is normalized, the 3dB bandwidth must be
+%   Note 5: if the frequency is normalized, the 3dB bandwidth must be
 %           normalized as well to the same value.
-%   Note 5: For future new implementations of special filters, use the 
+%   Note 6: For future new implementations of special filters, use the 
 %	    variable ORD for the new filter parameters.
 %
 %   Thanks to E. Forestieri for the filter expressions.
@@ -146,6 +149,17 @@ switch ftype
       
       Hf = exp(-0.5*log(2).*x.^(2*ord));      
     
+    case 'rootrc'
+% Root Raised Cosine 
+      if nargin ~= 4
+          error('missing filter roll-off');
+      end
+      if ord <0 || ord > 1, error('It must be 0<=roll-off<=1');end
+      Hf=zeros(size(x));
+      Hf(abs(x)<=0.5*(1-ord)) = 1;
+      ii = abs(x) > 0.5*(1-ord) & abs(x) <= 0.5*(1+ord);
+      Hf(ii) = sqrt(0.5*(1+cos(pi/ord*(abs(x(ii))-0.5*(1-ord)))));
+      
   otherwise
       error('the filter ftype does not exist.');
 end
