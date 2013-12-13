@@ -154,6 +154,7 @@ switch ftype
       if nargin ~= 4
           error('missing filter roll-off');
       end
+      x=x/2; % convert two-sided bandwith in low-pass
       if ord <0 || ord > 1, error('It must be 0<=roll-off<=1');end
       Hf=zeros(size(x));
       Hf(abs(x)<=0.5*(1-ord)) = 1;
