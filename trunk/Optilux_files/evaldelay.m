@@ -85,8 +85,8 @@ switch ftype
 
       y=(sqrt(2)-1)/(pi*bw);
       
-    case 'supergauss' 
-% Super-Gaussian
+    case 'supergauss' || 'rootrc'
+% Super-Gaussian or rootrc
 
       y=0;      
     
