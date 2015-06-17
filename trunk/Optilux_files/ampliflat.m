@@ -12,12 +12,15 @@ function ampliflat(x,atype,options)
 %   insert the amplified spontaneous emission (ASE) noise.
 %   OPTIONS is a structure whose fields can be:
 %
-%   OPTIONS.f:     [dB] is the optical ASE noise figure, which corresponds 
-%                  to a one-sided ASE power spectral density, on two 
-%                  polarizations, N0 = F*(Gain-1)*h*nu, with Gain the 
-%                  amplifier gain, h the Planck's constant and nu the 
-%                  channel central frequency.
-%                  Hence, ASE power on a frequency band B is Pase = N0*B.
+%   OPTIONS.f:     [dB] is the ASE noise figure as measured in the 
+%                  electrical domain, corresponding to a one-sided ASE
+%                  power spectral density in two polarizations:
+%                       N0 = F*G*h*nu,
+%                  with G the amplifier gain, h the Planck's constant and 
+%                  nu the channel central frequency. The relation with the 
+%                  spontaneous emission factor nsp is:
+%                       OPTIONS.f = 2*nsp*(G-1)/G.
+%                  ASE power on a frequency band B is Pase = N0*B.
 %   OPTIONS.asepol:If it's 'asex' allows to force to zero the ASE noise 
 %                  added to GSTATE.FIELDY, while for 'asey' allows to force
 %                  to zero the noise added to GSTATE.FIELDX.
@@ -94,10 +97,10 @@ if (nargin == 3)
             maxl=max(GSTATE.LAMBDA);
             minl=min(GSTATE.LAMBDA);
             lamc = 2*maxl*minl/(maxl+minl);     % central wavelength
-            sigma = sqrt(Flin/4*HPLANCK*CLIGHT./lamc.*(gain-1)*...
+            sigma = sqrt(Flin/4*HPLANCK*CLIGHT./lamc.*gain*...
             GSTATE.NT.*GSTATE.SYMBOLRATE*1e21);   % sqrt(mW). sigma^2 is the variance
         else
-            sigma = sqrt(Flin/4*HPLANCK*CLIGHT./GSTATE.LAMBDA.*(gain-1)*...
+            sigma = sqrt(Flin/4*HPLANCK*CLIGHT./GSTATE.LAMBDA.*gain*...
             GSTATE.NT.*GSTATE.SYMBOLRATE*1e21);   % sqrt(mW). sigma^2 is the variance
         end
     else
