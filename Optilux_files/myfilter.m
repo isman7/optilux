@@ -88,6 +88,12 @@ switch ftype
       
     case 'gauss_off'
 % Gaussian with offset
+      if nargin ~= 4
+          error('missing Gaussian filter offset.');
+      end
+      if isnan(ord)
+          error('Offset must be a number.')
+      end
 
       Hf = exp(-0.5*log(2).*(x-ord/bw).*(x-ord/bw));
       
@@ -144,18 +150,20 @@ switch ftype
     case 'supergauss'
 % Super-Gaussian of order ORD        
       if nargin ~= 4
-          error('missing superGauss order');
+          error('missing superGauss order.');
       end
-      
+      if isnan(ord)
+          error('superGaussian order must be a number.')
+      end
       Hf = exp(-0.5*log(2).*x.^(2*ord));      
     
     case 'rootrc'
 % Root Raised Cosine 
       if nargin ~= 4
-          error('missing filter roll-off');
+          error('missing filter roll-off.');
       end
       x=x/2; % convert two-sided bandwith in low-pass
-      if ord <0 || ord > 1, error('It must be 0<=roll-off<=1');end
+      if ord <0 || ord > 1 || isnan(ord), error('It must be 0<=roll-off<=1');end
       Hf=zeros(size(x));
       Hf(abs(x)<=0.5*(1-ord)) = 1;
       ii = abs(x) > 0.5*(1-ord) & abs(x) <= 0.5*(1+ord);
