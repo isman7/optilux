@@ -86,11 +86,11 @@ CLIGHT = CONSTANTS.CLIGHT;      % speed of lightin vacuum [m/s]
 global GSTATE   % GSTATE is a structure whose fields are defined in reset_all.m
 
 if ~isfield(x,'oord')
-    x.oord = 0;     % not using special filter
+    x.oord = NaN;     % not using special filter
 end
 
 if ~isfield(x,'eord')
-    x.eord = 0;     % not using special filter
+    x.eord = NaN;     % not using special filter
 end
 
 %%%%%%%%%%% INITIALIZATION
