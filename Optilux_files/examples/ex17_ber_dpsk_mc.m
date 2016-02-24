@@ -66,10 +66,9 @@ nampli = 1;   % number of amplifiers
 osnrbw = 0.1; % bandwidth for OSNR measurement [nm]
 
 hvdl = -30-10*log10(HPLANCK*CLIGHT/lam*CLIGHT*osnrbw/lam^2*1e18); % conv. factor
-nsp  = 10*log10(Pavg) + hvdl - 10*log10(10^(Gerbio/10)-1) - 3 - ...
-    10*log10(nampli) - x.osnr; % [dB]
-F    = nsp + 3; % noise figure [dB]
-                % the one-sided ASE PSD of a single amplifier is 2*nsp*hvdl*(Gerbio-1) 
+F  = 10*log10(Pavg) + hvdl - Gerbio - 10*log10(nampli) - x.osnr; % [dB]
+% F is the excess noise figure, i.e., noise figure measured in the 
+% electrical domain
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 randn('state',1);   % set random state
