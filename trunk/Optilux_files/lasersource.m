@@ -36,6 +36,10 @@ function E=lasersource(Ptx,lam,spac,options)
 %           imag).
 %      OPTIONS.pnoise: the matrix with phase noise samples
 %
+%   Note: without linewidth or n0 or anoise or pnoise options, lasersource
+%   returns a row vector. On the contrary, it returns a matrix where the
+%   number of rows is GSTATE.NSYMB*GSTATE.NT.
+%
 %   The matrices representing amplitude and phase noise are ignored if
 %   OPTIONS.linewidth and OPTIONS.n0 are specified.
 %
@@ -179,7 +183,9 @@ else
 
 end % end if single
 
-E   = ones(nfft,1)*sqrt(Pin);
+E = sqrt(Pin);
+
+if size(E,1) > 1, E = E.';end % force to be row
 
 % Add phase noise
 if linewidth
@@ -191,18 +197,18 @@ if linewidth
         phase_noise(nnoise)=phase_noise(nnoise)-(nnoise-1)/...
             (length(phase_noise)-1)*phase_noise(end);
     end
-    E = E .* fastexp(phase_noise);
+    E = repmat(E,nfft,1) .* fastexp(phase_noise);
 elseif exist('pnoise','var')
-    E = E .* fastexp(pnoise);
+    E = repmat(E,nfft,1) .* fastexp(pnoise);
 end
 
 % Add gaussian complex white noise (ASE)
 if ~isinf(N0)
     N0_lin=10^(.1*N0);
     sigma = sqrt(N0_lin/2*GSTATE.NT*GSTATE.SYMBOLRATE); % noise std
-    E = E + sigma*complex(randn(nfft,nch),randn(nfft,nch));
+    E = repmat(E,nfft,1) + sigma*complex(randn(nfft,nch),randn(nfft,nch));
 elseif exist('anoise','var')
-    E = E + anoise;
+    E = repmat(E,nfft,1) + anoise;
 end
 
 if GSTATE.PRINT
