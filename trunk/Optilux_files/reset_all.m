@@ -116,7 +116,9 @@ global GSTATE;  % GSTATE is a global structure variable.
 %%%%%%%%%%%%%%%
 MAXBYTES = 50e6;    % warning dimension for simul_out
 
-error(nargchk(3,5,nargin));
+if nargin < 3
+    error('Too few arguments to function.');
+end
 
 switch nargin
     case 3
